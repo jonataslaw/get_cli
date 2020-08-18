@@ -52,11 +52,14 @@ bool validateArgs(List<String> arguments) {
   if (arguments != null &&
       arguments.isNotEmpty &&
       firstArgsAllow.contains(arguments.first)) {
-    if (arguments.first == 'init') return true;
-    if (arguments.first == 'install') return true;
-    if (arguments.first == 'upgrade') return true;
-    final secondArg = arguments[1].split(':').first;
-    if (secondArgsAllow.contains(secondArg)) return true;
+    if (arguments.first == 'init' || arguments.first == 'update') return true;
+
+    if (arguments.first == 'create') {
+      final secondArg = arguments[1].split(':').first;
+      if (secondArgsAllow.contains(secondArg)) return true;
+    }
+
+    if (arguments.first == 'install' && arguments.length > 1) return true;
   }
   return false;
 }
