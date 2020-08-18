@@ -1,14 +1,13 @@
 import 'dart:io';
-
 import 'package:get_cli/functions/create/create_page.dart';
 import 'package:get_cli/functions/create/create_route.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
-import 'package:get_cli/functions/install/install_dependencies.dart';
 import 'package:get_cli/functions/shell/pubget.dart';
 import 'package:get_cli/samples/impl/get_controller.dart';
 import 'package:get_cli/samples/impl/get_view.dart';
 
 import '../init/init_chooser.dart';
+import '../install/install.dart';
 
 Future<void> create(List<String> args) async {
   final name = args[1].split(':').last;
@@ -36,7 +35,7 @@ Future<void> create(List<String> args) async {
     case "project":
       await ShellUtils.flutterCreate(Directory.current.path);
       await createInitial();
-      await commandInstall(['get']);
+      await installPackage(['get']);
       break;
   }
   return;

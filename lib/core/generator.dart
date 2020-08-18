@@ -1,11 +1,9 @@
-
-import 'package:get_cli/common/shell.dart';
 import 'package:get_cli/functions/install/install.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 
-
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
+import '../functions/shell/pubget.dart';
 
 /// Essa função é chamada pela main, e recebe os argumentos da cli
 Future<void> generate({
@@ -67,4 +65,3 @@ bool validateArgs(List<String> arguments) {
   }
   return false;
 }
-

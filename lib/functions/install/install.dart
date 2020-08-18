@@ -1,11 +1,11 @@
 import 'package:get_cli/common/pubspec.dart';
-import 'package:get_cli/common/shell.dart';
+import '../../common/utils/logger/LogUtils.dart';
+import '../shell/pubget.dart';
 
 Future<void> installPackage(List<String> args) async {
-  //TODO: melhorar os logs
   if (args.isEmpty) {
-    print('enter the name of a package');
-    print('''exemple:
+    LogService.error('enter the name of a package');
+    LogService.info('''exemple:
   get install get:3.4.6
   or 
   get intall get
@@ -13,6 +13,7 @@ Future<void> installPackage(List<String> args) async {
     return;
   }
   var padkageInfo = args.first.split(':');
+
   if (padkageInfo.length == 1) {
     await PubspecUtils.addDependencies(padkageInfo.first);
   } else {
