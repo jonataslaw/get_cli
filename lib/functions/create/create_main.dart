@@ -22,6 +22,6 @@ Future<void> createMain() async {
     _route.create(recursive: true);
   }
 
-  await _route.writeAsString(GetMainSample().file(reCase.pascalCase));
+  await _route.writeAsString(MainSample().file(reCase.pascalCase));
   print(reCase.pascalCase + " Main created succesfully.");
 }

@@ -20,5 +20,5 @@ Future<void> createView(String name, String path) async {
       await File((_fileModel.path) + "_view.dart").create(recursive: true);
   await _view.writeAsString(GetViewSample().file(reCase.pascalCase));
 
-  print(reCase.pascalCase + " route created succesfully.");
+  print(reCase.pascalCase + " view created succesfully.");
 }

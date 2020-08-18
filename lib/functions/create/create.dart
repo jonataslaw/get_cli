@@ -9,7 +9,6 @@ Future<void> create(List<String> args) async {
   final command = args[1].split(':').first;
 
   String onCommand;
-  print(args.length);
   if (args.length > 2 && args[2] == 'on') {
     onCommand = args[3];
   }
@@ -33,7 +32,6 @@ Future<void> create(List<String> args) async {
 }
 
 // Future<void> create(List<String> args) async {
-//   print('comando é create');
 //   final menu = Menu(['page', 'controller', 'view', 'route']);
 //   final result = menu.choose();
 

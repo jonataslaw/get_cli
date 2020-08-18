@@ -1,13 +1,11 @@
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
-
 /// Essa função é chamada pela main, e recebe os argumentos da cli
 Future<void> generate({
   List<String> arguments,
 }) async {
-  print("list de arguments = $arguments");
-
+  //TODO Adicionar um logger descente
   final validate = validateArgs(arguments);
   if (!validate) {
     print('Error!!!!!!!!!!!! wrong arguments');

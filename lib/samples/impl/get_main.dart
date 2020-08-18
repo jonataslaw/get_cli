@@ -1,6 +1,6 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
-class GetMainSample extends Sample {
+class MainSample extends Sample {
   @override
   String file(String fileName) {
     return '''
