@@ -1,5 +1,8 @@
+
 import 'package:get_cli/common/shell.dart';
 import 'package:get_cli/functions/install/install.dart';
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
+
 
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
@@ -8,17 +11,17 @@ import '../functions/init/init_chooser.dart';
 Future<void> generate({
   List<String> arguments,
 }) async {
-  //TODO Adicionar um logger descente
+  ///TODO: add validation info
   final validate = validateArgs(arguments);
   if (!validate) {
-    print('Error!!!!!!!!!!!! wrong arguments');
+    LogService.error('Error!!! wrong arguments');
   }
 
   switch (arguments.first) {
     case "init":
       await createInitial();
       break;
-    case "upgrade":
+    case "update":
       ShellUtils.update();
       break;
     case "install":
@@ -38,7 +41,7 @@ bool validateArgs(List<String> arguments) {
   List<String> firstArgsAllow = [
     'create',
     'init',
-    'upgrade',
+    'update',
     'install',
     'remove'
   ];
@@ -46,13 +49,14 @@ bool validateArgs(List<String> arguments) {
     'page',
     'controller',
     'route',
+    'project',
     'presentation',
     'view'
   ];
   if (arguments != null &&
       arguments.isNotEmpty &&
       firstArgsAllow.contains(arguments.first)) {
-    if (arguments.first == 'init' || arguments.first == 'update') return true;
+    if (arguments.first == 'init' || arguments.first == 'update' || arguments.first == 'install') return true;
 
     if (arguments.first == 'create') {
       final secondArg = arguments[1].split(':').first;

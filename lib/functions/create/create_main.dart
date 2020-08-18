@@ -19,7 +19,7 @@ Future<void> createMain() async {
   File _route = await File(_fileModel.path + "main.dart");
 
   if (!_route.existsSync()) {
-    _route.create(recursive: true);
+    await _route.create(recursive: true);
   }
 
   await _route.writeAsString(MainSample().file(reCase.pascalCase));
