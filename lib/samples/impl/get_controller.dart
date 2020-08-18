@@ -1,4 +1,4 @@
-import '../sample_interface.dart';
+import '../interface/sample_interface.dart';
 
 class ControllerSample extends Sample {
   @override

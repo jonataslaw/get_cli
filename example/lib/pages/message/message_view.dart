@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'home_controller.dart';
+import 'message_controller.dart';
 
-class HomeView extends  GetView<HomeController>  {
+class MessageView extends  GetView<MessageController>  {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home')
+        title: Text('Message')
       ), 
       body: Container(),
     );

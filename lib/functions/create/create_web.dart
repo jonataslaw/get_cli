@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:get_cli/models/get_binding.dart';
+import 'package:get_cli/samples/impl/get_binding.dart';
 import 'package:http/http.dart';
 
 Future<File> getOnlineModel(String path, String url) async {

@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:get_cli/file_model.dart';
-import 'package:get_cli/models/get_main.dart';
-import 'package:get_cli/structure.dart';
+import 'package:get_cli/models/file_model.dart';
+import 'package:get_cli/samples/impl/get_main.dart';
+import 'package:get_cli/core/structure.dart';
 import 'package:recase/recase.dart';
 
 Future<void> createMain() async {

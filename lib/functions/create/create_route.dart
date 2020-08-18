@@ -1,10 +1,8 @@
 import 'dart:io';
-
-import 'package:get_cli/models/get_route.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/samples/impl/get_route.dart';
 import 'package:recase/recase.dart';
-
-import '../file_model.dart';
-import '../get_cli.dart';
+import '../../models/file_model.dart';
 
 Future<void> createRoute() async {
   FileModel _fileModel = FileModel(
@@ -22,5 +20,5 @@ Future<void> createRoute() async {
       await File(_fileModel.path + "route.dart").create(recursive: true);
   await _route.writeAsString(RouteSample().file(reCase.pascalCase));
 
-  print(reCase.pascalCase + " Page created succesfully.");
+  print(reCase.pascalCase + " route created succesfully.");
 }

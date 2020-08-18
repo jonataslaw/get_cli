@@ -1,6 +1,6 @@
 import 'dart:io';
 
-/// this class includes default paths
+/// Global defaultStructure
 Structure defaultStructure = Structure();
 
 /// You able to create a your own structure with this class
@@ -27,6 +27,9 @@ class Structure {
   /// Path of the controllers dir for example: 'lib/controllers/'
   String controllersPath;
 
+  /// Path of the view dir for example: 'lib/view/'
+  String viewsPath;
+
   Structure({
     this.pagesPath = 'lib/pages/',
     this.widgetsPath = 'lib/widgets/',
@@ -34,7 +37,8 @@ class Structure {
     this.repositoriesPath = 'lib/repositories/',
     this.mainPath = 'lib/',
     this.routePath = 'lib/routes/',
-    this.controllersPath = 'lib/controllers/',
+    this.controllersPath = 'controllers/',
+    this.viewsPath = 'views/',
   })  : assert(pagesPath != null),
         assert(widgetsPath != null),
         assert(modelsPath != null),
@@ -47,6 +51,7 @@ class Structure {
     modelsPath = replaceAsExpected(path: modelsPath);
     repositoriesPath = replaceAsExpected(path: repositoriesPath);
     controllersPath = replaceAsExpected(path: controllersPath);
+    viewsPath = replaceAsExpected(path: viewsPath);
   }
 
   Map<String, String> toMap() => {
@@ -57,6 +62,7 @@ class Structure {
         'route': routePath,
         'repository': repositoriesPath,
         'controller': controllersPath,
+        'view': viewsPath,
       };
 
   /// Get file paths with key such as: page, widget, repository, model and more...

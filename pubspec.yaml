@@ -1,6 +1,6 @@
 name: get_cli
 description: A sample command-line application to manage flutter applications
-version: 0.2.2
+version: 0.2.26
 homepage: https://github.com/jonataslaw/get_cli
 
 environment:
@@ -11,8 +11,8 @@ executables:
 
 dependencies:
   recase: ^3.0.0
-  args: ^1.5.2
   http:
+  cli_menu: ^0.2.2
 
 dev_dependencies:
   pedantic: ^1.7.0
