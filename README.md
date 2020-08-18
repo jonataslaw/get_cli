@@ -33,7 +33,7 @@ TODO:
 
 
 ## Adicionando novas funções:
-- Adicione a pasta em core/structure (Não esqueça de adicionar ao replaceAsExpected e ao toMap)
+- Adicione a pasta em que os novos arquivos serão criados em core/structure (Não esqueça de adicionar ao replaceAsExpected e ao toMap)
 
 - Crie um sample e insira na pasta samples/impl (é necessário criar uma classe, estender Sample)
 
