@@ -1,45 +1,45 @@
-Essa CLI está em estágio alfa, use com cuidado.
+This CLI is in alpha stage, use with caution.
 
 ```dart
-// para instalar:
+// to install:
 pub global activate get_cli 
 
 
-// Para iniciar um projeto com a estrutura escolhida:
+// To start a project with the chosen structure:
 get init 
 
-// para criar uma página: Páginas possuem controller, view, e binding
+// to create a page: Pages have controller, view, and binding
 get create page:home //get create page:login 
 
-// para criar um novo controller em uma pasta expecífica:
+// to create a new controller in a specific folder:
 get create controller:dialogcontroller on home
-// Obs: você não precisa apontar o caminho, Getx procurará automaticamente a pasta home e irá inserir seu controller lá.
+// Note: you don't need to point the way, Getx will automatically search for the home folder and insert your controller there.
 
-// para criar uma nova view em uma pasta expecífica:
+// to create a new view in a specific folder:
 get create view:dialogview on home
-// Obs: você não precisa apontar o caminho, Getx procurará automaticamente a pasta home e irá inserir seu controller lá.
+// Note: you don't need to point the way, Getx will automatically search for the home folder and insert your controller there.
 
-// para criar o arquivo de rotas:
+// to create the route file:
 get create route 
 
 ```
 
 TODO: 
-- Ao criar um controller, inserir ele automaticamente no Binding 
-- Ao criar uma page, inserir ela automaticamente em Routes 
-- Inserir as opções de upgrade, install, remove na cli 
-- Suporte a customModels
-- Testes unitários
+- When creating a controller, automatically insert it into the Binding
+- When creating a page, insert it automatically in Routes
+- Insert the `upgrade`, `install`, `remove` options in the cli
+- Support for customModels
+- Unit tests
 
 
-## Adicionando novas funções:
-- Adicione a pasta em que os novos arquivos serão criados em core/structure (Não esqueça de adicionar ao replaceAsExpected e ao toMap)
+## Adding new functions:
+- Add the folder where the new files will be created in core / structure (Don't forget to add to replaceAsExpected and toMap)
 
-- Crie um sample e insira na pasta samples/impl (é necessário criar uma classe, estender Sample)
+- Create a sample and insert it in the samples / impl folder (you need to create a class, extend Sample)
 
-- Crie a função de criação da classe ou das pastas e insira em functions. Se o comando for de criação, na pasta create, se for de inicialização (como uma estrutura nova) em init 
+- Create the function for creating the class or folders and insert in functions. If the command is for creation, in the create folder, if it is for startup (as a new structure) in init
 
-- Abra o arquivo create/create.dart, adicione seu comando no switch, e aponte para sua função.
+- Open the create / create.dart file, add your command to the switch, and point to its function.
 
 
-Pronto!
+Ready!
