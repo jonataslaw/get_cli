@@ -19,3 +19,10 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+
+### macOS ###
+.DS_Store
+
+### example files
+example/android/local.properties
+example/pubspec.lock

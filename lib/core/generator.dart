@@ -1,6 +1,8 @@
+
+import 'package:get_cli/common/shell.dart';
+import 'package:get_cli/functions/install/install.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/functions/install/install_dependencies.dart';
-import 'package:get_cli/functions/shell/pubget.dart';
+
 
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
@@ -23,9 +25,8 @@ Future<void> generate({
       await ShellUtils.update();
       break;
     case "install":
-      List<String> toInstall = List<String>.from(arguments);
-      toInstall.removeAt(0);
-      await commandInstall(toInstall);
+      arguments.removeAt(0);
+      await installPackage(arguments);
       break;
     case "remove":
       //TODO insert remove funcion
@@ -66,3 +67,4 @@ bool validateArgs(List<String> arguments) {
   }
   return false;
 }
+
