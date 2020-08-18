@@ -22,11 +22,11 @@ Future<void> generate({
       await createInitial();
       break;
     case "update":
-      ShellUtils.update();
+      await ShellUtils.update();
       break;
     case "install":
       arguments.removeAt(0);
-      installPackage(arguments);
+      await installPackage(arguments);
       break;
     case "remove":
       //TODO insert remove funcion
@@ -56,7 +56,7 @@ bool validateArgs(List<String> arguments) {
   if (arguments != null &&
       arguments.isNotEmpty &&
       firstArgsAllow.contains(arguments.first)) {
-    if (arguments.first == 'init' || arguments.first == 'update' || arguments.first == 'install') return true;
+    if (arguments.first == 'init' || arguments.first == 'update') return true;
 
     if (arguments.first == 'create') {
       final secondArg = arguments[1].split(':').first;
@@ -67,3 +67,4 @@ bool validateArgs(List<String> arguments) {
   }
   return false;
 }
+
