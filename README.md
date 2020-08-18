@@ -33,9 +33,13 @@ TODO:
 
 
 ## Adicionando novas funções:
-1- Adicione a pasta em core/structure (Não esqueça de adicionar ao replaceAsExpected e ao toMap)
-2- Crie um sample e insira na pasta samples/impl (é necessário criar uma classe, estender Sample)
-3- Crie a função de criação da classe ou das pastas e insira em functions. Se o comando for de criação, na pasta create, se for de inicialização (como uma estrutura nova) em init 
-4- Abra o arquivo create/create.dart, adicione seu comando no switch, e aponte para sua função. 
+- Adicione a pasta em core/structure (Não esqueça de adicionar ao replaceAsExpected e ao toMap)
+
+- Crie um sample e insira na pasta samples/impl (é necessário criar uma classe, estender Sample)
+
+- Crie a função de criação da classe ou das pastas e insira em functions. Se o comando for de criação, na pasta create, se for de inicialização (como uma estrutura nova) em init 
+
+- Abra o arquivo create/create.dart, adicione seu comando no switch, e aponte para sua função.
+
 
 Pronto!
