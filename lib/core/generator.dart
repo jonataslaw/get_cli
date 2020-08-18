@@ -1,3 +1,6 @@
+import 'package:get_cli/common/shell.dart';
+import 'package:get_cli/functions/install/install.dart';
+
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
@@ -16,10 +19,11 @@ Future<void> generate({
       await createInitial();
       break;
     case "upgrade":
-      //TODO insert upgrade funcion
+      ShellUtils.update();
       break;
     case "install":
-      //TODO insert install funcion
+      arguments.removeAt(0);
+      installPackage(arguments);
       break;
     case "remove":
       //TODO insert remove funcion
@@ -49,6 +53,8 @@ bool validateArgs(List<String> arguments) {
       arguments.isNotEmpty &&
       firstArgsAllow.contains(arguments.first)) {
     if (arguments.first == 'init') return true;
+    if (arguments.first == 'install') return true;
+    if (arguments.first == 'upgrade') return true;
     final secondArg = arguments[1].split(':').first;
     if (secondArgsAllow.contains(secondArg)) return true;
   }
