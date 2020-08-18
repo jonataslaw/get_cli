@@ -1,15 +1,19 @@
-This CLI is in alpha stage, use with caution.
+The official CLI from Getx Framework of Flutter
+
+This CLI is in `Beta` stage, use with caution.
 
 ```dart
 // to install:
 pub global activate get_cli 
 
+// To create a flutter project with the chosen structure from begin:
+get create project 
 
-// To start a project with the chosen structure:
+// To create the chosen structure on project:
 get init 
 
 // to create a page: Pages have controller, view, and binding
-get create page:home //get create page:login 
+get create page:home // or other name, ex: get create page:login 
 
 // to create a new controller in a specific folder:
 get create controller:dialogcontroller on home
@@ -22,14 +26,22 @@ get create view:dialogview on home
 // to create the route file:
 get create route 
 
+// to install package on your project
+get install camera
+
+// to update CLI 
+get update
+
 ```
 
 TODO: 
 - When creating a controller, automatically insert it into the Binding
 - When creating a page, insert it automatically in Routes
-- Insert the `upgrade`, `install`, `remove` options in the cli
+- Insert the `remove` options in the cli
 - Support for customModels
 - Unit tests
+- Improve structure
+- Added backup
 
 
 ## Adding new functions:

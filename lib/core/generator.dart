@@ -1,3 +1,7 @@
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/functions/install/install_dependencies.dart';
+import 'package:get_cli/functions/shell/pubget.dart';
+
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
@@ -5,21 +9,23 @@ import '../functions/init/init_chooser.dart';
 Future<void> generate({
   List<String> arguments,
 }) async {
-  //TODO Adicionar um logger descente
+  ///TODO: add validation info
   final validate = validateArgs(arguments);
   if (!validate) {
-    print('Error!!!!!!!!!!!! wrong arguments');
+    LogService.error('Error!!! wrong arguments');
   }
 
   switch (arguments.first) {
     case "init":
       await createInitial();
       break;
-    case "upgrade":
-      //TODO insert upgrade funcion
+    case "update":
+      await ShellUtils.update();
       break;
     case "install":
-      //TODO insert install funcion
+      List<String> toInstall = List<String>.from(arguments);
+      toInstall.removeAt(0);
+      await commandInstall(toInstall);
       break;
     case "remove":
       //TODO insert remove funcion
@@ -34,7 +40,7 @@ bool validateArgs(List<String> arguments) {
   List<String> firstArgsAllow = [
     'create',
     'init',
-    'upgrade',
+    'update',
     'install',
     'remove'
   ];
@@ -42,15 +48,21 @@ bool validateArgs(List<String> arguments) {
     'page',
     'controller',
     'route',
+    'project',
     'presentation',
     'view'
   ];
   if (arguments != null &&
       arguments.isNotEmpty &&
       firstArgsAllow.contains(arguments.first)) {
-    if (arguments.first == 'init') return true;
-    final secondArg = arguments[1].split(':').first;
-    if (secondArgsAllow.contains(secondArg)) return true;
+    if (arguments.first == 'init' || arguments.first == 'update') return true;
+
+    if (arguments.first == 'create') {
+      final secondArg = arguments[1].split(':').first;
+      if (secondArgsAllow.contains(secondArg)) return true;
+    }
+
+    if (arguments.first == 'install' && arguments.length > 1) return true;
   }
   return false;
 }

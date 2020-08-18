@@ -24,8 +24,8 @@ Future handleFileCreate(String name, String command, String on,
 
   final list = current.listSync(recursive: true, followLinks: false);
 
-  final contains =
-      list.firstWhere((element) => element.path.contains(on), orElse: null);
+  final contains = list.firstWhere((element) => element.path.contains(on),
+      orElse: () => null);
 
   await defaultGenerator.createFile(
       fileModel: FileModel(
