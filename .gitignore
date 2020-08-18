@@ -22,3 +22,7 @@ doc/api/
 
 ### macOS ###
 .DS_Store
+
+### example files
+example/android/local.properties
+example/pubspec.lock
