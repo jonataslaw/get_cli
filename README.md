@@ -30,10 +30,13 @@ get create route
 get install camera
 
 // to install package in dependencies_dev on your project
-get install flutter_launcher_icons
+get install flutter_launcher_icons --dev
 
 // to remove package on your project
 get remove http
+
+// to remove two or two or more packages on your project
+get remove http path
 
 // to update CLI 
 get update
@@ -51,6 +54,7 @@ TODO:
 - Improve structure
 - Added backup
 - suggest update whenever the package is updated in pub.dev
+- help
 
 ## Adding new functions:
 - Add the folder where the new files will be created in core/structure. The key of Map is the command, the value is the path
