@@ -1,6 +1,6 @@
 name: get_cli
 description: The official CLI from Getx Framework to build Flutter Applications easily
-version: 0.5.3
+version: 0.5.4
 homepage: https://github.com/jonataslaw/get_cli
 
 environment:

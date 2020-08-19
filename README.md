@@ -29,8 +29,14 @@ get create route
 // to install package on your project
 get install camera
 
+// to remove package on your project
+get remove http
+
 // to update CLI 
 get update
+
+// to shows the installed version 
+get --version 
 
 ```
 
@@ -42,7 +48,6 @@ TODO:
 - Improve structure
 - Added backup
 - suggest update whenever the package is updated in pub.dev
-- add --version
 
 ## Adding new functions:
 - Add the folder where the new files will be created in core / structure (Don't forget to add to replaceAsExpected and toMap)

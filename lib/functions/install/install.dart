@@ -12,13 +12,15 @@ Future<void> installPackage(List<String> args) async {
   that way the latest version will be installed''');
     return;
   }
-  var padkageInfo = args.first.split(':');
+  var packageInfo = args.first.split(':');
+  LogService.info('intalling package: ${packageInfo.first}');
 
-  if (padkageInfo.length == 1) {
-    await PubspecUtils.addDependencies(padkageInfo.first);
+  if (packageInfo.length == 1) {
+    await PubspecUtils.addDependencies(packageInfo.first);
   } else {
-    await PubspecUtils.addDependencies(padkageInfo.first,
-        version: padkageInfo[1]);
+    await PubspecUtils.addDependencies(packageInfo.first,
+        version: packageInfo[1]);
   }
   await ShellUtils.pubGet();
+  LogService.success('Package: ${packageInfo.first} installed!');
 }

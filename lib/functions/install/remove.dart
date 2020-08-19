@@ -14,7 +14,7 @@ Future<void> removePackage(List<String> args) async {
   args.removeAt(0);
 
   var package = args.first;
-  print('Removing package: $package');
+  LogService.info('Removing package: $package');
   if (args.length == 1) {
     await PubspecUtils.removeDependencies(package);
   } else {
@@ -23,4 +23,5 @@ Future<void> removePackage(List<String> args) async {
     }
   }
   await ShellUtils.pubGet();
+  LogService.success('Package: $package removed!');
 }
