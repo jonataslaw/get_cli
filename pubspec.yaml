@@ -11,13 +11,14 @@ executables:
 
 dependencies:
   recase: ^3.0.0
-
   cli_menu: ^0.2.2
   archive: ^2.0.13
   ansicolor: ^1.0.2
   html: ^0.14.0+3
   process_run: ^0.10.12+1
   http: ^0.12.2
+  path: ^1.7.0
+  yaml: ^2.2.1
 
 dev_dependencies:
   pedantic: ^1.7.0
