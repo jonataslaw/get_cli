@@ -53,13 +53,13 @@ TODO:
 - suggest update whenever the package is updated in pub.dev
 
 ## Adding new functions:
-- Add the folder where the new files will be created in core / structure (Don't forget to add to replaceAsExpected and toMap)
+- Add the folder where the new files will be created in core/structure. The key of Map is the command, the value is the path
 
-- Create a sample and insert it in the samples / impl folder (you need to create a class, extend Sample)
+- Create a sample and insert it in the samples/impl folder (you need to create a class, extend Sample)
 
 - Create the function for creating the class or folders and insert in functions. If the command is for creation, in the create folder, if it is for startup (as a new structure) in init
 
-- Open the create / create.dart file, add your command to the switch, and point to its function.
+- Open the create/create.dart file, add your command to the switch and validation, then point to its function.
 
 
 Ready!
