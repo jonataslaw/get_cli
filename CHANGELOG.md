@@ -1,3 +1,6 @@
+## [0.5.0]
+- Added remove function
+
 ## [0.4.0]
 - Cleaner code
 

@@ -16,4 +16,13 @@ class PubspecUtils {
     lines.insert(index, '  $package: $version');
     await pubspec.writeAsStringSync(lines.join('\n'));
   }
+
+  static void removeDependencies(String package) async {
+    var pubspec = File('pubspec.yaml');
+    var lines = pubspec.readAsLinesSync();
+    var index = lines
+        .indexWhere((element) => element.split(':').first.trim() == package);
+    lines.removeAt(index);
+    await pubspec.writeAsStringSync(lines.join('\n'));
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/functions/install/install.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/functions/install/remove.dart';
 
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
@@ -27,7 +28,7 @@ Future<void> generate({
       await installPackage(arguments);
       break;
     case "remove":
-      //TODO insert remove funcion
+      await removePackage(arguments);
       break;
     case "create":
       await create(arguments);
@@ -60,8 +61,8 @@ bool validateArgs(List<String> arguments) {
       final secondArg = arguments[1].split(':').first;
       if (secondArgsAllow.contains(secondArg)) return true;
     }
-
-    if (arguments.first == 'install' && arguments.length > 1) return true;
+    final depList = ['install', 'remove'];
+    if (depList.contains(arguments.first) && arguments.length > 1) return true;
   }
   return false;
 }
