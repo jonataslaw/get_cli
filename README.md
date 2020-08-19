@@ -29,6 +29,9 @@ get create route
 // to install package on your project
 get install camera
 
+// to install package in dependencies_dev on your project
+get install flutter_launcher_icons
+
 // to remove package on your project
 get remove http
 
