@@ -5,16 +5,9 @@ import 'package:recase/recase.dart';
 import '../../models/file_model.dart';
 
 Future<void> createRoute() async {
-  FileModel _fileModel = FileModel(
-    result: '',
-    path: Structure.getPathWithName(
-      defaultStructure.getPathByKey('route'),
-      '',
-      createWithWrappedFolder: false,
-    ),
-    commandName: 'route',
-  );
-  ReCase reCase = ReCase(_fileModel.result);
+  FileModel _fileModel = Structure.model('', 'route', false);
+
+  ReCase reCase = ReCase(_fileModel.name);
 
   File _route =
       await File(_fileModel.path + "route.dart").create(recursive: true);

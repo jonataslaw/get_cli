@@ -1,10 +1,10 @@
 class FileModel {
-  final String result;
+  final String name;
   final String path;
   final String commandName;
 
   FileModel({
-    this.result,
+    this.name,
     this.path,
     this.commandName,
   });

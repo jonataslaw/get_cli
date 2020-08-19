@@ -1,73 +1,47 @@
 import 'dart:io';
+import 'package:recase/recase.dart';
+import '../models/file_model.dart';
 
-/// Global defaultStructure
-Structure defaultStructure = Structure();
-
-/// You able to create a your own structure with this class
-/// Just create a new instance an pass it to [Generator]
 class Structure {
-  /// Path of the pages dir for example: 'lib/pages/'
-  String pagesPath;
+  static Map<String, String> _paths = {
+    'page': replaceAsExpected(path: 'lib/pages/'),
+    'widget': replaceAsExpected(path: 'lib/widgets/'),
+    'model': replaceAsExpected(path: 'lib/data/models/'),
+    'init': replaceAsExpected(path: 'lib/'),
+    'route': replaceAsExpected(path: 'lib/routes/'),
+    'repository': replaceAsExpected(path: 'lib/data/repositories/'),
+    'provider': replaceAsExpected(path: 'lib/data/providers/'),
+    'controller': replaceAsExpected(path: 'controllers/'),
+    'view': replaceAsExpected(path: 'views/'),
+  };
 
-  /// Path of the widgets dir for example: 'lib/widgets/'
-  String widgetsPath;
+  static FileModel model(String name, String command, bool wrapperFolder,
+      {String on}) {
+    if (on != null) {
+      Directory current = Directory('./lib');
+      final list = current.listSync(recursive: true, followLinks: false);
+      final contains = list.firstWhere((element) => element.path.contains(on),
+          orElse: () => null);
 
-  /// Path of the main dir for example: 'lib/'
-  String mainPath;
-
-  /// Path of the routes dir for example: 'lib/routes/'
-  String routePath;
-
-  /// Path of the models dir for example: 'lib/models/'
-  String modelsPath;
-
-  /// Path of the repositories dir for example: 'lib/repositories/'
-  String repositoriesPath;
-
-  /// Path of the controllers dir for example: 'lib/controllers/'
-  String controllersPath;
-
-  /// Path of the view dir for example: 'lib/view/'
-  String viewsPath;
-
-  Structure({
-    this.pagesPath = 'lib/pages/',
-    this.widgetsPath = 'lib/widgets/',
-    this.modelsPath = 'lib/models/',
-    this.repositoriesPath = 'lib/repositories/',
-    this.mainPath = 'lib/',
-    this.routePath = 'lib/routes/',
-    this.controllersPath = 'controllers/',
-    this.viewsPath = 'views/',
-  })  : assert(pagesPath != null),
-        assert(widgetsPath != null),
-        assert(modelsPath != null),
-        assert(repositoriesPath != null),
-        assert(controllersPath != null) {
-    mainPath = replaceAsExpected(path: mainPath);
-    routePath = replaceAsExpected(path: routePath);
-    pagesPath = replaceAsExpected(path: pagesPath);
-    widgetsPath = replaceAsExpected(path: widgetsPath);
-    modelsPath = replaceAsExpected(path: modelsPath);
-    repositoriesPath = replaceAsExpected(path: repositoriesPath);
-    controllersPath = replaceAsExpected(path: controllersPath);
-    viewsPath = replaceAsExpected(path: viewsPath);
-  }
-
-  Map<String, String> toMap() => {
-        'page': pagesPath,
-        'widget': widgetsPath,
-        'model': modelsPath,
-        'init': mainPath,
-        'route': routePath,
-        'repository': repositoriesPath,
-        'controller': controllersPath,
-        'view': viewsPath,
-      };
-
-  /// Get file paths with key such as: page, widget, repository, model and more...
-  String getPathByKey(String key) {
-    return toMap()[key];
+      return FileModel(
+        name: name,
+        path: Structure.getPathWithName(
+          contains.path,
+          ReCase(name).snakeCase,
+          createWithWrappedFolder: wrapperFolder,
+        ),
+        commandName: command,
+      );
+    }
+    return FileModel(
+      name: name,
+      path: Structure.getPathWithName(
+        _paths[command],
+        ReCase(name).snakeCase,
+        createWithWrappedFolder: wrapperFolder,
+      ),
+      commandName: command,
+    );
   }
 
   static String replaceAsExpected({String path, String replaceChar}) {

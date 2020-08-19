@@ -4,17 +4,12 @@ import 'package:get_cli/samples/impl/get_main.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:recase/recase.dart';
 
+import '../../core/structure.dart';
+
 Future<void> createMain() async {
-  FileModel _fileModel = FileModel(
-    result: '',
-    path: Structure.getPathWithName(
-      defaultStructure.getPathByKey('init'),
-      '',
-      createWithWrappedFolder: false,
-    ),
-    commandName: 'init',
-  );
-  ReCase reCase = ReCase(_fileModel.result);
+  FileModel _fileModel = Structure.model('', 'init', false);
+
+  ReCase reCase = ReCase(_fileModel.name);
 
   File _route = await File(_fileModel.path + "main.dart");
 
