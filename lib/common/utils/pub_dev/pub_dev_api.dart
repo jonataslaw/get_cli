@@ -6,10 +6,10 @@ class PubDevApi {
   static Future<String> getLatestVersionFromPackage(String package) async {
     var res = await get('https://pub.dev/packages/$package/install');
     var document = parse(res.body);
-    var inputElement =
+    var divElement =
         document.getElementsByClassName('language-yaml').first.text;
-    var hh = inputElement.split(':');
+    var packageDetails = divElement.split(':');
 
-    return hh.last.trim();
+    return packageDetails.last.trim();
   }
 }
