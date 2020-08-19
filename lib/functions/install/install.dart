@@ -1,5 +1,4 @@
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import '../../common/utils/logger/LogUtils.dart';
 
 Future<void> installPackage(List<String> args) async {
@@ -12,15 +11,14 @@ Future<void> installPackage(List<String> args) async {
   that way the latest version will be installed''');
     return;
   }
+  var isDev = args.contains('--dev');
   var packageInfo = args.first.split(':');
   LogService.info('intalling package: ${packageInfo.first}');
 
   if (packageInfo.length == 1) {
-    await PubspecUtils.addDependencies(packageInfo.first);
+    await PubspecUtils.addDependencies(packageInfo.first, isDev: isDev);
   } else {
     await PubspecUtils.addDependencies(packageInfo.first,
-        version: packageInfo[1]);
+        version: packageInfo[1], isDev: isDev);
   }
-  await ShellUtils.pubGet();
-  LogService.success('Package: ${packageInfo.first} installed!');
 }
