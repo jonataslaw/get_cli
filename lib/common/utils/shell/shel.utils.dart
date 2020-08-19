@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:process_run/process_run.dart';
 
@@ -14,7 +16,9 @@ class ShellUtils {
 
   static void update() async {
     LogService.info('upgrade get_cli');
-    await run('pub', ['global', 'activate', 'get_cli'], verbose: false);
+    var res =
+        await run('pub', ['global', 'activate', 'get_cli'], verbose: false);
+    if (res.stderr != null) return LogService.error('falha ao atulizar');
     LogService.success('upgrade complete');
   }
 }

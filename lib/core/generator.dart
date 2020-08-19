@@ -36,6 +36,7 @@ Future<void> generate({
       await create(arguments);
       break;
     case "--version":
+    case "--v":
       await versionCommand();
       break;
   }

@@ -34,6 +34,8 @@ class PubspecUtils {
 
   static void removeDependencies(String package) async {
     try {
+      LogService.info('Removing package: $package');
+
       var lines = _pubspec.readAsLinesSync();
       /* I changed the method so that it would not give an error 
       if the dependency was not found
@@ -41,6 +43,7 @@ class PubspecUtils {
       lines
           .removeWhere((element) => element.split(':').first.trim() == package);
       await _pubspec.writeAsStringSync(lines.join('\n'));
+      LogService.success('Package: $package removed!');
     } on FileSystemException catch (e) {
       _onFileSystemError(e);
     } catch (e) {

@@ -14,14 +14,13 @@ Future<void> removePackage(List<String> args) async {
   args.removeAt(0);
 
   var package = args.first;
-  LogService.info('Removing package: $package');
   if (args.length == 1) {
     await PubspecUtils.removeDependencies(package);
   } else {
     for (var element in args) {
+      // Alterei os logs. Motivo: aqui ele pode remover mais de um package e so estava sendo informado o primeiro
       await PubspecUtils.removeDependencies(element);
     }
   }
   await ShellUtils.pubGet();
-  LogService.success('Package: $package removed!');
 }
