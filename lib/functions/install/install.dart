@@ -1,6 +1,6 @@
-import 'package:get_cli/common/pubspec.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import '../../common/utils/logger/LogUtils.dart';
-import '../shell/pubget.dart';
 
 Future<void> installPackage(List<String> args) async {
   if (args.isEmpty) {

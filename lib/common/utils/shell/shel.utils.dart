@@ -12,10 +12,6 @@ class ShellUtils {
     await run('flutter', ['create', '$path'], verbose: true);
   }
 
-  static void cdDir(String dir) async {
-    await run('cd', [dir], verbose: false);
-  }
-
   static void update() async {
     LogService.info('upgrade get_cli');
     await run('pub', ['global', 'activate', 'get_cli'], verbose: false);
