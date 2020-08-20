@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:html/parser.dart';
 import 'package:http/http.dart';
 
 class PubDevApi {

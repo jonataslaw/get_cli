@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
