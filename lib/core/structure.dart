@@ -30,7 +30,7 @@ class Structure {
         return element.path.contains(on);
       }, orElse: () => null);
       //TODO: Corrigir erros
-//dando erros se o caminho não for encontrado...
+      //dando erros se o caminho não for encontrado...
 
       return FileModel(
         name: name,
