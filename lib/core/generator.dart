@@ -3,6 +3,7 @@ import 'package:get_cli/functions/install/install.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/functions/install/remove.dart';
 import 'package:get_cli/functions/version/version.dart';
+import 'package:get_cli/get_cli.dart';
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
@@ -19,7 +20,7 @@ class Core {
         LogService.error(
             'Error!!! wrong arguments! only $firstArgsAllow are allow how first argument. Example: get create page:home');
         break;
-      case Validation.errorFirstArgument:
+      case Validation.errorSecondArgument:
         LogService.error(
             'Error!!! wrong arguments! only $secondArgsAllow are allow how second arguments of create. Example: get create page:home');
         break;
@@ -95,6 +96,7 @@ class Core {
       }
 
       if (arguments.first == 'create') {
+        if (arguments.length <= 1) return Validation.errorSecondArgument;
         final secondArg = arguments[1].split(':').first;
         if (secondArgsAllow.contains(secondArg)) {
           return Validation.success;

@@ -11,8 +11,9 @@ import '../init/init_chooser.dart';
 import '../install/install.dart';
 
 Future<void> create(List<String> args) async {
-  final name =
-      args[1].split(':').length == 1 ? 'home' : args[1].split(':').last;
+  final name = args[1].split(':').length == 1 || args[1].split(':')[1].isEmpty
+      ? 'home'
+      : args[1].split(':').last;
   final command = args[1].split(':').first;
 
   String onCommand;
