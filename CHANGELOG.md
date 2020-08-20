@@ -1,3 +1,6 @@
+## [0.7.0]
+- Init Arc version
+
 ## [0.6.0]
 - Added version
 
