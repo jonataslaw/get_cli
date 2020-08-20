@@ -1,3 +1,6 @@
+## [0.6.0]
+- Added version
+
 ## [0.5.0]
 - Added remove function
 

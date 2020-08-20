@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:process_run/process_run.dart';
 

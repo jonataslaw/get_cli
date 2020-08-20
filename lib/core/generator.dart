@@ -3,8 +3,6 @@ import 'package:get_cli/functions/install/install.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/functions/install/remove.dart';
 import 'package:get_cli/functions/version/version.dart';
-import 'package:process_run/shell.dart';
-
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
@@ -23,6 +21,7 @@ Future<void> generate({
       await createInitial();
       break;
     case "update":
+    case "upgrade":
       await ShellUtils.update();
       break;
     case "install":
@@ -35,8 +34,8 @@ Future<void> generate({
     case "create":
       await create(arguments);
       break;
-    case "--version":
-    case "--v":
+    case "-version":
+    case "-v":
       await versionCommand();
       break;
   }
@@ -47,10 +46,11 @@ bool validateArgs(List<String> arguments) {
     'create',
     'init',
     'update',
+    'upgrade',
     'install',
     'remove',
-    '--version',
-    '--v'
+    '-version',
+    '-v'
   ];
   List<String> secondArgsAllow = [
     'page',
@@ -65,8 +65,9 @@ bool validateArgs(List<String> arguments) {
       firstArgsAllow.contains(arguments.first)) {
     if (arguments.first == 'init' ||
         arguments.first == 'update' ||
-        arguments.first == '--version' ||
-        arguments.first == '--v') return true;
+        arguments.first == 'upgrade' ||
+        arguments.first == '-version' ||
+        arguments.first == '-v') return true;
 
     if (arguments.first == 'create') {
       final secondArg = arguments[1].split(':').first;
