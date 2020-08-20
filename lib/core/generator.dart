@@ -3,7 +3,6 @@ import 'package:get_cli/functions/install/install.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/functions/install/remove.dart';
 import 'package:get_cli/functions/version/version.dart';
-import 'package:get_cli/get_cli.dart';
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
