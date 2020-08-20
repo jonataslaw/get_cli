@@ -22,8 +22,15 @@ class Structure {
     if (on != null) {
       Directory current = Directory('./lib');
       final list = current.listSync(recursive: true, followLinks: false);
-      final contains = list.firstWhere((element) => element.path.contains(on),
-          orElse: () => null);
+      final contains = list.firstWhere((element) {
+        //Fix erro ao encontrar arquivo com nome
+        if (element is File) {
+          return false;
+        }
+        return element.path.contains(on);
+      }, orElse: () => null);
+      //TODO: Corrigir erros
+//dando erros se o caminho não for encontrado...
 
       return FileModel(
         name: name,
