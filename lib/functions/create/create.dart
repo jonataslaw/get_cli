@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/functions/create/create_page.dart';
 import 'package:get_cli/functions/create/create_route.dart';
+import 'package:get_cli/functions/create/create_screen.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/samples/impl/arc_screen.dart';
 import 'package:get_cli/samples/impl/get_controller.dart';
 import 'package:get_cli/samples/impl/get_view.dart';
 
@@ -29,6 +31,7 @@ Future<void> create(List<String> args) async {
     case "view":
       await handleFileCreate(name, 'view', onCommand, false, GetViewSample());
       break;
+
     case "route":
       await createRoute();
       break;
@@ -36,6 +39,11 @@ Future<void> create(List<String> args) async {
       await ShellUtils.flutterCreate(Directory.current.path);
       await createInitial();
       await installPackage(['get']);
+      break;
+
+    //katekko
+    case "screen":
+      await createScreen(name);
       break;
   }
   return;

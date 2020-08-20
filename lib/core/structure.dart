@@ -13,6 +13,8 @@ class Structure {
     'provider': replaceAsExpected(path: 'lib/data/providers/'),
     'controller': replaceAsExpected(path: 'controllers/'),
     'view': replaceAsExpected(path: 'views/'),
+    //artekko files
+    'screen': replaceAsExpected(path: 'lib/presentation/'),
   };
 
   static FileModel model(String name, String command, bool wrapperFolder,
