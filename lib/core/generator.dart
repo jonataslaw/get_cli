@@ -3,6 +3,7 @@ import 'package:get_cli/functions/install/install.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/functions/install/remove.dart';
 import 'package:get_cli/functions/version/version.dart';
+import 'package:get_cli/get_cli.dart';
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
@@ -81,7 +82,7 @@ class Core {
   ];
 
   Validation validateArgs(List<String> arguments) {
-    if (arguments == null || arguments.isNotEmpty) {
+    if (arguments == null || arguments.isEmpty) {
       return Validation.emptyArgs;
     }
 
@@ -90,11 +91,17 @@ class Core {
           arguments.first == 'update' ||
           arguments.first == 'upgrade' ||
           arguments.first == '-version' ||
-          arguments.first == '-v') return Validation.success;
+          arguments.first == '-v') {
+        return Validation.success;
+      }
 
       if (arguments.first == 'create') {
         final secondArg = arguments[1].split(':').first;
-        if (secondArgsAllow.contains(secondArg)) return Validation.success;
+        if (secondArgsAllow.contains(secondArg)) {
+          return Validation.success;
+        } else {
+          return Validation.errorSecondArgument;
+        }
       }
       final depList = ['install', 'remove'];
       if (depList.contains(arguments.first) && arguments.length > 1) {

@@ -1,3 +1,12 @@
+## [0.7.5]
+- Fix errors on get create
+
+## [0.7.4]
+- Fix errors on validation
+
+## [0.7.1]
+- Show custom errors on validation of args
+
 ## [0.7.0]
 - Init Arc version
 
