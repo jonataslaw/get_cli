@@ -6,42 +6,60 @@ import 'package:get_cli/functions/version/version.dart';
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
-/// Essa função é chamada pela main, e recebe os argumentos da cli
-Future<void> generate({
-  List<String> arguments,
-}) async {
-  ///TODO: add validation info
-  final validate = validateArgs(arguments);
-  if (!validate) {
-    LogService.error('Error!!! wrong arguments');
+class Core {
+  /// Main function. It receive typed arguments
+  void generate({
+    List<String> arguments,
+  }) {
+    switch (validateArgs(arguments)) {
+      case Validation.emptyArgs:
+        LogService.error('Error!!! arguments can not be empty');
+        break;
+      case Validation.errorFirstArgument:
+        LogService.error(
+            'Error!!! wrong arguments! only $firstArgsAllow are allow how first argument. Example: get create page:home');
+        break;
+      case Validation.errorFirstArgument:
+        LogService.error(
+            'Error!!! wrong arguments! only $secondArgsAllow are allow how second arguments of create. Example: get create page:home');
+        break;
+      case Validation.success:
+        runArguments(arguments);
+        break;
+      default:
+        LogService.error('Error!!! Something went wrong');
+        break;
+    }
   }
 
-  switch (arguments.first) {
-    case "init":
-      await createInitial();
-      break;
-    case "update":
-    case "upgrade":
-      await ShellUtils.update();
-      break;
-    case "install":
-      arguments.removeAt(0);
-      await installPackage(arguments);
-      break;
-    case "remove":
-      await removePackage(arguments);
-      break;
-    case "create":
-      await create(arguments);
-      break;
-    case "-version":
-    case "-v":
-      await versionCommand();
-      break;
+  Future<void> runArguments(
+    List<String> arguments,
+  ) async {
+    switch (arguments.first) {
+      case "init":
+        await createInitial();
+        break;
+      case "update":
+      case "upgrade":
+        await ShellUtils.update();
+        break;
+      case "install":
+        arguments.removeAt(0);
+        await installPackage(arguments);
+        break;
+      case "remove":
+        await removePackage(arguments);
+        break;
+      case "create":
+        await create(arguments);
+        break;
+      case "-version":
+      case "-v":
+        await versionCommand();
+        break;
+    }
   }
-}
 
-bool validateArgs(List<String> arguments) {
   List<String> firstArgsAllow = [
     'create',
     'init',
@@ -61,21 +79,37 @@ bool validateArgs(List<String> arguments) {
     'view',
     'screen'
   ];
-  if (arguments != null &&
-      arguments.isNotEmpty &&
-      firstArgsAllow.contains(arguments.first)) {
-    if (arguments.first == 'init' ||
-        arguments.first == 'update' ||
-        arguments.first == 'upgrade' ||
-        arguments.first == '-version' ||
-        arguments.first == '-v') return true;
 
-    if (arguments.first == 'create') {
-      final secondArg = arguments[1].split(':').first;
-      if (secondArgsAllow.contains(secondArg)) return true;
+  Validation validateArgs(List<String> arguments) {
+    if (arguments == null || arguments.isNotEmpty) {
+      return Validation.emptyArgs;
     }
-    final depList = ['install', 'remove'];
-    if (depList.contains(arguments.first) && arguments.length > 1) return true;
+
+    if (firstArgsAllow.contains(arguments.first)) {
+      if (arguments.first == 'init' ||
+          arguments.first == 'update' ||
+          arguments.first == 'upgrade' ||
+          arguments.first == '-version' ||
+          arguments.first == '-v') return Validation.success;
+
+      if (arguments.first == 'create') {
+        final secondArg = arguments[1].split(':').first;
+        if (secondArgsAllow.contains(secondArg)) return Validation.success;
+      }
+      final depList = ['install', 'remove'];
+      if (depList.contains(arguments.first) && arguments.length > 1) {
+        return Validation.success;
+      }
+    } else {
+      return Validation.errorFirstArgument;
+    }
+    return Validation.errorSecondArgument;
   }
-  return false;
+}
+
+enum Validation {
+  success,
+  errorFirstArgument,
+  errorSecondArgument,
+  emptyArgs,
 }

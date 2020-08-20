@@ -39,10 +39,10 @@ get remove http
 get remove http path
 
 // to update CLI 
-get update
+get update // or upgrade
 
 // to shows the installed version 
-get --version 
+get -v // or get -version 
 
 ```
 
