@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
@@ -11,7 +12,7 @@ import 'package:recase/recase.dart';
 
 import '../../core/structure.dart';
 
-Future<void> createScreen([String name = 'home']) async {
+Future<void> createScreen(String name, {bool isExample = false}) async {
   //TODO: Melhorar
   FileModel _fileModel = Structure.model(name, 'screen', true);
 
@@ -20,7 +21,8 @@ Future<void> createScreen([String name = 'home']) async {
   // os if são para não sobrescrever caso ja exista um arquivo
   if (!await _screen.exists()) {
     await _screen.create(recursive: true);
-    await _screen.writeAsString(ArcScreenSample().file(name));
+    await _screen
+        .writeAsString(ArcScreenSample().file(name, isExample: isExample));
     LogService.success(reCase.pascalCase + " Screen created succesfully.");
   }
   File _binding = await File(Structure.replaceAsExpected(
@@ -36,33 +38,40 @@ Future<void> createScreen([String name = 'home']) async {
       '${reCase.snakeCase}.controller.dart');
   if (!await _controller.exists()) {
     await _controller.create(recursive: true);
-    await _controller.writeAsString(ControllerSample().file(name, isArc: true));
+    await _controller.writeAsString(isExample
+        ? ControllerSample().file(name)
+        : ControllerSample().file(name, isArc: true));
     LogService.success(reCase.pascalCase + " controller created succesfully.");
   }
 
   await _addRoute(name);
-  await addNavigation(name);
 }
 
 void _addRoute(String nameRoute) async {
   var routesFile = File(Structure.replaceAsExpected(
       path: 'lib/infrastructure/navigation/routes.dart'));
   if (!await routesFile.exists()) {
-    await createRoute(isArc: true);
+    await createRoute(isArc: true, initial: nameRoute.snakeCase.toUpperCase());
   }
   var lines = await routesFile.readAsLines();
-
+  String line =
+      '  static const ${nameRoute.snakeCase.toUpperCase()} = \'/${nameRoute.snakeCase.toLowerCase().replaceAll('_', '-')}\';';
+  if (lines.contains(line)) {
+    return;
+  }
   while (lines.last.isEmpty) {
     lines.removeLast();
   }
+
   lines.removeLast();
-  lines.add(
-      '  static const ${nameRoute.snakeCase.toUpperCase()} = \'/${nameRoute.snakeCase.toLowerCase().replaceAll('_', '-')}\';');
+
+  lines.add(line);
 
   _routesSort(lines);
 
   await routesFile.writeAsStringSync(lines.join('\n'));
-  LogService.info('${nameRoute}  route created succesfully ');
+  LogService.success('${nameRoute}  route created succesfully ');
+  await addNavigation(nameRoute);
 }
 
 List<String> _routesSort(List<String> lines) {

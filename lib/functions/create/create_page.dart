@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/get_binding.dart';
@@ -23,5 +24,5 @@ Future<void> createPage([String name = 'home']) async {
       await File(_fileModel.path + "_controller.dart").create(recursive: true);
   await _controller.writeAsString(ControllerSample().file(reCase.pascalCase));
 
-  print(reCase.pascalCase + " Page created succesfully.");
+  LogService.success(reCase.pascalCase + " Page created succesfully.");
 }

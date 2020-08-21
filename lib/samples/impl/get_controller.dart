@@ -14,6 +14,7 @@ class ${fileName}Controller extends GetxController {
   void onInit() => null;
   
   final count = 0.obs;
+  increment() => count.value++;
 }
 '''
         : ''' 
@@ -22,7 +23,7 @@ import 'package:get/get.dart';
 
 class ${fileName.pascalCase}Controller extends GetxController{
 
-  ${fileName.pascalCase}Controller({@required Map screenArgs});
+  ${fileName.pascalCase}Controller();
 
   //TODO: ${fileName.pascalCase}Controller
 }

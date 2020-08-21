@@ -22,7 +22,7 @@ class ${fileName.pascalCase}ControllerBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<${fileName.pascalCase}Controller>(
-          () => ${fileName.pascalCase}Controller(screenArgs: Get.arguments),
+          () => ${fileName.pascalCase}Controller(),
     );
   }
 }

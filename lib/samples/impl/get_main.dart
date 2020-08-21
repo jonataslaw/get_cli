@@ -22,7 +22,6 @@ void main() {
 import 'package:get/get.dart';
 import 'infrastructure/navigation/navigation.dart';
 import 'infrastructure/navigation/routes.dart';
-import 'infrastructure/theme/theme.dart';
 
 void main() async {
 
@@ -39,7 +38,6 @@ class Main extends StatelessWidget {
     return GetMaterialApp(
       initialRoute: initialRoute,
       getPages: Nav.routes,
-      theme: themeData,
     );
     
   }

@@ -15,7 +15,7 @@ Future<void> createNavigation() async {
       await File((_fileModel.path + "navigation.dart")).create(recursive: true);
   await _route.writeAsString(ArcNavigationSample().file(reCase.pascalCase));
 
-  LogService.success(" Navigation created succesfully.");
+  LogService.success("Navigation created succesfully.");
 }
 
 Future<void> addNavigation(String name) async {
