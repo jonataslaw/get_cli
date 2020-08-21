@@ -1,3 +1,6 @@
+## [0.8.5]
+- Init Clean by Katekko is implemented.
+
 ## [0.8.0]
 - complete arc screen
 
