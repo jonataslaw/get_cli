@@ -1,3 +1,6 @@
+## [0.8.0]
+- complete arc screen
+
 ## [0.7.5]
 - Fix errors on get create
 

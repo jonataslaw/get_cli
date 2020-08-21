@@ -2,11 +2,10 @@ import 'package:get_cli/samples/interface/sample_interface.dart';
 import 'package:recase/recase.dart';
 
 //Usei arc pra fazer reencia a clean do katekko
-class ArcSceeenSample extends Sample {
+class ArcScreenSample extends Sample {
   @override
   String file(String fileName) {
-    return '''
-import 'controllers/${fileName.snakeCase}.controller.dart';
+    return '''import 'controllers/${fileName.snakeCase}.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

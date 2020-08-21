@@ -2,10 +2,9 @@ import 'package:get_cli/samples/interface/sample_interface.dart';
 
 class RouteSample extends Sample {
   @override
-  String file(String fileName) {
-    return '''
-
-import 'package:get/get.dart';
+  String file(String fileName, {bool isArc = false}) {
+    return !isArc
+        ? '''import 'package:get/get.dart';
 import '../pages/home/home_view.dart';
 class Routes {
 
@@ -16,6 +15,14 @@ class Routes {
   ];
 }
 
+'''
+        : ''' 
+class Routes {
+  static Future<String> get initialRoute async {
+    // TODO: implement method
+    return null;
+  }
+}
 ''';
   }
 }

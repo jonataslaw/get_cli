@@ -3,8 +3,7 @@ import 'package:get_cli/samples/interface/sample_interface.dart';
 class GetViewSample extends Sample {
   @override
   String file(String fileName) {
-    return '''
-import 'package:flutter/material.dart';
+    return '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '${fileName.toLowerCase()}_controller.dart';
 

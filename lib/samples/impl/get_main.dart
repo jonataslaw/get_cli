@@ -4,8 +4,7 @@ class MainSample extends Sample {
   @override
   String file(String fileName, {bool isArc = false}) {
     return !isArc
-        ? '''
-import 'package:flutter/material.dart';
+        ? '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'routes/route.dart';
 
@@ -19,8 +18,7 @@ void main() {
   );
 }
   '''
-        : '''
-import 'package:flutter/material.dart';
+        : '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'infrastructure/navigation/navigation.dart';
 import 'infrastructure/navigation/routes.dart';
