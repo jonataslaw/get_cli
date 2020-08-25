@@ -17,7 +17,7 @@ class ShellUtils {
   static void update() async {
     String versionInPubDev =
         await PubDevApi.getLatestVersionFromPackage('get_cli');
-    String versionInstalled = await PubspecLock.getVersionCli();
+    String versionInstalled = await PubspecLock.getVersionCli(disableLog: true);
     if (versionInstalled == versionInPubDev)
       return LogService.info('latest version is already installed');
     LogService.info('upgrade get_cli');
