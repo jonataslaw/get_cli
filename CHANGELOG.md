@@ -1,3 +1,6 @@
+## [0.8.6]
+- Clean imports
+
 ## [0.8.5]
 - Init Clean by Katekko is implemented.
 

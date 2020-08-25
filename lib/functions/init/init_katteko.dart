@@ -1,6 +1,4 @@
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/samples/impl/get_controller.dart';
-
 import '../create/create_screen.dart';
 import '../create/create_main.dart';
 import '../create/create_route.dart';
