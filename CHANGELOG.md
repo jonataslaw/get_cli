@@ -1,3 +1,6 @@
+## [0.8.7]
+- Auto install get on init
+
 ## [0.8.6]
 - Clean imports
 

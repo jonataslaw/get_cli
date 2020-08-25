@@ -2,7 +2,8 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 
-Future<void> removePackage(List<String> args) async {
+Future<void> removePackage(List<String> args,
+    {bool updatePubspec = true}) async {
   if (args.isEmpty || args.length == 1) {
     LogService.error('enter the name of a package');
     LogService.info('''example:
@@ -22,5 +23,7 @@ Future<void> removePackage(List<String> args) async {
       await PubspecUtils.removeDependencies(element);
     }
   }
-  await ShellUtils.pubGet();
+  if (updatePubspec) {
+    await ShellUtils.pubGet();
+  }
 }
