@@ -1,4 +1,6 @@
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
 import 'package:process_run/process_run.dart';
 
 class ShellUtils {
@@ -13,10 +15,16 @@ class ShellUtils {
   }
 
   static void update() async {
+    String versionInPubDev =
+        await PubDevApi.getLatestVersionFromPackage('get_cli');
+    String versionInstalled = await PubspecLock.getVersionCli();
+    if (versionInstalled == versionInPubDev)
+      return LogService.info('latest version is already installed');
     LogService.info('upgrade get_cli');
     var res =
         await run('pub', ['global', 'activate', 'get_cli'], verbose: true);
-    if (res.stderr != null) return LogService.error('falha ao atualizar');
+    if (res.stderr.toString().isNotEmpty)
+      return LogService.error('falha ao atualizar');
     LogService.success('upgrade complete');
   }
 }
