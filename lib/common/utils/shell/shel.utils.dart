@@ -15,8 +15,8 @@ class ShellUtils {
   static void update() async {
     LogService.info('upgrade get_cli');
     var res =
-        await run('pub', ['global', 'activate', 'get_cli'], verbose: false);
-    if (res.stderr != null) return LogService.error('falha ao atulizar');
+        await run('pub', ['global', 'activate', 'get_cli'], verbose: true);
+    if (res.stderr != null) return LogService.error('falha ao atualizar');
     LogService.success('upgrade complete');
   }
 }

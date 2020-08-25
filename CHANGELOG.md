@@ -1,3 +1,6 @@
+## [0.8.8]
+- Auto install get katekko structure
+
 ## [0.8.7]
 - Auto install get on init
 
