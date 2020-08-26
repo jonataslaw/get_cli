@@ -1,3 +1,7 @@
+## [0.9.5]
+- Fix get_page
+- fix navigation
+- other improvements
 
 ## [0.9.4]
 - Improve code format
