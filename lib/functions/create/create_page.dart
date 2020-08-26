@@ -14,15 +14,23 @@ Future<void> createPage([String name = 'home']) async {
 
   ReCase reCase = ReCase(_fileModel.name);
 
-  File _binding =
-      await File(_fileModel.path + "_binding.dart").create(recursive: true);
-  await _binding.writeAsString(BindingSample().file(reCase.pascalCase));
-  File _view =
-      await File(_fileModel.path + "_view.dart").create(recursive: true);
-  await _view.writeAsString(GetViewSample().file(reCase.pascalCase));
-  File _controller =
-      await File(_fileModel.path + "_controller.dart").create(recursive: true);
-  await _controller.writeAsString(ControllerSample().file(reCase.pascalCase));
+  File _binding = await File(_fileModel.path + "_binding.dart");
+  if (await _binding.exists()) {
+    await _binding.create(recursive: true);
+    await _binding.writeAsString(BindingSample().file(reCase.pascalCase));
+  }
+
+  File _view = await File(_fileModel.path + "_view.dart");
+  if (await _view.exists()) {
+    await _view.create(recursive: true);
+    await _view.writeAsString(GetViewSample().file(reCase.pascalCase));
+  }
+
+  File _controller = await File(_fileModel.path + "_controller.dart");
+  if (await _controller.exists()) {
+    await _controller.create();
+    await _controller.writeAsString(ControllerSample().file(reCase.pascalCase));
+  }
 
   LogService.success(reCase.pascalCase + " Page created succesfully.");
 }
