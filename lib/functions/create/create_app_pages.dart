@@ -30,7 +30,8 @@ Future<void> addAppPage(String name) async {
   String namePascalCase = name.pascalCase;
   String line = '''    GetPage(name: Routes.${nameSnakeCase.toUpperCase()}, 
       page:()=> ${namePascalCase}View(), 
-      binding: ${namePascalCase}Binding()),''';
+      binding: ${namePascalCase}Binding(),
+    ),''';
   lines.insert(lines.length - 2, line);
   lines.insert(
       0, '''import '../pages/$nameSnakeCase/${nameSnakeCase}_binding.dart';''');

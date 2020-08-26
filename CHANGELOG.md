@@ -1,3 +1,15 @@
+## [0.9.4]
+- Improve code format
+
+## [0.9.3]
+- Remove duplicate appPages
+
+## [0.9.2]
+- Remove duplicate imports
+
+## [0.9.1]
+- New routes format
+
 ## [0.9.0]
 - Auto create route on page create
 

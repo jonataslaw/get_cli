@@ -8,7 +8,6 @@ class RouteSample extends Sample {
 
 abstract class Routes{
 
-  static const INITIAL = '/';
 }
 
 '''
