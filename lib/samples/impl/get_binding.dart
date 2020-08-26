@@ -6,12 +6,12 @@ class BindingSample extends Sample {
   String file(String fileName, {isArc = false}) {
     return !isArc
         ? '''import 'package:get/get.dart';
-import '${fileName.toLowerCase()}_controller.dart';
+import '${fileName.toLowerCase().snakeCase}_controller.dart';
 
-class ${fileName}Binding extends Bindings {
+class ${fileName.pascalCase}Binding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<${fileName}Controller>(() => ${fileName}Controller());
+    Get.lazyPut<${fileName.pascalCase}Controller>(() => ${fileName.pascalCase}Controller());
   }
 }
 '''
