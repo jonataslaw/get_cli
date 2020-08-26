@@ -1,3 +1,6 @@
+## [0.9.0]
+- Auto create route on page create
+
 ## [0.8.8]
 - Auto install get katekko structure
 
