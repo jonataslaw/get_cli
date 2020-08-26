@@ -48,6 +48,7 @@ class Core {
         await installPackage(arguments);
         break;
       case "remove":
+        arguments.removeAt(0);
         await removePackage(arguments);
         break;
       case "create":

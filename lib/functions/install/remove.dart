@@ -4,15 +4,13 @@ import 'package:get_cli/common/utils/shell/shel.utils.dart';
 
 Future<void> removePackage(List<String> args,
     {bool updatePubspec = true}) async {
-  if (args.isEmpty || args.length == 1) {
+  if (args.isEmpty) {
     LogService.error('enter the name of a package');
     LogService.info('''example:
   get remove http
 ''');
     return;
   }
-
-  args.removeAt(0);
 
   var package = args.first;
   if (args.length == 1) {

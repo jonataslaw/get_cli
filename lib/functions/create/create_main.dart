@@ -12,13 +12,12 @@ Future<void> createMain({bool isArc = false}) async {
 
   ReCase reCase = ReCase(_fileModel.name);
 
-  File _route = await File(_fileModel.path + "main.dart");
+  File _main = await File(_fileModel.path + "main.dart");
 
-  if (!_route.existsSync()) {
-    await _route.create(recursive: true);
+  if (!_main.existsSync()) {
+    await _main.create(recursive: true);
   }
 
-  await _route
-      .writeAsString(MainSample().file(reCase.pascalCase, isArc: isArc));
+  await _main.writeAsString(MainSample().file(reCase.pascalCase, isArc: isArc));
   LogService.success("Main created succesfully.");
 }

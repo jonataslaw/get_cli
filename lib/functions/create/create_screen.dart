@@ -3,6 +3,7 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_navigation.dart';
 import 'package:get_cli/functions/create/create_route.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/arc_screen.dart';
 import 'package:get_cli/samples/impl/get_binding.dart';
@@ -16,32 +17,20 @@ Future<void> createScreen(String name, {bool isExample = false}) async {
   FileModel _fileModel = Structure.model(name, 'screen', true);
 
   ReCase reCase = ReCase(_fileModel.name);
-  File _screen = File(_fileModel.path + ".screen.dart");
-  // os if são para não sobrescrever caso ja exista um arquivo
-  if (!await _screen.exists()) {
-    await _screen.create(recursive: true);
-    await _screen
-        .writeAsString(ArcScreenSample().file(name, isExample: isExample));
-    LogService.success(reCase.pascalCase + " Screen created succesfully.");
-  }
-  File _binding = await File(Structure.replaceAsExpected(
-          path: 'lib/infrastructure/navigation/bindings/controllers/') +
-      '${reCase.snakeCase}.controller.binding.dart');
-  if (!await _binding.exists()) {
-    await _binding.create(recursive: true);
-    await _binding.writeAsString(BindingSample().file(name, isArc: true));
-    LogService.success(reCase.pascalCase + " Binding created succesfully.");
-  }
-  File _controller = await File(Structure.replaceAsExpected(
-          path: 'lib/presentation/${reCase.snakeCase}/controllers/') +
-      '${reCase.snakeCase}.controller.dart');
-  if (!await _controller.exists()) {
-    await _controller.create(recursive: true);
-    await _controller.writeAsString(isExample
-        ? ControllerSample().file(name)
-        : ControllerSample().file(name, isArc: true));
-    LogService.success(reCase.pascalCase + " controller created succesfully.");
-  }
+  await writeFile(_fileModel.path + ".screen.dart",
+      ArcScreenSample().file(name, isExample: isExample));
+
+  await writeFile(
+      Structure.replaceAsExpected(
+              path: 'lib/infrastructure/navigation/bindings/controllers/') +
+          '${reCase.snakeCase}.controller.binding.dart',
+      BindingSample().file(name, isArc: true));
+
+  await writeFile(
+      Structure.replaceAsExpected(
+              path: 'lib/presentation/${reCase.snakeCase}/controllers/') +
+          '${reCase.snakeCase}.controller.dart',
+      ControllerSample().file(name, isArc: !isExample));
 
   await _addRoute(name);
 }

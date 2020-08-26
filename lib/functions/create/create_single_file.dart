@@ -17,3 +17,12 @@ Future handleFileCreate(String name, String command, String on,
   print(
       'file created succesfully with name :${fileModel.name} at path: ${fileModel.path}');
 }
+
+Future<void> writeFile(String path, String content,
+    {bool overwrite = false}) async {
+  File _file = await File(Structure.replaceAsExpected(path: path));
+  if (!await _file.exists() || overwrite) {
+    await _file.create(recursive: true);
+    await _file.writeAsString(content);
+  }
+}

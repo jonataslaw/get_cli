@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/samples/impl/arc_navigation.dart';
 import 'package:recase/recase.dart';
 import '../../models/file_model.dart';
@@ -10,10 +11,8 @@ Future<void> createNavigation() async {
 
   ReCase reCase = ReCase(_fileModel.name);
 
-  File _route =
-      await File((_fileModel.path + "navigation.dart")).create(recursive: true);
-  await _route.writeAsString(ArcNavigationSample().file(reCase.pascalCase));
-
+  await writeFile(_fileModel.path + "navigation.dart",
+      ArcNavigationSample().file(reCase.pascalCase));
   LogService.success("Navigation created succesfully.");
 }
 

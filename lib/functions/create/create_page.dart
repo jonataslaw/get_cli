@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/get_binding.dart';
 import 'package:recase/recase.dart';
@@ -14,23 +15,14 @@ Future<void> createPage([String name = 'home']) async {
 
   ReCase reCase = ReCase(_fileModel.name);
 
-  File _binding = await File(_fileModel.path + "_binding.dart");
-  if (await _binding.exists()) {
-    await _binding.create(recursive: true);
-    await _binding.writeAsString(BindingSample().file(reCase.pascalCase));
-  }
+  await writeFile(_fileModel.path + "_binding.dart",
+      BindingSample().file(reCase.pascalCase));
 
-  File _view = await File(_fileModel.path + "_view.dart");
-  if (await _view.exists()) {
-    await _view.create(recursive: true);
-    await _view.writeAsString(GetViewSample().file(reCase.pascalCase));
-  }
+  await writeFile(
+      _fileModel.path + "_view.dart", GetViewSample().file(reCase.pascalCase));
 
-  File _controller = await File(_fileModel.path + "_controller.dart");
-  if (await _controller.exists()) {
-    await _controller.create();
-    await _controller.writeAsString(ControllerSample().file(reCase.pascalCase));
-  }
+  await writeFile(_fileModel.path + "_controller.dart",
+      ControllerSample().file(reCase.pascalCase));
 
   LogService.success(reCase.pascalCase + " Page created succesfully.");
 }
