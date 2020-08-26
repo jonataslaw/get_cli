@@ -1,3 +1,6 @@
+## [0.9.0]
+- auto create route when creating page in getx_pattern
+
 ## [0.8.8]
 - Auto install get katekko structure
 
