@@ -12,7 +12,7 @@ void main() {
   runApp(
     GetMaterialApp(
       title: "Application",
-      initialRoute: Routes.INITIAL,
+      initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),
   );
