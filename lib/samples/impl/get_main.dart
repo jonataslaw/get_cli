@@ -4,16 +4,16 @@ class MainSample extends Sample {
   @override
   String file(String fileName, {bool isArc = false}) {
     return !isArc
-        ? '''import 'package:flutter/material.dart';
+        ? '''import 'routes/app_pages.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'routes/route.dart';
 
 void main() {
   runApp(
     GetMaterialApp(
       title: "Application",
-      initialRoute: Routes.initial,
-      getPages: Routes.paths,
+      initialRoute: Routes.INITIAL,
+      getPages: AppPages.routes,
     ),
   );
 }

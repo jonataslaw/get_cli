@@ -4,15 +4,11 @@ class RouteSample extends Sample {
   @override
   String file(String fileName, {bool isArc = false, String initial = 'HOME'}) {
     return !isArc
-        ? '''import 'package:get/get.dart';
-import '../pages/home/home_view.dart';
-class Routes {
+        ? '''part of 'app_pages.dart';
 
-  static final String initial = '/home';
+abstract class Routes{
 
-  static final paths = [
-    GetPage(name: '/home', page: () => HomeView()),
-  ];
+  static const INITIAL = '/';
 }
 
 '''
