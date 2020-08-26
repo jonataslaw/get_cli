@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cli_menu/cli_menu.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
@@ -5,16 +8,28 @@ import 'package:get_cli/functions/routes/get_add_route.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/get_binding.dart';
 import 'package:recase/recase.dart';
-
 import '../../core/structure.dart';
 import '../../samples/impl/get_controller.dart';
 import '../../samples/impl/get_view.dart';
 
 Future<void> createPage([String name = 'home']) async {
   FileModel _fileModel = Structure.model(name, 'page', true);
-
   ReCase reCase = ReCase(_fileModel.name);
 
+  if (File(_fileModel.path + "_view.dart").existsSync() ||
+      File(_fileModel.path + "_binding.dart").existsSync() ||
+      File(_fileModel.path + "_controller.dart").existsSync()) {
+    LogService.info(
+        'The PAGE [$name] already exists, do you want to overwrite it?');
+    final menu = Menu(["Yes", "No"]);
+    final result = menu.choose();
+    if (result.index == 0) await _writeFiles(_fileModel, reCase);
+  } else {
+    await _writeFiles(_fileModel, reCase);
+  }
+}
+
+Future<void> _writeFiles(FileModel _fileModel, ReCase reCase) async {
   await writeFile(
       _fileModel.path + "_binding.dart",
       //erro ao criar pages com nome composto
@@ -25,7 +40,7 @@ Future<void> createPage([String name = 'home']) async {
 
   await writeFile(_fileModel.path + "_controller.dart",
       ControllerSample().file(reCase.pascalCase));
-  addRoute(reCase.originalText);
-
+  await addRoute(reCase.originalText);
   LogService.success(reCase.pascalCase + " Page created succesfully.");
+  return;
 }

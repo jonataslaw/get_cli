@@ -8,6 +8,9 @@ import '../create/create_screen.dart';
 import '../create/create_main.dart';
 
 Future<void> createInitKatekko() async {
+  bool canContinue = await createMain(isArc: true);
+  if (!canContinue) return;
+
   List<Directory> initialDirs = [
     Directory(Structure.replaceAsExpected(path: 'lib/domain/core/interfaces/')),
     Directory(Structure.replaceAsExpected(
@@ -22,7 +25,6 @@ Future<void> createInitKatekko() async {
     Directory(Structure.replaceAsExpected(path: 'lib/infrastructure/theme/')),
   ];
   await Future.wait([
-    createMain(isArc: true),
     createScreen('Counter', isExample: true),
     createListDirectory(initialDirs),
   ]);

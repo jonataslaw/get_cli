@@ -7,10 +7,12 @@ import '../create/create_page.dart';
 import '../create/create_route.dart';
 
 Future<void> createInitGetxPattern() async {
+  bool canContinue = await createMain();
+  if (!canContinue) return;
+
   await Future.wait([
     createRoute(),
     createAppPage(),
-    createMain(),
     createPage(),
   ]);
   await installGet();

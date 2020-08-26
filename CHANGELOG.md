@@ -1,7 +1,14 @@
-## [0.9.5]
-- Fix get_page
-- fix navigation
-- other improvements
+## [0.10.3]
+- Fix: If the user decides not to overwrite the project, the action will be stopped completely
+
+## [0.10.2]
+- Improve overwrite messages
+
+## [0.10.1]
+- Fix selector 
+
+## [0.10.0]
+- Added selector that asks the user if he wants to overwrite the file, if it exists.
 
 ## [0.9.4]
 - Improve code format
