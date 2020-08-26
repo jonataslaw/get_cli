@@ -27,14 +27,23 @@ Future<void> addNavigation(String name) async {
   while (lines.last.isEmpty) {
     lines.removeLast();
   }
+  if (lines.last.trim() != '}') {
+    lines.last = lines.last.replaceAll('}', '');
+    lines.add('}');
+  }
+  int index = lines.indexWhere((element) => element.contains('];'));
+  if (lines[index].trim() != '];') {
+    lines[index] = lines[index].replaceAll('];', '');
+    index++;
+    lines.insert(index, '  ];');
+  }
 
-  lines.insert(lines.length - 2, '    GetPage(');
-  lines.insert(
-      lines.length - 2, '    name: Routes.${name.snakeCase.toUpperCase()},');
-  lines.insert(lines.length - 2, '    page: () => ${name.pascalCase}Screen(),');
-  lines.insert(
-      lines.length - 2, '    binding: ${name.pascalCase}ControllerBinding()');
-  lines.insert(lines.length - 2, '  ),');
+  lines.insert(index, '''    GetPage(
+      name: Routes.${name.snakeCase.toUpperCase()},
+      page: () => ${name.pascalCase}Screen(),
+      binding: ${name.pascalCase}ControllerBinding()
+    ),    ''');
+
   lines.insert(0,
       '''import '../../presentation/${name.snakeCase}/${name.snakeCase}.screen.dart';''');
   lines.insert(0,
