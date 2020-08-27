@@ -1,3 +1,6 @@
+## [0.11.2]
+- add create project:name
+
 ## [0.11.1]
 - Improve new version available message
 
