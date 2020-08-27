@@ -44,11 +44,6 @@ Future<void> addNavigation(String name) async {
       binding: ${name.pascalCase}ControllerBinding()
     ),    ''');
 
-  lines.insert(0,
-      '''import '../../presentation/${name.snakeCase}/${name.snakeCase}.screen.dart';''');
-  lines.insert(0,
-      '''import '../../infrastructure/navigation/bindings/controllers/${name.snakeCase}.controller.binding.dart';''');
-
   await navigationFile.writeAsStringSync(lines.join('\n'));
   LogService.success("${name.pascalCase} navigation add succesfully.");
 }

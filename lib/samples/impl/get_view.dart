@@ -6,6 +6,7 @@ class GetViewSample extends Sample {
   String file(String fileName) {
     return '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '${fileName.toLowerCase().snakeCase}_controller.dart';
 
 class ${fileName.pascalCase}View extends  GetView<${fileName.pascalCase}Controller>  {

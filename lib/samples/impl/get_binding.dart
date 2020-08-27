@@ -6,7 +6,8 @@ class BindingSample extends Sample {
   String file(String fileName, {isArc = false}) {
     return !isArc
         ? '''import 'package:get/get.dart';
-import '${fileName.toLowerCase().snakeCase}_controller.dart';
+
+import '${fileName.snakeCase}_controller.dart';
 
 class ${fileName.pascalCase}Binding extends Bindings {
   @override
@@ -15,8 +16,9 @@ class ${fileName.pascalCase}Binding extends Bindings {
   }
 }
 '''
-        : '''import '../../../../presentation/${fileName.snakeCase}/controllers/${fileName.snakeCase}.controller.dart';
-import 'package:get/get.dart';
+        : '''import 'package:get/get.dart';
+
+import '../../../../presentation/${fileName.snakeCase}/controllers/${fileName.snakeCase}.controller.dart';
 
 class ${fileName.pascalCase}ControllerBinding extends Bindings {
   @override

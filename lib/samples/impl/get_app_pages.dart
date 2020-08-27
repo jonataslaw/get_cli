@@ -5,6 +5,7 @@ class AppPagesSample extends Sample {
   String file(String fileName) {
     return '''
 import 'package:get/get.dart';
+
 part 'app_routes.dart';
 
 class AppPages {
