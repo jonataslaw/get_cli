@@ -1,20 +1,25 @@
 import 'dart:io';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/functions/create/create_page.dart';
+import 'package:get_cli/functions/create/create_project.dart';
 import 'package:get_cli/functions/create/create_route.dart';
 import 'package:get_cli/functions/create/create_screen.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/samples/impl/get_controller.dart';
 import 'package:get_cli/samples/impl/get_view.dart';
 
-import '../init/init_chooser.dart';
-import '../install/install.dart';
-
 Future<void> create(List<String> args) async {
-  final name = args[1].split(':').length == 1 || args[1].split(':')[1].isEmpty
-      ? 'home'
-      : args[1].split(':').last;
   final command = args[1].split(':').first;
+  String name;
+  if (command != 'project') {
+    name = args[1].split(':').length == 1 || args[1].split(':')[1].isEmpty
+        ? 'home'
+        : args[1].split(':')[1];
+  } else {
+    name = args[1].split(':').length == 1 || args[1].split(':')[1].isEmpty
+        ? '.'
+        : args[1].split(':')[1];
+  }
 
   String onCommand;
   if (args.length > 2 && args[2] == 'on') {
@@ -37,9 +42,7 @@ Future<void> create(List<String> args) async {
       await createRoute();
       break;
     case "project":
-      await ShellUtils.flutterCreate(Directory.current.path);
-      await createInitial();
-      await installPackage(['get']);
+      createProject(name);
       break;
 
     //katekko
