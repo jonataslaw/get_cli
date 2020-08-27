@@ -8,9 +8,9 @@ import '../functions/init/init_chooser.dart';
 
 class Core {
   /// Main function. It receive typed arguments
-  void generate({
+  Future<void> generate({
     List<String> arguments,
-  }) {
+  }) async {
     switch (validateArgs(arguments)) {
       case Validation.emptyArgs:
         LogService.error('Error!!! arguments can not be empty');
@@ -24,7 +24,7 @@ class Core {
             'Error!!! wrong arguments! only $secondArgsAllow are allow how second arguments of create. Example: get create page:home');
         break;
       case Validation.success:
-        runArguments(arguments);
+        await runArguments(arguments);
         break;
       default:
         LogService.error('Error!!! Something went wrong');

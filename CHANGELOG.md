@@ -1,5 +1,12 @@
+## [0.11.1]
+- Improve new version available message
+
+## [0.11.0]
+- Added addExport and reactivate check for updates
+
 ## [0.10.4]
 - fix: overwrite files
+
 ## [0.10.3]
 - Fix: If the user decides not to overwrite the project, the action will be stopped completely
 
