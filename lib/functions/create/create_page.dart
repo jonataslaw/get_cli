@@ -23,23 +23,28 @@ Future<void> createPage([String name = 'home']) async {
         'The PAGE [$name] already exists, do you want to overwrite it?');
     final menu = Menu(["Yes", "No"]);
     final result = menu.choose();
-    if (result.index == 0) await _writeFiles(_fileModel, reCase);
+    if (result.index == 0)
+      await _writeFiles(_fileModel, reCase, overwrite: true);
   } else {
     await _writeFiles(_fileModel, reCase);
   }
 }
 
-Future<void> _writeFiles(FileModel _fileModel, ReCase reCase) async {
+Future<void> _writeFiles(FileModel _fileModel, ReCase reCase,
+    {bool overwrite = false}) async {
   await writeFile(
       _fileModel.path + "_binding.dart",
       //erro ao criar pages com nome composto
-      BindingSample().file(reCase.originalText));
+      BindingSample().file(reCase.originalText),
+      overwrite: overwrite);
 
-  await writeFile(_fileModel.path + "_view.dart",
-      GetViewSample().file(reCase.originalText));
+  await writeFile(
+      _fileModel.path + "_view.dart", GetViewSample().file(reCase.originalText),
+      overwrite: overwrite);
 
   await writeFile(_fileModel.path + "_controller.dart",
-      ControllerSample().file(reCase.pascalCase));
+      ControllerSample().file(reCase.pascalCase),
+      overwrite: overwrite);
   await addRoute(reCase.originalText);
   LogService.success(reCase.pascalCase + " Page created succesfully.");
   return;
