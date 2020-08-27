@@ -1,3 +1,5 @@
+## [0.10.4]
+- fix: overwrite files
 ## [0.10.3]
 - Fix: If the user decides not to overwrite the project, the action will be stopped completely
 
