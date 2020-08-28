@@ -11,14 +11,16 @@ Future<void> addExport(String path, String line) async {
   }
   List<String> lines = await _file.readAsLines();
 
-  if (lines.contains(line)) {
-    return;
-  }
-  while (lines.last.isEmpty) {
-    /* remover as linhas em branco no final do arquivo 
+  if (lines.length > 1) {
+    if (lines.contains(line)) {
+      return;
+    }
+    while (lines.last.isEmpty) {
+      /* remover as linhas em branco no final do arquivo 
     gerada pelo o visual studio e outras ide
     */
-    lines.removeLast();
+      lines.removeLast();
+    }
   }
 
   lines.add(line);
