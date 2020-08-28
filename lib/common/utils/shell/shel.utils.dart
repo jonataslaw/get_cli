@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
 import 'package:process_run/process_run.dart';
+import 'package:process_run/shell.dart';
 
 class ShellUtils {
   static void pubGet() async {
@@ -21,8 +24,13 @@ class ShellUtils {
     if (versionInstalled == versionInPubDev)
       return LogService.info('latest version is already installed');
     LogService.info('upgrade get_cli');
-    var res =
-        await run('pub', ['global', 'activate', 'get_cli'], verbose: true);
+    var res;
+    if (Platform.script.path.contains('flutter')) {
+      res = await run('flutter', ['pub', 'global', 'activate', 'get_cli'],
+          verbose: true);
+    } else {
+      res = await run('pub', ['global', 'activate', 'get_cli'], verbose: true);
+    }
     if (res.stderr.toString().isNotEmpty)
       return LogService.error('falha ao atualizar');
     LogService.success('upgrade complete');
