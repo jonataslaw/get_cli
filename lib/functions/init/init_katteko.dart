@@ -4,8 +4,9 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_list_directory.dart';
 import 'package:get_cli/functions/install/install_get.dart';
-import '../create/create_screen.dart';
+
 import '../create/create_main.dart';
+import '../create/create_screen.dart';
 
 Future<void> createInitKatekko() async {
   bool canContinue = await createMain(isArc: true);
@@ -31,5 +32,5 @@ Future<void> createInitKatekko() async {
 
   await installGet();
 
-  LogService.success("Succesfully.");
+  LogService.success("CLEAN Pattern structure successfully generated.");
 }

@@ -3,6 +3,7 @@ import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/samples/impl/get_route.dart';
 import 'package:recase/recase.dart';
+
 import '../../models/file_model.dart';
 
 Future<void> createRoute({bool isArc = false, String initial = 'null'}) async {
@@ -18,5 +19,5 @@ Future<void> createRoute({bool isArc = false, String initial = 'null'}) async {
           : (_fileModel.path + "app_routes.dart"),
       RouteSample().file(reCase.pascalCase, isArc: isArc, initial: initial));
 
-  LogService.success("Routes created succesfully.");
+  LogService.success("Routes created successfully.");
 }

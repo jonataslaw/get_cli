@@ -6,7 +6,10 @@ This CLI is in `Beta` stage, use with caution.
 // To install:
 pub global activate get_cli 
 
-// To create a flutter project with the chosen structure template:
+// To create a flutter project in the current directory:
+// Note: By default it will take the folder's name as project name
+// You can name the project with `get create project:my_project`
+// If the name has spaces use `get create project:"my cool project"`
 get create project 
 
 // To generate the chosen structure on an existing project:

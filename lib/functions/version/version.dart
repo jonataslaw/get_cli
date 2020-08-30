@@ -11,5 +11,5 @@ Future<void> versionCommand() async {
 ╚██████╔╝███████╗░░░██║░░░   ╚█████╔╝███████╗ ██║
 ░╚═════╝░╚══════╝░░░╚═╝░░░   ░╚════╝░╚══════╝ ╚═╝
 ''');
-  print('Version: $version');
+//  print('Version: $version');
 }

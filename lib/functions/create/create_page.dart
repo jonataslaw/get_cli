@@ -8,6 +8,7 @@ import 'package:get_cli/functions/routes/get_add_route.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/get_binding.dart';
 import 'package:recase/recase.dart';
+
 import '../../core/structure.dart';
 import '../../samples/impl/get_controller.dart';
 import '../../samples/impl/get_view.dart';
@@ -20,7 +21,7 @@ Future<void> createPage([String name = 'home']) async {
       File(_fileModel.path + "_binding.dart").existsSync() ||
       File(_fileModel.path + "_controller.dart").existsSync()) {
     LogService.info(
-        'The PAGE [$name] already exists, do you want to overwrite it?');
+        'The page [$name] already exists, do you want to overwrite it?');
     final menu = Menu(["Yes", "No"]);
     final result = menu.choose();
     if (result.index == 0)
@@ -46,6 +47,6 @@ Future<void> _writeFiles(FileModel _fileModel, ReCase reCase,
       ControllerSample().file(reCase.pascalCase),
       overwrite: overwrite);
   await addRoute(reCase.originalText);
-  LogService.success(reCase.pascalCase + " Page created succesfully.");
+  LogService.success(reCase.pascalCase + " page created successfully.");
   return;
 }

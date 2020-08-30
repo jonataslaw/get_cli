@@ -1,33 +1,75 @@
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/functions/install/install.dart';
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/functions/install/remove.dart';
 import 'package:get_cli/functions/version/version.dart';
+
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
 
 class Core {
+  // prefix = -•○
+  String _getArgsPrintList(args, {String prefix = '•', String spacer = ''}) {
+    return args
+        .map((e) {
+          return spacer + '$prefix $e'; //.padLeft(20, ' ');
+        })
+        .toList()
+        .join('\n');
+  }
+
   /// Main function. It receive typed arguments
   Future<void> generate({
     List<String> arguments,
   }) async {
+    final err = LogService.error;
+    final cod1 = LogService.code;
+    final cod2 = LogService.codeBold;
+
     switch (validateArgs(arguments)) {
       case Validation.emptyArgs:
-        LogService.error('Error!!! arguments can not be empty');
+        err('''
+❌ Error! you need to provide a valid command with arguments.
+''');
         break;
       case Validation.errorFirstArgument:
-        LogService.error(
-            'Error!!! wrong arguments! only $firstArgsAllow are allow how first argument. Example: get create page:home');
+//        final codeSample = LogService.code('get create page:home');
+        String codeSample = cod1('get ') + cod2('create') + cod1(' page:home');
+        String commandList = _getArgsPrintList(
+          firstArgsAllow,
+          spacer: ' ' * 2,
+        );
+        err('''
+Error! wrong command 
+  Valid commands are
+$commandList
+
+  Example:
+  $codeSample
+''');
         break;
       case Validation.errorSecondArgument:
-        LogService.error(
-            'Error!!! wrong arguments! only $secondArgsAllow are allow how second arguments of create. Example: get create page:home');
+        String codeSample = cod1('get create ') + cod2('page') + cod1(':home');
+        String commandList = _getArgsPrintList(
+          secondArgsAllow,
+          spacer: ' ' * 2,
+        );
+        err('''
+Error! wrong arguments
+  Valid arguments are
+$commandList
+
+  Example:
+  $codeSample
+''');
         break;
       case Validation.success:
         await runArguments(arguments);
         break;
       default:
-        LogService.error('Error!!! Something went wrong');
+        LogService.error('''
+Error! Sorry, something went wrong
+''');
         break;
     }
   }

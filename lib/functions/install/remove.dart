@@ -5,10 +5,10 @@ import 'package:get_cli/common/utils/shell/shel.utils.dart';
 Future<void> removePackage(List<String> args,
     {bool updatePubspec = true}) async {
   if (args.isEmpty) {
-    LogService.error('enter the name of a package');
-    LogService.info('''example:
-  get remove http
-''');
+    LogService.error('Enter the name of the package you wanna remove');
+    final codeSample = LogService.code('get remove http');
+    LogService.info('''Example:
+  $codeSample''');
     return;
   }
 
