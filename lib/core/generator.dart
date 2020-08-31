@@ -147,7 +147,7 @@ Error! Sorry, something went wrong
         }
       }
       final depList = ['install', 'remove'];
-      if (depList.contains(arguments.first) && arguments.length > 1) {
+      if (depList.contains(arguments.first)) {
         return Validation.success;
       }
     } else {

@@ -11,7 +11,7 @@ Future<void> installPackage(List<String> args) async {
     LogService.info('''Example:
   $codeSample1
   if you wanna install the latest version:
-  $codeSample1
+  $codeSample2
 ''');
     return;
   }

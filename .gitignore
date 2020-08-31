@@ -23,6 +23,5 @@ doc/api/
 ### macOS ###
 .DS_Store
 
-### example files
-example/android/local.properties
-example/pubspec.lock
+### extra files
+bin/.get_cli.yaml

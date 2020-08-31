@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:recase/recase.dart';
 import '../models/file_model.dart';
 
@@ -29,9 +30,11 @@ class Structure {
           return false;
         }
         return element.path.contains(on);
-      }, orElse: () => null);
-      //TODO: Corrigir erros
-      //dando erros se o caminho não for encontrado...
+      }, orElse: () {
+        LogService.error('Folder $on not found');
+        exit(0);
+        return;
+      });
 
       return FileModel(
         name: name,

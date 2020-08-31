@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/functions/create/create_page.dart';
 import 'package:get_cli/functions/create/create_project.dart';
 import 'package:get_cli/functions/create/create_route.dart';
