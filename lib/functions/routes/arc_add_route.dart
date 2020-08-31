@@ -36,7 +36,7 @@ Future<void> arcAddRoute(String nameRoute) async {
   _routesSort(lines);
 
   await routesFile.writeAsStringSync(lines.join('\n'));
-  LogService.success('${nameRoute}  route created succesfully ');
+  LogService.success('${nameRoute} route created successfully.');
   await addNavigation(nameRoute);
 }
 

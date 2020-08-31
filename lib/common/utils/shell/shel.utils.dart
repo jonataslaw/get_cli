@@ -4,16 +4,15 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
 import 'package:process_run/process_run.dart';
-import 'package:process_run/shell.dart';
 
 class ShellUtils {
   static void pubGet() async {
-    LogService.info('run flutter pub get');
+    LogService.info('Running `flutter pub get` …');
     await run('flutter', ['pub', 'get'], verbose: true);
   }
 
   static void flutterCreate(String path) async {
-    LogService.info('run flutter create $path');
+    LogService.info('Running `flutter create $path` …');
     await run('flutter', ['create', '$path'], verbose: true);
   }
 
@@ -22,8 +21,8 @@ class ShellUtils {
         await PubDevApi.getLatestVersionFromPackage('get_cli');
     String versionInstalled = await PubspecLock.getVersionCli(disableLog: true);
     if (versionInstalled == versionInPubDev)
-      return LogService.info('latest version is already installed');
-    LogService.info('upgrade get_cli');
+      return LogService.info('Latest version of get_cli already installed');
+    LogService.info('Upgrading get_cli …');
     var res;
     if (Platform.script.path.contains('flutter')) {
       res = await run('flutter', ['pub', 'global', 'activate', 'get_cli'],
@@ -32,7 +31,7 @@ class ShellUtils {
       res = await run('pub', ['global', 'activate', 'get_cli'], verbose: true);
     }
     if (res.stderr.toString().isNotEmpty)
-      return LogService.error('falha ao atualizar');
-    LogService.success('upgrade complete');
+      return LogService.error('There was an error upgrading get_cli');
+    LogService.success('Upgrade complete');
   }
 }

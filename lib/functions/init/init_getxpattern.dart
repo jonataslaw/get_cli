@@ -17,5 +17,5 @@ Future<void> createInitGetxPattern() async {
   ]);
   await installGet();
 
-  LogService.success("init succesfully.");
+  LogService.success("GetX Pattern structure successfully generated.");
 }

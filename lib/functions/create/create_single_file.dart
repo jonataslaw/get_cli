@@ -5,6 +5,7 @@ import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/samples/interface/sample_interface.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
+
 import '../../core/structure.dart';
 
 Future handleFileCreate(String name, String command, String on,
@@ -17,7 +18,7 @@ Future handleFileCreate(String name, String command, String on,
   await _file.writeAsString(content.file(reCase.pascalCase));
 
   print(
-      'file created succesfully with name :${fileModel.name} at path: ${fileModel.path}');
+      'File "${fileModel.name}" created successfully at path: ${fileModel.path}');
 }
 
 Future<void> writeFile(String path, String content,
@@ -26,6 +27,6 @@ Future<void> writeFile(String path, String content,
   if (!await _file.exists() || overwrite) {
     await _file.create(recursive: true);
     await _file.writeAsString(content);
-    LogService.success(basename(path) + ' Created');
+    LogService.success(basename(path) + ' created');
   }
 }

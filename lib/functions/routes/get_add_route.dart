@@ -34,7 +34,7 @@ Future<void> addRoute(String nameRoute) async {
   lines.insert(lines.length - 1, line);
 
   await routesFile.writeAsStringSync(lines.join('\n'));
-  LogService.success('${nameRoute}  route created succesfully ');
+  LogService.success('${nameRoute} route created successfully,');
 
   addAppPage(nameRoute);
 }
