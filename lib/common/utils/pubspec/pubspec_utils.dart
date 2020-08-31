@@ -29,7 +29,7 @@ class PubspecUtils {
     } on FileSystemException catch (e) {
       _onFileSystemError(e);
     } catch (e) {
-      _logException(e.runtimeType);
+      _logException(e.runtimeType.toString());
     }
   }
 
@@ -48,7 +48,7 @@ class PubspecUtils {
     } on FileSystemException catch (e) {
       _onFileSystemError(e);
     } catch (e) {
-      _logException(e.runtimeType);
+      _logException(e.runtimeType.toString());
     }
   }
 
