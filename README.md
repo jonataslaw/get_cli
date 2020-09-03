@@ -101,6 +101,14 @@ get generate locales assets/locales
 
 output: 
 ```dart 
+abstract class AppTranslation {
+
+  static Map<String, Map<String, String>> translations = {
+    'en_EN' : Locales.en_EN,
+    'pt_BR' : Locales.pt_BR,
+  };
+
+}
 abstract class LocaleKeys {
   static const buttons_login = 'buttons_login';
   static const buttons_sign_in = 'buttons_sign_in';
@@ -133,6 +141,15 @@ abstract class Locales {
 
 ```
 
+now just add the line in GetMaterialApp
+```dart
+
+    GetMaterialApp(
+      ...
+      translationsKeys: AppTranslation.translations,
+      ...
+    )
+```
 
 TODO: 
 - When creating a controller, automatically insert it into the Binding

@@ -81,9 +81,9 @@ class Structure {
       {bool createWithWrappedFolder = false}) {
     String betweenPaths;
     if (Platform.isWindows) {
-      betweenPaths = "\\\\";
+      betweenPaths = '\\\\';
     } else if (Platform.isMacOS || Platform.isLinux) {
-      betweenPaths = "/";
+      betweenPaths = '/';
     }
     if (betweenPaths.isNotEmpty) {
       if (createWithWrappedFolder) {

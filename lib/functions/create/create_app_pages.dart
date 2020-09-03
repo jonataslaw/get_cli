@@ -11,7 +11,7 @@ Future<void> createAppPage() async {
 
   ReCase reCase = ReCase(_fileModel.name);
 
-  await writeFile(_fileModel.path + "app_pages.dart",
+  await writeFile(_fileModel.path + 'app_pages.dart',
       AppPagesSample().file(reCase.pascalCase));
 }
 

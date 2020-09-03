@@ -14,7 +14,7 @@ Future<void> createScreen(String name, {bool isExample = false}) async {
   FileModel _fileModel = Structure.model(name, 'screen', true);
 
   ReCase reCase = ReCase(_fileModel.name);
-  await writeFile(_fileModel.path + ".screen.dart",
+  await writeFile(_fileModel.path + '.screen.dart',
       ArcScreenSample().file(name, isExample: isExample));
   await addExport('lib/presentation/screens.dart',
       '''export '${reCase.snakeCase}/${reCase.snakeCase}.screen.dart';''');

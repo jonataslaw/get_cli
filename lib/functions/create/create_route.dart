@@ -16,8 +16,8 @@ Future<void> createRoute({bool isArc = false, String initial = 'null'}) async {
           ? (Structure.replaceAsExpected(
               path: 'lib/infrastructure/navigation/routes.dart'))
           // alteração com base na documentacão do getx_parttern
-          : (_fileModel.path + "app_routes.dart"),
+          : (_fileModel.path + 'app_routes.dart'),
       RouteSample().file(reCase.pascalCase, isArc: isArc, initial: initial));
 
-  LogService.success("Routes created successfully.");
+  LogService.success('Routes created successfully.');
 }

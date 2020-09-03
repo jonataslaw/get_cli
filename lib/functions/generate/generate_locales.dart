@@ -57,7 +57,7 @@ $e
 
   final parsedKeys = keys.map((e) => '  static const $e = \'$e\';').join('\n');
   var parsedLocales = '\n';
-  var translationsKeys = '\n';
+  var translationsKeys = '';
   locales.forEach((key, value) {
     parsedLocales += '  static const $key = {\n';
     translationsKeys += '    \'$key\' : Locales.$key,\n';

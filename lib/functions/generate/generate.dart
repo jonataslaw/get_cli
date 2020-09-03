@@ -6,7 +6,7 @@ Future<void> generate(List<String> args) async {
   final command = args[1];
 
   switch (command) {
-    case "locales":
+    case 'locales':
       if (args.length < 3) {
         LogService.error(
             '❌ Error! you need to provide a locales input files dirname.');
@@ -14,7 +14,6 @@ Future<void> generate(List<String> args) async {
       }
       await generateLocales(args[2]);
       break;
-
     default:
       break;
   }
