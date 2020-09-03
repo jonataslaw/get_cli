@@ -63,8 +63,10 @@ get -v
 ## Examples
 ### Generate Locates example
 
-create the json language files in the assets/locales folder.
-input: 
+create the json language files in the assets/locales folder.<br/>
+
+input: <br/>
+
 pt_BR.json
 ```json
 {
