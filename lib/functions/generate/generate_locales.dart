@@ -57,8 +57,10 @@ $e
 
   final parsedKeys = keys.map((e) => '  static const $e = \'$e\';').join('\n');
   var parsedLocales = '\n';
+  var translationsKeys = '\n';
   locales.forEach((key, value) {
     parsedLocales += '  static const $key = {\n';
+    translationsKeys += '    \'$key\' : Locales.$key,\n';
     value.forEach((key, value) {
       parsedLocales += '   \'$key\': \'$value\',\n';
     });
@@ -66,8 +68,10 @@ $e
   });
 
   try {
-    final content = GenerateLocalesSample()
-        .file('generate_locales', locales: parsedLocales, keys: parsedKeys);
+    final content = GenerateLocalesSample().file('generate_locales',
+        locales: parsedLocales,
+        keys: parsedKeys,
+        translationsKeys: translationsKeys);
     await writeFile(outputFilePath + '.g.dart', content, overwrite: true);
   } catch (e) {
     LogService.error('''
