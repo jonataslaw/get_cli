@@ -36,7 +36,6 @@ Future<void> addNavigation(String name) async {
   int indexStartNavClass = lines.indexWhere(
     (line) => line.contains('class Nav'),
   );
-  print(indexStartNavClass);
   int index =
       lines.indexWhere((element) => element.contains('];'), indexStartNavClass);
   if (lines[index].trim() != '];') {
