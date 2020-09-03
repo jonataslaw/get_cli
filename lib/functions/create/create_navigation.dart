@@ -33,7 +33,12 @@ Future<void> addNavigation(String name) async {
     lines.last = lines.last.replaceAll('}', '');
     lines.add('}');
   }
-  int index = lines.indexWhere((element) => element.contains('];'));
+  int indexStartNavClass = lines.indexWhere(
+    (line) => line.contains('class Nav'),
+  );
+  print(indexStartNavClass);
+  int index =
+      lines.indexWhere((element) => element.contains('];'), indexStartNavClass);
   if (lines[index].trim() != '];') {
     lines[index] = lines[index].replaceAll('];', '');
     index++;

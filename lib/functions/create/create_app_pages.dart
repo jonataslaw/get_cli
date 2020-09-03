@@ -41,7 +41,10 @@ Future<void> addAppPage(String name) async {
     lines.last = lines.last.replaceAll('}', '');
     lines.add('}');
   }
-  int index = lines.indexWhere((element) => element.contains('];'));
+  int indexClassRoutes =
+      lines.indexWhere((element) => element.contains('class AppPages'));
+  int index =
+      lines.indexWhere((element) => element.contains('];'), indexClassRoutes);
   if (lines[index].trim() != '];') {
     lines[index] = lines[index].replaceAll('];', '');
     index++;
