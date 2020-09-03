@@ -13,9 +13,9 @@ Future<void> createNavigation() async {
 
   ReCase reCase = ReCase(_fileModel.name);
 
-  await writeFile(_fileModel.path + "navigation.dart",
+  await writeFile(_fileModel.path + 'navigation.dart',
       ArcNavigationSample().file(reCase.pascalCase));
-  LogService.success("Navigation created successfully.");
+  LogService.success('Navigation created successfully.');
 }
 
 Future<void> addNavigation(String name) async {
@@ -51,5 +51,5 @@ Future<void> addNavigation(String name) async {
     ),    ''');
 
   await navigationFile.writeAsStringSync(lines.join('\n'));
-  LogService.success("${name.pascalCase} navigation added successfully.");
+  LogService.success('${name.pascalCase} navigation added successfully.');
 }

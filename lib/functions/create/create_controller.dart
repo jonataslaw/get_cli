@@ -12,9 +12,9 @@ Future<void> createController(String name, String path) async {
 
   ReCase reCase = ReCase(_fileModel.name);
 
-  File _view = await File((_fileModel.path) + "_controller.dart")
+  File _view = await File((_fileModel.path) + '_controller.dart')
       .create(recursive: true);
   await _view.writeAsString(ControllerSample().file(reCase.pascalCase));
 
-  print(reCase.pascalCase + " controller created successfully.");
+  print(reCase.pascalCase + ' controller created successfully.');
 }

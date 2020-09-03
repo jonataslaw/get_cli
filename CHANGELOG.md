@@ -1,3 +1,6 @@
+## [0.11.3]
+- add generates locates
+
 ## [0.11.2]
 - add create project:name
 

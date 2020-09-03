@@ -32,5 +32,5 @@ Future<void> createInitKatekko() async {
 
   await installGet();
 
-  LogService.success("CLEAN Pattern structure successfully generated.");
+  LogService.success('CLEAN Pattern structure successfully generated.');
 }

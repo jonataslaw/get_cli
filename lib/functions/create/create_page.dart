@@ -17,15 +17,16 @@ Future<void> createPage([String name = 'home']) async {
   FileModel _fileModel = Structure.model(name, 'page', true);
   ReCase reCase = ReCase(_fileModel.name);
 
-  if (File(_fileModel.path + "_view.dart").existsSync() ||
-      File(_fileModel.path + "_binding.dart").existsSync() ||
-      File(_fileModel.path + "_controller.dart").existsSync()) {
+  if (File(_fileModel.path + '_view.dart').existsSync() ||
+      File(_fileModel.path + '_binding.dart').existsSync() ||
+      File(_fileModel.path + '_controller.dart').existsSync()) {
     LogService.info(
         'The page [$name] already exists, do you want to overwrite it?');
-    final menu = Menu(["Yes", "No"]);
+    final menu = Menu(['Yes', 'No']);
     final result = menu.choose();
-    if (result.index == 0)
+    if (result.index == 0) {
       await _writeFiles(_fileModel, reCase, overwrite: true);
+    }
   } else {
     await _writeFiles(_fileModel, reCase);
   }
@@ -34,19 +35,19 @@ Future<void> createPage([String name = 'home']) async {
 Future<void> _writeFiles(FileModel _fileModel, ReCase reCase,
     {bool overwrite = false}) async {
   await writeFile(
-      _fileModel.path + "_binding.dart",
+      _fileModel.path + '_binding.dart',
       //erro ao criar pages com nome composto
       BindingSample().file(reCase.originalText),
       overwrite: overwrite);
 
   await writeFile(
-      _fileModel.path + "_view.dart", GetViewSample().file(reCase.originalText),
+      _fileModel.path + '_view.dart', GetViewSample().file(reCase.originalText),
       overwrite: overwrite);
 
-  await writeFile(_fileModel.path + "_controller.dart",
+  await writeFile(_fileModel.path + '_controller.dart',
       ControllerSample().file(reCase.pascalCase),
       overwrite: overwrite);
   await addRoute(reCase.originalText);
-  LogService.success(reCase.pascalCase + " page created successfully.");
+  LogService.success(reCase.pascalCase + ' page created successfully.');
   return;
 }

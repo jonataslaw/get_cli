@@ -13,8 +13,8 @@ Future<void> createView(String name, String path) async {
   ReCase reCase = ReCase(_fileModel.name);
 
   File _view =
-      await File((_fileModel.path) + "_view.dart").create(recursive: true);
+      await File((_fileModel.path) + '_view.dart').create(recursive: true);
   await _view.writeAsString(GetViewSample().file(reCase.pascalCase));
 
-  print(reCase.pascalCase + " view created successfully.");
+  print(reCase.pascalCase + ' view created successfully.');
 }
