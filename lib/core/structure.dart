@@ -16,7 +16,9 @@ class Structure {
     'view': replaceAsExpected(path: 'views/'),
     //artekko files
     'screen': replaceAsExpected(path: 'lib/presentation/'),
-    'navigation': replaceAsExpected(path: 'lib/infrastructure/navigation/')
+    'navigation': replaceAsExpected(path: 'lib/infrastructure/navigation/'),
+    //generator files
+    'generate_locales': replaceAsExpected(path: 'lib/generated/'),
   };
 
   static FileModel model(String name, String command, bool wrapperFolder,

@@ -6,6 +6,7 @@ import 'package:get_cli/functions/version/version.dart';
 
 import '../functions/create/create.dart';
 import '../functions/init/init_chooser.dart';
+import '../functions/generate/generate.dart' as generators;
 
 class Core {
   // prefix = -•○
@@ -96,6 +97,9 @@ Error! Sorry, something went wrong
       case "create":
         await create(arguments);
         break;
+      case "generate":
+        await generators.generate(arguments);
+        break;
       case "-version":
       case "-v":
         await versionCommand();
@@ -110,6 +114,7 @@ Error! Sorry, something went wrong
     'upgrade',
     'install',
     'remove',
+    'generate',
     '-version',
     '-v'
   ];
@@ -121,6 +126,10 @@ Error! Sorry, something went wrong
     'presentation',
     'view',
     'screen'
+  ];
+
+  List<String> secondGenerateArgsAllow = [
+    'locales',
   ];
 
   Validation validateArgs(List<String> arguments) {
@@ -148,6 +157,14 @@ Error! Sorry, something went wrong
       }
       final depList = ['install', 'remove'];
       if (depList.contains(arguments.first)) {
+        return Validation.success;
+      }
+
+      if (arguments.first == 'generate') {
+        final secondArg = arguments[1];
+        if (!secondGenerateArgsAllow.contains(secondArg)) {
+          return Validation.errorSecondArgument;
+        }
         return Validation.success;
       }
     } else {
