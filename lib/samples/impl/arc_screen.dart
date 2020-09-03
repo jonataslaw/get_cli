@@ -16,10 +16,15 @@ class ${fileName.pascalCase}Screen extends GetView<${fileName.pascalCase}Control
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: Text('${fileName.pascalCase}Screen '),
-      centerTitle: true,),
+      appBar: AppBar(
+        title: Text('${fileName.pascalCase}Screen'),
+        centerTitle: true,
+      ),
       body: Center(
-        child: Text('${fileName.pascalCase}Screen  is working', style: TextStyle(fontSize:20),),
+        child: Text(
+          '${fileName.pascalCase}Screen  is working', 
+          style: TextStyle(fontSize:20),
+        ),
       ),
     );
   }
