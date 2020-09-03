@@ -79,29 +79,29 @@ Error! Sorry, something went wrong
     List<String> arguments,
   ) async {
     switch (arguments.first) {
-      case "init":
+      case 'init':
         await createInitial();
         break;
-      case "update":
-      case "upgrade":
+      case 'update':
+      case 'upgrade':
         await ShellUtils.update();
         break;
-      case "install":
+      case 'install':
         arguments.removeAt(0);
         await installPackage(arguments);
         break;
-      case "remove":
+      case 'remove':
         arguments.removeAt(0);
         await removePackage(arguments);
         break;
-      case "create":
+      case 'create':
         await create(arguments);
         break;
-      case "generate":
+      case 'generate':
         await generators.generate(arguments);
         break;
-      case "-version":
-      case "-v":
+      case '-version':
+      case '-v':
         await versionCommand();
         break;
     }

@@ -17,7 +17,7 @@ class CliConfig {
     return configFile;
   }
 
-  static updateCheckToday() async {
+  static Future<void> updateCheckToday() async {
     final DateTime now = DateTime.now();
     final DateFormat formatter = DateFormat('yyyy-MM-dd');
     final String formatted = formatter.format(now);

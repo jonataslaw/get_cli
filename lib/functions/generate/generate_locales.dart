@@ -18,7 +18,7 @@ Future<void> generateLocales(String inputPath) async {
       .where((FileSystemEntity entry) => entry.path.endsWith('.json'))
       .toList();
 
-  if (files.length == 0) {
+  if (files.isEmpty) {
     LogService.info('input directory is empty.');
     return;
   }

@@ -5,7 +5,7 @@ import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 
 class PubspecUtils {
-  static var _pubspec = File('pubspec.yaml');
+  static final _pubspec = File('pubspec.yaml');
 
   static void addDependencies(String package,
       {String version, bool isDev = false}) async {
@@ -54,7 +54,7 @@ class PubspecUtils {
 
   static void _onFileSystemError(FileSystemException e) {
     if (e.osError.errorCode == 2) {
-      LogService.error('pubspec.yaml not found in current directory, ' +
+      LogService.error('pubspec.yaml not found in current directory, '
           'are you in the root folder of your project?');
       return;
     } else if (e.osError.errorCode == 13) {

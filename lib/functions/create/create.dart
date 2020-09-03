@@ -25,26 +25,26 @@ Future<void> create(List<String> args) async {
   }
 
   switch (command) {
-    case "page":
+    case 'page':
       await createPage(name);
       break;
-    case "controller":
+    case 'controller':
       await handleFileCreate(
           name, 'controller', onCommand, false, ControllerSample());
       break;
-    case "view":
+    case 'view':
       await handleFileCreate(name, 'view', onCommand, false, GetViewSample());
       break;
 
-    case "route":
+    case 'route':
       await createRoute();
       break;
-    case "project":
-      createProject(name);
+    case 'project':
+      await createProject(name);
       break;
 
     //katekko
-    case "screen":
+    case 'screen':
       await createScreen(name);
       break;
   }

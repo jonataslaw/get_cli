@@ -21,8 +21,9 @@ class PubspecLock {
       var version = text['packages']['get_cli']['version'].toString();
       return version;
     } catch (e) {
-      if (!disableLog)
+      if (!disableLog) {
         LogService.error('failed to find the version you have installed.');
+      }
       return null;
     }
   }

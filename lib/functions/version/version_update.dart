@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:get_cli/cli_config/cli_config.dart';
 import 'package:get_cli/functions/version/check_dev_version.dart';
 import 'package:get_cli/functions/version/print_get_cli.dart';
 import 'package:version/version.dart';
@@ -15,7 +14,7 @@ void checkForUpdate() {
   if (!isDevVersion()) {
     PubDevApi.getLatestVersionFromPackage('get_cli')
         .then((versionInPubDev) async {
-      PubspecLock.getVersionCli(disableLog: true)
+      await PubspecLock.getVersionCli(disableLog: true)
           .then((versionInstalled) async {
         if (versionInstalled == null) exit(2);
 

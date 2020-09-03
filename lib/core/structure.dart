@@ -4,7 +4,7 @@ import 'package:recase/recase.dart';
 import '../models/file_model.dart';
 
 class Structure {
-  static Map<String, String> _paths = {
+  static final Map<String, String> _paths = {
     'page': replaceAsExpected(path: 'lib/pages/'),
     'widget': replaceAsExpected(path: 'lib/widgets/'),
     'model': replaceAsExpected(path: 'lib/data/models/'),

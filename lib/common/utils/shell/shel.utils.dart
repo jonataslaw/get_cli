@@ -20,8 +20,9 @@ class ShellUtils {
     String versionInPubDev =
         await PubDevApi.getLatestVersionFromPackage('get_cli');
     String versionInstalled = await PubspecLock.getVersionCli(disableLog: true);
-    if (versionInstalled == versionInPubDev)
+    if (versionInstalled == versionInPubDev) {
       return LogService.info('Latest version of get_cli already installed');
+    }
     LogService.info('Upgrading get_cli …');
     var res;
     if (Platform.script.path.contains('flutter')) {
@@ -30,8 +31,9 @@ class ShellUtils {
     } else {
       res = await run('pub', ['global', 'activate', 'get_cli'], verbose: true);
     }
-    if (res.stderr.toString().isNotEmpty)
+    if (res.stderr.toString().isNotEmpty) {
       return LogService.error('There was an error upgrading get_cli');
+    }
     LogService.success('Upgrade complete');
   }
 }
