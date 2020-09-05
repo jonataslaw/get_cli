@@ -1,5 +1,5 @@
 ###### Idiomas da documentação
-| pt_BR - Esse arquivo| [en_EN]((https://github.com/jonataslaw/get_cli/blob/master/README.md)) |
+| pt_BR - Esse arquivo| [en_EN](https://github.com/jonataslaw/get_cli/blob/master/README.md) |
 |-------|-------|
 
 CLI oficial para a estrutura GetX ™.
