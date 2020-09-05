@@ -75,7 +75,7 @@ get help
 ```
 
 ## Exemplos
-### Generate Locates example
+### Exemplos de geração de idioma.
 
 Crie os arquivos de idioma json na pasta assets/locales. <br/>
 
