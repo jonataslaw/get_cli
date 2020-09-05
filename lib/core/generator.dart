@@ -2,11 +2,6 @@ import 'package:get_cli/commands/commands_list.dart';
 import 'package:get_cli/commands/impl/help/help.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/common/utils/shell/shel.utils.dart';
-import 'package:get_cli/functions/version/version.dart';
-
-import '../functions/create/deprecated/create.dart';
-import '../functions/generate/generate.dart' as generators;
 
 class GetCli {
   final List<String> _arguments;

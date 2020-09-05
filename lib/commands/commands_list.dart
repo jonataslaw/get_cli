@@ -15,5 +15,8 @@ final commands = {
   'init': () => InitCommand(),
   'install': () => InstallCommand(),
   'remove': () => RemoveCommand(),
-  'version': () => VersionCommand(),
+  'update': () => UpdateCommand(),
+  'upgrade': () => UpdateCommand(),
+  '-v': () => VersionCommand(),
+  '-version': () => VersionCommand(),
 };

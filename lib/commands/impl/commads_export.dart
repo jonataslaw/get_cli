@@ -9,3 +9,4 @@ export 'create/screen/screen.dart';
 export 'init/init.dart';
 export 'install/install.dart';
 export 'remove/remove.dart';
+export 'update/update.dart';

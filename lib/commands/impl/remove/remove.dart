@@ -24,7 +24,7 @@ class RemoveCommand extends Command {
   }
 
   @override
-  String get hint => 'Use to install a package in your project (dependencies):';
+  String get hint => 'Use to remove a package in your project (dependencies):';
 
   @override
   bool validate() {

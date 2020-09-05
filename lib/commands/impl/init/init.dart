@@ -15,12 +15,10 @@ class InitCommand extends Command {
   }
 
   @override
-  // TODO: implement hint
-  String get hint => throw UnimplementedError();
+  String get hint => 'generate the chosen structure on an existing project:';
 
   @override
   bool validate() {
-    // TODO: implement validate
-    throw UnimplementedError();
+    return true;
   }
 }
