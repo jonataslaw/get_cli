@@ -1,11 +1,12 @@
-import 'package:get_cli/functions/create/create_page.dart';
-import 'package:get_cli/functions/create/create_project.dart';
+import 'package:get_cli/functions/create/deprecated/create_page.dart';
+import 'package:get_cli/functions/create/deprecated/create_project.dart';
 import 'package:get_cli/functions/create/create_route.dart';
 import 'package:get_cli/functions/create/create_screen.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/samples/impl/get_controller.dart';
 import 'package:get_cli/samples/impl/get_view.dart';
 
+@deprecated
 Future<void> create(List<String> args) async {
   final command = args[1].split(':').first;
   String name;

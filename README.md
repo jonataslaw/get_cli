@@ -32,9 +32,6 @@ get create controller:dialogcontroller on home
 // and insert your controller there.
 get create view:dialogview on home
 
-// To create the route file:
-get create route 
-
 // To generate a localization file:
 // Note: 'assets/locales' directory with your translation files in json format
 get generate locales assets/locales
