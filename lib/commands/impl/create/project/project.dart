@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cli_dialog/cli_dialog.dart';
 import 'package:get_cli/commands/impl/create/create.dart';
 import 'package:get_cli/commands/impl/init/init.dart';
 import 'package:get_cli/commands/interface/command.dart';
@@ -15,7 +16,15 @@ class CreateProjectCommand extends Command with CreateMixin {
         : Structure.replaceAsExpected(
             path: Directory.current.path + '/${name.snakeCase}');
 
-    await ShellUtils.flutterCreate(path);
+    final dialog = CLI_Dialog(questions: [
+      [
+        'What is your company\'s domain? \x1B[33m example: com.yourcompany \x1B[0m',
+        'org'
+      ]
+    ]);
+    final org = dialog.ask()['org'];
+
+    await ShellUtils.flutterCreate(path, org);
     Directory.current = path;
     await InitCommand().execute();
   }

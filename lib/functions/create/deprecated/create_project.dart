@@ -11,7 +11,7 @@ Future<void> createProject(String name) async {
       : Structure.replaceAsExpected(
           path: Directory.current.path + '/${name.snakeCase}');
 
-  await ShellUtils.flutterCreate(path);
+  await ShellUtils.flutterCreate(path, 'com.exemple');
   Directory.current = path;
   //await createInitial();
 }

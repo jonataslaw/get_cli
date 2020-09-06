@@ -11,9 +11,9 @@ class ShellUtils {
     await run('flutter', ['pub', 'get'], verbose: true);
   }
 
-  static void flutterCreate(String path) async {
+  static void flutterCreate(String path, String org) async {
     LogService.info('Running `flutter create $path` …');
-    await run('flutter', ['create', '$path'], verbose: true);
+    await run('flutter', ['create', '--org', org, path], verbose: true);
   }
 
   static void update() async {
