@@ -1,3 +1,6 @@
+## [0.11.5]
+- fix create project company
+
 ## [0.11.3]
 - add generates locates
 
