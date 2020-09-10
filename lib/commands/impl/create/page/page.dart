@@ -33,7 +33,6 @@ class CreatePageCommand extends Command with CreateMixin {
         await _writeFiles(_fileModel, name, overwrite: true);
       }
     } else {
-      print('hsabhdvsahdbasd');
       await _writeFiles(_fileModel, name, overwrite: false);
     }
   }
