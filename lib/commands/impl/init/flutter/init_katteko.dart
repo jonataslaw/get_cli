@@ -6,9 +6,10 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_list_directory.dart';
 import 'package:get_cli/functions/create/create_main.dart';
+import 'package:get_cli/samples/impl/arctekko/arc_main.dart';
 
 Future<void> createInitKatekko() async {
-  bool canContinue = await createMain(isArc: true);
+  bool canContinue = await createMain();
   if (!canContinue) return;
 
   List<Directory> initialDirs = [
@@ -25,6 +26,7 @@ Future<void> createInitKatekko() async {
     Directory(Structure.replaceAsExpected(path: 'lib/infrastructure/theme/')),
   ];
   await Future.wait([
+    ArcMainSample().create(),
     CreateScreenCommand().execute(),
     createListDirectory(initialDirs),
   ]);

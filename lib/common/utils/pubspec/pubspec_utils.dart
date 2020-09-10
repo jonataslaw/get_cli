@@ -25,7 +25,7 @@ class PubspecUtils {
   }
 
   static void addDependencies(String package,
-      {String version, bool isDev = false}) async {
+      {String version, bool isDev = false, bool runPubGet = true}) async {
     try {
       var lines = _pubspec.readAsLinesSync();
       // Adicione aqui tambem para não instalar uma dependência 2 vezes.
@@ -41,7 +41,7 @@ class PubspecUtils {
       if (version == null) return;
       lines.insert(index, '  $package: $version');
       await _pubspec.writeAsStringSync(lines.join('\n'));
-      await ShellUtils.pubGet();
+      if (runPubGet) await ShellUtils.pubGet();
       LogService.success('Package: $package installed!');
     } on FileSystemException catch (e) {
       _onFileSystemError(e);

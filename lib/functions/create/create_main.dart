@@ -11,7 +11,7 @@ import 'package:recase/recase.dart';
 import '../../common/utils/logger/LogUtils.dart';
 import '../../core/structure.dart';
 
-Future<bool> createMain({bool isArc = false}) async {
+Future<bool> createMain() async {
   FileModel _fileModel = Structure.model('', 'init', false);
 
   File _main = await File(_fileModel.path + 'main.dart');
@@ -29,7 +29,6 @@ WARNING: This action is irreversible''');
       return false;
     }
   }
-  isArc ? await ArcMainSample().create() : await GetXMainSample().create();
   LogService.success('Main sample created successfully 👍');
   return true;
 }

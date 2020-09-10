@@ -1,14 +1,14 @@
 import 'package:cli_menu/cli_menu.dart';
-import 'package:get_cli/commands/impl/init/init_getxpattern.dart';
-import 'package:get_cli/commands/impl/init/init_katteko.dart';
+import 'package:get_cli/commands/impl/init/flutter/init_getxpattern.dart';
+import 'package:get_cli/commands/impl/init/flutter/init_katteko.dart';
 import 'package:get_cli/commands/interface/command.dart';
 
 class InitCommand extends Command {
   @override
   Future<void> execute() async {
     final menu = Menu([
-      'Flutter GetX Pattern (by Kauê)',
-      'Flutter CLEAN (by Arktekko)',
+      'GetX Pattern (by Kauê)',
+      'CLEAN (by Arktekko)',
     ]);
     final result = menu.choose();
     result.index == 0

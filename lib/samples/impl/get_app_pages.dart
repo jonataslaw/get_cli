@@ -1,16 +1,23 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
 class AppPagesSample extends Sample {
-  AppPagesSample({String path = 'lib/routes/app_pages.dart'}) : super(path);
+  String initial;
+  String import;
+  AppPagesSample(
+      {String path = 'lib/routes/app_pages.dart',
+      this.import = '''import 'package:get/get.dart';''',
+      this.initial = 'HOME'})
+      : super(path);
+
+  String get _initial =>
+      initial != null ? '\nstatic const INITIAL = Routes.$initial;' : '';
 
   @override
-  Future<String> get content async => '''
-import 'package:get/get.dart';
-
+  Future<String> get content async => ''' $import
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.HOME;
+  $_initial
 
   static final routes = [
   ];

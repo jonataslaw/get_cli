@@ -6,7 +6,7 @@ export 'create/controller/controller.dart';
 export 'create/view/view.dart';
 export 'create/project/project.dart';
 export 'create/screen/screen.dart';
-export 'init/init.dart';
+export 'init/flutter/init.dart';
 export 'install/install.dart';
 export 'remove/remove.dart';
 export 'update/update.dart';
