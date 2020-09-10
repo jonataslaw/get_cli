@@ -1,3 +1,6 @@
+## [1.0.0]
+- add support for [get_Server](https://github.com/jonataslaw/get_server)
+
 ## [0.11.5]
 - fix create project company
 

@@ -9,6 +9,9 @@ class GetServerPubspecSample extends Sample {
 description: A new Get Server application.
 version: 1.0.0
 
+environment:
+  sdk: '>=2.4.0 <3.0.0'
+
 dependencies:
 
 dev_dependencies:
