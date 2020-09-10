@@ -3,8 +3,6 @@ import 'dart:io';
 
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/get_cli.dart';
 import 'package:get_cli/samples/impl/generate_locales.dart';
 import 'package:path/path.dart';
@@ -25,8 +23,6 @@ class GenerateLocalesCommand extends Command {
   @override
   Future<void> execute() async {
     final inputPath = GetCli.arguments[2];
-    final fileModel = Structure.model('locales', 'generate_locales', false);
-    final outputFilePath = Structure.replaceAsExpected(path: fileModel.path);
 
     if (!await Directory(inputPath).exists()) {
       LogService.error('${inputPath} directory does not exist.');
@@ -84,11 +80,8 @@ class GenerateLocalesCommand extends Command {
     });
 
     try {
-      final content = GenerateLocalesSample().file('generate_locales',
-          locales: parsedLocales,
-          keys: parsedKeys,
-          translationsKeys: translationsKeys);
-      await writeFile(outputFilePath + '.g.dart', content, overwrite: true);
+      await GenerateLocalesSample(parsedKeys, parsedLocales, translationsKeys)
+          .create();
     } catch (e) {
       LogService.error('''
 ❌ Error! localization file is not created.

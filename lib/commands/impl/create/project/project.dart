@@ -23,6 +23,13 @@ class CreateProjectCommand extends Command with CreateMixin {
       ]
     ]);
     final org = dialog.ask()['org'];
+    final dialog = CLI_Dialog(questions: [
+      [
+        'What is your company\'s domain? \x1B[33m example: com.yourcompany \x1B[0m',
+        'org'
+      ]
+    ]);
+    final org = dialog.ask()['org'];
 
     await ShellUtils.flutterCreate(path, org);
     Directory.current = path;

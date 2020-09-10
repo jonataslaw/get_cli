@@ -6,7 +6,10 @@ import 'package:get_cli/commands/interface/command.dart';
 class InitCommand extends Command {
   @override
   Future<void> execute() async {
-    final menu = Menu(['GetX Pattern (by Kauê)', 'CLEAN (by Arktekko)']);
+    final menu = Menu([
+      'Flutter GetX Pattern (by Kauê)',
+      'Flutter CLEAN (by Arktekko)',
+    ]);
     final result = menu.choose();
     result.index == 0
         ? await createInitGetxPattern()

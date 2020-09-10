@@ -17,7 +17,10 @@ class CreatePageCommand extends Command with CreateMixin {
   @override
   Future<void> execute() async {
     FileModel _fileModel = Structure.model(name, 'page', true);
-    ReCase reCase = ReCase(_fileModel.name);
+    print(_fileModel.path);
+    print(_fileModel.name);
+
+    print(_fileModel.name);
 
     if (File(_fileModel.path + '_view.dart').existsSync() ||
         File(_fileModel.path + '_binding.dart').existsSync() ||
@@ -27,10 +30,11 @@ class CreatePageCommand extends Command with CreateMixin {
       final menu = Menu(['Yes', 'No']);
       final result = menu.choose();
       if (result.index == 0) {
-        await _writeFiles(_fileModel, reCase, overwrite: true);
+        await _writeFiles(_fileModel, name, overwrite: true);
       }
     } else {
-      await _writeFiles(_fileModel, reCase);
+      print('hsabhdvsahdbasd');
+      await _writeFiles(_fileModel, name, overwrite: false);
     }
   }
 
@@ -42,23 +46,29 @@ class CreatePageCommand extends Command with CreateMixin {
     return true;
   }
 
-  Future<void> _writeFiles(FileModel _fileModel, ReCase reCase,
+  Future<void> _writeFiles(FileModel _fileModel, String name,
       {bool overwrite = false}) async {
-    await writeFile(
-        _fileModel.path + '_binding.dart',
-        //erro ao criar pages com nome composto
-        BindingSample().file(reCase.originalText),
-        overwrite: overwrite);
+    String controllerDir =
+        'pages/${name.snakeCase}/${name.snakeCase}_controller.dart';
 
-    await writeFile(_fileModel.path + '_view.dart',
-        GetViewSample().file(reCase.originalText),
-        overwrite: overwrite);
+    await BindingSample(_fileModel.path + '_binding.dart', name,
+            name.pascalCase + 'Binding', controllerDir,
+            overwrite: overwrite)
+        .create();
 
-    await writeFile(_fileModel.path + '_controller.dart',
-        ControllerSample().file(reCase.pascalCase),
-        overwrite: overwrite);
-    await addRoute(reCase.originalText);
-    LogService.success(reCase.pascalCase + ' page created successfully.');
+    await GetViewSample(
+            _fileModel.path + '_view.dart',
+            name.pascalCase + 'View',
+            name.pascalCase + 'Controller',
+            controllerDir,
+            overwrite: overwrite)
+        .create();
+
+    await ControllerSample('lib/' + controllerDir, name, overwrite: overwrite)
+        .create();
+
+    await addRoute(name);
+    LogService.success(name.pascalCase + ' page created successfully.');
     return;
   }
 }

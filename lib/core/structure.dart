@@ -16,7 +16,8 @@ class Structure {
     'view': replaceAsExpected(path: 'lib/views/'),
     //artekko files
     'screen': replaceAsExpected(path: 'lib/presentation/'),
-    'navigation': replaceAsExpected(path: 'lib/infrastructure/navigation/'),
+    'navigation': replaceAsExpected(
+        path: 'lib/infrastructure/navigation/navigation.dart'),
     //generator files
     'generate_locales': replaceAsExpected(path: 'lib/generated/'),
   };

@@ -3,10 +3,15 @@ import 'package:recase/recase.dart';
 
 //Usei arc pra fazer referencia a clean do katekko
 class ArcScreenSample extends Sample {
+  String fileName;
+  bool isExample;
+  ArcScreenSample(String path, String fileName,
+      {bool overwrite = false, this.isExample = false})
+      : super(path, overwrite: overwrite);
+
   @override
-  String file(String fileName, {isExample = false}) {
-    return !isExample
-        ? '''import 'package:flutter/material.dart';
+  Future<String> get content async => !isExample
+      ? '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'controllers/${fileName.snakeCase}.controller.dart';
@@ -30,7 +35,7 @@ class ${fileName.pascalCase}Screen extends GetView<${fileName.pascalCase}Control
   }
 }
 '''
-        : '''import 'package:get/get.dart';
+      : '''import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import 'controllers/counter.controller.dart';
@@ -65,5 +70,4 @@ class CounterScreen extends GetView<CounterController> {
   }
 }
 ''';
-  }
 }

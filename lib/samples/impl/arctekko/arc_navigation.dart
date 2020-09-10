@@ -1,9 +1,12 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
 class ArcNavigationSample extends Sample {
+  ArcNavigationSample(
+      {String path = 'lib/infrastructure/navigation/navigation.dart'})
+      : super(path);
+
   @override
-  String file(String filename) {
-    return '''import 'package:flutter/material.dart';
+  Future<String> get content async => '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../config.dart';
@@ -32,5 +35,4 @@ class Nav {
   static List<GetPage> routes = [
   ];
 }''';
-  }
 }

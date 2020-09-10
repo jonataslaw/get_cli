@@ -4,7 +4,8 @@ import 'package:cli_menu/cli_menu.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/models/file_model.dart';
-import 'package:get_cli/samples/impl/get_main.dart';
+import 'package:get_cli/samples/impl/arctekko/arc_main.dart';
+import 'package:get_cli/samples/impl/getx_pattern/get_main.dart';
 import 'package:recase/recase.dart';
 
 import '../../common/utils/logger/LogUtils.dart';
@@ -12,8 +13,6 @@ import '../../core/structure.dart';
 
 Future<bool> createMain({bool isArc = false}) async {
   FileModel _fileModel = Structure.model('', 'init', false);
-
-  ReCase reCase = ReCase(_fileModel.name);
 
   File _main = await File(_fileModel.path + 'main.dart');
 
@@ -30,8 +29,7 @@ WARNING: This action is irreversible''');
       return false;
     }
   }
-  await _main.create(recursive: true);
-  await _main.writeAsString(MainSample().file(reCase.pascalCase, isArc: isArc));
+  isArc ? await ArcMainSample().create() : await GetXMainSample().create();
   LogService.success('Main sample created successfully 👍');
   return true;
 }

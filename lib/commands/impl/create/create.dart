@@ -6,8 +6,13 @@ mixin CreateMixin {
   String get onCommand =>
       _args.length > 2 && _args[2] == 'on' ? _args[3] : null;
 
-  String get name =>
-      _args[1].split(':').length == 1 || _args[1].split(':')[1].isEmpty
+  String get name {
+    if (_args.first == 'init') {
+      return 'home';
+    } else {
+      return _args[1].split(':').length == 1 || _args[1].split(':')[1].isEmpty
           ? (_args[1].split(':').first == 'project' ? '.' : 'home')
           : _args[1].split(':')[1];
+    }
+  }
 }

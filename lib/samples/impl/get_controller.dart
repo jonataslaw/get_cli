@@ -3,30 +3,22 @@ import 'package:recase/recase.dart';
 import '../interface/sample_interface.dart';
 
 class ControllerSample extends Sample {
+  String fileName;
+  ControllerSample(String path, this.fileName, {bool overwrite = false})
+      : super(path, overwrite: overwrite);
+
   @override
-  String file(String fileName, {bool isArc = false}) {
-    return !isArc
-        ? '''import 'package:get/get.dart';
+  Future<String> get content async => '''import 'package:get/get.dart';
 
-class ${fileName}Controller extends GetxController {
-
+class ${fileName.pascalCase}Controller extends GetxController {
+  //TODO: Implement ${fileName.pascalCase}Controller
+  
   @override
   void onInit() => null;
   
   final count = 0.obs;
   increment() => count.value++;
-}
-'''
-        : ''' 
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 
-class ${fileName.pascalCase}Controller extends GetxController{
-
-  ${fileName.pascalCase}Controller();
-
-  //TODO: ${fileName.pascalCase}Controller
 }
 ''';
-  }
 }

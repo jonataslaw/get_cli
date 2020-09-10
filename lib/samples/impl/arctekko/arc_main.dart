@@ -1,32 +1,16 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
-class MainSample extends Sample {
+class ArcMainSample extends Sample {
+  ArcMainSample() : super('lib/main.dart', overwrite: true);
+
   @override
-  String file(String fileName, {bool isArc = false}) {
-    return !isArc
-        ? '''import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import 'routes/app_pages.dart';
-
-void main() {
-  runApp(
-    GetMaterialApp(
-      title: "Application",
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
-    ),
-  );
-}
-  '''
-        : '''import 'package:flutter/material.dart';
+  Future<String> get content async => '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'infrastructure/navigation/navigation.dart';
 import 'infrastructure/navigation/routes.dart';
 
 void main() async {
-
   var initialRoute = await Routes.initialRoute;
   runApp(Main(initialRoute));
 }
@@ -44,5 +28,4 @@ class Main extends StatelessWidget {
     
   }
 }''';
-  }
 }

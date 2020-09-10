@@ -7,6 +7,23 @@ import 'package:get_cli/common/utils/shell/shel.utils.dart';
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');
 
+  static Future<String> getProjectName() async {
+    String name;
+    try {
+      var lines = _pubspec.readAsLinesSync();
+      name = lines
+          .firstWhere((line) => line.startsWith('name:'))
+          .split(':')
+          .last
+          .trim();
+    } on FileSystemException catch (e) {
+      _onFileSystemError(e);
+    } catch (e) {
+      _logException(e.runtimeType.toString());
+    }
+    return name;
+  }
+
   static void addDependencies(String package,
       {String version, bool isDev = false}) async {
     try {
