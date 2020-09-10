@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 import '../models/file_model.dart';
 
@@ -20,6 +21,7 @@ class Structure {
         path: 'lib/infrastructure/navigation/navigation.dart'),
     //generator files
     'generate_locales': replaceAsExpected(path: 'lib/generated/'),
+    'generate_model': replaceAsExpected(path: 'lib/generated/models/'),
   };
 
   static FileModel model(String name, String command, bool wrapperFolder,
@@ -32,7 +34,7 @@ class Structure {
         if (element is File) {
           return false;
         }
-        return element.path.contains(on);
+        return element.path.split(p.separator).contains(on);
       }, orElse: () {
         LogService.error('Folder $on not found');
         exit(0);

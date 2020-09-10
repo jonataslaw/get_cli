@@ -8,7 +8,6 @@ import 'package:get_cli/commands/impl/init/get_server/get_server_command.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/core/structure.dart';
-import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
 class CreateProjectCommand extends Command with CreateMixin {

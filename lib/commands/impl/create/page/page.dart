@@ -5,7 +5,6 @@ import 'package:get_cli/commands/impl/create/create.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/routes/get_add_route.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/get_binding.dart';

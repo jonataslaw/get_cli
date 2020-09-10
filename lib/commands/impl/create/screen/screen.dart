@@ -39,6 +39,6 @@ class CreateScreenCommand extends Command with CreateMixin {
 
   @override
   bool validate() {
-    throw true;
+    return true;
   }
 }

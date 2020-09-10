@@ -10,6 +10,7 @@ final commands = {
   },
   'generate': {
     'locales': () => GenerateLocalesCommand(),
+    'model': () => GenerateModelCommand(),
   },
   'help': () => HelpCommand(),
   'init': () => InitCommand(),

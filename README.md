@@ -33,12 +33,19 @@ get create controller:dialogcontroller on home
 // To create a new view in a specific folder:
 // Note: you don't need to reference the folder,
 // Getx will automatically search for the home folder
-// and insert your controller there.
+// and insert your view there.
 get create view:dialogview on home
 
 // To generate a localization file:
 // Note: 'assets/locales' directory with your translation files in json format
 get generate locales assets/locales
+
+// To generate a class model:
+// Note: 'assets/models/user.json' path of your template file in json format
+// Note: on  == folder output file
+// Getx will automatically search for the home folder
+// and insert your view there.
+get generate model on home with assets/models/user.json
 
 // To install a package in your project (dependencies):
 get install camera
@@ -154,26 +161,53 @@ now just add the line in GetMaterialApp
       ...
     )
 ```
+### Generate model example
+
+Create the json model file in the assets/models/user.json<br/>
+
+input: <br/>
+```json
+{
+  "name": "",
+  "age": 0,
+  "friends": ["", ""]
+}
+ ```
+Run : 
+```dart 
+get generate model on home with assets/models/user.json
+```
+
+output: 
+```dart
+class User {
+  String name;
+  int age;
+  List<String> friends;
+
+  User({this.name, this.age, this.friends});
+
+  User.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    age = json['age'];
+    friends = json['friends'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['age'] = this.age;
+    data['friends'] = this.friends;
+    return data;
+  }
+}
+
+```
+
 
 TODO: 
-- When creating a controller, automatically insert it into the Binding
-- When creating a page, insert it automatically in Routes
 - Support for customModels
 - Include unit tests
 - Improve generated structure
 - Add a backup system
-- Suggest updates when the package is updated in pub.dev
-- Add help in CLI
 
-## Adding new functions:
-- Add the folder where the new files will be created in core/structure. Map's key is the command, the value is the path.
-
-- Create a sample and insert it in the samples/impl folder (you need to create a class that extends Sample)
-
-- Create the function for generating the class (or folders) and insert in `functions`. 
-If the command is meant for *code generation*, use the `created` folder, 
-if the command is for *startup* (new structure), use the `init` folder.
-
-- Open the file `create/create.dart`, add your command to the switch and validation, then point to its function.
-
-Ready!

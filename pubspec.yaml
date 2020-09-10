@@ -1,6 +1,6 @@
 name: get_cli
 description: Official CLI for GetX™ framework to build Flutter Applications easily
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/jonataslaw/get_cli
 
 environment:
@@ -21,6 +21,9 @@ dependencies:
   version: ^1.2.0
   intl: ^0.16.1
   cli_dialog: ^0.3.3
+  json_to_dart: 
+    git: https://github.com/CpdnCristiano/json_to_dart.git
+
 
 
 
