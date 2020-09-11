@@ -1,5 +1,7 @@
 import 'dart:convert' as convert;
+import 'dart:io';
 import 'dart:math';
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:json_ast/json_ast.dart'
     show Node, ObjectNode, ArrayNode, LiteralNode;
 
@@ -66,7 +68,16 @@ String camelCaseFirstLower(String text) {
 }
 
 dynamic decodeJSON(String rawJson) {
-  return convert.json.decode(rawJson);
+  try {
+    return convert.json.decode(rawJson);
+  } on FormatException catch (e) {
+    LogService.error(
+        'invalid json format: \n${e.toString().split("FormatException:").last}');
+    exit(0);
+  } catch (e) {
+    LogService.error('Unexpected error ${e}');
+    exit(0);
+  }
 }
 
 WithWarning<Map> mergeObj(Map obj, Map other, String path) {
