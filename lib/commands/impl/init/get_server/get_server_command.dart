@@ -9,7 +9,6 @@ import 'package:get_cli/samples/impl/get_app_pages.dart';
 import 'package:get_cli/samples/impl/get_route.dart';
 import 'package:get_cli/samples/impl/get_server/get_server_main.dart';
 import 'package:get_cli/samples/impl/get_server/pubspec.dart';
-import 'package:http/http.dart';
 import 'package:path/path.dart';
 
 class InitGetServer extends Command {

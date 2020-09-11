@@ -4,10 +4,6 @@ import 'package:cli_menu/cli_menu.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/models/file_model.dart';
-import 'package:get_cli/samples/impl/arctekko/arc_main.dart';
-import 'package:get_cli/samples/impl/getx_pattern/get_main.dart';
-import 'package:recase/recase.dart';
-
 import '../../common/utils/logger/LogUtils.dart';
 import '../../core/structure.dart';
 

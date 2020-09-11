@@ -21,11 +21,8 @@ dependencies:
   version: ^1.2.0
   intl: ^0.16.1
   cli_dialog: ^0.3.3
-  json_to_dart: 
-    git: https://github.com/CpdnCristiano/json_to_dart.git
-
-
-
+  json_ast: ^1.0.5
+  dart_style:  ">=1.0.10 <2.0.0" 
 
 dev_dependencies:
   pedantic: ^1.7.0

@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:get_cli/commands/impl/generate/generate.dart';
 import 'package:get_cli/commands/interface/command.dart';
+import 'package:get_cli/common/utils/json_serialize/model_generator.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/models/file_model.dart';
-import 'package:json_to_dart/json_to_dart.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 
