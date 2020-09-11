@@ -1,3 +1,6 @@
+## [1.0.2]
+- add generate model class from url
+
 ## [1.0.1]
 - add generate model class from json
 - fix create screen

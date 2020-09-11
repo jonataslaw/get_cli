@@ -47,6 +47,9 @@ get generate locales assets/locales
 // and insert your view there.
 get generate model on home with assets/models/user.json
 
+//Note: the URL must return a json format
+get generate model on home from https://api.github.com/users/CpdnCristiano
+
 // To install a package in your project (dependencies):
 get install camera
 

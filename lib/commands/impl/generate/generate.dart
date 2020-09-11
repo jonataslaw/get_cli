@@ -10,10 +10,17 @@ mixin GenerateMixin {
     return onIndex != -1 ? _args[onIndex + 1] : null;
   }
 
-  String get withArguments {
+  String get withArgument {
     int withIndex = _args.indexWhere(
       (element) => element == 'with',
     );
     return withIndex != -1 ? _args[withIndex + 1] : null;
+  }
+
+  String get fromArgument {
+    int fromIndex = _args.indexWhere(
+      (element) => element == 'from',
+    );
+    return fromIndex != -1 ? _args[fromIndex + 1] : null;
   }
 }
