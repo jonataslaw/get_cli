@@ -27,10 +27,11 @@ class InitGetServer extends Command {
       GetServerMainSample().create(),
       AppPagesSample(
               import: '''import 'package:get_server/get_server.dart';''',
-              initial: null)
+              initial: null,
+              path: 'lib/routes/app_pages.dart')
           .create(),
       GetServerPubspecSample(basename(Directory.current.path)).create(),
-      RouteSample().create(),
+      RouteSample(path: 'lib/routes/app_routes.dart').create(),
       createListDirectory(initialDirs),
     ]);
     await PubspecUtils.addDependencies('get_server', runPubGet: false);

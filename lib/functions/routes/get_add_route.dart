@@ -3,14 +3,18 @@ import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_app_pages.dart';
-import 'package:get_cli/functions/create/create_route.dart';
+import 'package:get_cli/samples/impl/get_route.dart';
 import 'package:recase/recase.dart';
 
 Future<void> addRoute(String nameRoute) async {
   File routesFile =
       File(Structure.replaceAsExpected(path: 'lib/routes/app_routes.dart'));
   if (!await routesFile.exists()) {
-    await createRoute();
+    routesFile = File(
+        Structure.replaceAsExpected(path: 'lib/app/routes/app_routes.dart'));
+    if (!await routesFile.exists()) {
+      await RouteSample().create();
+    }
   }
   List<String> lines = await routesFile.readAsLines();
   String line =

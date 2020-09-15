@@ -6,15 +6,19 @@ import '../models/file_model.dart';
 
 class Structure {
   static final Map<String, String> _paths = {
-    'page': replaceAsExpected(path: 'lib/pages/'),
+    'page': Directory(
+                replaceAsExpected(path: Directory.current.path + '/lib/pages/'))
+            .existsSync()
+        ? replaceAsExpected(path: 'lib/pages/')
+        : replaceAsExpected(path: 'lib/app/modules/'),
     'widget': replaceAsExpected(path: 'lib/widgets/'),
     'model': replaceAsExpected(path: 'lib/data/models/'),
     'init': replaceAsExpected(path: 'lib/'),
     'route': replaceAsExpected(path: 'lib/routes/'),
     'repository': replaceAsExpected(path: 'lib/data/repositories/'),
     'provider': replaceAsExpected(path: 'lib/data/providers/'),
-    'controller': replaceAsExpected(path: 'lib/controllers/'),
-    'view': replaceAsExpected(path: 'lib/views/'),
+    'controller': replaceAsExpected(path: 'lib/app/controllers/'),
+    'view': replaceAsExpected(path: 'lib/app/views/'),
     //artekko files
     'screen': replaceAsExpected(path: 'lib/presentation/'),
     'navigation': replaceAsExpected(

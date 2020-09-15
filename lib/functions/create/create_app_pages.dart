@@ -12,7 +12,11 @@ Future<void> addAppPage(String name) async {
   File appPagesFile =
       File(Structure.replaceAsExpected(path: 'lib/routes/app_pages.dart'));
   if (!await appPagesFile.exists()) {
-    await createAppPage();
+    appPagesFile = File(
+        Structure.replaceAsExpected(path: 'lib/app/routes/app_pages.dart'));
+    if (!await appPagesFile.exists()) {
+      await AppPagesSample().create();
+    }
   }
   var lines = await appPagesFile.readAsLinesSync();
 
@@ -51,11 +55,16 @@ Future<void> addAppPage(String name) async {
       page:()=> ${namePascalCase}View(), 
       binding: ${namePascalCase}Binding(),
     ),''';
+  String import = Directory(Structure.replaceAsExpected(
+              path: Directory.current.path + '/lib/pages/'))
+          .existsSync()
+      ? 'pages'
+      : 'modules';
   lines.insert(index, line);
+  lines.insert(0,
+      '''import '../$import/$nameSnakeCase/${nameSnakeCase}_binding.dart';''');
   lines.insert(
-      0, '''import '../pages/$nameSnakeCase/${nameSnakeCase}_binding.dart';''');
-  lines.insert(
-      0, '''import '../pages/$nameSnakeCase/${nameSnakeCase}_view.dart';''');
+      0, '''import '../$import/$nameSnakeCase/${nameSnakeCase}_view.dart';''');
 
   await appPagesFile.writeAsStringSync(lines.join('\n'));
 }

@@ -16,11 +16,6 @@ class CreatePageCommand extends Command with CreateMixin {
   @override
   Future<void> execute() async {
     FileModel _fileModel = Structure.model(name, 'page', true);
-    print(_fileModel.path);
-    print(_fileModel.name);
-
-    print(_fileModel.name);
-
     if (File(_fileModel.path + '_view.dart').existsSync() ||
         File(_fileModel.path + '_binding.dart').existsSync() ||
         File(_fileModel.path + '_controller.dart').existsSync()) {
@@ -46,8 +41,11 @@ class CreatePageCommand extends Command with CreateMixin {
 
   Future<void> _writeFiles(FileModel _fileModel, String name,
       {bool overwrite = false}) async {
-    String controllerDir =
-        'pages/${name.snakeCase}/${name.snakeCase}_controller.dart';
+    String controllerDir = Directory(Structure.replaceAsExpected(
+                path: Directory.current.path + '/lib/pages/'))
+            .existsSync()
+        ? 'pages/${name.snakeCase}/${name.snakeCase}_controller.dart'
+        : 'app/modules/${name.snakeCase}/${name.snakeCase}_controller.dart';
 
     await BindingSample(_fileModel.path + '_binding.dart', name,
             name.pascalCase + 'Binding', controllerDir,

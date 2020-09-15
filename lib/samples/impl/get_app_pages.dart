@@ -4,7 +4,7 @@ class AppPagesSample extends Sample {
   String initial;
   String import;
   AppPagesSample(
-      {String path = 'lib/routes/app_pages.dart',
+      {String path = 'lib/app/routes/app_pages.dart',
       this.import = '''import 'package:get/get.dart';''',
       this.initial = 'HOME'})
       : super(path);
