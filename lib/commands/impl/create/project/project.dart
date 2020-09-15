@@ -18,11 +18,21 @@ class CreateProjectCommand extends Command with CreateMixin {
       'Get Server',
     ]);
     final result = menu.choose();
+    String nameProject;
+    if (name == '.') {
+      final dialog = CLI_Dialog(questions: [
+        ['what is the name of the project?', 'name']
+      ]);
+      nameProject = dialog.ask()['name'];
+    }
+
+    String path = Structure.replaceAsExpected(
+        path: Directory.current.path + '/${nameProject.snakeCase}');
+    await Directory(path).create(recursive: true);
+
+    Directory.current = path;
+
     if (result.index == 0) {
-      String path = name == '.'
-          ? Directory.current.path
-          : Structure.replaceAsExpected(
-              path: Directory.current.path + '/${name.snakeCase}');
       final dialog = CLI_Dialog(questions: [
         [
           'What is your company\'s domain? \x1B[33m example: com.yourcompany \x1B[0m',
@@ -32,18 +42,9 @@ class CreateProjectCommand extends Command with CreateMixin {
       final org = dialog.ask()['org'];
 
       await ShellUtils.flutterCreate(path, org);
-      Directory.current = path;
       await InitCommand().execute();
     } else {
-      if (name == '.') {
-        await InitGetServer().execute();
-      } else {
-        String path = Structure.replaceAsExpected(
-            path: Directory.current.path + '/${name.snakeCase}');
-        await Directory(path).create(recursive: true);
-        Directory.current = path;
-        await InitGetServer().execute();
-      }
+      await InitGetServer().execute();
     }
   }
 

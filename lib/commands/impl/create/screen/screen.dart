@@ -1,5 +1,6 @@
 import 'package:get_cli/commands/impl/create/create.dart';
 import 'package:get_cli/commands/interface/command.dart';
+import 'package:get_cli/core/generator.dart';
 import 'package:get_cli/functions/exports_files/add_export.dart';
 import 'package:get_cli/functions/routes/arc_add_route.dart';
 import 'package:get_cli/samples/impl/get_binding.dart';
@@ -10,6 +11,9 @@ import 'package:recase/recase.dart';
 class CreateScreenCommand extends Command with CreateMixin {
   @override
   Future<void> execute() async {
+    bool isProject = GetCli.arguments[1].split(':').first == 'project';
+    String name = isProject ? 'home' : this.name;
+
     String baseFolder = 'lib/presentation/';
     String screenDir = '${name.snakeCase}/${name.snakeCase}.screen.dart';
     String controllerDir =

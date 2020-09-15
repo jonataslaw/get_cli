@@ -4,6 +4,7 @@ import 'package:cli_menu/cli_menu.dart';
 import 'package:get_cli/commands/impl/create/create.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/core/generator.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/routes/get_add_route.dart';
 import 'package:get_cli/models/file_model.dart';
@@ -15,7 +16,9 @@ import 'package:recase/recase.dart';
 class CreatePageCommand extends Command with CreateMixin {
   @override
   Future<void> execute() async {
-    FileModel _fileModel = Structure.model(name, 'page', true);
+    bool isProject = GetCli.arguments[1].split(':').first == 'project';
+    FileModel _fileModel =
+        Structure.model(isProject ? 'home' : name, 'page', true);
     if (File(_fileModel.path + '_view.dart').existsSync() ||
         File(_fileModel.path + '_binding.dart').existsSync() ||
         File(_fileModel.path + '_controller.dart').existsSync()) {
@@ -24,10 +27,12 @@ class CreatePageCommand extends Command with CreateMixin {
       final menu = Menu(['Yes', 'No']);
       final result = menu.choose();
       if (result.index == 0) {
-        await _writeFiles(_fileModel, name, overwrite: true);
+        await _writeFiles(_fileModel, isProject ? 'home' : name,
+            overwrite: true);
       }
     } else {
-      await _writeFiles(_fileModel, name, overwrite: false);
+      await _writeFiles(_fileModel, isProject ? 'home' : name,
+          overwrite: false);
     }
   }
 
