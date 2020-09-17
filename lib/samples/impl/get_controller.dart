@@ -13,12 +13,18 @@ class ControllerSample extends Sample {
 class ${fileName.pascalCase}Controller extends GetxController {
   //TODO: Implement ${fileName.pascalCase}Controller
   
-  @override
-  void onInit() => null;
-  
   final count = 0.obs;
-  increment() => count.value++;
 
+  @override
+  void onInit() {}
+
+  @override
+  void onReady() {}
+
+  @override
+  void onClose() {}
+
+  increment() => count.value++;
 }
 ''';
 }
