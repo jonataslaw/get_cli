@@ -1,3 +1,6 @@
+## [1.0.3]
+- Change Controller model
+
 ## [1.0.2]
 - add generate model class from url
 
