@@ -11,7 +11,10 @@ import 'package:recase/recase.dart';
 class CreateScreenCommand extends Command with CreateMixin {
   @override
   Future<void> execute() async {
-    bool isProject = GetCli.arguments[1].split(':').first == 'project';
+    bool isProject = false;
+    if (GetCli.arguments[0] == 'create') {
+      isProject = GetCli.arguments[1].split(':').first == 'project';
+    }
     String name = isProject ? 'home' : this.name;
 
     String baseFolder = 'lib/presentation/';

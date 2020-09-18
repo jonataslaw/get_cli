@@ -16,7 +16,10 @@ import 'package:recase/recase.dart';
 class CreatePageCommand extends Command with CreateMixin {
   @override
   Future<void> execute() async {
-    bool isProject = GetCli.arguments[1].split(':').first == 'project';
+    bool isProject = false;
+    if (GetCli.arguments[0] == 'create') {
+      isProject = GetCli.arguments[1].split(':').first == 'project';
+    }
     FileModel _fileModel =
         Structure.model(isProject ? 'home' : name, 'page', true);
     if (File(_fileModel.path + '_view.dart').existsSync() ||
