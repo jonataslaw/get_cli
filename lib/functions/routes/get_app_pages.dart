@@ -1,22 +1,15 @@
 import 'dart:io';
 
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/functions/find_file/find_file_by_name.dart';
 import 'package:get_cli/samples/impl/get_app_pages.dart';
 import 'package:recase/recase.dart';
 
-Future<void> createAppPage() async {
-  await AppPagesSample().create();
-}
-
 Future<void> addAppPage(String name) async {
-  File appPagesFile =
-      File(Structure.replaceAsExpected(path: 'lib/routes/app_pages.dart'));
-  if (!await appPagesFile.exists()) {
-    appPagesFile = File(
-        Structure.replaceAsExpected(path: 'lib/app/routes/app_pages.dart'));
-    if (!await appPagesFile.exists()) {
-      await AppPagesSample().create();
-    }
+  File appPagesFile = findFileByName('app_pages.dart');
+  if (appPagesFile == null) {
+    await AppPagesSample().create();
+    appPagesFile = File(AppPagesSample().path);
   }
   var lines = await appPagesFile.readAsLinesSync();
 

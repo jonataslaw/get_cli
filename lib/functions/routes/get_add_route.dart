@@ -1,20 +1,16 @@
 import 'dart:io';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/functions/create/create_app_pages.dart';
+import 'package:get_cli/functions/routes/get_app_pages.dart';
+import 'package:get_cli/functions/find_file/find_file_by_name.dart';
 import 'package:get_cli/samples/impl/get_route.dart';
 import 'package:recase/recase.dart';
 
 Future<void> addRoute(String nameRoute) async {
-  File routesFile =
-      File(Structure.replaceAsExpected(path: 'lib/routes/app_routes.dart'));
-  if (!await routesFile.exists()) {
-    routesFile = File(
-        Structure.replaceAsExpected(path: 'lib/app/routes/app_routes.dart'));
-    if (!await routesFile.exists()) {
-      await RouteSample().create();
-    }
+  File routesFile = findFileByName('app_routes.dart');
+  if (routesFile == null) {
+    await RouteSample().create();
+    routesFile = File(RouteSample().path);
   }
   List<String> lines = await routesFile.readAsLines();
   String line =
