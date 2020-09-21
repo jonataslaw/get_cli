@@ -7,6 +7,7 @@ import 'package:get_cli/common/utils/json_serialize/model_generator.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/functions/find_file/find_folder_by_directory.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart';
@@ -26,10 +27,14 @@ class GenerateModelCommand extends Command with GenerateMixin {
       String result = dialog.ask()['name'];
       name = result.pascalCase;
     }
+    FileModel _fileModel;
     final classGenerator = ModelGenerator(name);
-
-    FileModel _fileModel =
-        Structure.model(name, 'generate_model', false, on: on);
+    if (findFolderByName('models') != null) {
+      _fileModel =
+          Structure.model(name, 'generate_model', false, on: on ?? 'models');
+    } else {
+      _fileModel = Structure.model(name, 'generate_model', false, on: on);
+    }
 
     DartCode dartCode = classGenerator.generateDartClasses(await _jsonRawData);
 
