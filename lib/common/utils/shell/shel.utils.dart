@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
+import 'package:get_cli/core/generator.dart';
 import 'package:process_run/process_run.dart';
 
 class ShellUtils {
@@ -17,6 +18,7 @@ class ShellUtils {
   }
 
   static void update() async {
+    bool isGit = GetCli.arguments.contains('--git');
     String versionInPubDev =
         await PubDevApi.getLatestVersionFromPackage('get_cli');
     String versionInstalled = await PubspecLock.getVersionCli(disableLog: true);
@@ -26,10 +28,49 @@ class ShellUtils {
     LogService.info('Upgrading get_cli …');
     var res;
     if (Platform.script.path.contains('flutter')) {
-      res = await run('flutter', ['pub', 'global', 'activate', 'get_cli'],
-          verbose: true);
+      if (isGit) {
+        res = await run(
+            'flutter',
+            [
+              'pub',
+              'global',
+              'activate',
+              '-sgit',
+              'https://github.com/jonataslaw/get_cli/'
+            ],
+            verbose: true);
+      } else {
+        res = await run(
+            'flutter',
+            [
+              'pub',
+              'global',
+              'activate',
+              'get_cli',
+            ],
+            verbose: true);
+      }
     } else {
-      res = await run('pub', ['global', 'activate', 'get_cli'], verbose: true);
+      if (isGit) {
+        res = await run(
+            'pub',
+            [
+              'global',
+              'activate',
+              '-sgit',
+              'https://github.com/jonataslaw/get_cli/'
+            ],
+            verbose: true);
+      } else {
+        res = await run(
+            'pub',
+            [
+              'global',
+              'activate',
+              'get_cli',
+            ],
+            verbose: true);
+      }
     }
     if (res.stderr.toString().isNotEmpty) {
       return LogService.error('There was an error upgrading get_cli');
