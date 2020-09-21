@@ -38,7 +38,7 @@ class Structure {
         if (element is File) {
           return false;
         }
-        return element.path.split(p.separator).contains(on);
+        return element.path.contains(on);
       }, orElse: () {
         LogService.error('Folder $on not found');
         exit(0);

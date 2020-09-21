@@ -4,6 +4,7 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/functions/create/create_app_pages.dart';
 import 'package:get_cli/functions/create/create_main.dart';
 import 'package:get_cli/functions/create/create_route.dart';
+import 'package:get_cli/samples/impl/get_route.dart';
 import 'package:get_cli/samples/impl/getx_pattern/get_main.dart';
 
 Future<void> createInitGetxPattern() async {
@@ -12,7 +13,7 @@ Future<void> createInitGetxPattern() async {
 
   await Future.wait([
     GetXMainSample().create(),
-    createRoute(),
+    RouteSample().create(),
     createAppPage(),
     CreatePageCommand().execute(),
   ]);

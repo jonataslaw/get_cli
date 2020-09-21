@@ -3,14 +3,15 @@ import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_navigation.dart';
-import 'package:get_cli/functions/create/create_route.dart';
+import 'package:get_cli/samples/impl/arctekko/arc_routes.dart';
 import 'package:recase/recase.dart';
 
 Future<void> arcAddRoute(String nameRoute) async {
   File routesFile = File(Structure.replaceAsExpected(
       path: 'lib/infrastructure/navigation/routes.dart'));
   if (!await routesFile.exists()) {
-    await createRoute(isArc: true, initial: nameRoute.snakeCase.toUpperCase());
+    await ArcRouteSample(nameRoute.snakeCase.toUpperCase()).create();
+    //await createRoute(isArc: true, initial: nameRoute.snakeCase.toUpperCase());
   }
   List<String> lines = await routesFile.readAsLines();
   String line =
