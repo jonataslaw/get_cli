@@ -60,7 +60,7 @@ class CreatePageCommand extends Command with CreateMixin {
 
     await ControllerSample(
       _fileModel.path + '_controller.dart',
-      name.pascalCase + 'Controller',
+      name,
       isServer,
       overwrite: overwrite,
     ).create();
