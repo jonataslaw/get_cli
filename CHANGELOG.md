@@ -1,3 +1,9 @@
+## [1.2.6]
+- Clean imports
+
+## [1.2.5]
+- Create server uses getxPattern by default
+
 ## [1.2.4]
 - Improve error handle
 

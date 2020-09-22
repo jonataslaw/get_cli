@@ -54,6 +54,7 @@ class PubspecUtils {
     final serverLine = lines.firstWhere(
         (element) => element.split(':').first.trim() == 'get_server',
         orElse: () => null);
+        
     if (serverLine == null || serverLine.isEmpty) {
       LogService.info('Flutter project detected!');
       return false;

@@ -57,6 +57,7 @@ class CreatePageCommand extends Command with CreateMixin {
         : 'app/modules/${name.snakeCase}/${name.snakeCase}_controller.dart';
 
     bool isServer = PubspecUtils.isServerProject;
+  
 
     await BindingSample(_fileModel.path + '_binding.dart', name,
             name.pascalCase + 'Binding', controllerDir, isServer,
