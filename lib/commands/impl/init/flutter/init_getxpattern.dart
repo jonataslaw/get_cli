@@ -23,7 +23,9 @@ Future<void> createInitGetxPattern() async {
     AppPagesSample(import: import).create(),
     CreatePageCommand().execute(),
   ]);
-  await installGet();
+  if (!isServerProject) {
+    await installGet();
+  }
 
   LogService.success('GetX Pattern structure successfully generated.');
 }

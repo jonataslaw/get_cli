@@ -1,3 +1,6 @@
+## [1.2.3]
+- Prevent get init add getx flutter  dependencies
+
 ## [1.2.2]
 - Now Init command work too with get_server
 
