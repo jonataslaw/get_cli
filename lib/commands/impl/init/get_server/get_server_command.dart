@@ -6,8 +6,8 @@ import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/functions/create/create_main.dart';
 import 'package:get_cli/samples/impl/get_app_pages.dart';
 import 'package:get_cli/samples/impl/get_route.dart';
-import 'package:get_cli/samples/impl/get_server/get_server_main.dart';
 import 'package:get_cli/samples/impl/get_server/pubspec.dart';
+import 'package:get_cli/samples/impl/getx_pattern/get_main.dart';
 import 'package:path/path.dart';
 
 class InitGetServer extends Command {
@@ -20,7 +20,7 @@ class InitGetServer extends Command {
     await PubspecUtils.addDependencies('get_server', runPubGet: false);
 
     await Future.wait([
-      GetServerMainSample().create(),
+      GetXMainSample().create(),
       RouteSample().create(),
       AppPagesSample(
         import: "import 'package:get_server/get_server.dart';",

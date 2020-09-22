@@ -1,10 +1,10 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
 class GetXMainSample extends Sample {
-  GetXMainSample() : super('lib/main.dart', overwrite: true);
+  final bool isServer;
+  GetXMainSample({this.isServer}) : super('lib/main.dart', overwrite: true);
 
-  @override
-  Future<String> get content async => '''import 'package:flutter/material.dart';
+  String get _flutterMain => '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'app/routes/app_pages.dart';
@@ -19,4 +19,17 @@ void main() {
   );
 }
   ''';
+
+  String get _serverMain => '''import 'package:get_server/get_server.dart';
+import 'app/routes/app_pages.dart';
+
+void main() {
+  runApp(GetServer(
+    getPages: AppPages.routes,
+  ));
+}
+  ''';
+
+  @override
+  String get content => isServer ? _serverMain : _flutterMain;
 }

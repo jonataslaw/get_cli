@@ -1,3 +1,9 @@
+## [1.2.2]
+- Now Init command work too with get_server
+
+## [1.2.1]
+- Remove empty lines
+
 ## [1.2.0]
 - Added fully compatibility from getx and get_server
 
