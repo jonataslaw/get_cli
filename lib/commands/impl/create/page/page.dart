@@ -22,7 +22,7 @@ class CreatePageCommand extends Command with CreateMixin {
       isProject = GetCli.arguments[1].split(':').first == 'project';
     }
     FileModel _fileModel =
-        Structure.model(isProject ? 'home' : name, 'page', true);
+        Structure.model(isProject ? 'home' : name, 'page', true, on: onCommand);
     if (File(_fileModel.path + '_view.dart').existsSync() ||
         File(_fileModel.path + '_binding.dart').existsSync() ||
         File(_fileModel.path + '_controller.dart').existsSync()) {
@@ -57,12 +57,22 @@ class CreatePageCommand extends Command with CreateMixin {
         : 'app/modules/${name.snakeCase}/${name.snakeCase}_controller.dart';
 
     bool isServer = PubspecUtils.isServerProject;
-  
 
-    await BindingSample(_fileModel.path + '_binding.dart', name,
-            name.pascalCase + 'Binding', controllerDir, isServer,
-            overwrite: overwrite)
-        .create();
+    await ControllerSample(
+      _fileModel.path + '_controller.dart',
+      name.pascalCase + 'Controller',
+      isServer,
+      overwrite: overwrite,
+    ).create();
+
+    await BindingSample(
+      _fileModel.path + '_binding.dart',
+      name,
+      name.pascalCase + 'Binding',
+      controllerDir,
+      isServer,
+      overwrite: overwrite,
+    ).create();
 
     await GetViewSample(
             _fileModel.path + '_view.dart',
@@ -77,7 +87,7 @@ class CreatePageCommand extends Command with CreateMixin {
             overwrite: overwrite)
         .create();
 
-    await addRoute(name);
+    await addRoute(name, Structure.replaceAsExpected(path: _fileModel.path));
     LogService.success(name.pascalCase + ' page created successfully.');
     return;
   }

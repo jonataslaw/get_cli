@@ -6,7 +6,7 @@ import 'package:get_cli/functions/find_file/find_file_by_name.dart';
 import 'package:get_cli/samples/impl/get_route.dart';
 import 'package:recase/recase.dart';
 
-Future<void> addRoute(String nameRoute) async {
+Future<void> addRoute(String nameRoute, String path) async {
   File routesFile = findFileByName('app_routes.dart');
   if (routesFile == null) {
     await RouteSample().create();
@@ -36,5 +36,5 @@ Future<void> addRoute(String nameRoute) async {
   await routesFile.writeAsStringSync(lines.join('\n'));
   LogService.success('${nameRoute} route created successfully,');
 
-  await addAppPage(nameRoute);
+  await addAppPage(nameRoute, path);
 }

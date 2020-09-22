@@ -1,3 +1,9 @@
+## [1.3.1]
+- Fix controller creatoutside page folder with on command
+
+## [1.3.0]
+- Added on command to create pages
+
 ## [1.2.7]
 - Fix create view with no controller
 
