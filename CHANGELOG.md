@@ -1,3 +1,9 @@
+## [1.1.0]
+- Add model generate on folders models
+
+## [1.0.4]
+- Fix init
+
 ## [1.0.3]
 - Change Controller model
 
