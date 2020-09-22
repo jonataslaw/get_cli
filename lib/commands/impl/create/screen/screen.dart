@@ -1,5 +1,6 @@
 import 'package:get_cli/commands/impl/create/create.dart';
 import 'package:get_cli/commands/interface/command.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/core/generator.dart';
 import 'package:get_cli/functions/exports_files/add_export.dart';
 import 'package:get_cli/functions/routes/arc_add_route.dart';
@@ -24,19 +25,20 @@ class CreateScreenCommand extends Command with CreateMixin {
     String bindingDir =
         'lib/infrastructure/navigation/bindings/controllers/${name.snakeCase}.controller.binding.dart';
 
+    bool isServer = PubspecUtils.isServerProject;
     await GetViewSample('$baseFolder/$screenDir', '${name.pascalCase}Screen',
-            '${name.pascalCase}Controller', controllerDir)
+            '${name.pascalCase}Controller', controllerDir, isServer)
         .create();
 
     await addExport('lib/presentation/screens.dart', 'export \'$screenDir\';');
     await BindingSample(bindingDir, name, '${name.pascalCase}ControllerBinding',
-            controllerDir)
+            controllerDir, isServer)
         .create();
     await addExport(
         'lib/infrastructure/navigation/bindings/controllers/controllers_bindings.dart',
         '''export '${name.snakeCase}.controller.binding.dart';''');
 
-    await ControllerSample('lib/$controllerDir', name).create();
+    await ControllerSample('lib/$controllerDir', name, isServer).create();
 
     await arcAddRoute(name);
   }

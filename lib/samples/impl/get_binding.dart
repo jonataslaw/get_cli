@@ -6,14 +6,19 @@ class BindingSample extends Sample {
   String fileName;
   String controllerDir;
   String bindingName;
+  bool isServer;
 
-  BindingSample(
-      String path, this.fileName, this.bindingName, this.controllerDir,
+  BindingSample(String path, this.fileName, this.bindingName,
+      this.controllerDir, this.isServer,
       {bool overwrite = false})
       : super(path, overwrite: overwrite);
 
+  String get import => isServer
+      ? "import 'package:get_server/get_server.dart';"
+      : "import 'package:get/get.dart';";
+
   @override
-  Future<String> get content async => '''import 'package:get/get.dart';
+  Future<String> get content async => '''$import
 
 import 'package:${await PubspecUtils.getProjectName()}/$controllerDir';
 

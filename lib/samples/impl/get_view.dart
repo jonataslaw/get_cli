@@ -5,21 +5,22 @@ class GetViewSample extends Sample {
   String controllerDir;
   String viewName;
   String controller;
+  bool isServer;
 
   GetViewSample(String path, this.viewName, this.controller, this.controllerDir,
+      this.isServer,
       {bool overwrite = false})
       : super(path, overwrite: overwrite);
-  String get _controller =>
-      controller != null ? 'GetView<$controller>' : 'GetView';
 
   Future<String> get import async => controllerDir != null
       ? '''\nimport  'package:${await PubspecUtils.getProjectName()}/$controllerDir';'''
       : '';
-  @override
-  Future<String> get content async => '''import 'package:flutter/material.dart';
+
+  Future<String> get _flutterView async =>
+      '''import 'package:flutter/material.dart';
 import 'package:get/get.dart'; ${await import}
 
-class $viewName extends $_controller {
+class $viewName extends GetView<$controller> {
   @override
   Widget build(BuildContext context) {
 
@@ -38,4 +39,17 @@ class $viewName extends $_controller {
   }
 }
   ''';
+
+  Future<String> get _serverView async =>
+      '''import 'package:get_server/get_server.dart'; ${await import}
+class $viewName extends GetView<$controller> {
+  @override
+  Widget build(BuildContext context) {
+    return Text('GetX to Server is working!');
+  }
+}
+  ''';
+
+  @override
+  Future<String> get content async => isServer ? _serverView : _flutterView;
 }

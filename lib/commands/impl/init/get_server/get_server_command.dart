@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:get_cli/commands/impl/create/page/page.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/functions/create/create_list_directory.dart';
 import 'package:get_cli/functions/create/create_main.dart';
 import 'package:get_cli/samples/impl/get_app_pages.dart';
 import 'package:get_cli/samples/impl/get_route.dart';
@@ -17,24 +16,18 @@ class InitGetServer extends Command {
     bool canContinue = await createMain();
     if (!canContinue) return;
 
-    List<Directory> initialDirs = [
-      Directory(Structure.replaceAsExpected(path: 'lib/data')),
-      Directory(Structure.replaceAsExpected(path: 'lib/pages')),
-      Directory(Structure.replaceAsExpected(path: 'lib/routes')),
-      Directory(Structure.replaceAsExpected(path: 'lib/widgets')),
-    ];
+    await GetServerPubspecSample(basename(Directory.current.path)).create();
+    await PubspecUtils.addDependencies('get_server', runPubGet: false);
+
     await Future.wait([
       GetServerMainSample().create(),
+      RouteSample().create(),
       AppPagesSample(
-              import: '''import 'package:get_server/get_server.dart';''',
-              initial: null,
-              path: 'lib/routes/app_pages.dart')
-          .create(),
-      GetServerPubspecSample(basename(Directory.current.path)).create(),
-      RouteSample(path: 'lib/routes/app_routes.dart').create(),
-      createListDirectory(initialDirs),
+        import: "import 'package:get_server/get_server.dart';",
+      ).create(),
+      CreatePageCommand().execute(),
     ]);
-    await PubspecUtils.addDependencies('get_server', runPubGet: false);
+
     await PubspecUtils.addDependencies('pedantic',
         isDev: true, runPubGet: false);
     await PubspecUtils.addDependencies('test', isDev: true, runPubGet: true);

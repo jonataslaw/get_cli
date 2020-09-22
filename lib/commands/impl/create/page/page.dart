@@ -4,6 +4,7 @@ import 'package:cli_menu/cli_menu.dart';
 import 'package:get_cli/commands/impl/create/create.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/core/generator.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/routes/get_add_route.dart';
@@ -55,8 +56,10 @@ class CreatePageCommand extends Command with CreateMixin {
         ? 'pages/${name.snakeCase}/${name.snakeCase}_controller.dart'
         : 'app/modules/${name.snakeCase}/${name.snakeCase}_controller.dart';
 
+    bool isServer = PubspecUtils.isServerProject;
+
     await BindingSample(_fileModel.path + '_binding.dart', name,
-            name.pascalCase + 'Binding', controllerDir,
+            name.pascalCase + 'Binding', controllerDir, isServer,
             overwrite: overwrite)
         .create();
 
@@ -65,10 +68,12 @@ class CreatePageCommand extends Command with CreateMixin {
             name.pascalCase + 'View',
             name.pascalCase + 'Controller',
             controllerDir,
+            isServer,
             overwrite: overwrite)
         .create();
 
-    await ControllerSample('lib/' + controllerDir, name, overwrite: overwrite)
+    await ControllerSample('lib/' + controllerDir, name, isServer,
+            overwrite: overwrite)
         .create();
 
     await addRoute(name);

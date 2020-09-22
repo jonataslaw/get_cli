@@ -10,10 +10,10 @@ class PubspecUtils {
   static Future<String> getProjectName() async {
     var lines = _pubspec.readAsLinesSync();
     return lines
-        .firstWhere((line) => line.startsWith('name:'))
-        .split(':')
-        .last
-        .trim();
+        .firstWhere((line) => line.startsWith('name:'), orElse: () => null)
+        ?.split(':')
+        ?.last
+        ?.trim();
   }
 
   static void addDependencies(String package,
@@ -46,4 +46,24 @@ class PubspecUtils {
     await _pubspec.writeAsStringSync(lines.join('\n'));
     LogService.success('Package: "$package" removed!');
   }
+
+  static bool get isServerProject {
+    LogService.info('Checking project type');
+
+    var lines = _pubspec.readAsLinesSync();
+    final serverLine = lines.firstWhere(
+        (element) => element.split(':').first.trim() == 'get_server',
+        orElse: () => null);
+    if (serverLine == null || serverLine.isEmpty) {
+      LogService.info('Flutter project detected!');
+      return false;
+    } else {
+      LogService.info('Get Server project detected!');
+      return true;
+    }
+  }
+
+  static String get getPackageImport => !isServerProject
+      ? "import 'package:get/get.dart';"
+      : "import 'package:get_server/get_server.dart';";
 }

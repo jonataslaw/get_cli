@@ -4,11 +4,17 @@ import '../interface/sample_interface.dart';
 
 class ControllerSample extends Sample {
   String fileName;
-  ControllerSample(String path, this.fileName, {bool overwrite = false})
+  bool isServer;
+  ControllerSample(String path, this.fileName, this.isServer,
+      {bool overwrite = false})
       : super(path, overwrite: overwrite);
 
+  String get import => isServer
+      ? "import 'package:get_server/get_server.dart';"
+      : "import 'package:get/get.dart';";
+
   @override
-  Future<String> get content async => '''import 'package:get/get.dart';
+  Future<String> get content async => '''$import
 
 class ${fileName.pascalCase}Controller extends GetxController {
   //TODO: Implement ${fileName.pascalCase}Controller
