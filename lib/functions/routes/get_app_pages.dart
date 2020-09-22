@@ -52,7 +52,6 @@ Future<void> addAppPage(String name, String path) async {
 
   String import =
       "import 'package:${await PubspecUtils.getProjectName()}/$path";
-  print('PATH IS $path');
 
   // String import = Directory(Structure.replaceAsExpected(
   //             path: Directory.current.path + '/lib/pages/'))

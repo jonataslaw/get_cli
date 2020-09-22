@@ -54,6 +54,7 @@ class CreatePageCommand extends Command with CreateMixin {
     pathSplit.remove('.');
     pathSplit.remove('lib');
     String path = pathSplit.join('/');
+    print(path);
 
     String controllerDir = path + '_controller.dart';
 
