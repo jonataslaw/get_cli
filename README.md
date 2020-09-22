@@ -1,10 +1,8 @@
 ###### Documentation languages
 | [pt_BR](https://github.com/jonataslaw/get_cli/blob/master/README-pt_BR.md) | en_EN - this file |
-|-------|-------|
+| -------------------------------------------------------------------------- | ----------------- |
 
 Official CLI for the GetX™ framework.
-
-This CLI is in `Beta` stage, use with caution.
 
 ```dart
 // To install:

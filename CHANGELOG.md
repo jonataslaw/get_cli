@@ -1,3 +1,6 @@
+## [1.2.7]
+- Fix create view with no controller
+
 ## [1.2.6]
 - Clean imports
 

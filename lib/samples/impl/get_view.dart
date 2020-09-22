@@ -16,11 +16,14 @@ class GetViewSample extends Sample {
       ? '''\nimport 'package:${await PubspecUtils.getProjectName()}/$controllerDir';'''
       : '';
 
+  String get _controller =>
+      controller != null ? 'GetView<$controller>' : 'GetView';
+
   Future<String> get _flutterView async =>
       '''import 'package:flutter/material.dart';
 import 'package:get/get.dart'; ${await import}
 
-class $viewName extends GetView<$controller> {
+class $viewName extends $_controller {
   @override
   Widget build(BuildContext context) {
 
