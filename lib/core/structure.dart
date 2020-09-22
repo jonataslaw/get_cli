@@ -41,7 +41,7 @@ class Structure {
         return element.path.contains(on);
       }, orElse: () {
         LogService.error('Folder $on not found');
-        exit(0);
+        if (!Platform.isWindows) exit(0);
         return;
       });
 

@@ -73,10 +73,10 @@ dynamic decodeJSON(String rawJson) {
   } on FormatException catch (e) {
     LogService.error(
         'invalid json format: \n${e.toString().split("FormatException:").last}');
-    exit(0);
+    if (!Platform.isWindows) exit(0);
   } catch (e) {
     LogService.error('Unexpected error ${e}');
-    exit(0);
+    if (!Platform.isWindows) exit(0);
   }
 }
 

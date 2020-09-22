@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/find_file/find_file_by_name.dart';
 import 'package:get_cli/samples/impl/get_app_pages.dart';
 import 'package:recase/recase.dart';
