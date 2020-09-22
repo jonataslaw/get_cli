@@ -4,7 +4,7 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 
 class ExceptionHandler {
-  void handle(Exception e) {
+  void handle(dynamic e) {
     if (e is CliException) {
       LogService.error(e.message);
       if (e.codeSample != null) {
@@ -21,7 +21,7 @@ class ExceptionHandler {
       }
       _logException(e.message);
     } else {
-      _logException(e.runtimeType.toString());
+      _logException(e.toString());
     }
     exit(0);
   }

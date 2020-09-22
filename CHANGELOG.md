@@ -1,3 +1,6 @@
+## [1.2.4]
+- Improve error handle
+
 ## [1.2.3]
 - Prevent get init add getx flutter  dependencies
 
