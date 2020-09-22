@@ -50,11 +50,12 @@ class CreatePageCommand extends Command with CreateMixin {
 
   Future<void> _writeFiles(FileModel _fileModel, String name,
       {bool overwrite = false}) async {
-    String controllerDir = Directory(Structure.replaceAsExpected(
-                path: Directory.current.path + '/lib/pages/'))
-            .existsSync()
-        ? 'pages/${name.snakeCase}/${name.snakeCase}_controller.dart'
-        : 'app/modules/${name.snakeCase}/${name.snakeCase}_controller.dart';
+    List<String> pathSplit = _fileModel.path.replaceAll('\\', '/').split('/');
+    pathSplit.remove('.');
+    pathSplit.remove('lib');
+    String path = pathSplit.join('/');
+
+    String controllerDir = path + '_controller.dart';
 
     bool isServer = PubspecUtils.isServerProject;
 
@@ -83,22 +84,7 @@ class CreatePageCommand extends Command with CreateMixin {
             overwrite: overwrite)
         .create();
 
-    // await ControllerSample('lib/' + controllerDir, name, isServer,
-    //         overwrite: overwrite)
-    //     .create();
-
-    List<String> pathSplit = _fileModel.path.replaceAll('\\', '/').split('/');
-    pathSplit.remove('.');
-    pathSplit.remove('lib');
-    String routePath = pathSplit.join('/');
-
-    // String routePath = Directory(Structure.replaceAsExpected(
-    //             path: Directory.current.path + '/lib/pages/'))
-    //         .existsSync()
-    //     ? 'pages/${name.snakeCase}/${name.snakeCase}'
-    //     : 'app/modules/${name.snakeCase}/${name.snakeCase}';
-
-    await addRoute(name, routePath);
+    await addRoute(name, path);
     LogService.success(name.pascalCase + ' page created successfully.');
     return;
   }
