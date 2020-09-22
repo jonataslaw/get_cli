@@ -87,11 +87,16 @@ class CreatePageCommand extends Command with CreateMixin {
     //         overwrite: overwrite)
     //     .create();
 
-    String routePath = Directory(Structure.replaceAsExpected(
-                path: Directory.current.path + '/lib/pages/'))
-            .existsSync()
-        ? 'pages/${name.snakeCase}/${name.snakeCase}'
-        : 'app/modules/${name.snakeCase}/${name.snakeCase}';
+    List<String> pathSplit = _fileModel.path.replaceAll('\\', '/').split('/');
+    pathSplit.remove('.');
+    pathSplit.remove('lib');
+    String routePath = pathSplit.join('/');
+
+    // String routePath = Directory(Structure.replaceAsExpected(
+    //             path: Directory.current.path + '/lib/pages/'))
+    //         .existsSync()
+    //     ? 'pages/${name.snakeCase}/${name.snakeCase}'
+    //     : 'app/modules/${name.snakeCase}/${name.snakeCase}';
 
     await addRoute(name, routePath);
     LogService.success(name.pascalCase + ' page created successfully.');
