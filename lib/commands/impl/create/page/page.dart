@@ -83,11 +83,11 @@ class CreatePageCommand extends Command with CreateMixin {
             overwrite: overwrite)
         .create();
 
-    await ControllerSample('lib/' + controllerDir, name, isServer,
-            overwrite: overwrite)
-        .create();
+    // await ControllerSample('lib/' + controllerDir, name, isServer,
+    //         overwrite: overwrite)
+    //     .create();
 
-    await addRoute(name, _fileModel.path);
+    await addRoute(name, controllerDir);
     LogService.success(name.pascalCase + ' page created successfully.');
     return;
   }
