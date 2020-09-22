@@ -13,7 +13,7 @@ class GetViewSample extends Sample {
       : super(path, overwrite: overwrite);
 
   Future<String> get import async => controllerDir != null
-      ? '''\nimport  'package:${await PubspecUtils.getProjectName()}/$controllerDir';'''
+      ? '''\nimport 'package:${await PubspecUtils.getProjectName()}/$controllerDir';'''
       : '';
 
   Future<String> get _flutterView async =>
@@ -42,6 +42,7 @@ class $viewName extends GetView<$controller> {
 
   Future<String> get _serverView async =>
       '''import 'package:get_server/get_server.dart'; ${await import}
+
 class $viewName extends GetView<$controller> {
   @override
   Widget build(BuildContext context) {

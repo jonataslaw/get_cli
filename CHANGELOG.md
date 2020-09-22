@@ -1,3 +1,6 @@
+## [1.2.0]
+- Added fully compatibility from getx and get_server
+
 ## [1.1.0]
 - Add model generate on folders models
 

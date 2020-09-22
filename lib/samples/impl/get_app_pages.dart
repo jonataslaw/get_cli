@@ -13,7 +13,7 @@ class AppPagesSample extends Sample {
       initial != null ? '\nstatic const INITIAL = Routes.$initial;' : '';
 
   @override
-  Future<String> get content async => ''' $import
+  Future<String> get content async => '''$import
 part 'app_routes.dart';
 
 class AppPages {
