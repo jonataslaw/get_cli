@@ -14,7 +14,9 @@ class PubspecLock {
       var text = loadYaml(await file.readAsString());
       if (text['packages']['get_cli'] == null) {
         if (isDevVersion()) {
-          LogService.info('Development version');
+          if (!disableLog) {
+            LogService.info('Development version');
+          }
         }
         return null;
       }

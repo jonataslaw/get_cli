@@ -18,7 +18,7 @@ class LogService {
     const sep = '\n';
     // to check: ⚠ ❌✖✕
     msg = '✖ ' + _penError(msg.trim());
-    msg = sep + msg + sep;
+    msg = msg + sep;
     print(msg);
   }
 

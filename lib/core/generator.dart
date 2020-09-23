@@ -26,11 +26,14 @@ class GetCli {
       return _findCommand(currentIndex += 1, command);
     } on RangeError catch (_) {
       // command line arguments is empty
-      return HelpCommand();
+      LogService.error('argument is empty');
+      LogService.info('run `get help` to help', false, false);
+      //return HelpCommand();
     } catch (e) {
       // command not found
       LogService.error('command not found');
-      return HelpCommand();
+      LogService.info('run `get help` to help', false, false);
+      //return HelpCommand();
     }
   }
 }

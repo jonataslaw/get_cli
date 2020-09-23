@@ -1,3 +1,6 @@
+## [1.3.10]
+- verificaçao de update alterada para uma vez por dia
+
 ## [1.3.9]
 - Create helper class to parse path
 
