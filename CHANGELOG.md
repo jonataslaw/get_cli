@@ -1,3 +1,9 @@
+## [1.3.9]
+- Create helper class to parse path
+
+## [1.3.8]
+- Prevent windows from close terminal
+
 ## [1.3.7]
 - Fix duplicate slashs
 
