@@ -1,5 +1,8 @@
 ## [1.3.10]
-- verificaçao de update alterada para uma vez por dia
+- update check changed to once a day
+- fix crete project
+- fix update from git
+- add analysis_options for get_server
 
 ## [1.3.9]
 - Create helper class to parse path
