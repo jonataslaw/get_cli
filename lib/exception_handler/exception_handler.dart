@@ -12,16 +12,15 @@ class ExceptionHandler {
       }
     } else if (e is FileSystemException) {
       if (e.osError.errorCode == 2) {
-        LogService.error('pubspec.yaml not found in current directory, '
-            'are you in the root folder of your project?');
+        LogService.error(' File not found in ${e.path}');
         return;
       } else if (e.osError.errorCode == 13) {
-        LogService.error('You are not allowed to access pubspec.yaml');
+        LogService.error('Access denied to ${e.path}');
         return;
       }
       _logException(e.message);
     } else {
-      _logException(e.toString());
+      _logException(e);
     }
     if (!Platform.isWindows) exit(0);
   }

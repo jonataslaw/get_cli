@@ -31,13 +31,10 @@ Current installed version: $versionInstalled
             final codeSample = LogService.code('get update');
             LogService.info('''New version available: $versionInPubDev
 Please, run $codeSample''', false, true);
-          } else if (needsUpdate == -1) {
-            LogService.info(
-                '''Seems like you are using the latest version from git ($versionInstalled)''');
           }
         });
       });
-      CliConfig.setUpdateCheckToday();
+      await CliConfig.setUpdateCheckToday();
     }
   }
 }

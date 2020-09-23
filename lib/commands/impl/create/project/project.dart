@@ -18,7 +18,7 @@ class CreateProjectCommand extends Command with CreateMixin {
       'Get Server',
     ]);
     final result = menu.choose();
-    String nameProject;
+    String nameProject = name;
     if (name == '.') {
       final dialog = CLI_Dialog(questions: [
         ['what is the name of the project?', 'name']
