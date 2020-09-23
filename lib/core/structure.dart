@@ -105,4 +105,9 @@ class Structure {
     }
     return null;
   }
+
+  static List<String> safeSplitPath(String path) {
+    return path.replaceAll('\\', '/').split('/')
+      ..removeWhere((element) => element == null || element.isEmpty);
+  }
 }
