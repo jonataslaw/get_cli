@@ -50,7 +50,8 @@ class CreatePageCommand extends Command with CreateMixin {
 
   Future<void> _writeFiles(FileModel _fileModel, String name,
       {bool overwrite = false}) async {
-    List<String> pathSplit = _fileModel.path.replaceAll('\\', '/').split('/');
+    List<String> pathSplit = (_fileModel.path.replaceAll('\\', '/').split('/')
+      ..removeWhere((element) => element == null || element.isEmpty));
     pathSplit.remove('.');
     pathSplit.remove('lib');
     String path = pathSplit.join('/');
