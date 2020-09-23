@@ -22,7 +22,7 @@ class ShellUtils {
     String versionInPubDev =
         await PubDevApi.getLatestVersionFromPackage('get_cli');
     String versionInstalled = await PubspecLock.getVersionCli(disableLog: true);
-    if (versionInstalled == versionInPubDev) {
+    if (versionInstalled == versionInPubDev && !isGit) {
       return LogService.info('Latest version of get_cli already installed');
     }
     LogService.info('Upgrading get_cli …');
