@@ -20,7 +20,7 @@ class ExceptionHandler {
       }
       _logException(e.message);
     } else {
-      _logException(e);
+      _logException(e.toString());
     }
     if (!Platform.isWindows) exit(0);
   }

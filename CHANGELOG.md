@@ -1,3 +1,6 @@
+## [1.3.11]
+- Fix type on exception
+
 ## [1.3.10]
 - update check changed to once a day
 - fix crete project

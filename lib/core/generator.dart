@@ -1,5 +1,4 @@
 import 'package:get_cli/commands/commands_list.dart';
-import 'package:get_cli/commands/impl/help/help.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 
@@ -29,11 +28,15 @@ class GetCli {
       LogService.error('argument is empty');
       LogService.info('run `get help` to help', false, false);
       //return HelpCommand();
+      ///TODO retornar o tipo apropriado
+      return null;
     } catch (e) {
       // command not found
       LogService.error('command not found');
       LogService.info('run `get help` to help', false, false);
       //return HelpCommand();
+      ///TODO retornar o tipo apropriado
+      return null;
     }
   }
 }
