@@ -58,6 +58,9 @@ class CreatePageCommand extends Command with CreateMixin {
     pathSplit.removeLast();
     String path = pathSplit.join('/');
     print(path);
+    if (!File(path).existsSync()) {
+      File(path).createSync(recursive: true);
+    }
 
     String controllerDir = path + 'controllers/$name' + '_controller.dart';
 
