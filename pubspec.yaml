@@ -10,6 +10,7 @@ executables:
   get: get
 
 dependencies:
+  meta: ^1.2.3
   recase: ^3.0.0
   cli_menu: ^0.2.2
   archive: ^2.0.13

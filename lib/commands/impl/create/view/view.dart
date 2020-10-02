@@ -27,6 +27,7 @@ class CreateViewCommand extends Command with CreateMixin {
           null,
           null,
           PubspecUtils.isServerProject,
-        ));
+        ),
+        'views');
   }
 }

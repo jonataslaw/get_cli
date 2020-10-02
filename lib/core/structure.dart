@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:meta/meta.dart';
 //import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 import '../models/file_model.dart';
@@ -29,7 +30,7 @@ class Structure {
   };
 
   static FileModel model(String name, String command, bool wrapperFolder,
-      {String on}) {
+      {String on, String folderName}) {
     if (on != null) {
       Directory current = Directory('./lib');
       final list = current.listSync(recursive: true, followLinks: false);
@@ -49,7 +50,7 @@ class Structure {
         name: name,
         path: Structure.getPathWithName(
           contains.path,
-          ReCase(name).snakeCase,
+          folderName ?? ReCase(name).snakeCase,
           createWithWrappedFolder: wrapperFolder,
         ),
         commandName: command,
@@ -59,7 +60,7 @@ class Structure {
       name: name,
       path: Structure.getPathWithName(
         _paths[command],
-        ReCase(name).snakeCase,
+        folderName ?? ReCase(name).snakeCase,
         createWithWrappedFolder: wrapperFolder,
       ),
       commandName: command,

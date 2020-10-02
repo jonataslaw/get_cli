@@ -8,8 +8,9 @@ import 'package:path/path.dart';
 import '../../core/structure.dart';
 
 Future handleFileCreate(String name, String command, String on,
-    bool extraFolder, Sample sample) async {
-  final fileModel = Structure.model(name, command, extraFolder, on: on);
+    bool extraFolder, Sample sample, String folderName) async {
+  final fileModel = Structure.model(name, command, extraFolder,
+      on: on, folderName: folderName);
 
   String path = fileModel.path + '_${fileModel.commandName}.dart';
   sample.path = path;

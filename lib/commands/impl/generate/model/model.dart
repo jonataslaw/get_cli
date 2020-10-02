@@ -31,7 +31,7 @@ class GenerateModelCommand extends Command with GenerateMixin {
     final classGenerator = ModelGenerator(name);
     if (findFolderByName('models') != null) {
       _fileModel =
-          Structure.model(name, 'generate_model', false, on: on ?? 'models');
+          Structure.model(name, 'generate_model', true, on: on ?? 'models');
     } else {
       _fileModel = Structure.model(name, 'generate_model', false, on: on);
     }
