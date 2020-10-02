@@ -71,7 +71,7 @@ class CreatePageCommand extends Command with CreateMixin {
       'controller',
       path,
       true,
-      ControllerSample('', name, PubspecUtils.isServerProject),
+      ControllerSample('', name, isServer),
       'controllers',
     );
 
@@ -96,12 +96,8 @@ class CreatePageCommand extends Command with CreateMixin {
       'view',
       path,
       true,
-      GetViewSample(
-          '',
-          name.pascalCase + 'View',
-          name.pascalCase + 'Controller',
-          controllerDir,
-          PubspecUtils.isServerProject),
+      GetViewSample('', name.pascalCase + 'View',
+          name.pascalCase + 'Controller', controllerDir, isServer),
       'views',
     );
 

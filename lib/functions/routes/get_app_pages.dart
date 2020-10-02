@@ -52,14 +52,17 @@ Future<void> addAppPage(String name, String path) async {
   String import =
       "import 'package:${await PubspecUtils.getProjectName()}/$path";
 
+  // barra, pastanome, nome
+
   // String import = Directory(Structure.replaceAsExpected(
   //             path: Directory.current.path + '/lib/pages/'))
   //         .existsSync()
   //     ? 'pages'
   //     : 'modules';
   lines.insert(index, line);
-  lines.insert(0, import + "_binding.dart';");
-  lines.insert(0, import + "_view.dart';");
+
+  lines.insert(0, import + '/bindings/$name' "_binding.dart';");
+  lines.insert(0, import + '/views/$name' + "_view.dart';");
 
   await appPagesFile.writeAsStringSync(lines.join('\n'));
 }
