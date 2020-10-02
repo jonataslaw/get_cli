@@ -26,7 +26,6 @@ import 'package:get/get.dart'; ${await import}
 class $viewName extends $_controller {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text('$viewName'),

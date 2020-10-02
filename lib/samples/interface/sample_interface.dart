@@ -8,6 +8,6 @@ abstract class Sample {
   FutureOr<String> get content;
   Sample(this.path, {this.overwrite = false});
   Future<void> create() async {
-    return await writeFile(path, await content, overwrite: overwrite);
+    return writeFile(path, await content, overwrite: overwrite);
   }
 }
