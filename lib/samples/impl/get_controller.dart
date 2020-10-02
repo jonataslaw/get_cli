@@ -30,7 +30,7 @@ class ${fileName.pascalCase}Controller extends GetxController {
   @override
   void onClose() {}
 
-  increment() => count.value++;
+  void increment() => count.value++;
 }
 ''';
 }
