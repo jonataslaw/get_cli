@@ -77,7 +77,7 @@ class CreatePageCommand extends Command with CreateMixin {
 
     await handleFileCreate(
       name,
-      'view',
+      'binding',
       path,
       true,
       BindingSample(
