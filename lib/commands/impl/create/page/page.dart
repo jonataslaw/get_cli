@@ -62,7 +62,7 @@ class CreatePageCommand extends Command with CreateMixin {
       File(path).createSync(recursive: true);
     }
 
-    String controllerDir = path + 'controllers/$name' + '_controller.dart';
+    String controllerDir = path + '/controllers/$name' + '_controller.dart';
 
     bool isServer = PubspecUtils.isServerProject;
 
@@ -73,16 +73,6 @@ class CreatePageCommand extends Command with CreateMixin {
       true,
       ControllerSample('', name, PubspecUtils.isServerProject),
       'controllers',
-    );
-
-    await handleFileCreate(
-      name,
-      'view',
-      path,
-      true,
-      GetViewSample('', name.pascalCase + 'View', null, null,
-          PubspecUtils.isServerProject),
-      'views',
     );
 
     await handleFileCreate(
@@ -101,14 +91,19 @@ class CreatePageCommand extends Command with CreateMixin {
       'bindings',
     );
 
-    await GetViewSample(
-            _fileModel.path + 'views/$name' + '_view.dart',
-            name.pascalCase + 'View',
-            name.pascalCase + 'Controller',
-            controllerDir,
-            isServer,
-            overwrite: overwrite)
-        .create();
+    await handleFileCreate(
+      name,
+      'view',
+      path,
+      true,
+      GetViewSample(
+          '',
+          name.pascalCase + 'View',
+          name.pascalCase + 'Controller',
+          controllerDir,
+          PubspecUtils.isServerProject),
+      'views',
+    );
 
     await addRoute(name, path);
     LogService.success(name.pascalCase + ' page created successfully.');
