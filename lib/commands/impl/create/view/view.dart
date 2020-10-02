@@ -20,7 +20,7 @@ class CreateViewCommand extends Command with CreateMixin {
         name,
         'view',
         onCommand,
-        false,
+        true,
         GetViewSample(
           '',
           name.pascalCase + 'View',
