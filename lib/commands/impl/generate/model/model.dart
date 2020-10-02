@@ -33,7 +33,7 @@ class GenerateModelCommand extends Command with GenerateMixin {
       _fileModel = Structure.model(name, 'generate_model', true,
           on: on ?? 'models', folderName: 'models');
     } else {
-      _fileModel = Structure.model(name, 'generate_model', false,
+      _fileModel = Structure.model(name, 'generate_model', true,
           on: on, folderName: 'models');
     }
 
