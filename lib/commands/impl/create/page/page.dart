@@ -21,8 +21,9 @@ class CreatePageCommand extends Command with CreateMixin {
     if (GetCli.arguments[0] == 'create') {
       isProject = GetCli.arguments[1].split(':').first == 'project';
     }
-    FileModel _fileModel =
-        Structure.model(isProject ? 'home' : name, 'page', true, on: onCommand);
+    FileModel _fileModel = Structure.model(
+        isProject ? 'home' : name, 'page', true,
+        on: onCommand, folderName: isProject ? 'home' : name);
     if (File(_fileModel.path + '_view.dart').existsSync() ||
         File(_fileModel.path + '_binding.dart').existsSync() ||
         File(_fileModel.path + '_controller.dart').existsSync()) {
