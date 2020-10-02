@@ -30,7 +30,7 @@ class Structure {
   };
 
   static FileModel model(String name, String command, bool wrapperFolder,
-      {String on, String folderName}) {
+      {String on, @required String folderName}) {
     if (on != null) {
       Directory current = Directory('./lib');
       final list = current.listSync(recursive: true, followLinks: false);

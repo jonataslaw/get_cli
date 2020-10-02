@@ -54,22 +54,23 @@ class CreatePageCommand extends Command with CreateMixin {
     List<String> pathSplit = Structure.safeSplitPath(_fileModel.path);
     pathSplit.remove('.');
     pathSplit.remove('lib');
+    pathSplit.removeLast();
     String path = pathSplit.join('/');
     print(path);
 
-    String controllerDir = path + '_controller.dart';
+    String controllerDir = path + 'controllers/$name' + '_controller.dart';
 
     bool isServer = PubspecUtils.isServerProject;
 
     await ControllerSample(
-      _fileModel.path + '_controller.dart',
+      controllerDir,
       name,
       isServer,
       overwrite: overwrite,
     ).create();
 
     await BindingSample(
-      _fileModel.path + '_binding.dart',
+      _fileModel.path + 'bindings/$name' + '_binding.dart',
       name,
       name.pascalCase + 'Binding',
       controllerDir,
@@ -78,7 +79,7 @@ class CreatePageCommand extends Command with CreateMixin {
     ).create();
 
     await GetViewSample(
-            _fileModel.path + '_view.dart',
+            _fileModel.path + 'views/$name' + '_view.dart',
             name.pascalCase + 'View',
             name.pascalCase + 'Controller',
             controllerDir,
