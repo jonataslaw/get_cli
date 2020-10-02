@@ -30,10 +30,11 @@ class GenerateModelCommand extends Command with GenerateMixin {
     FileModel _fileModel;
     final classGenerator = ModelGenerator(name);
     if (findFolderByName('models') != null) {
-      _fileModel =
-          Structure.model(name, 'generate_model', true, on: on ?? 'models');
+      _fileModel = Structure.model(name, 'generate_model', true,
+          on: on ?? 'models', folderName: 'models');
     } else {
-      _fileModel = Structure.model(name, 'generate_model', false, on: on);
+      _fileModel = Structure.model(name, 'generate_model', false,
+          on: on, folderName: 'models');
     }
 
     DartCode dartCode = classGenerator.generateDartClasses(await _jsonRawData);

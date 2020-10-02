@@ -55,10 +55,8 @@ class CreatePageCommand extends Command with CreateMixin {
 
   Future<void> _writeFiles(List<String> pathSplit, String name,
       {bool overwrite = false}) async {
-    // List<String> pathSplit = Structure.safeSplitPath(_fileModel.path);
     pathSplit.remove('.');
     pathSplit.remove('lib');
-    //  pathSplit.removeLast();
     String path = pathSplit.join('/');
 
     String controllerDir = path + '/controllers/$name' + '_controller.dart';
