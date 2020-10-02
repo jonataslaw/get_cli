@@ -7,6 +7,7 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/core/generator.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/routes/get_add_route.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/get_binding.dart';
@@ -62,21 +63,40 @@ class CreatePageCommand extends Command with CreateMixin {
 
     bool isServer = PubspecUtils.isServerProject;
 
-    await ControllerSample(
-      controllerDir,
+    await handleFileCreate(
       name,
-      isServer,
-      overwrite: overwrite,
-    ).create();
+      'controller',
+      path,
+      true,
+      ControllerSample('', name, PubspecUtils.isServerProject),
+      'controllers',
+    );
 
-    await BindingSample(
-      _fileModel.path + 'bindings/$name' + '_binding.dart',
+    await handleFileCreate(
       name,
-      name.pascalCase + 'Binding',
-      controllerDir,
-      isServer,
-      overwrite: overwrite,
-    ).create();
+      'view',
+      path,
+      true,
+      GetViewSample('', name.pascalCase + 'View', null, null,
+          PubspecUtils.isServerProject),
+      'views',
+    );
+
+    await handleFileCreate(
+      name,
+      'view',
+      path,
+      true,
+      BindingSample(
+        '',
+        name,
+        name.pascalCase + 'Binding',
+        controllerDir,
+        isServer,
+        overwrite: overwrite,
+      ),
+      'bindings',
+    );
 
     await GetViewSample(
             _fileModel.path + 'views/$name' + '_view.dart',
