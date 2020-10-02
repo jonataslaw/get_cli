@@ -25,9 +25,12 @@ class CreatePageCommand extends Command with CreateMixin {
     FileModel _fileModel = Structure.model(
         isProject ? 'home' : name, 'page', true,
         on: onCommand, folderName: isProject ? 'home' : name);
-    if (File(_fileModel.path + '_view.dart').existsSync() ||
-        File(_fileModel.path + '_binding.dart').existsSync() ||
-        File(_fileModel.path + '_controller.dart').existsSync()) {
+
+    List<String> pathSplit = Structure.safeSplitPath(_fileModel.path);
+    pathSplit.removeLast();
+    String path = pathSplit.join('/');
+
+    if (File(path).existsSync()) {
       LogService.info(
           'The page [$name] already exists, do you want to overwrite it?');
       final menu = Menu(['Yes', 'No']);
@@ -37,6 +40,7 @@ class CreatePageCommand extends Command with CreateMixin {
             overwrite: true);
       }
     } else {
+      File(path).createSync(recursive: true);
       await _writeFiles(_fileModel, isProject ? 'home' : name,
           overwrite: false);
     }
@@ -57,11 +61,6 @@ class CreatePageCommand extends Command with CreateMixin {
     pathSplit.remove('lib');
     pathSplit.removeLast();
     String path = pathSplit.join('/');
-    print(path);
-    print(_fileModel.path);
-    if (!File(_fileModel.path).existsSync()) {
-      File(_fileModel.path).createSync(recursive: true);
-    }
 
     String controllerDir = path + '/controllers/$name' + '_controller.dart';
 
