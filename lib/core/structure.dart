@@ -50,8 +50,9 @@ class Structure {
         name: name,
         path: Structure.getPathWithName(
           contains.path,
-          folderName ?? ReCase(name).snakeCase,
+          ReCase(name).snakeCase,
           createWithWrappedFolder: wrapperFolder,
+          folderName: folderName,
         ),
         commandName: command,
       );
@@ -60,8 +61,9 @@ class Structure {
       name: name,
       path: Structure.getPathWithName(
         _paths[command],
-        folderName ?? ReCase(name).snakeCase,
+        ReCase(name).snakeCase,
         createWithWrappedFolder: wrapperFolder,
+        folderName: folderName,
       ),
       commandName: command,
     );
@@ -86,7 +88,7 @@ class Structure {
   }
 
   static String getPathWithName(String firstPath, String secondPath,
-      {bool createWithWrappedFolder = false}) {
+      {bool createWithWrappedFolder = false, @required String folderName}) {
     String betweenPaths;
     if (Platform.isWindows) {
       betweenPaths = '\\\\';
@@ -97,7 +99,7 @@ class Structure {
       if (createWithWrappedFolder) {
         return firstPath +
             betweenPaths +
-            secondPath +
+            folderName +
             betweenPaths +
             secondPath;
       } else {
