@@ -24,6 +24,7 @@ WARNING: This action is irreversible''');
       LogService.info('No files were overwritten');
       return false;
     }
+    await Directory('lib/').delete(recursive: true);
   }
   LogService.success('Main sample created successfully 👍');
   return true;

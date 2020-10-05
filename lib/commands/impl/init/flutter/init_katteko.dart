@@ -7,6 +7,7 @@ import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_list_directory.dart';
 import 'package:get_cli/functions/create/create_main.dart';
 import 'package:get_cli/samples/impl/arctekko/arc_main.dart';
+import 'package:get_cli/samples/impl/arctekko/config_example.dart';
 
 Future<void> createInitKatekko() async {
   bool canContinue = await createMain();
@@ -28,6 +29,7 @@ Future<void> createInitKatekko() async {
   await Future.wait([
     ArcMainSample().create(),
     CreateScreenCommand().execute(),
+    ConfigExampleSample().create(),
     createListDirectory(initialDirs),
   ]);
 
