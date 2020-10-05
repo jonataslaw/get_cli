@@ -1,3 +1,6 @@
+## [1.3.12]
+- Fix init
+
 ## [1.3.11]
 - Fix type on exception
 
