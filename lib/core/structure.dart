@@ -21,7 +21,7 @@ class Structure {
     'controller': replaceAsExpected(path: 'lib/app/controllers/'),
     'view': replaceAsExpected(path: 'lib/app/views/'),
     //artekko files
-    'screen': replaceAsExpected(path: 'lib/presentation/'),
+    'screen': replaceAsExpected(path: 'lib/presentation'),
     'navigation': replaceAsExpected(
         path: 'lib/infrastructure/navigation/navigation.dart'),
     //generator files
