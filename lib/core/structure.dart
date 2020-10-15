@@ -39,7 +39,8 @@ class Structure {
         if (element is File) {
           return false;
         }
-        return element.path.contains(on);
+        return element.path
+            .contains(replaceAsExpected(path: on).replaceAll('\\\\', '\\'));
       }, orElse: () {
         LogService.error('Folder $on not found');
         if (!Platform.isWindows) exit(0);
