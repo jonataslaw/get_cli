@@ -1,5 +1,5 @@
 ## [1.3.13]
-- Fix create page
+- Fix create page on GetxPattern on Windows
 
 ## [1.3.12]
 - Fix init
