@@ -51,6 +51,14 @@ get generate model on home from https://api.github.com/users/CpdnCristiano
 // To install a package in your project (dependencies):
 get install camera
 
+// To install several packages from your project:
+get install http path camera 
+
+// To install a package with specific version:
+get install path:1.6.4
+
+// You can also specify several packages with version numbers
+
 // To install a dev package in your project (dependencies_dev): 
 get install flutter_launcher_icons --dev
 
