@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:get_cli/get_cli.dart';
 import 'package:get_cli/samples/impl/generate_locales.dart';
 import 'package:path/path.dart';
@@ -74,6 +75,13 @@ class GenerateLocalesCommand extends Command {
       parsedLocales += '  static const $key = {\n';
       translationsKeys += '    \'$key\' : Locales.$key,\n';
       value.forEach((key, value) {
+        if (value.contains('\'')) {
+          value = value.replaceAll('\'', '\\\'');
+        }
+        if (RegExp(r'^[0-9]|[!@#<>?":`~;[\]\\|=+)(*&^%-\s]').hasMatch(key)) {
+          throw CliException(
+              'Special characters are not allowed in key. \n key: $key');
+        }
         parsedLocales += '   \'$key\': \'$value\',\n';
       });
       parsedLocales += '  };\n';
