@@ -1,5 +1,6 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
+/// [Sample] file from pubspec.yaml file creation.
 class GetServerPubspecSample extends Sample {
   String name;
   GetServerPubspecSample(this.name) : super('pubspec.yaml', overwrite: true);

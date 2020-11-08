@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
+/// [Sample] file from analysis_options.yaml file creation.
 class AnalysisOptionsSample extends Sample {
   AnalysisOptionsSample({String path = 'analysis_options.yaml'})
       : super(path, overwrite: true);

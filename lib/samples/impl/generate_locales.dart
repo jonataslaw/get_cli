@@ -1,10 +1,10 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
 class GenerateLocalesSample extends Sample {
-  String translationsKeys;
-  String keys;
-  String locales;
-  GenerateLocalesSample(this.keys, this.locales, this.translationsKeys)
+  final String _translationsKeys;
+  final String _keys;
+  final String _locales;
+  GenerateLocalesSample(this._keys, this._locales, this._translationsKeys)
       : super('lib/generated/locales.g.dart', overwrite: true);
 
   @override
@@ -14,16 +14,16 @@ class GenerateLocalesSample extends Sample {
 abstract class AppTranslation {
 
   static Map<String, Map<String, String>> translations = {
-$translationsKeys
+$_translationsKeys
   };
 
 }
 abstract class LocaleKeys {
-$keys
+$_keys
 }
 
 abstract class Locales {
-  $locales
+  $_locales
 }
 ''';
 }

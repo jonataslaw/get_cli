@@ -1,5 +1,6 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
+/// [Sample] file from [app_routes] file creation.
 class RouteSample extends Sample {
   RouteSample({String path = 'lib/app/routes/app_routes.dart'}) : super(path);
   @override

@@ -14,7 +14,7 @@ class CreateControllerCommand extends Command with CreateMixin {
   }
 
   @override
-  Future<void> execute() async { 
+  Future<void> execute() async {
     await handleFileCreate(
       name,
       'controller',

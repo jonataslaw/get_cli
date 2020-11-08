@@ -1,3 +1,6 @@
+## [1.3.14]
+- Fix single quotes on translations
+
 ## [1.3.13]
 - Fix create page on GetxPattern on Windows
 

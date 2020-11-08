@@ -1,5 +1,6 @@
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
+/// [Sample] file from [app_pages] file creation.
 class AppPagesSample extends Sample {
   String initial;
   String import;
@@ -9,7 +10,7 @@ class AppPagesSample extends Sample {
       this.initial = 'HOME'})
       : super(path);
 
-  String get _initial =>
+  String get _initialRoute =>
       initial != null ? '\nstatic const INITIAL = Routes.$initial;' : '';
 
   @override
@@ -17,7 +18,7 @@ class AppPagesSample extends Sample {
 part 'app_routes.dart';
 
 class AppPages {
-  $_initial
+  $_initialRoute
 
   static final routes = [
   ];
