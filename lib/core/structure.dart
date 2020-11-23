@@ -32,20 +32,29 @@ class Structure {
   static FileModel model(String name, String command, bool wrapperFolder,
       {String on, String folderName}) {
     if (on != null) {
+      on = replaceAsExpected(path: on).replaceAll('\\\\', '\\');
       Directory current = Directory('./lib');
       final list = current.listSync(recursive: true, followLinks: false);
       final contains = list.firstWhere((element) {
-        //Fix erro ao encontrar arquivo com nome
         if (element is File) {
           return false;
         }
-        return element.path
-            .contains(replaceAsExpected(path: on).replaceAll('\\\\', '\\'));
+
+        return '${element.path}/'.contains('$on/');
       }, orElse: () {
-        LogService.error('Folder $on not found');
-        if (!Platform.isWindows) exit(0);
-        return;
+        return list.firstWhere((element) {
+          //Fix erro ao encontrar arquivo com nome
+          if (element is File) {
+            return false;
+          }
+          return element.path.contains(on);
+        }, orElse: () {
+          LogService.error('Folder $on not found');
+          if (!Platform.isWindows) exit(0);
+          return;
+        });
       });
+      print(contains);
 
       return FileModel(
         name: name,
