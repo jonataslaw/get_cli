@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cli_menu/cli_menu.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
@@ -16,11 +17,21 @@ class PubspecUtils {
         ?.trim();
   }
 
-  static void addDependencies(String package,
+  static Future<bool> addDependencies(String package,
       {String version, bool isDev = false, bool runPubGet = true}) async {
     var lines = _pubspec.readAsLinesSync();
-    // Adicione aqui tambem para não instalar uma dependência 2 vezes.
-    lines.removeWhere((element) => element.split(':').first.trim() == package);
+    if (containsPackage(package)) {
+      print('package already installed, do you want to update?');
+      final menu = Menu([
+        'Yes, update the package',
+        'No!',
+      ]);
+      final result = menu.choose();
+      if (result.index != 0) {
+        return false;
+      }
+    }
+    lines.removeWhere((element) => element.startsWith('  $package:'));
     var index = isDev
         ? lines.indexWhere((element) => element.trim() == 'dev_dependencies:')
         : lines.indexWhere((element) => element.trim() == 'dependencies:');
@@ -28,23 +39,33 @@ class PubspecUtils {
     version = version == null || version.isEmpty
         ? await PubDevApi.getLatestVersionFromPackage(package)
         : '^$version';
-    if (version == null) return;
+    if (version == null) return false;
     lines.insert(index, '  $package: $version');
     await _pubspec.writeAsStringSync(lines.join('\n'));
     if (runPubGet) await ShellUtils.pubGet();
     LogService.success('Package: $package installed!');
+    return true;
   }
 
   static void removeDependencies(String package) async {
     LogService.info('Removing package: "$package"');
 
     var lines = _pubspec.readAsLinesSync();
-    /* I changed the method so that it would not give an error 
-      if the dependency was not found
-    */
-    lines.removeWhere((element) => element.split(':').first.trim() == package);
-    await _pubspec.writeAsStringSync(lines.join('\n'));
-    LogService.success('Package: "$package" removed!');
+    if (containsPackage(package)) {
+      lines.removeWhere((element) => element.startsWith('  $package:'));
+      await _pubspec.writeAsStringSync(lines.join('\n'));
+      LogService.success('Package: "$package" removed!');
+    } else {
+      LogService.info(
+          'Package: "$package" is not installed in this application');
+    }
+  }
+
+  static bool containsPackage(String package) {
+    var lines = _pubspec.readAsLinesSync();
+
+    int i = lines.indexWhere((element) => element.startsWith('  $package:'));
+    return i != -1;
   }
 
   static bool get isServerProject {

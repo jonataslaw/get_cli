@@ -11,15 +11,16 @@ class InstallCommand extends Command {
     List<String> args = List.from(GetCli.arguments);
     args.removeAt(0);
     var isDev = args.contains('--dev');
+    var runPubGet = true;
 
     if (args.length == 1) {
       var packageInfo = args.first.split(':');
       LogService.info('Installing package "${packageInfo.first}" …');
       if (packageInfo.length == 1) {
-        await PubspecUtils.addDependencies(packageInfo.first,
+        runPubGet = await PubspecUtils.addDependencies(packageInfo.first,
             isDev: isDev, runPubGet: false);
       } else {
-        await PubspecUtils.addDependencies(packageInfo.first,
+        runPubGet = await PubspecUtils.addDependencies(packageInfo.first,
             version: packageInfo[1], isDev: isDev, runPubGet: false);
       }
     } else {
@@ -35,7 +36,7 @@ class InstallCommand extends Command {
         }
       }
     }
-    await ShellUtils.pubGet();
+    if (runPubGet) await ShellUtils.pubGet();
   }
 
   @override
