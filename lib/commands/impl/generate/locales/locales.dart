@@ -1,29 +1,28 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:get_cli/get_cli.dart';
+import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/generate_locales.dart';
 import 'package:path/path.dart';
 
-class GenerateLocalesCommand extends Command {
+class GenerateLocalesCommand extends Command with ArgsMixin {
   @override
   String get hint => 'Generate a localization file';
 
   @override
   bool validate() {
-    final isValid = GetCli.arguments.length > 2;
-    if (!isValid) {
-      LogService.error('you need to provide a locales input files dirname.');
-    }
-    return isValid;
+    return true;
   }
 
   @override
   Future<void> execute() async {
-    final inputPath = GetCli.arguments[2];
+    final inputPath = args.length >= 3 ? GetCli.arguments[2] : 'assets/locales';
 
     if (!await Directory(inputPath).exists()) {
       LogService.error('${inputPath} directory does not exist.');
@@ -67,13 +66,13 @@ class GenerateLocalesCommand extends Command {
     });
 
     final parsedKeys =
-        keys.map((e) => '  static const $e = \'$e\';').join('\n');
+        keys.map((e) => '\tstatic const $e = \'$e\';').join('\n');
 
-    var parsedLocales = '\n';
-    var translationsKeys = '';
+    final parsedLocales = StringBuffer('\n');
+    final translationsKeys = StringBuffer();
     locales.forEach((key, value) {
-      parsedLocales += '  static const $key = {\n';
-      translationsKeys += '    \'$key\' : Locales.$key,\n';
+      parsedLocales.writeln('\tstatic const $key = {');
+      translationsKeys.writeln('\t\t\'$key\' : Locales.$key,');
       value.forEach((key, value) {
         if (value.contains('\'')) {
           value = value.replaceAll('\'', '\\\'');
@@ -82,21 +81,18 @@ class GenerateLocalesCommand extends Command {
           throw CliException(
               'Special characters are not allowed in key. \n key: $key');
         }
-        parsedLocales += '   \'$key\': \'$value\',\n';
+        parsedLocales.writeln('\t\t\'$key\': \'$value\',');
       });
-      parsedLocales += '  };\n';
+      parsedLocales.writeln('\t};');
     });
 
-    try {
-      await GenerateLocalesSample(parsedKeys, parsedLocales, translationsKeys)
-          .create();
-    } catch (e) {
-      LogService.error('''
-❌ Error! localization file is not created.
-$e
-''');
-      return;
-    }
+    FileModel _fileModel =
+        Structure.model('locales', 'generate_locales', false, on: onCommand);
+
+    await GenerateLocalesSample(
+            parsedKeys, parsedLocales.toString(), translationsKeys.toString(),
+            path: _fileModel.path + '.g.dart')
+        .create();
 
     LogService.success('locale files generated successfully.');
   }

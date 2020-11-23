@@ -25,7 +25,7 @@ class Structure {
     'navigation': replaceAsExpected(
         path: 'lib/infrastructure/navigation/navigation.dart'),
     //generator files
-    'generate_locales': replaceAsExpected(path: 'lib/generated/'),
+    'generate_locales': replaceAsExpected(path: 'lib/generated'),
     'generate_model': replaceAsExpected(path: 'lib/generated/models/'),
   };
 

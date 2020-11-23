@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
-import 'package:get_cli/commands/impl/generate/generate.dart';
+import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/json_serialize/model_generator.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -13,7 +13,7 @@ import 'package:http/http.dart';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 
-class GenerateModelCommand extends Command with GenerateMixin {
+class GenerateModelCommand extends Command with ArgsMixin {
   @override
   Future<void> execute() async {
     String name = basenameWithoutExtension(withArgument ?? '').pascalCase;
@@ -31,10 +31,10 @@ class GenerateModelCommand extends Command with GenerateMixin {
     final classGenerator = ModelGenerator(name);
     if (findFolderByName('models') != null) {
       _fileModel = Structure.model(name, 'generate_model', true,
-          on: on ?? 'models', folderName: 'models');
+          on: onCommand ?? 'models', folderName: 'models');
     } else {
       _fileModel = Structure.model(name, 'generate_model', true,
-          on: on, folderName: 'models');
+          on: onCommand, folderName: 'models');
     }
 
     DartCode dartCode = classGenerator.generateDartClasses(await _jsonRawData);

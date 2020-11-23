@@ -4,8 +4,9 @@ class GenerateLocalesSample extends Sample {
   final String _translationsKeys;
   final String _keys;
   final String _locales;
-  GenerateLocalesSample(this._keys, this._locales, this._translationsKeys)
-      : super('lib/generated/locales.g.dart', overwrite: true);
+  GenerateLocalesSample(this._keys, this._locales, this._translationsKeys,
+      {String path = 'lib/generated/locales.g.dart'})
+      : super(path, overwrite: true);
 
   @override
   Future<String> get content async => '''
@@ -13,17 +14,18 @@ class GenerateLocalesSample extends Sample {
 
 abstract class AppTranslation {
 
-  static Map<String, Map<String, String>> translations = {
+\tstatic Map<String, Map<String, String>> translations = {
 $_translationsKeys
-  };
+\t};
 
 }
+
 abstract class LocaleKeys {
 $_keys
 }
 
 abstract class Locales {
-  $_locales
+\t$_locales
 }
 ''';
 }

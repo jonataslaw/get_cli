@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
 import 'package:cli_menu/cli_menu.dart';
-import 'package:get_cli/commands/impl/create/create.dart';
+import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/impl/init/flutter/init.dart';
 import 'package:get_cli/commands/impl/init/get_server/get_server_command.dart';
 import 'package:get_cli/commands/interface/command.dart';
@@ -10,7 +10,7 @@ import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:recase/recase.dart';
 
-class CreateProjectCommand extends Command with CreateMixin {
+class CreateProjectCommand extends Command with ArgsMixin {
   @override
   Future<void> execute() async {
     final menu = Menu([

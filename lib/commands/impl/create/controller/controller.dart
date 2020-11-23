@@ -1,10 +1,10 @@
-import 'package:get_cli/commands/impl/create/create.dart';
+import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/samples/impl/get_controller.dart';
 
-class CreateControllerCommand extends Command with CreateMixin {
+class CreateControllerCommand extends Command with ArgsMixin {
   @override
   String get hint => 'generate controller';
 

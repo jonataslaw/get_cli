@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:cli_menu/cli_menu.dart';
-import 'package:get_cli/commands/impl/create/create.dart';
+import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
@@ -15,7 +15,7 @@ import 'package:get_cli/samples/impl/get_controller.dart';
 import 'package:get_cli/samples/impl/get_view.dart';
 import 'package:recase/recase.dart';
 
-class CreatePageCommand extends Command with CreateMixin {
+class CreatePageCommand extends Command with ArgsMixin {
   @override
   Future<void> execute() async {
     bool isProject = false;
