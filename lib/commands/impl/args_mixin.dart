@@ -6,18 +6,18 @@ mixin ArgsMixin {
 
   String get onCommand {
     int onIndex = _getIndexArg('on');
-    return onIndex != -1 ? _args[onIndex + 1] : null;
+    return onIndex != -1 ? _args[onIndex + 1] : '';
   }
 
   String get withArgument {
     int withIndex = _getIndexArg('with');
-    return withIndex != -1 ? _args[withIndex + 1] : null;
+    return withIndex != -1 ? _args[withIndex + 1] : '';
   }
 
   String get fromArgument {
     int fromIndex = _getIndexArg('from');
 
-    return fromIndex != -1 ? _args[fromIndex + 1] : null;
+    return fromIndex != -1 ? _args[fromIndex + 1] : '';
   }
 
   String get name {

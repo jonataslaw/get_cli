@@ -10,14 +10,14 @@ import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/find_file/find_folder_by_directory.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:http/http.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
 class GenerateModelCommand extends Command with ArgsMixin {
   @override
   Future<void> execute() async {
-    String name = basenameWithoutExtension(withArgument ?? '').pascalCase;
-    if (withArgument == null) {
+    String name = p.basenameWithoutExtension(withArgument).pascalCase;
+    if (withArgument.isEmpty) {
       final dialog = CLI_Dialog(questions: [
         [
           'Could not set the model name automatically, which name do you want to use?',
@@ -27,8 +27,10 @@ class GenerateModelCommand extends Command with ArgsMixin {
       String result = dialog.ask()['name'];
       name = result.pascalCase;
     }
+
     FileModel _fileModel;
     final classGenerator = ModelGenerator(name);
+
     if (findFolderByName('models') != null) {
       _fileModel = Structure.model(name, 'generate_model', true,
           on: onCommand ?? 'models', folderName: 'models');
@@ -50,8 +52,8 @@ class GenerateModelCommand extends Command with ArgsMixin {
 
   @override
   bool validate() {
-    if ((withArgument == null || extension(withArgument) != '.json') &&
-        fromArgument == null) {
+    if ((withArgument.isEmpty || p.extension(withArgument) != '.json') &&
+        fromArgument.isEmpty) {
       LogService.error('Enter a path to json file');
 
       LogService.info(
