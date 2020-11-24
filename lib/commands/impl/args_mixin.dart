@@ -29,6 +29,10 @@ mixin ArgsMixin {
           : _args[1].split(':')[1];
     }
   }
+
+  bool containsArg(String flag) {
+    return _args.contains(flag);
+  }
 }
 List<String> _getArgs() {
   var args = List.of(GetCli.arguments);

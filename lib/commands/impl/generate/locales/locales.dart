@@ -43,7 +43,7 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
     for (var file in files) {
       try {
         final map = jsonDecode(await File(file.path).readAsString());
-        final localeKey = basename(file.path).split('.').first;
+        final localeKey = basenameWithoutExtension(file.path);
         maps[localeKey] = map;
       } catch (e) {
         LogService.error('${file.path} is not a valid json file\n$e');

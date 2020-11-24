@@ -1,3 +1,4 @@
+import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
@@ -5,12 +6,12 @@ import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/core/generator.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 
-class InstallCommand extends Command {
+class InstallCommand extends Command with ArgsMixin {
   @override
   Future<void> execute() async {
     List<String> args = List.from(GetCli.arguments);
     args.removeAt(0);
-    var isDev = args.contains('--dev');
+    var isDev = containsArg('--dev');
     var runPubGet = true;
 
     if (args.length == 1) {
