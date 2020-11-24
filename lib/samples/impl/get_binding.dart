@@ -20,7 +20,7 @@ class BindingSample extends Sample {
 
   @override
   Future<String> get content async => '''$_import
-import 'package:${await PubspecUtils.getProjectName()}/$_controllerDir';
+import 'package:${PubspecUtils.getProjectName()}/$_controllerDir';
 
 class $_bindingName extends Bindings {
   @override

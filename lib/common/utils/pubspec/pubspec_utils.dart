@@ -8,7 +8,7 @@ import 'package:get_cli/common/utils/shell/shel.utils.dart';
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');
 
-  static Future<String> getProjectName() async {
+  static String getProjectName() {
     var lines = _pubspec.readAsLinesSync();
     return lines
         .firstWhere((line) => line.startsWith('name:'), orElse: () => null)

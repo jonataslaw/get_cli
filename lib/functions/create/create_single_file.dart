@@ -17,6 +17,7 @@ Future handleFileCreate(String name, String command, String on,
   await sample.create();
   print(
       'File "${fileModel.name}" created successfully at path: ${fileModel.path}');
+  return sample.path;
 }
 
 Future<void> writeFile(String path, String content,

@@ -54,7 +54,6 @@ class Structure {
           return;
         });
       });
-      print(contains);
 
       return FileModel(
         name: name,
