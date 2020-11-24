@@ -2,6 +2,7 @@
 - improving command install issue #35 by @rustiever
 - improving argument on issue #23 by @maares
 - improving locales command generation problems reported on [Discord](https://discord.gg/YC3SmUpN6E)
+- Improving create controller command, now automatically add to bindings
 
 ## [1.3.14]
 - Fix single quotes on translations
