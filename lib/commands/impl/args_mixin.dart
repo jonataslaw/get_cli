@@ -36,7 +36,7 @@ mixin ArgsMixin {
 }
 List<String> _getArgs() {
   var args = List.of(GetCli.arguments);
-  var defaultArgs = ['on', 'home', 'from'];
+  var defaultArgs = ['on', 'home', 'from', 'with'];
   defaultArgs.forEach((arg) {
     int indexArg = args.indexWhere((element) => (element == arg));
     if (indexArg != -1) {
