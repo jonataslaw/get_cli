@@ -34,6 +34,9 @@ get create controller:dialogcontroller on home
 // and insert your view there.
 get create view:dialogview on home
 
+// To create a new provider in a specific folder:
+get create provider:user on home
+
 // To generate a localization file:
 // Note: 'assets/locales' directory with your translation files in json format
 get generate locales assets/locales
@@ -44,6 +47,9 @@ get generate locales assets/locales
 // Getx will automatically search for the home folder
 // and insert your view there.
 get generate model on home with assets/models/user.json
+
+//to generate the model without the provider
+get generate model on home with assets/models/user.json --skipProvider
 
 //Note: the URL must return a json format
 get generate model on home from https://api.github.com/users/CpdnCristiano
