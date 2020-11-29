@@ -17,7 +17,7 @@ class Structure {
     'init': replaceAsExpected(path: 'lib/'),
     'route': replaceAsExpected(path: 'lib/routes/'),
     'repository': replaceAsExpected(path: 'lib/data/repositories/'),
-    'provider': replaceAsExpected(path: 'lib/data/providers/'),
+    'provider': replaceAsExpected(path: 'lib/app/data/providers'),
     'controller': replaceAsExpected(path: 'lib/app/controllers/'),
     'view': replaceAsExpected(path: 'lib/app/views/'),
     //artekko files
