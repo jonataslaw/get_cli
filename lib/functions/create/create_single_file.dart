@@ -11,7 +11,7 @@ Future handleFileCreate(String name, String command, String on,
     bool extraFolder, Sample sample, String folderName) async {
   final fileModel = Structure.model(name, command, extraFolder,
       on: on, folderName: folderName);
-
+  print(fileModel.path);
   String path = fileModel.path + '_${fileModel.commandName}.dart';
   sample.path = path;
   await sample.create();

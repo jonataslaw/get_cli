@@ -11,3 +11,4 @@ export 'init/flutter/init.dart';
 export 'install/install.dart';
 export 'remove/remove.dart';
 export 'update/update.dart';
+export 'create/provider/provider.dart';

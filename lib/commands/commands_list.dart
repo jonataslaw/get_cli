@@ -5,6 +5,7 @@ final commands = {
     'controller': () => CreateControllerCommand(),
     'page': () => CreatePageCommand(),
     'project': () => CreateProjectCommand(),
+    'provider': () => CreateProviderCommand(),
     'screen': () => CreateScreenCommand(),
     'view': () => CreateViewCommand(),
   },

@@ -31,7 +31,7 @@ class Structure {
 
   static FileModel model(String name, String command, bool wrapperFolder,
       {String on, String folderName}) {
-    if (on != null) {
+    if (on != null && on != '') {
       on = replaceAsExpected(path: on).replaceAll('\\\\', '\\');
       Directory current = Directory('./lib');
       final list = current.listSync(recursive: true, followLinks: false);
