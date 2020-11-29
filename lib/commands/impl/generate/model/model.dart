@@ -9,6 +9,7 @@ import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/find_file/find_folder_by_directory.dart';
 import 'package:get_cli/models/file_model.dart';
+import 'package:get_cli/samples/impl/get_provider.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
@@ -32,19 +33,35 @@ class GenerateModelCommand extends Command with ArgsMixin {
     final classGenerator = ModelGenerator(name);
 
     if (findFolderByName('models') != null) {
-      _fileModel = Structure.model(name, 'generate_model', true,
-          on: onCommand ?? 'models', folderName: 'models');
+      _fileModel = Structure.model(name, 'generate_model', onCommand != '',
+          on: onCommand != '' ? onCommand : 'models', folderName: 'models');
     } else {
-      _fileModel = Structure.model(name, 'generate_model', true,
-          on: onCommand, folderName: 'models');
+      _fileModel =
+          Structure.model(name, 'generate_model', false, on: onCommand);
     }
 
     DartCode dartCode = classGenerator.generateDartClasses(await _jsonRawData);
 
-    await writeFile(_fileModel.path + '_model.dart', dartCode.result,
-        overwrite: true);
+    String modelPath = _fileModel.path + '_model.dart';
+    await writeFile(modelPath, dartCode.result, overwrite: true);
     dartCode.warnings.forEach((warning) =>
         LogService.info('warning: ${warning.path} ${warning.warning} '));
+    if (!containsArg('--skipProvider')) {
+      List<String> pathSplit = Structure.safeSplitPath(modelPath);
+      pathSplit.removeWhere((element) => element == '.' || element == 'lib');
+      await handleFileCreate(
+        name,
+        'provider',
+        onCommand,
+        onCommand != '',
+        ProviderSample(
+          name,
+          createEndpoints: true,
+          modelPath: pathSplit.join('/'),
+        ),
+        'providers',
+      );
+    }
   }
 
   @override
