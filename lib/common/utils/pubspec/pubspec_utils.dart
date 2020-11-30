@@ -4,6 +4,8 @@ import 'package:cli_menu/cli_menu.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:version/version.dart';
 
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');
@@ -88,4 +90,16 @@ class PubspecUtils {
   static String get getPackageImport => !isServerProject
       ? "import 'package:get/get.dart';"
       : "import 'package:get_server/get_server.dart';";
+
+  static Version getPackageVersion(String package) {
+    var lines = _pubspec.readAsLinesSync();
+    int index =
+        lines.indexWhere((element) => element.startsWith('  $package:'));
+    if (index != -1) {
+      Version version = Version.parse(lines[index].split(':').last.trim());
+      return version;
+    } else {
+      throw CliException('$package is not installed in your project');
+    }
+  }
 }
