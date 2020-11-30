@@ -17,7 +17,7 @@ Future<void> addRoute(String nameRoute, String path) async {
   List<String> pathSplit = path.split('/');
   pathSplit.removeLast();
   pathSplit.removeWhere((element) => element == 'app' || element == 'modules');
-  bool supportChildren = Version.parse('3.21.1')
+  bool supportChildren = Version.parse('3.21.0')
           .compareTo(PubspecUtils.getPackageVersion('get')) <=
       0;
   if (supportChildren) {

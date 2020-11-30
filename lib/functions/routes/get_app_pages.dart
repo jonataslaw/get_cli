@@ -43,7 +43,7 @@ Future<void> addAppPage(String name, String path) async {
     lines.insert(index, '\t];');
   }
 
-  bool supportChildren = Version.parse('3.21.1')
+  bool supportChildren = Version.parse('3.21.0')
           .compareTo(PubspecUtils.getPackageVersion('get')) <=
       0;
   int tabEspaces = 2;
