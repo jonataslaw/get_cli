@@ -12,9 +12,19 @@ Future<void> addRoute(String nameRoute, String path) async {
     await RouteSample().create();
     routesFile = File(RouteSample().path);
   }
-  List<String> lines = await routesFile.readAsLines();
+  List<String> pathSplit = path.split('/');
+  pathSplit.removeLast();
+  pathSplit.removeWhere((element) => element == 'app' || element == 'modules');
+  pathSplit.add(nameRoute);
+  for (var i = 0; i < pathSplit.length; i++) {
+    pathSplit[i] =
+        pathSplit[i].snakeCase.snakeCase.toLowerCase().replaceAll('_', '-');
+  }
+  print(pathSplit);
+  String route = pathSplit.join('/');
+  List<String> lines = routesFile.readAsLinesSync();
   String line =
-      '  static const ${nameRoute.snakeCase.toUpperCase()} = \'/${nameRoute.snakeCase.toLowerCase().replaceAll('_', '-')}\';';
+      "\tstatic const ${nameRoute.snakeCase.toUpperCase()} = '/$route';";
   if (lines.contains(line)) {
     return;
   }
