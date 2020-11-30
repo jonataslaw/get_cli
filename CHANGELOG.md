@@ -1,3 +1,5 @@
+## [1.3.16]
+- improved route creation with support for children pages [learn more here](https://github.com/jonataslaw/getx/blob/master/CHANGELOG.md#3210---big-update)
 ## [1.3.15]
 - improving command install issue #35 by @rustiever
 - improving argument on issue #23 by @maares
