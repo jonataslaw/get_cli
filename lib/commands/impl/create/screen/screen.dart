@@ -41,7 +41,6 @@ class CreateScreenCommand extends Command with ArgsMixin {
         'lib/infrastructure/navigation/bindings/controllers/${name.snakeCase}.controller.binding.dart';
 
     bool isServer = PubspecUtils.isServerProject;
-    print(_fileModel.path);
 
     await GetViewSample(screenDir, '${name.pascalCase}Screen',
             '${name.pascalCase}Controller', controllerImport, isServer)
