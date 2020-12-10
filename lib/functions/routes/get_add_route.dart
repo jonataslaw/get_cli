@@ -10,7 +10,7 @@ import 'package:version/version.dart';
 
 Future<void> addRoute(String nameRoute, String path) async {
   File routesFile = findFileByName('app_routes.dart');
-  if (routesFile == null) {
+  if (routesFile.path.isEmpty) {
     await RouteSample().create();
     routesFile = File(RouteSample().path);
   }

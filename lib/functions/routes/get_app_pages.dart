@@ -9,7 +9,7 @@ import 'package:version/version.dart';
 
 Future<void> addAppPage(String name, String path) async {
   File appPagesFile = findFileByName('app_pages.dart');
-  if (appPagesFile == null) {
+  if (appPagesFile.path.isEmpty) {
     await AppPagesSample().create();
     appPagesFile = File(AppPagesSample().path);
   }
