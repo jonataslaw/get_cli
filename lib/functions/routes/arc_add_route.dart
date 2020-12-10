@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_navigation.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
 import 'package:get_cli/samples/impl/arctekko/arc_routes.dart';
 import 'package:recase/recase.dart';
 
@@ -11,32 +13,24 @@ Future<void> arcAddRoute(String nameRoute) async {
       path: 'lib/infrastructure/navigation/routes.dart'));
   if (!await routesFile.exists()) {
     await ArcRouteSample(nameRoute.snakeCase.toUpperCase()).create();
-    //await createRoute(isArc: true, initial: nameRoute.snakeCase.toUpperCase());
+  } else {
+    formatterDartFile(routesFile);
   }
   List<String> lines = await routesFile.readAsLines();
   String line =
-      '  static const ${nameRoute.snakeCase.toUpperCase()} = \'/${nameRoute.snakeCase.toLowerCase().replaceAll('_', '-')}\';';
+      'static const ${nameRoute.snakeCase.toUpperCase()} = \'/${nameRoute.snakeCase.toLowerCase().replaceAll('_', '-')}\';';
   if (lines.contains(line)) {
     return;
   }
   while (lines.last.isEmpty) {
-    /* remover as linhas em branco no final do arquivo 
-    gerada pelo o visual studio e outras ide
-    */
     lines.removeLast();
-  }
-// Caso a útima linha seja uma rota exemplo:  static const HOME = '/HOME';}
-// diferente do esperado
-  if (lines.last.trim() != '}') {
-    lines.last = lines.last.replaceAll('}', '');
-    lines.add('}');
   }
 
   lines.add(line);
 
   _routesSort(lines);
 
-  await routesFile.writeAsStringSync(lines.join('\n'));
+  await writeFile(routesFile.path, lines.join('\n'), overwrite: true);
   LogService.success('${nameRoute} route created successfully.');
   await addNavigation(nameRoute);
 }

@@ -22,7 +22,8 @@ abstract class Sample {
 
   /// This function will create the file in [path] with the
   /// content of [content].
-  Future<void> create() async {
-    return writeFile(path, await content, overwrite: overwrite);
+  Future<void> create({bool skipFormatter = false}) async {
+    return writeFile(path, await content,
+        overwrite: overwrite, skipFormatter: skipFormatter);
   }
 }

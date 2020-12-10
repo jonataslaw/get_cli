@@ -2,52 +2,32 @@ import 'dart:io';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/find_file/find_file_by_name.dart';
+import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
+import 'package:get_cli/functions/routes/get_support_children.dart';
 import 'package:get_cli/samples/impl/get_app_pages.dart';
 import 'package:recase/recase.dart';
-import 'package:version/version.dart';
 
 Future<void> addAppPage(String name, String path) async {
   File appPagesFile = findFileByName('app_pages.dart');
   if (appPagesFile.path.isEmpty) {
-    await AppPagesSample().create();
+    await AppPagesSample().create(skipFormatter: true);
     appPagesFile = File(AppPagesSample().path);
+  } else {
+    formatterDartFile(appPagesFile);
   }
+
   var lines = await appPagesFile.readAsLinesSync();
-
-  while (lines.last.isEmpty) {
-    lines.removeLast();
-  }
-
-  /* 
-  Verificar se as utimas linha segue o padrão esperado.
-  exemplo: 
-        ), // finalizar o getPage 
-      ]; // finalizar o array de pages
-    } // finaliza a classe
-
-    exemplos de fora do padrão:
-    ),];} // tudo na mesma linha
-  */
-  if (lines.last.trim() != '}') {
-    lines.last = lines.last.replaceAll('}', '');
-    lines.add('}');
-  }
+  String routesOrPath = 'Routes';
   int indexRoutes = lines
       .indexWhere((element) => element.trim().contains('static final routes'));
   int index =
       lines.indexWhere((element) => element.contains('];'), indexRoutes);
-  if (lines[index].trim() != '];') {
-    lines[index] = lines[index].replaceAll('];', '');
-    index++;
-    lines.insert(index, '\t];');
-  }
 
-  bool supportChildren = Version.parse('3.21.0')
-          .compareTo(PubspecUtils.getPackageVersion('get')) <=
-      0;
   int tabEspaces = 2;
-  if (supportChildren) {
+  if (supportChildrenRoutes) {
+    routesOrPath = '_Paths';
     List<String> pathSplit = path.split('/');
     pathSplit.removeLast();
     pathSplit
@@ -56,7 +36,7 @@ Future<void> addAppPage(String name, String path) async {
     while (pathSplit.isNotEmpty && onPageIndex == -1) {
       onPageIndex = lines.indexWhere(
           (element) => element
-              .contains('Routes.${pathSplit.last.snakeCase.toUpperCase()}'),
+              .contains('_Paths.${pathSplit.last.snakeCase.toUpperCase()}'),
           indexRoutes);
     }
     if (onPageIndex != -1) {
@@ -107,7 +87,7 @@ Future<void> addAppPage(String name, String path) async {
   String nameSnakeCase = name.snakeCase;
   String namePascalCase = name.pascalCase;
   String line = '''${_getTabs(tabEspaces)}GetPage(
-${_getTabs(tabEspaces + 1)}name: Routes.${nameSnakeCase.toUpperCase()}, 
+${_getTabs(tabEspaces + 1)}name: $routesOrPath.${nameSnakeCase.toUpperCase()}, 
 ${_getTabs(tabEspaces + 1)}page:()=> ${namePascalCase}View(), 
 ${_getTabs(tabEspaces + 1)}binding: ${namePascalCase}Binding(),
 ${_getTabs(tabEspaces)}),''';
@@ -120,7 +100,7 @@ ${_getTabs(tabEspaces)}),''';
   lines.insert(0, import + '/bindings/$name' "_binding.dart';");
   lines.insert(0, import + '/views/$name' + "_view.dart';");
 
-  await appPagesFile.writeAsStringSync(lines.join('\n'));
+  await writeFile(appPagesFile.path, lines.join('\n'), overwrite: true);
 }
 
 String _getTabs(int tabEspaces) {

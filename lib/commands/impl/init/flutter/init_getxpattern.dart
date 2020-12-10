@@ -17,17 +17,11 @@ Future<void> createInitGetxPattern() async {
 
   bool isServerProject = PubspecUtils.isServerProject;
 
-  final import = !isServerProject
-      ? "import 'package:get/get.dart';"
-      : "import 'package:get_server/get_server.dart';";
-
   List<Directory> initialDirs = [
     Directory(Structure.replaceAsExpected(path: 'lib/app/data/')),
   ];
   await Future.wait([
     GetXMainSample(isServer: isServerProject).create(),
-    RouteSample().create(),
-    AppPagesSample(import: import).create(),
     CreatePageCommand().execute(),
     createListDirectory(initialDirs),
   ]);

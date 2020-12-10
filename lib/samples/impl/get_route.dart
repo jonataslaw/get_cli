@@ -11,5 +11,9 @@ abstract class Routes{
 
 }
 
+abstract class _Paths {
+
+}
+
 ''';
 }
