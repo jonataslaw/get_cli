@@ -36,7 +36,7 @@ Future<void> addAppPage(String name, String path) async {
     while (pathSplit.isNotEmpty && onPageIndex == -1) {
       onPageIndex = lines.indexWhere(
           (element) => element
-              .contains('_Paths.${pathSplit.last.snakeCase.toUpperCase()}'),
+              .contains('_Paths.${pathSplit.last.snakeCase.toUpperCase()},'),
           indexRoutes);
     }
     if (onPageIndex != -1) {
