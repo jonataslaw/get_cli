@@ -81,7 +81,7 @@ class GenerateModelCommand extends Command with ArgsMixin {
   }
 
   Future<String> get _jsonRawData async {
-    if (withArgument != null) {
+    if (withArgument.isNotEmpty) {
       return await File(withArgument).readAsString();
     } else {
       try {
