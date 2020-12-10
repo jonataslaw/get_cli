@@ -5,6 +5,9 @@ import 'package:get_cli/functions/find_file/find_file_by_name.dart';
 import 'package:version/version.dart';
 
 bool get supportChildrenRoutes {
+  if (PubspecUtils.isServerProject) {
+    return false;
+  }
   bool supportChildren = Version.parse('3.21.0')
           .compareTo(PubspecUtils.getPackageVersion('get')) <=
       0;
