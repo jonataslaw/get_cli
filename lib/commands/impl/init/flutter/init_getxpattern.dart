@@ -7,8 +7,6 @@ import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_list_directory.dart';
 import 'package:get_cli/functions/create/create_main.dart';
-import 'package:get_cli/samples/impl/get_app_pages.dart';
-import 'package:get_cli/samples/impl/get_route.dart';
 import 'package:get_cli/samples/impl/getx_pattern/get_main.dart';
 
 Future<void> createInitGetxPattern() async {

@@ -5,17 +5,15 @@ import 'package:get_cli/get_cli.dart';
 Future<void> main(List<String> arguments) async {
   final command = GetCli(arguments).findCommand();
 
-  if (command != null) {
-    if (arguments.contains('--debug')) {
-      await command.execute().then((value) => checkForUpdate());
-    } else {
-      try {
-        if (command.validate()) {
-          await command.execute().then((value) => checkForUpdate());
-        }
-      } catch (e) {
-        ExceptionHandler().handle(e);
+  if (arguments.contains('--debug')) {
+    await command.execute().then((value) => checkForUpdate());
+  } else {
+    try {
+      if (command.validate()) {
+        await command.execute().then((value) => checkForUpdate());
       }
+    } catch (e) {
+      ExceptionHandler().handle(e);
     }
   }
 }

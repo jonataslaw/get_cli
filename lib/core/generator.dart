@@ -24,20 +24,28 @@ class GetCli {
       if (command is Function) return command();
       return _findCommand(currentIndex += 1, command);
     } on RangeError catch (_) {
-      // command line arguments is empty
-      LogService.error('argument is empty');
-      LogService.info('run `get help` to help', false, false);
-      //return HelpCommand();
-      ///TODO retornar o tipo apropriado
-      return null;
+      return ErrorCommand('argument is empty');
     } catch (e) {
-      // command not found
-      LogService.error('command not found');
-      LogService.info('run `get help` to help', false, false);
-      //return HelpCommand();
-      ///TODO retornar o tipo apropriado
-      return null;
+      return ErrorCommand('command not found');
     }
+  }
+}
+
+class ErrorCommand extends Command {
+  String error;
+  ErrorCommand(this.error);
+  @override
+  Future<void> execute() async {
+    LogService.error(error);
+    LogService.info('run `get help` to help', false, false);
+  }
+
+  @override
+  String get hint => 'Print on erro';
+
+  @override
+  bool validate() {
+    return true;
   }
 }
 
