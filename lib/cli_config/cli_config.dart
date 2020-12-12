@@ -6,21 +6,21 @@ import 'package:path/path.dart';
 class CliConfig {
   static final DateFormat _formatter = DateFormat('yyyy-MM-dd');
   // Em devsevolvimento
-  static Future<File> getFileConfig() async {
+  static File getFileConfig() {
     String scriptFile = Platform.script.toFilePath();
     String path = join(dirname(scriptFile), '.get_cli.yaml');
     File configFile = File(path);
-    if (!await configFile.exists()) {
-      await configFile.create(recursive: true);
+    if (!configFile.existsSync()) {
+      configFile.createSync(recursive: true);
     }
     return configFile;
   }
 
-  static Future<void> setUpdateCheckToday() async {
+  static void setUpdateCheckToday() {
     final DateTime now = DateTime.now();
 
     final String formatted = _formatter.format(now);
-    File configFile = await getFileConfig();
+    File configFile = getFileConfig();
     List<String> lines = configFile.readAsLinesSync();
     int lastUpdateIndex = lines.indexWhere(
       (element) => element.startsWith('last_update_check:'),
@@ -33,8 +33,8 @@ class CliConfig {
     configFile.writeAsStringSync(lines.join('\n'));
   }
 
-  static Future<bool> updateIsCheckingToday() async {
-    File configFile = await getFileConfig();
+  static bool updateIsCheckingToday() {
+    File configFile = getFileConfig();
 
     var lines = configFile.readAsLinesSync();
     int lastUpdateIndex = lines.indexWhere(

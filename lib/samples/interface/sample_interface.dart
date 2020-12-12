@@ -1,10 +1,10 @@
-import 'dart:async';
-
 import 'package:get_cli/functions/create/create_single_file.dart';
 
 /// [Sample] is the Base class in which the files for each command
 /// will be built.
 abstract class Sample {
+  String customContent = '';
+
   /// The path where the sample file will be added
   String path;
 
@@ -23,7 +23,7 @@ abstract class Sample {
   /// This function will create the file in [path] with the
   /// content of [content].
   void create({bool skipFormatter = false}) {
-    return writeFile(path, content,
+    return writeFile(path, customContent.isNotEmpty ? customContent : content,
         overwrite: overwrite, skipFormatter: skipFormatter);
   }
 }

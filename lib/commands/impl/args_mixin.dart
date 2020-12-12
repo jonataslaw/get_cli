@@ -1,23 +1,21 @@
 import 'package:get_cli/core/generator.dart';
+import 'package:http/http.dart';
 
 mixin ArgsMixin {
   final List<String> _args = GetCli.arguments;
   List<String> args = _getArgs();
+  List<String> flags = _getFlags();
 
   String get onCommand {
-    int onIndex = _getIndexArg('on');
-    return onIndex != -1 ? _args[onIndex + 1] : '';
+    return _getArg('on');
   }
 
   String get withArgument {
-    int withIndex = _getIndexArg('with');
-    return withIndex != -1 ? _args[withIndex + 1] : '';
+    return _getArg('with');
   }
 
   String get fromArgument {
-    int fromIndex = _getIndexArg('from');
-
-    return fromIndex != -1 ? _args[fromIndex + 1] : '';
+    return _getArg('from');
   }
 
   String get name {
@@ -39,7 +37,7 @@ List<String> _getArgs() {
   var defaultArgs = ['on', 'home', 'from', 'with'];
   defaultArgs.forEach((arg) {
     int indexArg = args.indexWhere((element) => (element == arg));
-    if (indexArg != -1) {
+    if (indexArg != -1 && indexArg + 1 < args.length) {
       args..removeAt(indexArg)..removeAt(indexArg);
     }
   });
@@ -47,6 +45,26 @@ List<String> _getArgs() {
   return args;
 }
 
+List<String> _getFlags() {
+  var args = List.of(GetCli.arguments);
+
+  return args.where((element) => element.startsWith('-')).toList();
+}
+
 int _getIndexArg(String arg) {
   return GetCli.arguments.indexWhere((element) => element == arg);
+}
+
+String _getArg(String arg) {
+  int index = _getIndexArg(arg);
+  if (index != -1) {
+    if (index + 1 < GetCli.arguments.length) {
+      index++;
+      return GetCli.arguments[index];
+    } else {
+      throw ClientException("the '$arg' argument is empty");
+    }
+  }
+
+  return '';
 }

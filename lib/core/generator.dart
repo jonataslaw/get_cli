@@ -1,6 +1,7 @@
 import 'package:get_cli/commands/commands_list.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 
 class GetCli {
   final List<String> _arguments;
@@ -23,6 +24,8 @@ class GetCli {
       if (command == null) throw Exception();
       if (command is Function) return command();
       return _findCommand(currentIndex += 1, command);
+    } on CliException catch (e) {
+      return ErrorCommand(e.message);
     } on RangeError catch (_) {
       return ErrorCommand('argument is empty');
     } catch (e) {

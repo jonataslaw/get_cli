@@ -7,8 +7,9 @@ class ExceptionHandler {
   void handle(dynamic e) {
     if (e is CliException) {
       LogService.error(e.message);
-      if (e.codeSample != null) {
-        LogService.info(e.codeSample);
+      if (e.codeSample.isNotEmpty) {
+        LogService.info('Example');
+        print(LogService.codeBold(e.codeSample));
       }
     } else if (e is FileSystemException) {
       if (e.osError.errorCode == 2) {

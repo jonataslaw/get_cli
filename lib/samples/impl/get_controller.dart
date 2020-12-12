@@ -9,17 +9,14 @@ class ControllerSample extends Sample {
       {bool overwrite = false})
       : super(path, overwrite: overwrite);
 
-  String get _import => _isServer
-      ? "import 'package:get_server/get_server.dart';"
-      : "import 'package:get/get.dart';";
-
   @override
-  String get content => '''$_import
+  String get content => _isServer ? serverController : flutterController;
+
+  String get serverController => '''import 'package:get_server/get_server.dart';
 
 class ${_fileName.pascalCase}Controller extends GetxController {
   //TODO: Implement ${_fileName.pascalCase}Controller
   
-  final count = 0.obs;
 
   @override
   void onInit() {}
@@ -30,7 +27,24 @@ class ${_fileName.pascalCase}Controller extends GetxController {
   @override
   void onClose() {}
 
-  void increment() => count.value++;
+}
+''';
+  String get flutterController =>
+      '''import 'package:get_server/get_server.dart';
+
+class ${_fileName.pascalCase}Controller extends GetxController {
+  //TODO: Implement ${_fileName.pascalCase}Controller
+  
+
+  @override
+  void onInit() {}
+
+  @override
+  void onReady() {}
+
+  @override
+  void onClose() {}
+
 }
 ''';
 }

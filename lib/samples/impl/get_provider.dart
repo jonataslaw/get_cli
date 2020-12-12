@@ -32,10 +32,10 @@ class ProviderSample extends Sample {
   String get content => '''$_import
 $_importModelPath
 class ${_fileName.pascalCase}Provider extends GetConnect {
-\t@override
-\tvoid onInit() {
-$_defaultEncoder\t\thttpClient.baseUrl = 'YOUR-API-URL';
-\t}
+@override
+void onInit() {
+$_defaultEncoder httpClient.baseUrl = 'YOUR-API-URL';
+}
 $_defaultEndpoint}
 ''';
 

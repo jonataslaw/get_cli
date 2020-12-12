@@ -9,9 +9,7 @@ class LogService {
     ..black(bold: false, bg: true)
     ..white();
 
-  static final AnsiPen codeBold = AnsiPen()
-    ..black(bold: false, bg: true)
-    ..yellow(bold: true);
+  static final AnsiPen codeBold = AnsiPen()..gray(level: 1);
 
 //  static var _errorWrapper = '_' * 40;
   static void error(msg) {

@@ -43,7 +43,7 @@ class PubspecUtils {
         : '^$version';
     if (version == null) return false;
     lines.insert(index, '  $package: $version');
-    await _pubspec.writeAsStringSync(lines.join('\n'));
+    _pubspec.writeAsStringSync(lines.join('\n'));
     if (runPubGet) await ShellUtils.pubGet();
     LogService.success('Package: $package installed!');
     return true;
@@ -55,7 +55,7 @@ class PubspecUtils {
     var lines = _pubspec.readAsLinesSync();
     if (containsPackage(package)) {
       lines.removeWhere((element) => element.startsWith('  $package:'));
-      await _pubspec.writeAsStringSync(lines.join('\n'));
+      _pubspec.writeAsStringSync(lines.join('\n'));
       if (logger) LogService.success('Package: "$package" removed!');
     } else if (logger) {
       LogService.info(

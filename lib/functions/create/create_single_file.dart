@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dart_style/dart_style.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/core/structure.dart';
@@ -10,13 +9,13 @@ import 'package:path/path.dart';
 
 import '../../core/structure.dart';
 
-Future handleFileCreate(String name, String command, String on,
-    bool extraFolder, Sample sample, String folderName) async {
+String handleFileCreate(String name, String command, String on,
+    bool extraFolder, Sample sample, String folderName) {
   final fileModel = Structure.model(name, command, extraFolder,
       on: on, folderName: folderName);
   String path = fileModel.path + '_${fileModel.commandName}.dart';
   sample.path = path;
-  await sample.create();
+  sample.create();
   return sample.path;
 }
 

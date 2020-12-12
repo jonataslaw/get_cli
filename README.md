@@ -218,6 +218,40 @@ class User {
 }
 
 ```
+### Generate controller for model online
+
+run 
+```dart
+
+  get create controller:auth with examples/authcontroller.dart 
+  //or url 
+  get create controller:auth with 'https://raw.githubusercontent.com/jonataslaw/get_cli/master/samples_file/controller.dart.example'
+
+```
+
+input: <br/>
+```dart
+import 'package:get/get.dart';
+
+class @controller extends GetxController {
+  final  email = ''.obs;
+  final  password = ''.obs;
+  void login() {
+  }
+
+}
+```
+
+output: 
+```dart 
+import 'package:get/get.dart';
+
+class AuthController extends GetxController {
+  final email = ''.obs;
+  final password = ''.obs;
+  void login() {}
+}
+```
 
 
 TODO: 
