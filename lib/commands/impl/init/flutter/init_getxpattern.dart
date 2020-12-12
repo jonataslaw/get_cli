@@ -18,11 +18,11 @@ Future<void> createInitGetxPattern() async {
   List<Directory> initialDirs = [
     Directory(Structure.replaceAsExpected(path: 'lib/app/data/')),
   ];
+  GetXMainSample(isServer: isServerProject).create();
   await Future.wait([
-    GetXMainSample(isServer: isServerProject).create(),
     CreatePageCommand().execute(),
-    createListDirectory(initialDirs),
   ]);
+  createListDirectory(initialDirs);
   if (!isServerProject) {
     await installGet();
   }

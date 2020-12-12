@@ -13,16 +13,16 @@ class GetViewSample extends Sample {
       {bool overwrite = false})
       : super(path, overwrite: overwrite);
 
-  Future<String> get import async => _controllerDir != null
-      ? '''\nimport 'package:${await PubspecUtils.getProjectName()}/$_controllerDir';'''
+  String get import => _controllerDir != null
+      ? '''import 'package:${PubspecUtils.getProjectName()}/$_controllerDir';'''
       : '';
 
   String get _controllerName =>
       _controller != null ? 'GetView<$_controller>' : 'GetView';
 
-  Future<String> get _flutterView async =>
-      '''import 'package:flutter/material.dart';
-import 'package:get/get.dart'; ${await import}
+  String get _flutterView => '''import 'package:flutter/material.dart';
+import 'package:get/get.dart'; 
+${import}
 
 class $_viewName extends $_controllerName {
   @override
@@ -43,8 +43,8 @@ class $_viewName extends $_controllerName {
 }
   ''';
 
-  Future<String> get _serverView async =>
-      '''import 'package:get_server/get_server.dart'; ${await import}
+  String get _serverView =>
+      '''import 'package:get_server/get_server.dart'; ${import}
 
 class $_viewName extends GetView<$_controller> {
   @override
@@ -55,5 +55,5 @@ class $_viewName extends GetView<$_controller> {
   ''';
 
   @override
-  Future<String> get content async => _isServer ? _serverView : _flutterView;
+  String get content => _isServer ? _serverView : _flutterView;
 }

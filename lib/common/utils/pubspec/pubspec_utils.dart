@@ -49,15 +49,15 @@ class PubspecUtils {
     return true;
   }
 
-  static void removeDependencies(String package) async {
-    LogService.info('Removing package: "$package"');
+  static void removeDependencies(String package, {bool logger = true}) async {
+    if (logger) LogService.info('Removing package: "$package"');
 
     var lines = _pubspec.readAsLinesSync();
     if (containsPackage(package)) {
       lines.removeWhere((element) => element.startsWith('  $package:'));
       await _pubspec.writeAsStringSync(lines.join('\n'));
-      LogService.success('Package: "$package" removed!');
-    } else {
+      if (logger) LogService.success('Package: "$package" removed!');
+    } else if (logger) {
       LogService.info(
           'Package: "$package" is not installed in this application');
     }
@@ -71,18 +71,18 @@ class PubspecUtils {
   }
 
   static bool get isServerProject {
-    LogService.info('Checking project type');
+    // LogService.info('Checking project type');
 
     var lines = _pubspec.readAsLinesSync();
     final serverLine = lines.firstWhere(
         (element) => element.split(':').first.trim() == 'get_server',
-        orElse: () => null);
+        orElse: () => '');
 
-    if (serverLine == null || serverLine.isEmpty) {
-      LogService.info('Flutter project detected!');
+    if (serverLine.isEmpty) {
+      // LogService.info('Flutter project detected!');
       return false;
     } else {
-      LogService.info('Get Server project detected!');
+      //LogService.info('Get Server project detected!');
       return true;
     }
   }

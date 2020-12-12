@@ -1,7 +1,7 @@
 import 'dart:io';
 
-Future<void> createListDirectory(List<Directory> dirs) async {
+void createListDirectory(List<Directory> dirs) {
   for (final element in dirs) {
-    await element.create(recursive: true);
+    element.createSync(recursive: true);
   }
 }

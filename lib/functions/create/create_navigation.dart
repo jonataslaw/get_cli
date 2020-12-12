@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -7,19 +8,24 @@ import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart'
 import 'package:get_cli/samples/impl/arctekko/arc_navigation.dart';
 import 'package:recase/recase.dart';
 
-Future<void> createNavigation() async {
-  await ArcNavigationSample().create(skipFormatter: true);
+void createNavigation() {
+  ArcNavigationSample().create(skipFormatter: true);
 }
 
-Future<void> addNavigation(String name) async {
+void addNavigation(String name) {
   File navigationFile = File(Structure.replaceAsExpected(
       path: 'lib/infrastructure/navigation/navigation.dart'));
-  if (!await navigationFile.exists()) {
-    await createNavigation();
+
+  List<String> lines;
+
+  if (navigationFile.existsSync()) {
+    createNavigation();
+    lines = navigationFile.readAsLinesSync();
   } else {
-    formatterDartFile(navigationFile);
+    String content = formatterDartFile(navigationFile.readAsStringSync());
+    lines = LineSplitter.split(content).toList();
   }
-  var lines = await navigationFile.readAsLinesSync();
+  navigationFile.readAsLinesSync();
 
   while (lines.last.isEmpty) {
     lines.removeLast();
@@ -37,6 +43,7 @@ Future<void> addNavigation(String name) async {
       binding: ${name.pascalCase}ControllerBinding(),
     ),    ''');
 
-  await writeFile(navigationFile.path, lines.join('\n'), overwrite: true);
+  writeFile(navigationFile.path, lines.join('\n'),
+      overwrite: true, logger: false);
   LogService.success('${name.pascalCase} navigation added successfully.');
 }

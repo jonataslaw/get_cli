@@ -1,12 +1,10 @@
-import 'dart:async';
-
 import 'package:get_cli/samples/interface/sample_interface.dart';
 
 class ConfigExampleSample extends Sample {
   ConfigExampleSample({String path = 'lib/config.dart'}) : super(path);
 
   @override
-  FutureOr<String> get content => '''
+  String get content => '''
 class Environments {
   static const String PRODUCTION = 'prod';
   static const String QAS = 'QAS';

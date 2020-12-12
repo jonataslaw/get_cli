@@ -9,7 +9,7 @@ class GenerateLocalesSample extends Sample {
       : super(path, overwrite: true);
 
   @override
-  Future<String> get content async => '''
+  String get content => '''
 // DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
 abstract class AppTranslation {

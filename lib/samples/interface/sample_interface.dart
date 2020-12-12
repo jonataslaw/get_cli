@@ -16,14 +16,14 @@ abstract class Sample {
   /// Store the content that will be written to the file in a String or
   /// Future <String> in that variable. It is used to fill the file created
   /// by path.
-  FutureOr<String> get content;
+  String get content;
 
   Sample(this.path, {this.overwrite = false});
 
   /// This function will create the file in [path] with the
   /// content of [content].
-  Future<void> create({bool skipFormatter = false}) async {
-    return writeFile(path, await content,
+  void create({bool skipFormatter = false}) {
+    return writeFile(path, content,
         overwrite: overwrite, skipFormatter: skipFormatter);
   }
 }

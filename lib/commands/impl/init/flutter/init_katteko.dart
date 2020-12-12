@@ -26,13 +26,12 @@ Future<void> createInitKatekko() async {
     Directory(Structure.replaceAsExpected(path: 'lib/presentation/')),
     Directory(Structure.replaceAsExpected(path: 'lib/infrastructure/theme/')),
   ];
+  ArcMainSample().create();
+  ConfigExampleSample().create();
   await Future.wait([
-    ArcMainSample().create(),
     CreateScreenCommand().execute(),
-    ConfigExampleSample().create(),
-    createListDirectory(initialDirs),
   ]);
-
+  createListDirectory(initialDirs);
   await installGet();
 
   LogService.success('CLEAN Pattern structure successfully generated.');

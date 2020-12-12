@@ -6,7 +6,7 @@ class ArcNavigationSample extends Sample {
       : super(path);
 
   @override
-  Future<String> get content async => '''import 'package:flutter/material.dart';
+  String get content => '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../config.dart';

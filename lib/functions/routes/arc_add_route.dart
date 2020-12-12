@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -11,12 +12,15 @@ import 'package:recase/recase.dart';
 Future<void> arcAddRoute(String nameRoute) async {
   File routesFile = File(Structure.replaceAsExpected(
       path: 'lib/infrastructure/navigation/routes.dart'));
+  List<String> lines = [];
   if (!await routesFile.exists()) {
     await ArcRouteSample(nameRoute.snakeCase.toUpperCase()).create();
+    lines = await routesFile.readAsLines();
   } else {
-    formatterDartFile(routesFile);
+    String content = formatterDartFile(routesFile.readAsStringSync());
+    lines = LineSplitter.split(content).toList();
   }
-  List<String> lines = await routesFile.readAsLines();
+
   String line =
       'static const ${nameRoute.snakeCase.toUpperCase()} = \'/${nameRoute.snakeCase.toLowerCase().replaceAll('_', '-')}\';';
   if (lines.contains(line)) {

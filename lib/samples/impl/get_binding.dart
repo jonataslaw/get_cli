@@ -19,7 +19,7 @@ class BindingSample extends Sample {
       : "import 'package:get/get.dart';";
 
   @override
-  Future<String> get content async => '''$_import
+  String get content => '''$_import
 import 'package:${PubspecUtils.getProjectName()}/$_controllerDir';
 
 class $_bindingName extends Bindings {

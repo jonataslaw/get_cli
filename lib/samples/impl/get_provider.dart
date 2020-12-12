@@ -29,7 +29,7 @@ class ProviderSample extends Sample {
       : '\n';
 
   @override
-  Future<String> get content async => '''$_import
+  String get content => '''$_import
 $_importModelPath
 class ${_fileName.pascalCase}Provider extends GetConnect {
 \t@override

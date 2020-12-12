@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/functions/sorter_imports/sort.dart';
 import 'package:get_cli/samples/interface/sample_interface.dart';
 import 'package:path/path.dart';
 
@@ -18,16 +20,15 @@ Future handleFileCreate(String name, String command, String on,
   return sample.path;
 }
 
-Future<void> writeFile(String path, String content,
-    {bool overwrite = false, bool skipFormatter = false}) async {
-  File _file = await File(Structure.replaceAsExpected(path: path));
-  if (!await _file.exists() || overwrite) {
-    await _file.create(recursive: true);
+void writeFile(String path, String content,
+    {bool overwrite = false, bool skipFormatter = false, logger = true}) {
+  File _file = File(Structure.replaceAsExpected(path: path));
+  if (!_file.existsSync() || overwrite) {
+    _file.createSync(recursive: true);
     if (!skipFormatter) {
       if (path.endsWith('.dart')) {
         try {
-          DartFormatter formatter = DartFormatter();
-          content = formatter.format(content);
+          content = sortImports(content, PubspecUtils.getProjectName());
         } catch (e) {
           LogService.info('invalid dart file format in $path file');
           rethrow;
@@ -35,9 +36,11 @@ Future<void> writeFile(String path, String content,
       }
     }
 
-    await _file.writeAsString(content);
+    _file.writeAsStringSync(content);
 
-    LogService.success(
-        'File "${basename(path)}" created successfully at path: ${_file.path}');
+    if (logger) {
+      LogService.success(
+          'File "${basename(path)}" created successfully at path: ${_file.path}');
+    }
   }
 }

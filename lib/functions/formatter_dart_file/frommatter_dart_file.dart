@@ -1,8 +1,6 @@
-import 'dart:io';
-
 import 'package:dart_style/dart_style.dart';
 
-void formatterDartFile(File file) {
+String formatterDartFile(String content) {
   DartFormatter formatter = DartFormatter();
-  file.writeAsStringSync(formatter.format(file.readAsStringSync()));
+  return formatter.format(content);
 }

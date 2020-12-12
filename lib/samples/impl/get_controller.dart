@@ -14,7 +14,7 @@ class ControllerSample extends Sample {
       : "import 'package:get/get.dart';";
 
   @override
-  Future<String> get content async => '''$_import
+  String get content => '''$_import
 
 class ${_fileName.pascalCase}Controller extends GetxController {
   //TODO: Implement ${_fileName.pascalCase}Controller

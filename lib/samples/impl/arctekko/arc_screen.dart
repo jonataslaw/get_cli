@@ -10,7 +10,7 @@ class ArcScreenSample extends Sample {
       : super(path, overwrite: overwrite);
 
   @override
-  Future<String> get content async => !isExample
+  String get content => !isExample
       ? '''import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

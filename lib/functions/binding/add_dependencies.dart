@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:recase/recase.dart';
 
 void addDependencieToBinding(String path, String controllerName, import) {
@@ -14,10 +16,11 @@ void addDependencieToBinding(String path, String controllerName, import) {
       return element.startsWith('void dependencies() {');
     });
     index++;
-    lines.insert(
-        index, '''\t\tGet.lazyPut<${controllerName.pascalCase}Controller>(
-\t\t\t() => ${controllerName.pascalCase}Controller(),
-\t\t);''');
-    file.writeAsStringSync(lines.join('\n'));
+    lines.insert(index, '''Get.lazyPut<${controllerName.pascalCase}Controller>(
+          () => ${controllerName.pascalCase}Controller(),
+);''');
+    writeFile(file.path, lines.join('\n'), overwrite: true, logger: false);
+    LogService.success('The ${controllerName.pascalCase} has been added '
+        'to binging at path: ${file.path}');
   }
 }

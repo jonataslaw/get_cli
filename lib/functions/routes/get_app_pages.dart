@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -11,14 +12,17 @@ import 'package:recase/recase.dart';
 
 Future<void> addAppPage(String name, String path) async {
   File appPagesFile = findFileByName('app_pages.dart');
+
+  List<String> lines = [];
   if (appPagesFile.path.isEmpty) {
     await AppPagesSample().create(skipFormatter: true);
     appPagesFile = File(AppPagesSample().path);
+    lines = appPagesFile.readAsLinesSync();
   } else {
-    formatterDartFile(appPagesFile);
+    String content = formatterDartFile(appPagesFile.readAsStringSync());
+    lines = LineSplitter.split(content).toList();
   }
 
-  var lines = await appPagesFile.readAsLinesSync();
   String routesOrPath = 'Routes';
   int indexRoutes = lines
       .indexWhere((element) => element.trim().contains('static final routes'));
@@ -100,7 +104,8 @@ ${_getTabs(tabEspaces)}),''';
   lines.insert(0, import + '/bindings/$name' "_binding.dart';");
   lines.insert(0, import + '/views/$name' + "_view.dart';");
 
-  await writeFile(appPagesFile.path, lines.join('\n'), overwrite: true);
+  await writeFile(appPagesFile.path, lines.join('\n'),
+      overwrite: true, logger: false);
 }
 
 String _getTabs(int tabEspaces) {

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -11,11 +12,15 @@ import 'package:recase/recase.dart';
 
 Future<void> addRoute(String nameRoute, String path) async {
   File routesFile = findFileByName('app_routes.dart');
+  List<String> lines = [];
+
   if (routesFile.path.isEmpty) {
     await RouteSample().create(skipFormatter: true);
     routesFile = File(RouteSample().path);
+    lines = routesFile.readAsLinesSync();
   } else {
-    formatterDartFile(routesFile);
+    String content = formatterDartFile(routesFile.readAsStringSync());
+    lines = LineSplitter.split(content).toList();
   }
   List<String> pathSplit = path.split('/');
   pathSplit.removeLast();
@@ -27,7 +32,7 @@ Future<void> addRoute(String nameRoute, String path) async {
         pathSplit[i].snakeCase.snakeCase.toLowerCase().replaceAll('_', '-');
   }
   String route = pathSplit.join('/');
-  List<String> lines = routesFile.readAsLinesSync();
+
   int indexEndRoutes = lines.indexWhere((element) => element.startsWith('}'));
 
   String line =
@@ -50,7 +55,8 @@ Future<void> addRoute(String nameRoute, String path) async {
 
   lines.insert(indexEndRoutes, line);
 
-  await writeFile(routesFile.path, lines.join('\n'), overwrite: true);
+  await writeFile(routesFile.path, lines.join('\n'),
+      overwrite: true, logger: false);
   LogService.success('${nameRoute} route created successfully,');
 
   await addAppPage(nameRoute, path);

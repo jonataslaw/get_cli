@@ -6,7 +6,7 @@ class GetServerPubspecSample extends Sample {
   GetServerPubspecSample(this.name) : super('pubspec.yaml', overwrite: true);
 
   @override
-  Future<String> get content async => '''name: $name
+  String get content => '''name: $name
 description: A new Get Server application.
 version: 1.0.0
 
