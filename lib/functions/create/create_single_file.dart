@@ -26,7 +26,6 @@ void writeFile(String path, String content,
     if (!skipFormatter) {
       if (path.endsWith('.dart')) {
         try {
-          print('sorted');
           content = sortImports(content, PubspecUtils.getProjectName());
         } catch (e) {
           LogService.info('invalid dart file format in $path file');
