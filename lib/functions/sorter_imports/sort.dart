@@ -63,5 +63,5 @@ String sortImports(
     ..add('')
     ..addAll(contentLines);
 
-  return formatterDartFile(content);
+  return formatterDartFile(sortedLines.join('\n'));
 }
