@@ -29,22 +29,19 @@ class ${_fileName.pascalCase}Controller extends GetxController {
 
 }
 ''';
-  String get flutterController =>
-      '''import 'package:get_server/get_server.dart';
+  String get flutterController => '''import 'package:get/get.dart';
 
 class ${_fileName.pascalCase}Controller extends GetxController {
   //TODO: Implement ${_fileName.pascalCase}Controller
   
-
+  final count = 0.obs;
   @override
   void onInit() {}
-
   @override
   void onReady() {}
-
   @override
   void onClose() {}
-
+  void increment() => count.value++;
 }
 ''';
 }

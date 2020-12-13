@@ -33,7 +33,7 @@ class GenerateModelCommand extends Command with ArgsMixin {
     final classGenerator = ModelGenerator(name);
 
     if (findFolderByName('models') != null) {
-      _fileModel = Structure.model(name, 'generate_model', onCommand != '',
+      _fileModel = Structure.model(name, 'model', onCommand != '',
           on: onCommand != '' ? onCommand : 'models', folderName: 'models');
     } else {
       _fileModel =

@@ -9,10 +9,10 @@ import 'package:get_cli/functions/binding/add_dependencies.dart';
 import 'package:get_cli/functions/binding/find_bindings.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/is_url/is_url.dart';
+import 'package:get_cli/functions/replace_vars/replace_vars.dart';
 import 'package:get_cli/samples/impl/get_controller.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart';
-import 'package:recase/recase.dart';
 
 class CreateControllerCommand extends Command with ArgsMixin {
   @override
@@ -30,6 +30,12 @@ class CreateControllerCommand extends Command with ArgsMixin {
 
   @override
   Future<void> execute() async {
+    return createController(name,
+        withArgument: withArgument, onCommand: onCommand);
+  }
+
+  Future<void> createController(String name,
+      {String withArgument = '', String onCommand = ''}) async {
     ControllerSample sample =
         ControllerSample('', name, PubspecUtils.isServerProject);
     if (withArgument.isNotEmpty) {
@@ -37,7 +43,7 @@ class CreateControllerCommand extends Command with ArgsMixin {
         Response res = await get(withArgument);
         if (res.statusCode == 200) {
           String content = res.body;
-          sample.customContent = _replaceVars(content);
+          sample.customContent = replaceVars(content, name);
         } else {
           CliException('failed to connect with $withArgument');
         }
@@ -45,7 +51,7 @@ class CreateControllerCommand extends Command with ArgsMixin {
         File file = File(withArgument);
         if (file.existsSync()) {
           String content = file.readAsStringSync();
-          sample.customContent = _replaceVars(content);
+          sample.customContent = replaceVars(content, name);
         } else {
           CliException('$withArgument  is not a file or valid url');
         }
@@ -67,10 +73,5 @@ class CreateControllerCommand extends Command with ArgsMixin {
     if (binindingPath != '') {
       addDependencieToBinding(binindingPath, name, pathSplit.join('/'));
     }
-  }
-
-  String _replaceVars(String content) {
-    content = content.replaceAll('@controller', name.pascalCase + 'Controller');
-    return content;
   }
 }

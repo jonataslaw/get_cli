@@ -1,0 +1,12 @@
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:recase/recase.dart';
+
+String replaceVars(String content, String name) {
+  return content
+      .replaceAll('@view', name.pascalCase + 'View')
+      .replaceAll('@screen', name.pascalCase + 'Screen')
+      .replaceAll('@controller', name.pascalCase + 'Controller')
+      .replaceAll('@binding', name.pascalCase + 'Binding')
+      .replaceAll('@import', PubspecUtils.getPackageImport)
+      .replaceAll('@package', PubspecUtils.getProjectName());
+}

@@ -23,7 +23,6 @@ void writeFile(String path, String content,
     {bool overwrite = false, bool skipFormatter = false, logger = true}) {
   File _file = File(Structure.replaceAsExpected(path: path));
   if (!_file.existsSync() || overwrite) {
-    _file.createSync(recursive: true);
     if (!skipFormatter) {
       if (path.endsWith('.dart')) {
         try {
@@ -34,7 +33,7 @@ void writeFile(String path, String content,
         }
       }
     }
-
+    _file.createSync(recursive: true);
     _file.writeAsStringSync(content);
 
     if (logger) {

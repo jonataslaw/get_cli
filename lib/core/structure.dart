@@ -18,7 +18,7 @@ class Structure {
     'route': replaceAsExpected(path: 'lib/routes/'),
     'repository': replaceAsExpected(path: 'lib/data/repositories/'),
     'provider': replaceAsExpected(path: 'lib/app/data/providers'),
-    'controller': replaceAsExpected(path: 'lib/app/controllers/'),
+    'controller': replaceAsExpected(path: 'lib/app'),
     'view': replaceAsExpected(path: 'lib/app/views/'),
     //artekko files
     'screen': replaceAsExpected(path: 'lib/presentation'),
@@ -26,7 +26,6 @@ class Structure {
         path: 'lib/infrastructure/navigation/navigation.dart'),
     //generator files
     'generate_locales': replaceAsExpected(path: 'lib/generated'),
-    'generate_model': replaceAsExpected(path: 'lib/generated/models/'),
   };
 
   static FileModel model(String name, String command, bool wrapperFolder,
