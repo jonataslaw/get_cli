@@ -231,7 +231,7 @@ run
 
 input: <br/>
 ```dart
-import 'package:get/get.dart';
+@import
 
 class @controller extends GetxController {
   final  email = ''.obs;
