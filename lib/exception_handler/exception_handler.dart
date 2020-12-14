@@ -8,7 +8,7 @@ class ExceptionHandler {
     if (e is CliException) {
       LogService.error(e.message);
       if (e.codeSample.isNotEmpty) {
-        LogService.info('Example');
+        LogService.info('Example', false, false);
         print(LogService.codeBold(e.codeSample));
       }
     } else if (e is FileSystemException) {

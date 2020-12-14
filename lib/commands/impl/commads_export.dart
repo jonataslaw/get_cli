@@ -9,6 +9,7 @@ export 'create/project/project.dart';
 export 'create/screen/screen.dart';
 export 'init/flutter/init.dart';
 export 'install/install.dart';
+export 'sort/sort.dart';
 export 'remove/remove.dart';
 export 'update/update.dart';
 export 'create/provider/provider.dart';
