@@ -28,7 +28,9 @@ void writeFile(String path, String content,
         try {
           content = sortImports(content, PubspecUtils.getProjectName());
         } catch (e) {
-          LogService.info('invalid dart file format in $path file');
+          if (_file.existsSync()) {
+            LogService.info('invalid dart file format in $path file');
+          }
           rethrow;
         }
       }
