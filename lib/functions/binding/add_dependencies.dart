@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:recase/recase.dart';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -21,7 +23,7 @@ void addDependencieToBinding(String path, String controllerName, import) {
           () => ${controllerName.pascalCase}Controller(),
 );''');
     writeFile(file.path, lines.join('\n'), overwrite: true, logger: false);
-    LogService.success('The ${controllerName.pascalCase} has been added '
-        'to binging at path: ${file.path}');
+    LogService.success(LocaleKeys.sucess_add_controller_in_bindings
+        .trArgs([controllerName.pascalCase, path]));
   }
 }

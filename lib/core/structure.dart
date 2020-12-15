@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
@@ -51,7 +53,7 @@ class Structure {
           }
           return element.path.contains(on);
         }, orElse: () {
-          LogService.error('Folder $on not found');
+          LogService.error(LocaleKeys.error_folder_not_found.trArgs([on]));
           if (!Platform.isWindows) exit(0);
           return;
         });

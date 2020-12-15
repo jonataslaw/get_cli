@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:cli_menu/cli_menu.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:version/version.dart';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -24,10 +26,11 @@ class PubspecUtils {
       {String version, bool isDev = false, bool runPubGet = true}) async {
     var lines = _pubspec.readAsLinesSync();
     if (containsPackage(package)) {
-      print('package already installed, do you want to update?');
+      print(Translation(LocaleKeys.ask_package_already_installed)
+          .trArgs([package]));
       final menu = Menu([
-        'Yes, update the package',
-        'No!',
+        LocaleKeys.options_yes.tr,
+        LocaleKeys.options_no.tr,
       ]);
       final result = menu.choose();
       if (result.index != 0) {
@@ -46,7 +49,7 @@ class PubspecUtils {
     lines.insert(index, '  $package: $version');
     _pubspec.writeAsStringSync(lines.join('\n'));
     if (runPubGet) await ShellUtils.pubGet();
-    LogService.success('Package: $package installed!');
+    LogService.success(LocaleKeys.sucess_package_installed.trArgs([package]));
     return true;
   }
 
@@ -57,10 +60,11 @@ class PubspecUtils {
     if (containsPackage(package)) {
       lines.removeWhere((element) => element.startsWith('  $package:'));
       _pubspec.writeAsStringSync(lines.join('\n'));
-      if (logger) LogService.success('Package: "$package" removed!');
+      if (logger) {
+        LogService.success(LocaleKeys.sucess_package_removed.trArgs([package]));
+      }
     } else if (logger) {
-      LogService.info(
-          'Package: "$package" is not installed in this application');
+      LogService.info(LocaleKeys.info_package_not_installed.trArgs([package]));
     }
   }
 
@@ -100,7 +104,8 @@ class PubspecUtils {
       Version version = Version.parse(lines[index].split(':').last.trim());
       return version;
     } else {
-      throw CliException('$package is not installed in your project');
+      throw CliException(
+          LocaleKeys.info_package_not_installed.trArgs([package]));
     }
   }
 }

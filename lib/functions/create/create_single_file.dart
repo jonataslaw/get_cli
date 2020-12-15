@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:path/path.dart';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -29,7 +31,7 @@ void writeFile(String path, String content,
           content = sortImports(content, PubspecUtils.getProjectName());
         } catch (e) {
           if (_file.existsSync()) {
-            LogService.info('invalid dart file format in $path file');
+            LogService.info(LocaleKeys.error_invalid_dart.trArgs([_file.path]));
           }
           rethrow;
         }
@@ -40,7 +42,10 @@ void writeFile(String path, String content,
 
     if (logger) {
       LogService.success(
-          'File "${basename(path)}" created successfully at path: ${_file.path}');
+        LocaleKeys.error_invalid_dart.trArgs(
+          [basename(_file.path), _file.path],
+        ),
+      );
     }
   }
 }

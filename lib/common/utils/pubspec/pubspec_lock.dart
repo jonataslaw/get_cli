@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 
@@ -25,7 +27,8 @@ class PubspecLock {
       return version;
     } catch (e) {
       if (!disableLog) {
-        LogService.error('failed to find the version you have installed.');
+        LogService.error(
+            Translation(LocaleKeys.error_cli_version_not_found).tr);
       }
       return null;
     }

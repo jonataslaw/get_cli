@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:version/version.dart';
 
 import 'package:get_cli/cli_config/cli_config.dart';
@@ -23,14 +25,16 @@ void checkForUpdate() async {
           final needsUpdate = v1.compareTo(v2);
           // needs update.
           if (needsUpdate == 1) {
-            LogService.info('''There\'s an update available!
-Current installed version: $versionInstalled         
-''');
+            LogService.info(Translation(
+                LocaleKeys.info_update_available.trArgs([versionInstalled])));
             //await versionCommand();
             printGetCli();
             final codeSample = LogService.code('get update');
-            LogService.info('''New version available: $versionInPubDev
-Please, run $codeSample''', false, true);
+            LogService.info(
+                LocaleKeys.info_update_available2.trArgs([versionInPubDev]) +
+                    ' $codeSample',
+                false,
+                true);
           }
         });
       });

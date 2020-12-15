@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:http/http.dart';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -21,7 +23,7 @@ class PubDevApi {
       if (value.statusCode == 200) {
         return json.decode(value.body)['latest']['version'];
       } else if (value.statusCode == 404) {
-        LogService.info('Package: $package not found in pub.dev');
+        LogService.info(Translation(LocaleKeys.error_package_not_found).tr);
       }
       return null;
     });

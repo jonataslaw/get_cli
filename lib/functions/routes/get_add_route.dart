@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:recase/recase.dart';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -58,7 +60,8 @@ Future<void> addRoute(String nameRoute, String path) async {
 
   await writeFile(routesFile.path, lines.join('\n'),
       overwrite: true, logger: false);
-  LogService.success('${nameRoute} route created successfully,');
+  LogService.success(
+      Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
 
   await addAppPage(nameRoute, path);
 }

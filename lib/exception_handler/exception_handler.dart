@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 
 class ExceptionHandler {
@@ -8,15 +10,15 @@ class ExceptionHandler {
     if (e is CliException) {
       LogService.error(e.message);
       if (e.codeSample.isNotEmpty) {
-        LogService.info('Example', false, false);
+        LogService.info(LocaleKeys.example.tr, false, false);
         print(LogService.codeBold(e.codeSample));
       }
     } else if (e is FileSystemException) {
       if (e.osError.errorCode == 2) {
-        LogService.error(' File not found in ${e.path}');
+        LogService.error(LocaleKeys.error_file_not_found.trArgs([e.path]));
         return;
       } else if (e.osError.errorCode == 13) {
-        LogService.error('Access denied to ${e.path}');
+        LogService.error(LocaleKeys.error_access_denied.trArgs([e.path]));
         return;
       }
       _logException(e.message);
@@ -27,8 +29,6 @@ class ExceptionHandler {
   }
 
   static void _logException(String msg) {
-    LogService.error('''Unexpected error occurred:
-$msg
-''');
+    LogService.error('${LocaleKeys.error_unexpected} $msg');
   }
 }

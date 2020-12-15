@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:process_run/process_run.dart';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -24,7 +26,8 @@ class ShellUtils {
         await PubDevApi.getLatestVersionFromPackage('get_cli');
     String versionInstalled = await PubspecLock.getVersionCli(disableLog: true);
     if (versionInstalled == versionInPubDev && !isGit) {
-      return LogService.info('Latest version of get_cli already installed');
+      return LogService.info(
+          Translation(LocaleKeys.info_cli_last_version_already_installed.tr));
     }
     LogService.info('Upgrading get_cli …');
     var res;
@@ -74,8 +77,8 @@ class ShellUtils {
       }
     }
     if (res.stderr.toString().isNotEmpty) {
-      return LogService.error('There was an error upgrading get_cli');
+      return LogService.error(LocaleKeys.error_update_cli.tr);
     }
-    LogService.success('Upgrade complete');
+    LogService.success(LocaleKeys.sucess_update_cli.tr);
   }
 }

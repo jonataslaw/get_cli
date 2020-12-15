@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:recase/recase.dart';
 
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
@@ -46,5 +48,7 @@ void addNavigation(String name) {
 
   writeFile(navigationFile.path, lines.join('\n'),
       overwrite: true, logger: false);
-  LogService.success('${name.pascalCase} navigation added successfully.');
+
+  LogService.success(Translation(
+      LocaleKeys.sucess_navigation_added.trArgs([name.pascalCase])));
 }
