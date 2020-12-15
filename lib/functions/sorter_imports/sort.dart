@@ -15,9 +15,11 @@ String sortImports(
   List<String> packageImports = [];
   List<String> projectRelativeImports = [];
   List<String> projectImports = [];
-
+  bool stringLine = false;
   for (int i = 0; i < lines.length; i++) {
-    if (lines[i].startsWith('import ') && lines[i].endsWith(';')) {
+    if (lines[i].startsWith('import ') &&
+        lines[i].endsWith(';') &&
+        !stringLine) {
       if (lines[i].contains('dart:')) {
         dartImports.add(lines[i]);
       } else if (lines[i].contains('package:flutter/')) {
@@ -32,6 +34,10 @@ String sortImports(
         }
       }
     } else {
+      bool containsThreeQuotes = lines[i].contains("'''");
+      if (containsThreeQuotes) {
+        stringLine = !stringLine;
+      }
       contentLines.add(lines[i]);
     }
   }
