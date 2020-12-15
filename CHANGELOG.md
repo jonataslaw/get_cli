@@ -6,6 +6,7 @@
 - add option with to controller e view here [more here](https://github.com/jonataslaw/get_cli#generate-controller-for-model-online)
 - add command sort 
 - and others improvements
+- fix check update
 
 ## [1.3.16]
 
