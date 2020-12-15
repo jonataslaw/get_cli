@@ -1,21 +1,22 @@
 import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
+import 'package:http/http.dart';
+import 'package:path/path.dart' as p;
+import 'package:recase/recase.dart';
+
 import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/json_serialize/model_generator.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/find_file/find_folder_by_directory.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/get_provider.dart';
-import 'package:http/http.dart';
-import 'package:path/path.dart' as p;
-import 'package:recase/recase.dart';
 
 class GenerateModelCommand extends Command with ArgsMixin {
   @override

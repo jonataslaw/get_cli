@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:cli_menu/cli_menu.dart';
+import 'package:version/version.dart';
+
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
-import 'package:version/version.dart';
 
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');

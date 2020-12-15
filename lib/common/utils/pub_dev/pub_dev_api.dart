@@ -1,6 +1,8 @@
 import 'dart:convert';
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
+
 import 'package:http/http.dart';
+
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
 
 class PubDevApi {
   //Find latest version in the Pub Dev.

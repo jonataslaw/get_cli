@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:http/http.dart';
+import 'package:path/path.dart';
+
 import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:get_cli/functions/binding/add_dependencies.dart';
 import 'package:get_cli/functions/binding/find_bindings.dart';
@@ -13,8 +16,6 @@ import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/is_url/is_url.dart';
 import 'package:get_cli/functions/replace_vars/replace_vars.dart';
 import 'package:get_cli/samples/impl/get_controller.dart';
-import 'package:http/http.dart';
-import 'package:path/path.dart';
 
 class CreateControllerCommand extends Command with ArgsMixin {
   @override

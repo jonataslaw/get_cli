@@ -1,9 +1,10 @@
 import 'dart:io';
 
+import 'package:recase/recase.dart';
+
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
-import 'package:recase/recase.dart';
 
 void addDependencieToBinding(String path, String controllerName, import) {
   import = '''import 'package:${PubspecUtils.getProjectName()}/$import';''';

@@ -1,4 +1,5 @@
 import 'package:recase/recase.dart';
+
 import '../interface/sample_interface.dart';
 
 /// [Sample] file from Module_Controller file creation.

@@ -1,7 +1,7 @@
 import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/samples/impl/get_provider.dart';
 

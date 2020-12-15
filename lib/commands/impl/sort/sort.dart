@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 

@@ -1,11 +1,12 @@
 import 'dart:convert' as convert;
 import 'dart:io';
 import 'dart:math';
+
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'sintaxe.dart';
+
 import 'package:json_ast/json_ast.dart'
     show Node, ObjectNode, ArrayNode, LiteralNode;
-
-import 'sintaxe.dart';
 
 const Map<String, bool> PRIMITIVE_TYPES = {
   'int': true,

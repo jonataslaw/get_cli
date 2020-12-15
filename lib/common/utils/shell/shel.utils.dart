@@ -1,10 +1,11 @@
 import 'dart:io';
 
+import 'package:process_run/process_run.dart';
+
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
 import 'package:get_cli/core/generator.dart';
-import 'package:process_run/process_run.dart';
 
 class ShellUtils {
   static void pubGet() async {

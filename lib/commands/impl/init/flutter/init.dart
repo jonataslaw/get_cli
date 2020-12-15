@@ -1,9 +1,10 @@
 import 'package:cli_menu/cli_menu.dart';
+
 import 'package:get_cli/commands/impl/init/flutter/init_getxpattern.dart';
 import 'package:get_cli/commands/impl/init/flutter/init_katteko.dart';
 import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 
 class InitCommand extends Command {
   @override

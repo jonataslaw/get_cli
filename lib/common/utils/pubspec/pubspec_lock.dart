@@ -1,9 +1,10 @@
 import 'dart:io';
 
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/functions/version/check_dev_version.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
+
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/functions/version/check_dev_version.dart';
 
 class PubspecLock {
   static Future<String> getVersionCli({bool disableLog = false}) async {

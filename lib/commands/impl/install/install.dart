@@ -4,8 +4,8 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/core/generator.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 
 class InstallCommand extends Command with ArgsMixin {

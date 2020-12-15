@@ -1,9 +1,12 @@
 import 'dart:io';
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
+
 import 'package:meta/meta.dart';
-//import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
+
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import '../models/file_model.dart';
+
+//import 'package:path/path.dart' as p;
 
 class Structure {
   static final Map<String, String> _paths = {

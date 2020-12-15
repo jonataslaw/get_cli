@@ -1,8 +1,9 @@
 import 'dart:io';
 
+import 'package:version/version.dart';
+
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/functions/find_file/find_file_by_name.dart';
-import 'package:version/version.dart';
 
 bool get supportChildrenRoutes {
   if (PubspecUtils.isServerProject) {

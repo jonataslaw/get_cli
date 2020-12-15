@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:version/version.dart';
+
 import 'package:get_cli/cli_config/cli_config.dart';
 import 'package:get_cli/functions/version/check_dev_version.dart';
 import 'package:get_cli/functions/version/print_get_cli.dart';
-import 'package:version/version.dart';
-
 import '../../common/utils/logger/LogUtils.dart';
 import '../../common/utils/pub_dev/pub_dev_api.dart';
 import '../../common/utils/pubspec/pubspec_lock.dart';

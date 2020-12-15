@@ -1,6 +1,8 @@
 import 'dart:collection';
+
 import 'package:dart_style/dart_style.dart';
 import 'package:json_ast/json_ast.dart' show parse, Settings, Node;
+
 import 'helpers.dart';
 import 'sintaxe.dart';
 

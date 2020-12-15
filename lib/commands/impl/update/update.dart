@@ -1,7 +1,7 @@
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
 
 class UpdateCommand extends Command {
   @override
