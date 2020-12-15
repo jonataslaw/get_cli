@@ -42,7 +42,7 @@ void writeFile(String path, String content,
 
     if (logger) {
       LogService.success(
-        LocaleKeys.error_invalid_dart.trArgs(
+        LocaleKeys.sucess_file_created.trArgs(
           [basename(_file.path), _file.path],
         ),
       );

@@ -157,6 +157,15 @@ abstract class Locales {
     'sucess_route_created': '%s route created successfully.',
   };
   static const pt_BR = {
+    'ask_existing_page': 'A página [%s] já existe, deseja sobrescrevê-la?',
+    'ask_name_to_project': 'Qual é o nome do projeto?',
+    'ask_company_domain': 'Qual é o domínio da sua empresa?',
+    'ask_model_name':
+        'Não foi possível definir o nome do modelo automaticamente, qual nome você deseja usar?',
+    'ask_package_already_installed':
+        'pacote: %s já instalado, deseja atualizar?',
+    'ask_lib_not_empty':
+        'Sua pasta lib não está vazia. Tem certeza de que deseja sobrescrever seu aplicativo? \n AVISO: esta ação é irreversível',
     'error_failed_to_connect': 'Falha ao conectar com %s',
     'error_no_valid_file_or_url': '\'%s\' não é um arquivo ou url válido',
     'error_unnecessary_parameter': 'O parâmetro %s não é necessário',
@@ -172,8 +181,61 @@ abstract class Locales {
     'error_invalid_dart': 'O %s não é um arquivo dart válido',
     'error_invalid_file_or_directory':
         'O %s não é um arquivo ou diretório válido',
-    'ask_existing_page': 'A página [%s] já existe, deseja sobrescrevê-la?',
+    'error_package_not_found': 'Pacote: %s não encontrado em pub.dev',
+    'error_cli_version_not_found':
+        'Não foi possível encontrar a versão instalada da CLI',
+    'error_update_cli': 'Ocorreu um erro ao atualizar get_cli',
+    'error_folder_not_found': 'Pasta %s não encontrada',
+    'error_file_not_found': 'Arquivo não encontrado em %s',
+    'error_access_denied': 'Acesso negado a %s',
+    'error_unexpected': 'Ocorreu um erro inesperado:',
+    'example': 'Exemplo:',
+    'hint_create_controller': 'Gerar um novo controller',
+    'hint_create_page':
+        'Gerar um novo modulo, (controller, view e bindigns) (Use essa opcão se esta usando getx_pattern)',
+    'hint_create_project':
+        'Crie um novo projeto, escolha flutter ou get server',
+    'hint_create_provider': 'Cria uma classe Provider',
+    'hint_create_screen':
+        'Gera uma nova Screen, [controller, view e bindigns] (Use essa opcão se for está usando clean)',
+    'hint_create_view': 'Cria uma nova view',
+    'hint_generate_locales':
+        'Gera um arquivo de traduçao comativel com getx usando json files',
+    'hint_generate_model': 'Crie sua classe model apartir de um json',
+    'hint_help': 'mostra a tela de help',
+    'hint_init': 'Gere a estrutura escolhida em um projeto existente:',
+    'hint_install':
+        'Use para instalar um pacote em seu projeto (dependencies):',
+    'hint_remove': 'Use para remover um pacote em seu projeto (dependencies):',
+    'hint_sort': 'Classificar os imports e formatar arquivos dart',
+    'hint_update': 'Para atualizar GET_CLI',
+    'hint_version': 'Mostra a versão atual do get_cli',
+    'info_unnecessary_flag': 'A flag: %s não é necessária',
+    'info_unnecessary_flag_prural': 'As flags: %s não são necessárias',
+    'info_package_not_installed':
+        'Pacote: %s não está instalado neste aplicativo',
+    'info_cli_last_version_already_installed':
+        'Versão mais recente de get_cli já instalada',
+    'info_no_file_overwritten': 'Nenhum arquivo foi sobrescrito',
+    'info_update_available':
+        'Há uma atualização disponível! Versão atual instalada: %s',
+    'info_update_available2': 'Nova versão disponível: %s Por favor, execute:',
     'options_yes': 'Sim!',
     'options_no': 'Não',
+    'optional_parameters': 'Parâmetros opcionais: %s',
+    'sucess_page_create': 'Página %s criada com sucesso.',
+    'sucess_locale_generate': 'Arquivo de tradução gerado com sucesso.',
+    'sucess_getx_pattern_generated':
+        'Estrutura GetX Pattern gerada com sucesso.',
+    'sucess_c_l_e_a_n_pattern_generated': 'Estrutura CLEAN gerada com sucesso.',
+    'sucess_file_formatted': ' \'%s\' foi formatado com sucesso',
+    'sucess_package_removed': 'Pacote: %s removido!',
+    'sucess_package_installed': '\'Pacote: %s instalado!',
+    'sucess_update_cli': 'Upgrade concluído',
+    'sucess_add_controller_in_bindings':
+        'O %s foi adicionado ao binging no path: %s \'',
+    'sucess_navigation_added': '%s navigation adicionada com sucesso.',
+    'sucess_file_created': 'Arquivo: %s criado com sucesso no path: %s',
+    'sucess_route_created': 'Rota %s criada com sucesso.',
   };
 }
