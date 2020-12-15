@@ -5,7 +5,10 @@ import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/json_serialize/model_generator.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/find_file/find_folder_by_directory.dart';
 import 'package:get_cli/models/file_model.dart';
@@ -20,10 +23,7 @@ class GenerateModelCommand extends Command with ArgsMixin {
     String name = p.basenameWithoutExtension(withArgument).pascalCase;
     if (withArgument.isEmpty) {
       final dialog = CLI_Dialog(questions: [
-        [
-          'Could not set the model name automatically, which name do you want to use?',
-          'name'
-        ]
+        [LocaleKeys.ask_model_name.tr, 'name']
       ]);
       String result = dialog.ask()['name'];
       name = result.pascalCase;
@@ -65,17 +65,16 @@ class GenerateModelCommand extends Command with ArgsMixin {
   }
 
   @override
-  String get hint => 'generate Class model from json';
+  String get hint => LocaleKeys.hint_generate_model.tr;
 
   @override
   bool validate() {
     if ((withArgument.isEmpty || p.extension(withArgument) != '.json') &&
         fromArgument.isEmpty) {
-      LogService.error('Enter a path to json file');
-
-      LogService.info(
-          'example: \n get generate model on home with assets/models/user.json');
-      return false;
+      String codeSample =
+          'get generate model on home with assets/models/user.json';
+      throw CliException(LocaleKeys.error_invalid_json.trArgs([withArgument]),
+          codeSample: codeSample);
     }
     return true;
   }
@@ -85,11 +84,11 @@ class GenerateModelCommand extends Command with ArgsMixin {
       return await File(withArgument).readAsString();
     } else {
       try {
-        var result = await get(fromArgument).then((value) => value);
+        var result = await get(fromArgument);
         return result.body;
       } catch (e) {
-        LogService.error('failed to receive json from $fromArgument');
-        return null;
+        throw CliException(
+            LocaleKeys.error_failed_to_connect.trArgs([fromArgument]));
       }
     }
   }

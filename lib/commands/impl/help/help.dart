@@ -1,10 +1,12 @@
 import 'package:get_cli/commands/commands_list.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/internationalization.dart';
 
 class HelpCommand extends Command {
   @override
-  String get hint => 'Show this help';
+  String get hint => Translation(LocaleKeys.hint_help).tr;
 
   @override
   Future<void> execute() async {

@@ -48,7 +48,9 @@ List<String> _getArgs() {
 List<String> _getFlags() {
   var args = List.of(GetCli.arguments);
 
-  return args.where((element) => element.startsWith('-')).toList();
+  return args
+      .where((element) => element.startsWith('-') && element != '--debug')
+      .toList();
 }
 
 int _getIndexArg(String arg) {

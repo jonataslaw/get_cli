@@ -4,16 +4,19 @@ import 'dart:io';
 import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:get_cli/get_cli.dart';
 import 'package:get_cli/models/file_model.dart';
 import 'package:get_cli/samples/impl/generate_locales.dart';
 import 'package:path/path.dart';
+import 'package:recase/recase.dart';
 
 class GenerateLocalesCommand extends Command with ArgsMixin {
   @override
-  String get hint => 'Generate a localization file';
+  String get hint => Translation(LocaleKeys.hint_generate_locales).tr;
 
   @override
   bool validate() {
@@ -25,7 +28,8 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
     final inputPath = args.length >= 3 ? GetCli.arguments[2] : 'assets/locales';
 
     if (!await Directory(inputPath).exists()) {
-      LogService.error('${inputPath} directory does not exist.');
+      LogService.error(
+          LocaleKeys.error_nonexistent_directory.trArgs([inputPath]));
       return;
     }
 
@@ -35,7 +39,7 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
         .toList();
 
     if (files.isEmpty) {
-      LogService.info('input directory is empty.');
+      LogService.info(LocaleKeys.error_empty_directory.trArgs([inputPath]));
       return;
     }
 
@@ -46,8 +50,8 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
         final localeKey = basenameWithoutExtension(file.path);
         maps[localeKey] = map;
       } catch (e) {
-        LogService.error('${file.path} is not a valid json file\n$e');
-        return;
+        LogService.error(LocaleKeys.error_invalid_json.trArgs([file.path]));
+        rethrow;
       }
     }
 
@@ -74,12 +78,11 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
       parsedLocales.writeln('\tstatic const $key = {');
       translationsKeys.writeln('\t\t\'$key\' : Locales.$key,');
       value.forEach((key, value) {
-        if (value.contains('\'')) {
-          value = value.replaceAll('\'', '\\\'');
-        }
+        key = key.snakeCase;
+        value = _replaceValue(value);
         if (RegExp(r'^[0-9]|[!@#<>?":`~;[\]\\|=+)(*&^%-\s]').hasMatch(key)) {
           throw CliException(
-              'Special characters are not allowed in key. \n key: $key');
+              LocaleKeys.error_special_characters_in_key.trArgs([key]));
         }
         parsedLocales.writeln('\t\t\'$key\': \'$value\',');
       });
@@ -94,7 +97,7 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
             path: _fileModel.path + '.g.dart')
         .create();
 
-    LogService.success('locale files generated successfully.');
+    LogService.success(LocaleKeys.sucess_locale_generate.tr);
   }
 
   void _resolve(Map<String, dynamic> localization, Map<String, String> result,
@@ -113,4 +116,8 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
       }
     }
   }
+}
+
+String _replaceValue(String value) {
+  return value.replaceAll("'", "\\'").replaceAll('\n', '\\n');
 }

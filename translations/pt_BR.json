@@ -1,0 +1,22 @@
+{
+  "error": {
+    "failed_to_connect": "Falha ao conectar com %s",
+    "no_valid_file_or_url": "'%s' não é um arquivo ou url válido",
+    "unnecessary_parameter": "O parâmetro %s não é necessário",
+    "unnecessary_parameter_plural": "Os parâmetros %s não são necessários",
+    "nonexistent_directory": "O diretório %s não existe.",
+    "empty_directory": "o diretório %s está vazio",
+    "invalid_json": "%s não é um arquivo json válido",
+    "special_characters_in_key": "Caracteres especiais não são permitidos na key. \\n key: %s",
+    "required_path": "Necessário para passar o path do arquivo ou diretório",
+    "invalid_dart": "O %s não é um arquivo dart válido",
+    "invalid_file_or_directory": "O %s não é um arquivo ou diretório válido"
+  },
+  "ask": {
+    "existing_page": "A página [%s] já existe, deseja sobrescrevê-la?"
+  },
+  "options": {
+    "yes": "Sim!",
+    "no": "Não"
+  }
+}

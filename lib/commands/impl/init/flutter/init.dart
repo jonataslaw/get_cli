@@ -2,6 +2,8 @@ import 'package:cli_menu/cli_menu.dart';
 import 'package:get_cli/commands/impl/init/flutter/init_getxpattern.dart';
 import 'package:get_cli/commands/impl/init/flutter/init_katteko.dart';
 import 'package:get_cli/commands/interface/command.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/internationalization.dart';
 
 class InitCommand extends Command {
   @override
@@ -18,7 +20,7 @@ class InitCommand extends Command {
   }
 
   @override
-  String get hint => 'generate the chosen structure on an existing project:';
+  String get hint => Translation(LocaleKeys.hint_init).tr;
 
   @override
   bool validate() {

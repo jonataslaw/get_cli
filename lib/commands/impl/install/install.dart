@@ -4,6 +4,8 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/core/generator.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 
 class InstallCommand extends Command with ArgsMixin {
@@ -41,7 +43,7 @@ class InstallCommand extends Command with ArgsMixin {
   }
 
   @override
-  String get hint => 'Use to install a package in your project (dependencies):';
+  String get hint => Translation(LocaleKeys.hint_install).tr;
 
   @override
   bool validate() {
@@ -52,7 +54,7 @@ class InstallCommand extends Command with ArgsMixin {
       final codeSample2 = LogService.code('get install get');
       throw CliException(
           'Please, enter the name of a package you wanna install',
-          codeSample: '''Example:
+          codeSample: '''
   $codeSample1
   if you wanna install the latest version:
   $codeSample2

@@ -1,5 +1,7 @@
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/functions/version/print_get_cli.dart';
 
 class VersionCommand extends Command {
@@ -12,7 +14,7 @@ class VersionCommand extends Command {
   }
 
   @override
-  String get hint => 'Shows the current CLI version';
+  String get hint => Translation(LocaleKeys.hint_version).tr;
 
   @override
   bool validate() {

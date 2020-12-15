@@ -3,6 +3,8 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/core/generator.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/internationalization.dart';
 
 class RemoveCommand extends Command {
   @override
@@ -24,7 +26,7 @@ class RemoveCommand extends Command {
   }
 
   @override
-  String get hint => 'Use to remove a package in your project (dependencies):';
+  String get hint => Translation(LocaleKeys.hint_remove).tr;
 
   @override
   bool validate() {

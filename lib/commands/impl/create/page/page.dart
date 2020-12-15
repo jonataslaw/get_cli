@@ -6,7 +6,9 @@ import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/core/generator.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/routes/get_add_route.dart';
 import 'package:get_cli/models/file_model.dart';
@@ -31,9 +33,11 @@ class CreatePageCommand extends Command with ArgsMixin {
     String path = pathSplit.join('/');
 
     if (Directory(path).existsSync()) {
-      LogService.info(
-          'The page [$name] already exists, do you want to overwrite it?');
-      final menu = Menu(['Yes', 'No']);
+      LogService.info(Translation(LocaleKeys.ask_existing_page.trArgs([name])));
+      final menu = Menu([
+        LocaleKeys.options_yes.tr,
+        LocaleKeys.options_no.tr,
+      ]);
       final result = menu.choose();
       if (result.index == 0) {
         await _writeFiles(pathSplit, isProject ? 'home' : name,
@@ -46,7 +50,7 @@ class CreatePageCommand extends Command with ArgsMixin {
   }
 
   @override
-  String get hint => 'Use to generate pages';
+  String get hint => LocaleKeys.hint_create_page.tr;
 
   @override
   bool validate() {
@@ -99,7 +103,7 @@ class CreatePageCommand extends Command with ArgsMixin {
     );
 
     await addRoute(name, path);
-    LogService.success(name.pascalCase + ' page created successfully.');
+    LogService.success(LocaleKeys.sucess_page_create.trArgs([name.pascalCase]));
     return;
   }
 }

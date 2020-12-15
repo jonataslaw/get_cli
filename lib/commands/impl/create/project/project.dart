@@ -7,7 +7,9 @@ import 'package:get_cli/commands/impl/init/flutter/init.dart';
 import 'package:get_cli/commands/impl/init/get_server/get_server_command.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:recase/recase.dart';
 
 class CreateProjectCommand extends Command with ArgsMixin {
@@ -21,7 +23,7 @@ class CreateProjectCommand extends Command with ArgsMixin {
     String nameProject = name;
     if (name == '.') {
       final dialog = CLI_Dialog(questions: [
-        ['what is the name of the project?', 'name']
+        [LocaleKeys.ask_name_to_project.tr, 'name']
       ]);
       nameProject = dialog.ask()['name'];
     }
@@ -35,7 +37,10 @@ class CreateProjectCommand extends Command with ArgsMixin {
     if (result.index == 0) {
       final dialog = CLI_Dialog(questions: [
         [
-          'What is your company\'s domain? \x1B[33m example: com.yourcompany \x1B[0m',
+          LocaleKeys.ask_company_domain.tr +
+              ' \x1B[33m' +
+              LocaleKeys.example.tr +
+              ' com.yourcompany \x1B[0m',
           'org'
         ]
       ]);
@@ -49,7 +54,7 @@ class CreateProjectCommand extends Command with ArgsMixin {
   }
 
   @override
-  String get hint => 'Use to generate new project';
+  String get hint => LocaleKeys.hint_create_project.tr;
 
   @override
   bool validate() {

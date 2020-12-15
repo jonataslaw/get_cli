@@ -1,5 +1,7 @@
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/internationalization.dart';
 
 class UpdateCommand extends Command {
   @override
@@ -8,7 +10,7 @@ class UpdateCommand extends Command {
   }
 
   @override
-  String get hint => 'To update CLI';
+  String get hint => Translation(LocaleKeys.hint_update).tr;
 
   @override
   bool validate() {

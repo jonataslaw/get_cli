@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/is_url/is_url.dart';
@@ -13,7 +15,7 @@ import 'package:recase/recase.dart';
 
 class CreateViewCommand extends Command with ArgsMixin {
   @override
-  String get hint => 'generate view';
+  String get hint => Translation(LocaleKeys.hint_create_view).tr;
 
   @override
   bool validate() {
@@ -42,7 +44,8 @@ Future<void> createView(String name,
         String content = res.body;
         sample.customContent = replaceVars(content, name);
       } else {
-        CliException('failed to connect with $withArgument');
+        throw CliException(
+            LocaleKeys.error_failed_to_connect.trArgs([withArgument]));
       }
     } else {
       File file = File(withArgument);
@@ -50,7 +53,8 @@ Future<void> createView(String name,
         String content = file.readAsStringSync();
         sample.customContent = replaceVars(content, name);
       } else {
-        CliException('$withArgument  is not a file or valid url');
+        throw CliException(
+            LocaleKeys.error_no_valid_file_or_url.trArgs([withArgument]));
       }
     }
   }

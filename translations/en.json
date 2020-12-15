@@ -1,0 +1,60 @@
+{
+  "error": {
+    "failed_to_connect": "Failed to connect with %s",
+    "no_valid_file_or_url": "%s is not a file or valid url",
+    "unnecessary_parameter": "the %s parameter is not necessary",
+    "unnecessary_parameter_plural": "the %s parameters are not necessary",
+    "nonexistent_directory": "%s directory does not exist.",
+    "empty_directory": "%s is empty",
+    "invalid_json": "%s is not a valid json file",
+    "special_characters_in_key":"Special characters are not allowed in key. \\n key: %s",
+    "required_path": "Needed to pass the file or directory path",
+    "invalid_dart": "The %s is not a valid dart file",
+    "invalid_file_or_directory" : "The %s is not a valid file or directory"
+  },
+  "ask": {
+    "existing_page": "The page [%s] already exists, do you want to overwrite it?",
+    "name_to_project": "what is the name of the project?",
+    "company_domain": "What is your company's domain?",
+    "model_name": "Could not set the model name automatically, which name do you want to use?"
+  },
+  "info": {
+      "unnecessary_flag": "The %s is not necessary",
+      "unnecessary_flag_prural": "The %s are not necessary"
+  },
+  "options": {
+    "yes": "Yes!",
+    "no": "No"
+  },
+  "sucess": {
+    "page_create": "%s page created successfully.",
+    "locale_generate": "locale files generated successfully.",
+    "getx_pattern_generated": "GetX Pattern structure successfully generated.",
+    "CLEAN_Pattern_generated": "CLEAN Pattern structure successfully generated.",
+    "file_formatted": " '%s' was successfully formatted"
+  },
+  "hint": {
+    "create": {
+      "controller": "Generate controller",
+      "page": "Use to generate pages",
+      "project": "Use to generate new project",
+      "provider": "Create a new Provider",
+      "screen": "Generate new screen",
+      "view": "Generate view"
+    }, 
+    "generate": {
+        "locales": "Generate translation file from json files",
+        "model": "generate Class model from json"
+    }, 
+    "help": "Show this help",
+    "init": "generate the chosen structure on an existing project:",
+    "install": "Use to install a package in your project (dependencies):",
+    "remove" : "Use to remove a package in your project (dependencies):",
+    "sort": "Sort imports and format dart files",
+    "update": "To update GET_CLI",
+    "version": "Shows the current CLI version'"
+  },
+  "optional_parameters": "Optional parameters: %s",
+  "example": "Example:"
+
+}

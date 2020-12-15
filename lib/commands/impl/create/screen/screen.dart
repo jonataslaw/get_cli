@@ -2,7 +2,9 @@ import 'package:get_cli/commands/impl/args_mixin.dart';
 import 'package:get_cli/commands/interface/command.dart';
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 import 'package:get_cli/core/generator.dart';
+import 'package:get_cli/core/locales.g.dart';
 import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/core/internationalization.dart';
 import 'package:get_cli/functions/exports_files/add_export.dart';
 import 'package:get_cli/functions/routes/arc_add_route.dart';
 import 'package:get_cli/models/file_model.dart';
@@ -61,7 +63,7 @@ class CreateScreenCommand extends Command with ArgsMixin {
   }
 
   @override
-  String get hint => 'Generate new screen';
+  String get hint => Translation(LocaleKeys.hint_create_screen).tr;
 
   @override
   bool validate() {
