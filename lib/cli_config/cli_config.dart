@@ -46,6 +46,6 @@ class CliConfig {
     String dateLatsUpdate = lines[lastUpdateIndex].split(':').last.trim();
     DateTime now = _formatter.parse(_formatter.format(DateTime.now()));
 
-    return _formatter.parse(dateLatsUpdate).isBefore(now);
+    return _formatter.parse(dateLatsUpdate) == now;
   }
 }
