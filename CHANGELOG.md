@@ -1,3 +1,12 @@
+## [1.4.0]
+
+- fix init command on issue #43
+- add internationalization for CLI
+- fix sort routes
+- add option with to controller e view here [more here](https://github.com/jonataslaw/get_cli#generate-controller-for-model-online)
+- add command sort 
+- and others improvements
+
 ## [1.3.16]
 
 - improved route creation with support for children pages [learn more here](https://github.com/jonataslaw/getx/blob/master/CHANGELOG.md#3210---big-update)
