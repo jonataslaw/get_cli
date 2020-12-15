@@ -76,7 +76,7 @@
     "page_create": "%s page created successfully.",
     "locale_generate": "locale files generated successfully.",
     "getx_pattern_generated": "GetX Pattern structure successfully generated.",
-    "CLEAN_Pattern_generated": "CLEAN Pattern structure successfully generated.",
+    "clean_Pattern_generated": "CLEAN Pattern structure successfully generated.",
     "file_formatted": " '%s' was successfully formatted",
     "package_removed": "Package: %s removed!",
     "package_installed": "'Package: %s installed!",

@@ -42,5 +42,5 @@ Future<void> createInitKatekko() async {
     await ShellUtils.pubGet();
   }
 
-  LogService.success(Translation(LocaleKeys.sucess_CLEAN_Pattern_generated));
+  LogService.success(Translation(LocaleKeys.sucess_clean_Pattern_generated).tr);
 }

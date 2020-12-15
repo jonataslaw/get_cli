@@ -67,7 +67,7 @@
     "page_create": "Página %s criada com sucesso.",
     "locale_generate": "Arquivo de tradução gerado com sucesso.",
     "getx_pattern_generated": "Estrutura GetX Pattern gerada com sucesso.",
-    "CLEAN_Pattern_generated": "Estrutura CLEAN gerada com sucesso.",
+    "clean_Pattern_generated": "Estrutura CLEAN gerada com sucesso.",
     "file_formatted": " '%s' foi formatado com sucesso",
     "package_removed": "Pacote: %s removido!",
     "package_installed": "'Pacote: %s instalado!",

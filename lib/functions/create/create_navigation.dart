@@ -21,7 +21,7 @@ void addNavigation(String name) {
 
   List<String> lines;
 
-  if (navigationFile.existsSync()) {
+  if (!navigationFile.existsSync()) {
     createNavigation();
     lines = navigationFile.readAsLinesSync();
   } else {

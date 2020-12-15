@@ -65,8 +65,8 @@ abstract class LocaleKeys {
   static const sucess_page_create = 'sucess_page_create';
   static const sucess_locale_generate = 'sucess_locale_generate';
   static const sucess_getx_pattern_generated = 'sucess_getx_pattern_generated';
-  static const sucess_CLEAN_Pattern_generated =
-      'sucess_CLEAN_Pattern_generated';
+  static const sucess_clean_Pattern_generated =
+      'sucess_clean_Pattern_generated';
   static const sucess_file_formatted = 'sucess_file_formatted';
   static const sucess_package_removed = 'sucess_package_removed';
   static const sucess_package_installed = 'sucess_package_installed';
@@ -144,7 +144,7 @@ abstract class Locales {
     'sucess_locale_generate': 'locale files generated successfully.',
     'sucess_getx_pattern_generated':
         'GetX Pattern structure successfully generated.',
-    'sucess_c_l_e_a_n_pattern_generated':
+    'sucess_clean_pattern_generated':
         'CLEAN Pattern structure successfully generated.',
     'sucess_file_formatted': ' \'%s\' was successfully formatted',
     'sucess_package_removed': 'Package: %s removed!',
@@ -227,7 +227,7 @@ abstract class Locales {
     'sucess_locale_generate': 'Arquivo de tradução gerado com sucesso.',
     'sucess_getx_pattern_generated':
         'Estrutura GetX Pattern gerada com sucesso.',
-    'sucess_c_l_e_a_n_pattern_generated': 'Estrutura CLEAN gerada com sucesso.',
+    'sucess_clean_pattern_generated': 'Estrutura CLEAN gerada com sucesso.',
     'sucess_file_formatted': ' \'%s\' foi formatado com sucesso',
     'sucess_package_removed': 'Pacote: %s removido!',
     'sucess_package_installed': '\'Pacote: %s instalado!',
