@@ -17,12 +17,12 @@ class Structure {
             .existsSync()
         ? replaceAsExpected(path: 'lib/pages')
         : replaceAsExpected(path: 'lib/app/modules'),
-    'widget': replaceAsExpected(path: 'lib/widgets/'),
-    'model': replaceAsExpected(path: 'lib/data/models/'),
+    'widget': replaceAsExpected(path: 'lib/app/widgets/'),
+    'model': replaceAsExpected(path: 'lib/app/data/models'),
     'init': replaceAsExpected(path: 'lib/'),
     'route': replaceAsExpected(path: 'lib/routes/'),
-    'repository': replaceAsExpected(path: 'lib/data/repositories/'),
-    'provider': replaceAsExpected(path: 'lib/app/data/providers'),
+    'repository': replaceAsExpected(path: 'lib/app/data/'),
+    'provider': replaceAsExpected(path: 'lib/app/data'),
     'controller': replaceAsExpected(path: 'lib/app'),
     'view': replaceAsExpected(path: 'lib/app/views/'),
     //artekko files

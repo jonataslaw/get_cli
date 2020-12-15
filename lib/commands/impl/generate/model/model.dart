@@ -33,13 +33,13 @@ class GenerateModelCommand extends Command with ArgsMixin {
     FileModel _fileModel;
     final classGenerator = ModelGenerator(name);
 
-    if (findFolderByName('models') != null) {
+    /* if (findFolderByName('models') != null) {
       _fileModel = Structure.model(name, 'model', onCommand != '',
           on: onCommand != '' ? onCommand : 'models', folderName: 'models');
     } else {
-      _fileModel =
-          Structure.model(name, 'generate_model', false, on: onCommand);
-    }
+      _fileModel = Structure.model(name, 'model', false, on: onCommand);
+    } */
+    _fileModel = Structure.model(name, 'model', false, on: onCommand);
 
     DartCode dartCode = classGenerator.generateDartClasses(await _jsonRawData);
 
@@ -54,7 +54,7 @@ class GenerateModelCommand extends Command with ArgsMixin {
         name,
         'provider',
         onCommand,
-        onCommand != '',
+        true,
         ProviderSample(
           name,
           createEndpoints: true,
