@@ -1,3 +1,9 @@
+## [1.4.1]
+
+- update README
+- and others improvements
+- add [separator](https://github.com/jonataslaw/get_cli#separator-file-type)
+
 ## [1.4.0]
 
 - fix init command on issue #43

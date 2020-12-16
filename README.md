@@ -264,7 +264,15 @@ get_cli:
 ```
 
 ### Are your imports disorganized?
-To help you organize your imports a new command was created: `get sort`, in addition to organizing your imports the command will also format your dart file. thanks to [dart_style](https://pub.dev/packages/dart_style).
+  To help you organize your imports a new command was created: `get sort`, in addition to organizing your imports the command will also format your dart file. thanks to [dart_style](https://pub.dev/packages/dart_style).
+
+### Internationalization of the cli
+  CLI now has an internationalization system.
+
+  to translate the cli into your language:
+1. create a new json file with your language, in the [tranlations](/translations) folder
+2. Copy the keys from the [file](/translations/en.json), and translate the values
+3. send your PR.
 
 
 TODO: 
