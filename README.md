@@ -85,13 +85,98 @@ get -v
 // For help
 get help
 ```
+# Exploring the CLI
+  let's explore the existing commands in the cli
+### Create project 
+```shell
+  get create project
+```
+  Using to generate a new project, you can choose between [Flutter](https://github.com/flutter/flutter) and [get_sever](https://pub.dev/packages/get_server), after creating the default directory, it will run a `get init` next command
 
-## Examples
-### Generate Locates example
+### Init
+```shell
+  get init
+```
+  Use this command with care it will overwrite all files in the lib folder.
+  It allows you to choose between two structures, [getx_pattern](https://kauemurakami.github.io/getx_pattern/) and [clean](https://github.com/Katekko/ekko_app).
 
-create the json language files in the assets/locales folder.<br/>
+### Create page
+```shell
+  get create page:name 
+``` 
+  this command allows you to create modules, it is recommended for users who chose to use getx_pattern.
 
-input: <br/>
+  creates the view, controller and binding files, in addition to automatically adding the route.
+
+  You can create a module within another module.
+```shell
+  get create page:name on other_module 
+``` 
+  When creating a new project now and use `on` to create a page the CLI will use [children pages](https://github.com/jonataslaw/getx/blob/master/CHANGELOG.md#3210---big-update).
+
+### Create Screen
+```shell
+  get create screen:name 
+``` 
+  similar to the `create page`, but suitable for those who use Clean
+
+### Create controller
+```shell
+  get create controller:dialog on your_folder
+```
+  create a controller in a specific folder.
+
+*Using with option*
+  You can now create a template file, the way you prefer.
+
+*run* 
+
+```shell
+  get create controller:auth with examples/authcontroller.dart on your_folder
+```
+  or with url
+  *run* 
+```shell
+  get create controller:auth with 'https://raw.githubusercontent.com/jonataslaw/get_cli/master/samples_file/controller.dart.example' on your_folder
+```
+
+
+input:
+```dart
+@import
+
+class @controller extends GetxController {
+  final  email = ''.obs;
+  final  password = ''.obs;
+  void login() {
+  }
+
+}
+```
+
+output: 
+```dart 
+import 'package:get/get.dart';
+
+class AuthController extends GetxController {
+  final email = ''.obs;
+  final password = ''.obs;
+  void login() {}
+}
+```
+### Create controller
+```shell
+  get view controller:dialog on your_folder
+```
+create a view in a specific folder
+
+
+  
+### Generate Locates
+
+  create the json language files in the assets/locales folder.
+
+  input: 
 
 pt_BR.json
 ```json
