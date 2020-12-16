@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:cli_menu/cli_menu.dart';
@@ -14,14 +13,28 @@ import 'package:yaml/yaml.dart';
 
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');
+  static final Map<String, dynamic> _mapSep = {
+    'separator': '',
+    'isChecked': false
+  };
+  static final Map<String, dynamic> _mapName = {'name': '', 'isChecked': false};
 
-  static String getProjectName() {
+  static String _getProjectName() {
+    _mapName['isChecked'] = true;
     var lines = _pubspec.readAsLinesSync();
-    return lines
+    String name = lines
         .firstWhere((line) => line.startsWith('name:'), orElse: () => null)
         ?.split(':')
         ?.last
         ?.trim();
+    return name;
+  }
+
+  static String getProjectName() {
+    if (!_mapName['isChecked']) {
+      _mapName['name'] = _getProjectName();
+    }
+    return _mapName['name'];
   }
 
   static Future<bool> addDependencies(String package,
@@ -112,6 +125,14 @@ class PubspecUtils {
   }
 
   static String get separatorFileType {
+    if (!_mapSep['isChecked']) {
+      _mapSep['separator'] = _separatorFileType;
+    }
+    return _mapSep['separator'];
+  }
+
+  static String get _separatorFileType {
+    _mapSep['isChecked'] = true;
     YamlMap yaml = loadYaml(_pubspec.readAsStringSync());
     if (yaml.containsKey('get_cli')) {
       if (yaml['get_cli'].containsKey('separator')) {

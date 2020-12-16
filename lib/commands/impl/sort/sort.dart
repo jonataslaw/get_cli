@@ -29,10 +29,11 @@ class SortCommand extends Command with ArgsMixin {
       'or\n'
       'get sort lib/main.dart\n'
       'or\n'
-      'get sort .';
+      'get sort . ';
 
   @override
   bool validate() {
+    flags.removeWhere((element) => element == '--skipRename');
     if (flags.isNotEmpty) {
       LogService.info(LocaleKeys.info_unnecessary_flag.trArgsPlural(
         LocaleKeys.info_unnecessary_flag_prural,
@@ -62,7 +63,9 @@ class SortCommand extends Command with ArgsMixin {
         .forEach((element) {
       if (element is File && element.path.endsWith('.dart')) {
         writeFile(element.path, element.readAsStringSync(),
-            overwrite: true, logger: false);
+            overwrite: true,
+            logger: false,
+            skipRename: containsArg('--skipRename'));
         LogService.success(
             LocaleKeys.sucess_file_formatted.trArgs([element.path]));
       }
@@ -72,7 +75,9 @@ class SortCommand extends Command with ArgsMixin {
   void sortImportsFile(String path) {
     if (path.endsWith('.dart') && File(path).existsSync()) {
       writeFile(path, File(path).readAsStringSync(),
-          overwrite: true, logger: false);
+          overwrite: true,
+          logger: false,
+          skipRename: containsArg('--skipRename'));
       LogService.success(LocaleKeys.sucess_file_formatted.trArgs([path]));
     } else {
       throw CliException(LocaleKeys.error_invalid_dart.trArgs([path]));

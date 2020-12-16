@@ -22,13 +22,17 @@ File handleFileCreate(String name, String command, String on, bool extraFolder,
 }
 
 File writeFile(String path, String content,
-    {bool overwrite = false, bool skipFormatter = false, logger = true}) {
+    {bool overwrite = false,
+    bool skipFormatter = false,
+    logger = true,
+    bool skipRename = false}) {
   File _file = File(Structure.replaceAsExpected(path: path));
   if (!_file.existsSync() || overwrite) {
     if (!skipFormatter) {
       if (path.endsWith('.dart')) {
         try {
-          content = sortImports(content, PubspecUtils.getProjectName());
+          content = sortImports(content, PubspecUtils.getProjectName(),
+              renameImport: !skipRename);
         } catch (e) {
           if (_file.existsSync()) {
             LogService.info(LocaleKeys.error_invalid_dart.trArgs([_file.path]));
@@ -37,12 +41,14 @@ File writeFile(String path, String content,
         }
       }
     }
-    String separatorFileType = PubspecUtils.separatorFileType;
-    if (separatorFileType.isNotEmpty) {
-      _file = _file.existsSync()
-          ? _file = _file
-              .renameSync(replacePathTypeSeparator(path, separatorFileType))
-          : File(replacePathTypeSeparator(path, separatorFileType));
+    if (!skipRename) {
+      String separatorFileType = PubspecUtils.separatorFileType;
+      if (separatorFileType.isNotEmpty) {
+        _file = _file.existsSync()
+            ? _file = _file
+                .renameSync(replacePathTypeSeparator(path, separatorFileType))
+            : File(replacePathTypeSeparator(path, separatorFileType));
+      }
     }
 
     _file.createSync(recursive: true);
@@ -66,7 +72,7 @@ String replacePathTypeSeparator(String path, String separator) {
     List<String> chars = path.split('');
     index--;
     chars.removeAt(index);
-    chars.insert(index, separator);
+    chars.insert(index, separator[0]);
     return chars.join();
   }
 

@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
 
-String sortImports(
-  String content,
-  String packageName,
-) {
+String sortImports(String content, String packageName,
+    {bool renameImport = false}) {
   content = formatterDartFile(content);
 
   List<String> lines = LineSplitter.split(content).toList();
@@ -39,6 +39,18 @@ String sortImports(
         stringLine = !stringLine;
       }
       contentLines.add(lines[i]);
+    }
+  }
+
+  if (renameImport) {
+    String separator = PubspecUtils.separatorFileType;
+    for (int i = 0; i < projectImports.length; i++) {
+      projectImports[i] =
+          replacePathTypeSeparator(projectImports[i], separator);
+    }
+    for (int i = 0; i < projectRelativeImports.length; i++) {
+      projectRelativeImports[i] =
+          replacePathTypeSeparator(projectRelativeImports[i], separator);
     }
   }
 
