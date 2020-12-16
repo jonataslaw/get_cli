@@ -316,7 +316,7 @@ get_cli:
 
 ### Are your imports disorganized?
   To help you organize your imports a new command was created: `get sort`, in addition to organizing your imports the command will also format your dart file. thanks to [dart_style](https://pub.dev/packages/dart_style).
-  When using get sort all files are renamed, with the [separator][#separator-file-type].
+  When using get sort all files are renamed, with the [separator](#separator-file-type).
   To not rename use the `--skipRename` flag
 
 ### Internationalization of the cli
