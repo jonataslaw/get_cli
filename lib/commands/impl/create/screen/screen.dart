@@ -94,9 +94,6 @@ class CreateScreenCommand extends Command with ArgsMixin {
         ControllerSample('', name, isServer), 'controllers', '.');
 
     String controllerImport = Structure.pathToDirImport(controller.path);
-    addExport(
-        'lib/infrastructure/navigation/bindings/controllers/controllers_bindings.dart',
-        "export 'package:${PubspecUtils.getProjectName()}/$controllerImport'; ");
 
     File view = handleFileCreate(
         name,
@@ -113,7 +110,7 @@ class CreateScreenCommand extends Command with ArgsMixin {
         '',
         '.');
     ;
-    handleFileCreate(
+    File binding = handleFileCreate(
         name,
         'controller.binding',
         '',
@@ -133,6 +130,10 @@ class CreateScreenCommand extends Command with ArgsMixin {
         '/' +
         Structure.pathToDirImport(view.path);
     addExport('lib/presentation/screens.dart', "export '$exportView';");
+
+    addExport(
+        'lib/infrastructure/navigation/bindings/controllers/controllers_bindings.dart',
+        "export 'package:${PubspecUtils.getProjectName()}/${Structure.pathToDirImport(binding.path)}'; ");
     arcAddRoute(name);
   }
 }
