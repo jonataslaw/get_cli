@@ -264,7 +264,7 @@ get_cli:
 ```
 
 ### Are your imports disorganized?
-To help you organize your imports a new command was created: `get sort`, in addition to organizing your imports the command will also format your dart file. thanks to [dart_style] (https://pub.dev/packages/dart_style).
+To help you organize your imports a new command was created: `get sort`, in addition to organizing your imports the command will also format your dart file. thanks to [dart_style](https://pub.dev/packages/dart_style).
 
 
 TODO: 
