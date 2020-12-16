@@ -164,9 +164,9 @@ class AuthController extends GetxController {
   void login() {}
 }
 ```
-### Create controller
+### Create view
 ```shell
-  get view controller:dialog on your_folder
+  get create view:dialog on your_folder
 ```
 create a view in a specific folder
 
