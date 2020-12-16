@@ -11,9 +11,9 @@ import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart'
 import 'package:get_cli/functions/routes/get_support_children.dart';
 import 'package:get_cli/samples/impl/get_app_pages.dart';
 
-Future<void> addAppPage(String name, String path) async {
+Future<void> addAppPage(String name, String bindingDir, String viewDir) async {
   File appPagesFile = findFileByName('app_pages.dart');
-
+  String path = viewDir;
   List<String> lines = [];
   if (appPagesFile.path.isEmpty) {
     await AppPagesSample().create(skipFormatter: true);
@@ -25,6 +25,7 @@ Future<void> addAppPage(String name, String path) async {
   }
 
   String routesOrPath = 'Routes';
+
   int indexRoutes = lines
       .indexWhere((element) => element.trim().contains('static final routes'));
   int index =
@@ -35,6 +36,7 @@ Future<void> addAppPage(String name, String path) async {
     routesOrPath = '_Paths';
     List<String> pathSplit = path.split('/');
     pathSplit.removeLast();
+    pathSplit.removeLast();
     pathSplit
         .removeWhere((element) => element == 'app' || element == 'modules');
     int onPageIndex = -1;
@@ -43,6 +45,8 @@ Future<void> addAppPage(String name, String path) async {
           (element) => element
               .contains('_Paths.${pathSplit.last.snakeCase.toUpperCase()},'),
           indexRoutes);
+
+      pathSplit.removeLast();
     }
     if (onPageIndex != -1) {
       int onPageStartIndex = lines
@@ -88,7 +92,6 @@ Future<void> addAppPage(String name, String path) async {
       }
     }
   }
-
   String nameSnakeCase = name.snakeCase;
   String namePascalCase = name.pascalCase;
   String line = '''${_getTabs(tabEspaces)}GetPage(
@@ -97,13 +100,12 @@ ${_getTabs(tabEspaces + 1)}page:()=> ${namePascalCase}View(),
 ${_getTabs(tabEspaces + 1)}binding: ${namePascalCase}Binding(),
 ${_getTabs(tabEspaces)}),''';
 
-  String import =
-      "import 'package:${await PubspecUtils.getProjectName()}/$path";
+  String import = "import 'package:${PubspecUtils.getProjectName()}/";
 
   lines.insert(index, line);
 
-  lines.insert(0, import + '/bindings/$name' "_binding.dart';");
-  lines.insert(0, import + '/views/$name' + "_view.dart';");
+  lines.insert(0, import + bindingDir + "';");
+  lines.insert(0, import + viewDir + "';");
 
   await writeFile(appPagesFile.path, lines.join('\n'),
       overwrite: true, logger: false);

@@ -12,13 +12,13 @@ import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
 import 'package:get_cli/samples/impl/arctekko/arc_routes.dart';
 
-Future<void> arcAddRoute(String nameRoute) async {
+void arcAddRoute(String nameRoute) {
   File routesFile = File(Structure.replaceAsExpected(
       path: 'lib/infrastructure/navigation/routes.dart'));
   List<String> lines = [];
-  if (!await routesFile.exists()) {
-    await ArcRouteSample(nameRoute.snakeCase.toUpperCase()).create();
-    lines = await routesFile.readAsLines();
+  if (!routesFile.existsSync()) {
+    ArcRouteSample(nameRoute.snakeCase.toUpperCase()).create();
+    lines = routesFile.readAsLinesSync();
   } else {
     String content = formatterDartFile(routesFile.readAsStringSync());
     lines = LineSplitter.split(content).toList();
@@ -37,10 +37,10 @@ Future<void> arcAddRoute(String nameRoute) async {
 
   _routesSort(lines);
 
-  await writeFile(routesFile.path, lines.join('\n'), overwrite: true);
+  writeFile(routesFile.path, lines.join('\n'), overwrite: true);
   LogService.success(
       Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
-  await addNavigation(nameRoute);
+  addNavigation(nameRoute);
 }
 
 List<String> _routesSort(List<String> lines) {

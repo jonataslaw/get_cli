@@ -44,9 +44,12 @@ class GenerateModelCommand extends Command with ArgsMixin {
     DartCode dartCode = classGenerator.generateDartClasses(await _jsonRawData);
 
     String modelPath = _fileModel.path + '_model.dart';
-    await writeFile(modelPath, dartCode.result, overwrite: true);
+
+    File model = writeFile(modelPath, dartCode.result, overwrite: true);
+
     dartCode.warnings.forEach((warning) =>
         LogService.info('warning: ${warning.path} ${warning.warning} '));
+
     if (!containsArg('--skipProvider')) {
       List<String> pathSplit = Structure.safeSplitPath(modelPath);
       pathSplit.removeWhere((element) => element == '.' || element == 'lib');
@@ -58,7 +61,7 @@ class GenerateModelCommand extends Command with ArgsMixin {
         ProviderSample(
           name,
           createEndpoints: true,
-          modelPath: pathSplit.join('/'),
+          modelPath: Structure.pathToDirImport(model.path),
         ),
         'providers',
       );

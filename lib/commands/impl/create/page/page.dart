@@ -28,11 +28,11 @@ class CreatePageCommand extends Command with ArgsMixin {
     FileModel _fileModel = Structure.model(
         isProject ? 'home' : name, 'page', true,
         on: onCommand, folderName: isProject ? 'home' : name);
-
     List<String> pathSplit = Structure.safeSplitPath(_fileModel.path);
+
     pathSplit.removeLast();
     String path = pathSplit.join('/');
-
+    path = Structure.replaceAsExpected(path: path);
     if (Directory(path).existsSync()) {
       LogService.info(Translation(LocaleKeys.ask_existing_page.trArgs([name])));
       final menu = Menu([
@@ -41,12 +41,11 @@ class CreatePageCommand extends Command with ArgsMixin {
       ]);
       final result = menu.choose();
       if (result.index == 0) {
-        await _writeFiles(pathSplit, isProject ? 'home' : name,
-            overwrite: true);
+        await _writeFiles(path, isProject ? 'home' : name, overwrite: true);
       }
     } else {
       Directory(path).createSync(recursive: true);
-      await _writeFiles(pathSplit, isProject ? 'home' : name, overwrite: false);
+      await _writeFiles(path, isProject ? 'home' : name, overwrite: false);
     }
   }
 
@@ -58,17 +57,11 @@ class CreatePageCommand extends Command with ArgsMixin {
     return true;
   }
 
-  Future<void> _writeFiles(List<String> pathSplit, String name,
+  Future<void> _writeFiles(String path, String name,
       {bool overwrite = false}) async {
-    pathSplit.remove('.');
-    pathSplit.remove('lib');
-    String path = pathSplit.join('/');
-
-    String controllerDir = path + '/controllers/$name' + '_controller.dart';
-
     bool isServer = PubspecUtils.isServerProject;
 
-    await handleFileCreate(
+    File controllerFile = handleFileCreate(
       name,
       'controller',
       path,
@@ -76,8 +69,17 @@ class CreatePageCommand extends Command with ArgsMixin {
       ControllerSample('', name, isServer),
       'controllers',
     );
-
-    await handleFileCreate(
+    String controllerDir = Structure.pathToDirImport(controllerFile.path);
+    File viewFile = handleFileCreate(
+      name,
+      'view',
+      path,
+      true,
+      GetViewSample('', name.pascalCase + 'View',
+          name.pascalCase + 'Controller', controllerDir, isServer),
+      'views',
+    );
+    File bindingFile = handleFileCreate(
       name,
       'binding',
       path,
@@ -93,17 +95,11 @@ class CreatePageCommand extends Command with ArgsMixin {
       'bindings',
     );
 
-    await handleFileCreate(
+    await addRoute(
       name,
-      'view',
-      path,
-      true,
-      GetViewSample('', name.pascalCase + 'View',
-          name.pascalCase + 'Controller', controllerDir, isServer),
-      'views',
+      Structure.pathToDirImport(bindingFile.path),
+      Structure.pathToDirImport(viewFile.path),
     );
-
-    await addRoute(name, path);
     LogService.success(LocaleKeys.sucess_page_create.trArgs([name.pascalCase]));
     return;
   }

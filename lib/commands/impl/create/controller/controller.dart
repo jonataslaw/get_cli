@@ -70,7 +70,7 @@ class CreateControllerCommand extends Command with ArgsMixin {
         }
       }
     }
-    String path = await handleFileCreate(
+    File controllerFile = await handleFileCreate(
       name,
       'controller',
       onCommand,
@@ -79,11 +79,12 @@ class CreateControllerCommand extends Command with ArgsMixin {
       'controllers',
     );
 
-    String binindingPath = findBindingFromName(path, basename(onCommand));
-    List<String> pathSplit = Structure.safeSplitPath(path);
+    String binindingPath =
+        findBindingFromName(controllerFile.path, basename(onCommand));
+    List<String> pathSplit = Structure.safeSplitPath(controllerFile.path);
     pathSplit.remove('.');
     pathSplit.remove('lib');
-    if (binindingPath != '') {
+    if (binindingPath.isNotEmpty) {
       addDependencieToBinding(binindingPath, name, pathSplit.join('/'));
     }
   }

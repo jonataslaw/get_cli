@@ -11,17 +11,17 @@ import 'package:get_cli/functions/sorter_imports/sort.dart';
 import 'package:get_cli/samples/interface/sample_interface.dart';
 import '../../core/structure.dart';
 
-String handleFileCreate(String name, String command, String on,
-    bool extraFolder, Sample sample, String folderName) {
+File handleFileCreate(String name, String command, String on, bool extraFolder,
+    Sample sample, String folderName,
+    [sep = '_']) {
   final fileModel = Structure.model(name, command, extraFolder,
       on: on, folderName: folderName);
-  String path = fileModel.path + '_${fileModel.commandName}.dart';
+  String path = fileModel.path + '$sep${fileModel.commandName}.dart';
   sample.path = path;
-  sample.create();
-  return sample.path;
+  return sample.create();
 }
 
-void writeFile(String path, String content,
+File writeFile(String path, String content,
     {bool overwrite = false, bool skipFormatter = false, logger = true}) {
   File _file = File(Structure.replaceAsExpected(path: path));
   if (!_file.existsSync() || overwrite) {
@@ -37,6 +37,14 @@ void writeFile(String path, String content,
         }
       }
     }
+    String separatorFileType = PubspecUtils.separatorFileType;
+    if (separatorFileType.isNotEmpty) {
+      _file = _file.existsSync()
+          ? _file = _file
+              .renameSync(replacePathTypeSeparator(path, separatorFileType))
+          : File(replacePathTypeSeparator(path, separatorFileType));
+    }
+
     _file.createSync(recursive: true);
     _file.writeAsStringSync(content);
 
@@ -48,4 +56,19 @@ void writeFile(String path, String content,
       );
     }
   }
+  return _file;
+}
+
+String replacePathTypeSeparator(String path, String separator) {
+  int index = path.indexOf(RegExp(r'controller.dart|model.dart|provider.dart|'
+      'binding.dart|view.dart|screen.dart'));
+  if (index != -1) {
+    List<String> chars = path.split('');
+    index--;
+    chars.removeAt(index);
+    chars.insert(index, separator);
+    return chars.join();
+  }
+
+  return path;
 }

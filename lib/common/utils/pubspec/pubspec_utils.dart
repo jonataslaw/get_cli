@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:cli_menu/cli_menu.dart';
@@ -9,6 +10,7 @@ import 'package:get_cli/common/utils/logger/LogUtils.dart';
 import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
 import 'package:get_cli/common/utils/shell/shel.utils.dart';
 import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:yaml/yaml.dart';
 
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');
@@ -107,5 +109,16 @@ class PubspecUtils {
       throw CliException(
           LocaleKeys.info_package_not_installed.trArgs([package]));
     }
+  }
+
+  static String get separatorFileType {
+    YamlMap yaml = loadYaml(_pubspec.readAsStringSync());
+    if (yaml.containsKey('get_cli')) {
+      if (yaml['get_cli'].containsKey('separator')) {
+        return yaml['get_cli']['separator'] ?? '';
+      }
+    }
+
+    return '';
   }
 }

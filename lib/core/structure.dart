@@ -24,9 +24,12 @@ class Structure {
     'repository': replaceAsExpected(path: 'lib/app/data/'),
     'provider': replaceAsExpected(path: 'lib/app/data'),
     'controller': replaceAsExpected(path: 'lib/app'),
+    'binding': replaceAsExpected(path: 'lib/app'),
     'view': replaceAsExpected(path: 'lib/app/views/'),
     //artekko files
     'screen': replaceAsExpected(path: 'lib/presentation'),
+    'controller.binding':
+        replaceAsExpected(path: 'lib/infrastructure/navigation/bindings'),
     'navigation': replaceAsExpected(
         path: 'lib/infrastructure/navigation/navigation.dart'),
     //generator files
@@ -125,5 +128,11 @@ class Structure {
   static List<String> safeSplitPath(String path) {
     return path.replaceAll('\\', '/').split('/')
       ..removeWhere((element) => element == null || element.isEmpty);
+  }
+
+  static String pathToDirImport(String path) {
+    List<String> pathSplit = safeSplitPath(path)
+      ..removeWhere((element) => element == '.' || element == 'lib');
+    return pathSplit.join('/');
   }
 }

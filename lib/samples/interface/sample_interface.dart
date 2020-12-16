@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:get_cli/functions/create/create_single_file.dart';
 
 /// [Sample] is the Base class in which the files for each command
@@ -22,7 +24,7 @@ abstract class Sample {
 
   /// This function will create the file in [path] with the
   /// content of [content].
-  void create({bool skipFormatter = false}) {
+  File create({bool skipFormatter = false}) {
     return writeFile(path, customContent.isNotEmpty ? customContent : content,
         overwrite: overwrite, skipFormatter: skipFormatter);
   }

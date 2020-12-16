@@ -2,14 +2,14 @@ import 'dart:io';
 
 import 'package:get_cli/core/structure.dart';
 
-Future<void> addExport(String path, String line) async {
+void addExport(String path, String line) {
   File _file = File(Structure.replaceAsExpected(path: path));
-  if (!await _file.exists()) {
-    await _file.create(recursive: true);
-    await _file.writeAsString(line);
+  if (!_file.existsSync()) {
+    _file.createSync(recursive: true);
+    _file.writeAsStringSync(line);
     return;
   }
-  List<String> lines = await _file.readAsLines();
+  List<String> lines = _file.readAsLinesSync();
 
   if (lines.length > 1) {
     if (lines.contains(line)) {
@@ -27,5 +27,5 @@ Future<void> addExport(String path, String line) async {
 
   lines.sort();
 
-  await _file.writeAsStringSync(lines.join('\n'));
+  _file.writeAsStringSync(lines.join('\n'));
 }

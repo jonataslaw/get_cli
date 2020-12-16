@@ -13,7 +13,8 @@ import 'package:get_cli/functions/routes/get_app_pages.dart';
 import 'package:get_cli/functions/routes/get_support_children.dart';
 import 'package:get_cli/samples/impl/get_route.dart';
 
-Future<void> addRoute(String nameRoute, String path) async {
+Future<void> addRoute(
+    String nameRoute, String bindingDir, String viewDir) async {
   File routesFile = findFileByName('app_routes.dart');
   List<String> lines = [];
 
@@ -25,11 +26,14 @@ Future<void> addRoute(String nameRoute, String path) async {
     String content = formatterDartFile(routesFile.readAsStringSync());
     lines = LineSplitter.split(content).toList();
   }
-  List<String> pathSplit = path.split('/');
+  List<String> pathSplit = viewDir.split('/');
+  //remove file
   pathSplit.removeLast();
+  // remove view folder
+  pathSplit.removeLast();
+
   pathSplit.removeWhere((element) => element == 'app' || element == 'modules');
 
-  pathSplit.add(nameRoute);
   for (var i = 0; i < pathSplit.length; i++) {
     pathSplit[i] =
         pathSplit[i].snakeCase.snakeCase.toLowerCase().replaceAll('_', '-');
@@ -63,7 +67,7 @@ Future<void> addRoute(String nameRoute, String path) async {
   LogService.success(
       Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
 
-  await addAppPage(nameRoute, path);
+  await addAppPage(nameRoute, bindingDir, viewDir);
 }
 
 String _pathsToRoute(List<String> pathSplit) {

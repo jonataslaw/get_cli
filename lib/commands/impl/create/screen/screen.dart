@@ -1,3 +1,8 @@
+import 'dart:io';
+
+import 'package:cli_menu/cli_menu.dart';
+import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:recase/recase.dart';
 
 import 'package:get_cli/commands/impl/args_mixin.dart';
@@ -25,25 +30,40 @@ class CreateScreenCommand extends Command with ArgsMixin {
 
     FileModel _fileModel =
         Structure.model('', 'screen', true, on: onCommand, folderName: name);
+    List<String> pathSplit = Structure.safeSplitPath(_fileModel.path);
 
-    String screenDir = _fileModel.path + '${name.snakeCase}.screen.dart';
-    List<String> pathScreenSplit = Structure.safeSplitPath(screenDir);
+    String path = pathSplit.join('/');
+    path = Structure.replaceAsExpected(path: path);
+    if (Directory(path).existsSync()) {
+      LogService.info(Translation(LocaleKeys.ask_existing_page.trArgs([name])));
+      final menu = Menu([
+        LocaleKeys.options_yes.tr,
+        LocaleKeys.options_no.tr,
+      ]);
+      final result = menu.choose();
+      if (result.index == 0) {
+        await _writeFiles(path, name, overwrite: true);
+      }
+    } else {
+      Directory(path).createSync(recursive: true);
+      await _writeFiles(path, name);
+    }
+
+    /*  List<String> pathScreenSplit = Structure.safeSplitPath(screenDir);
     pathScreenSplit.removeWhere((element) =>
         element == '.' || element == 'lib' || element == 'presentation');
 
     String screenImport = pathScreenSplit.join('/');
+
     String controllerDir =
         '${_fileModel.path}controllers/${name.snakeCase}.controller.dart';
+    controllerDir =
+        ControllerSample('$controllerDir', name, isServer).create().path;
 
-    List<String> pathControllerSplit = Structure.safeSplitPath(controllerDir);
-    pathControllerSplit
-        .removeWhere((element) => element == '.' || element == 'lib');
-    String controllerImport = pathControllerSplit.join('/');
+    String controllerImport = Structure.pathToDirImport(controllerDir);
 
     String bindingDir =
         'lib/infrastructure/navigation/bindings/controllers/${name.snakeCase}.controller.binding.dart';
-
-    bool isServer = PubspecUtils.isServerProject;
 
     await GetViewSample(screenDir, '${name.pascalCase}Screen',
             '${name.pascalCase}Controller', controllerImport, isServer)
@@ -56,11 +76,7 @@ class CreateScreenCommand extends Command with ArgsMixin {
         .create();
     await addExport(
         'lib/infrastructure/navigation/bindings/controllers/controllers_bindings.dart',
-        '''export '${name.snakeCase}.controller.binding.dart';''');
-
-    await ControllerSample('$controllerDir', name, isServer).create();
-
-    await arcAddRoute(name);
+        '''export '${name.snakeCase}.controller.binding.dart';'''); */
   }
 
   @override
@@ -69,5 +85,54 @@ class CreateScreenCommand extends Command with ArgsMixin {
   @override
   bool validate() {
     return true;
+  }
+
+  void _writeFiles(String path, String name, {bool overwrite = false}) {
+    bool isServer = PubspecUtils.isServerProject;
+
+    File controller = handleFileCreate(name, 'controller', path, true,
+        ControllerSample('', name, isServer), 'controllers', '.');
+
+    String controllerImport = Structure.pathToDirImport(controller.path);
+    addExport(
+        'lib/infrastructure/navigation/bindings/controllers/controllers_bindings.dart',
+        "export 'package:${PubspecUtils.getProjectName()}/$controllerImport'; ");
+
+    File view = handleFileCreate(
+        name,
+        'screen',
+        path,
+        false,
+        GetViewSample(
+          '',
+          '${name.pascalCase}Screen',
+          '${name.pascalCase}Controller',
+          controllerImport,
+          isServer,
+        ),
+        '',
+        '.');
+    ;
+    handleFileCreate(
+        name,
+        'controller.binding',
+        '',
+        true,
+        GetViewSample(
+          '',
+          '${name.pascalCase}Screen',
+          '${name.pascalCase}Controller',
+          controllerImport,
+          isServer,
+        ),
+        'controllers',
+        '.');
+
+    String exportView = 'package:' +
+        PubspecUtils.getProjectName() +
+        '/' +
+        Structure.pathToDirImport(view.path);
+    addExport('lib/presentation/screens.dart', "export '$exportView';");
+    arcAddRoute(name);
   }
 }
