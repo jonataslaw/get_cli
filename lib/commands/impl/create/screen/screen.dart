@@ -118,10 +118,10 @@ class CreateScreenCommand extends Command with ArgsMixin {
         'controller.binding',
         '',
         true,
-        GetViewSample(
+        BindingSample(
           '',
-          '${name.pascalCase}Screen',
-          '${name.pascalCase}Controller',
+          name,
+          '${name.pascalCase}Binding',
           controllerImport,
           isServer,
         ),
