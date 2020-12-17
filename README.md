@@ -1,4 +1,5 @@
 ###### Documentation languages
+
 | [pt_BR](https://github.com/jonataslaw/get_cli/blob/master/README-pt_BR.md) | en_EN - this file |
 | -------------------------------------------------------------------------- | ----------------- |
 
@@ -6,24 +7,24 @@ Official CLI for the GetX™ framework.
 
 ```dart
 // To install:
-pub global activate get_cli 
+pub global activate get_cli
 
 // To create a flutter project in the current directory:
 // Note: By default it will take the folder's name as project name
 // You can name the project with `get create project:my_project`
 // If the name has spaces use `get create project:"my cool project"`
-get create project 
+get create project
 
 // To generate the chosen structure on an existing project:
-get init 
+get init
 
-// To create a page: 
+// To create a page:
 // (Pages have controller, view, and binding)
-// Note: you can use any name, ex: `get create page:login` 
-get create page:home 
+// Note: you can use any name, ex: `get create page:login`
+get create page:home
 
 // To create a new controller in a specific folder:
-// Note: you don't need to reference the folder, 
+// Note: you don't need to reference the folder,
 // Getx will search automatically for the home folder
 // and add your controller there.
 get create controller:dialogcontroller on home
@@ -58,14 +59,14 @@ get generate model on home from https://api.github.com/users/CpdnCristiano
 get install camera
 
 // To install several packages from your project:
-get install http path camera 
+get install http path camera
 
 // To install a package with specific version:
 get install path:1.6.4
 
 // You can also specify several packages with version numbers
 
-// To install a dev package in your project (dependencies_dev): 
+// To install a dev package in your project (dependencies_dev):
 get install flutter_launcher_icons --dev
 
 // To remove a package from your project:
@@ -74,74 +75,91 @@ get remove http
 // To remove several packages from your project:
 get remove http path
 
-// To update CLI: 
+// To update CLI:
 get update
 // or `get upgrade`
 
-// Shows the current CLI version: 
-get -v 
+// Shows the current CLI version:
+get -v
 // or `get -version`
 
 // For help
 get help
 ```
+
 # Exploring the CLI
-  let's explore the existing commands in the cli
-### Create project 
+
+let's explore the existing commands in the cli
+
+### Create project
+
 ```shell
   get create project
 ```
-  Using to generate a new project, you can choose between [Flutter](https://github.com/flutter/flutter) and [get_sever](https://pub.dev/packages/get_server), after creating the default directory, it will run a `get init` next command
+
+Using to generate a new project, you can choose between [Flutter](https://github.com/flutter/flutter) and [get_sever](https://pub.dev/packages/get_server), after creating the default directory, it will run a `get init` next command
 
 ### Init
+
 ```shell
   get init
 ```
-  Use this command with care it will overwrite all files in the lib folder.
-  It allows you to choose between two structures, [getx_pattern](https://kauemurakami.github.io/getx_pattern/) and [clean](https://github.com/Katekko/ekko_app).
+
+Use this command with care it will overwrite all files in the lib folder.
+It allows you to choose between two structures, [getx_pattern](https://kauemurakami.github.io/getx_pattern/) and [clean](https://github.com/Katekko/ekko_app).
 
 ### Create page
-```shell
-  get create page:name 
-``` 
-  this command allows you to create modules, it is recommended for users who chose to use getx_pattern.
 
-  creates the view, controller and binding files, in addition to automatically adding the route.
-
-  You can create a module within another module.
 ```shell
-  get create page:name on other_module 
-``` 
-  When creating a new project now and use `on` to create a page the CLI will use [children pages](https://github.com/jonataslaw/getx/blob/master/CHANGELOG.md#3210---big-update).
+  get create page:name
+```
+
+this command allows you to create modules, it is recommended for users who chose to use getx_pattern.
+
+creates the view, controller and binding files, in addition to automatically adding the route.
+
+You can create a module within another module.
+
+```shell
+  get create page:name on other_module
+```
+
+When creating a new project now and use `on` to create a page the CLI will use [children pages](https://github.com/jonataslaw/getx/blob/master/CHANGELOG.md#3210---big-update).
 
 ### Create Screen
+
 ```shell
-  get create screen:name 
-``` 
-  similar to the `create page`, but suitable for those who use Clean
+  get create screen:name
+```
+
+similar to the `create page`, but suitable for those who use Clean
 
 ### Create controller
+
 ```shell
   get create controller:dialog on your_folder
 ```
-  create a controller in a specific folder.
 
-*Using with option*
-  You can now create a template file, the way you prefer.
+create a controller in a specific folder.
 
-*run* 
+_Using with option_
+You can now create a template file, the way you prefer.
+
+_run_
 
 ```shell
   get create controller:auth with examples/authcontroller.dart on your_folder
 ```
-  or with url
-  *run* 
+
+or with url
+_run_
+
 ```shell
   get create controller:auth with 'https://raw.githubusercontent.com/jonataslaw/get_cli/master/samples_file/controller.dart.example' on your_folder
 ```
 
-
 input:
+
 ```dart
 @import
 
@@ -154,8 +172,9 @@ class @controller extends GetxController {
 }
 ```
 
-output: 
-```dart 
+output:
+
+```dart
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
@@ -164,21 +183,23 @@ class AuthController extends GetxController {
   void login() {}
 }
 ```
+
 ### Create view
+
 ```shell
   get create view:dialog on your_folder
 ```
+
 create a view in a specific folder
 
-
-  
 ### Generate Locates
 
-  create the json language files in the assets/locales folder.
+create the json language files in the assets/locales folder.
 
-  input: 
+input:
 
 pt_BR.json
+
 ```json
 {
   "buttons": {
@@ -191,7 +212,9 @@ pt_BR.json
   }
 }
 ```
+
 en_EN.json
+
 ```json
 {
   "buttons": {
@@ -205,13 +228,15 @@ en_EN.json
 }
 ```
 
-Run : 
-```dart 
+Run :
+
+```dart
 get generate locales assets/locales
 ```
 
-output: 
-```dart 
+output:
+
+```dart
 abstract class AppTranslation {
 
   static Map<String, Map<String, String>> translations = {
@@ -230,7 +255,7 @@ abstract class LocaleKeys {
 }
 
 abstract class Locales {
-  
+
   static const en_EN = {
    'buttons_login': 'Login',
    'buttons_sign_in': 'Sign-in',
@@ -253,6 +278,7 @@ abstract class Locales {
 ```
 
 now just add the line in GetMaterialApp
+
 ```dart
 
     GetMaterialApp(
@@ -261,24 +287,29 @@ now just add the line in GetMaterialApp
       ...
     )
 ```
+
 ### Generate model example
 
 Create the json model file in the assets/models/user.json<br/>
 
 input: <br/>
+
 ```json
 {
   "name": "",
   "age": 0,
   "friends": ["", ""]
 }
- ```
-Run : 
-```dart 
+```
+
+Run :
+
+```dart
 get generate model on home with assets/models/user.json
 ```
 
-output: 
+output:
+
 ```dart
 class User {
   String name;
@@ -306,31 +337,35 @@ class User {
 
 ### Separator file type
 
-  One day a user asked me, if it was possible to change what the final name of the file was, he found it more readable to use: `my_controller_name.controller.dart`, instead of the default generated by the cli: `my_controller_name_controller. dart` thinking about users like him we added the option for you to choose your own separator, just add this information in your pubsepc.yaml
-  
-  Example:
+One day a user asked me, if it was possible to change what the final name of the file was, he found it more readable to use: `my_controller_name.controller.dart`, instead of the default generated by the cli: `my_controller_name_controller. dart` thinking about users like him we added the option for you to choose your own separator, just add this information in your pubsepc.yaml
+
+Example:
+
 ```yaml
 get_cli:
   separator: "."
 ```
 
 ### Are your imports disorganized?
-  To help you organize your imports a new command was created: `get sort`, in addition to organizing your imports the command will also format your dart file. thanks to [dart_style](https://pub.dev/packages/dart_style).
-  When using get sort all files are renamed, with the [separator](#separator-file-type).
-  To not rename use the `--skipRename` flag
+
+To help you organize your imports a new command was created: `get sort`, in addition to organizing your imports the command will also format your dart file. thanks to [dart_style](https://pub.dev/packages/dart_style).
+When using get sort all files are renamed, with the [separator](#separator-file-type).
+To not rename use the `--skipRename` flag
+You are one of those who prefer to use relative imports instead of project imports, use the `--relative` option, get cli will convert.
 
 ### Internationalization of the cli
-  CLI now has an internationalization system.
 
-  to translate the cli into your language:
+CLI now has an internationalization system.
+
+to translate the cli into your language:
+
 1. create a new json file with your language, in the [tranlations](/translations) folder
 2. Copy the keys from the [file](/translations/en.json), and translate the values
 3. send your PR.
 
+TODO:
 
-TODO: 
 - Support for customModels
 - Include unit tests
 - Improve generated structure
 - Add a backup system
-
