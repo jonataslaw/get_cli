@@ -75,7 +75,11 @@ String replacePathTypeSeparator(String path, String separator) {
     List<String> chars = path.split('');
     index--;
     chars.removeAt(index);
-    chars.insert(index, separator[0]);
+    if (separator.length > 1) {
+      chars.insert(index, separator[0]);
+    } else {
+      chars.insert(index, separator);
+    }
     return chars.join();
   }
 
