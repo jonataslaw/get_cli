@@ -69,18 +69,20 @@ File writeFile(String path, String content,
 }
 
 String replacePathTypeSeparator(String path, String separator) {
-  int index = path.indexOf(RegExp(r'controller.dart|model.dart|provider.dart|'
-      'binding.dart|view.dart|screen.dart'));
-  if (index != -1) {
-    List<String> chars = path.split('');
-    index--;
-    chars.removeAt(index);
-    if (separator.length > 1) {
-      chars.insert(index, separator[0]);
-    } else {
-      chars.insert(index, separator);
+  if (separator.isNotEmpty) {
+    int index = path.indexOf(RegExp(r'controller.dart|model.dart|provider.dart|'
+        'binding.dart|view.dart|screen.dart|widget.dart'));
+    if (index != -1) {
+      List<String> chars = path.split('');
+      index--;
+      chars.removeAt(index);
+      if (separator.length > 1) {
+        chars.insert(index, separator[0]);
+      } else {
+        chars.insert(index, separator);
+      }
+      return chars.join();
     }
-    return chars.join();
   }
 
   return path;
