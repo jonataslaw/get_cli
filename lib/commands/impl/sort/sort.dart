@@ -33,7 +33,8 @@ class SortCommand extends Command with ArgsMixin {
 
   @override
   bool validate() {
-    flags.removeWhere((element) => element == '--skipRename');
+    flags.removeWhere(
+        (element) => element == '--skipRename' || element == '--relative');
     if (flags.isNotEmpty) {
       LogService.info(LocaleKeys.info_unnecessary_flag.trArgsPlural(
         LocaleKeys.info_unnecessary_flag_prural,
@@ -41,6 +42,7 @@ class SortCommand extends Command with ArgsMixin {
         [flags.toString()],
       ));
     }
+
     if (args.length < 2) {
       throw CliException(LocaleKeys.error_required_path.tr,
           codeSample: codeSample);
@@ -65,7 +67,8 @@ class SortCommand extends Command with ArgsMixin {
         writeFile(element.path, element.readAsStringSync(),
             overwrite: true,
             logger: false,
-            skipRename: containsArg('--skipRename'));
+            skipRename: containsArg('--skipRename'),
+            useRelativeImport: containsArg('--relative'));
         LogService.success(
             LocaleKeys.sucess_file_formatted.trArgs([element.path]));
       }
@@ -77,7 +80,8 @@ class SortCommand extends Command with ArgsMixin {
       writeFile(path, File(path).readAsStringSync(),
           overwrite: true,
           logger: false,
-          skipRename: containsArg('--skipRename'));
+          skipRename: containsArg('--skipRename'),
+          useRelativeImport: containsArg('--relative'));
       LogService.success(LocaleKeys.sucess_file_formatted.trArgs([path]));
     } else {
       throw CliException(LocaleKeys.error_invalid_dart.trArgs([path]));

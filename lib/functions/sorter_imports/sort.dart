@@ -1,11 +1,16 @@
 import 'dart:convert';
 
 import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/core/structure.dart';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
+import 'package:get_cli/extensions.dart';
+import 'package:path/path.dart';
 
 String sortImports(String content, String packageName,
-    {bool renameImport = false}) {
+    {bool renameImport = false,
+    String filePath = '',
+    bool useRelative = false}) {
   content = formatterDartFile(content);
 
   List<String> lines = LineSplitter.split(content).toList();
@@ -42,18 +47,6 @@ String sortImports(String content, String packageName,
     }
   }
 
-  if (renameImport) {
-    String separator = PubspecUtils.separatorFileType;
-    for (int i = 0; i < projectImports.length; i++) {
-      projectImports[i] =
-          replacePathTypeSeparator(projectImports[i], separator);
-    }
-    for (int i = 0; i < projectRelativeImports.length; i++) {
-      projectRelativeImports[i] =
-          replacePathTypeSeparator(projectRelativeImports[i], separator);
-    }
-  }
-
   if (dartImports.isEmpty &&
       flutterImports.isEmpty &&
       packageImports.isEmpty &&
@@ -61,6 +54,22 @@ String sortImports(String content, String packageName,
       projectRelativeImports.isEmpty) {
     return content;
   }
+
+  if (renameImport) {
+    String separator = PubspecUtils.separatorFileType;
+    projectImports
+        .replaceAll((element) => replacePathTypeSeparator(element, separator));
+
+    projectRelativeImports
+        .replaceAll((element) => replacePathTypeSeparator(element, separator));
+  }
+  if (filePath.isNotEmpty && useRelative) {
+    projectImports
+        .replaceAll((element) => _replaceToRelativeImport(element, filePath));
+    projectRelativeImports.addAll(projectImports);
+    projectImports.clear();
+  }
+
   dartImports.sort();
   flutterImports.sort();
   packageImports.sort();
@@ -82,4 +91,14 @@ String sortImports(String content, String packageName,
     ..addAll(contentLines);
 
   return formatterDartFile(sortedLines.join('\n'));
+}
+
+String _replaceToRelativeImport(String value, String path) {
+  value = value.substring(value.indexOf('/') + 1, value.lastIndexOf("'"));
+  List<String> pathSafe = Structure.safeSplitPath(path);
+  pathSafe.removeWhere((element) => element == 'lib');
+  pathSafe.removeLast();
+  path = pathSafe.join('/');
+  String import = relative(value, from: path);
+  return "import '$import';";
 }

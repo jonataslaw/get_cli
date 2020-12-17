@@ -25,14 +25,17 @@ File writeFile(String path, String content,
     {bool overwrite = false,
     bool skipFormatter = false,
     logger = true,
-    bool skipRename = false}) {
+    bool skipRename = false,
+    bool useRelativeImport = false}) {
   File _file = File(Structure.replaceAsExpected(path: path));
   if (!_file.existsSync() || overwrite) {
     if (!skipFormatter) {
       if (path.endsWith('.dart')) {
         try {
           content = sortImports(content, PubspecUtils.getProjectName(),
-              renameImport: !skipRename);
+              renameImport: !skipRename,
+              filePath: path,
+              useRelative: useRelativeImport);
         } catch (e) {
           if (_file.existsSync()) {
             LogService.info(LocaleKeys.error_invalid_dart.trArgs([_file.path]));
