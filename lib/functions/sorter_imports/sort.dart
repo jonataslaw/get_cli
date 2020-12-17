@@ -99,6 +99,8 @@ String _replaceToRelativeImport(String value, String path) {
   pathSafe.removeWhere((element) => element == 'lib');
   pathSafe.removeLast();
   path = pathSafe.join('/');
+
   String import = relative(value, from: path);
+  import = Structure.safeSplitPath(import).join('/');
   return "import '$import';";
 }
