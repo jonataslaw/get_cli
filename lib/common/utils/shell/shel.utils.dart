@@ -20,15 +20,22 @@ class ShellUtils {
     await run('flutter', ['create', '--org', org, path], verbose: true);
   }
 
-  static void update() async {
-    bool isGit = GetCli.arguments.contains('--git');
-    String versionInPubDev =
-        await PubDevApi.getLatestVersionFromPackage('get_cli');
-    String versionInstalled = await PubspecLock.getVersionCli(disableLog: true);
-    if (versionInstalled == versionInPubDev && !isGit) {
-      return LogService.info(
-          Translation(LocaleKeys.info_cli_last_version_already_installed.tr));
+  static void update([isGit = false, forceUpdate = false]) async {
+    isGit = GetCli.arguments.contains('--git');
+    forceUpdate = GetCli.arguments.contains('-f');
+    if (!isGit && !forceUpdate) {
+      String versionInPubDev =
+          await PubDevApi.getLatestVersionFromPackage('get_cli');
+
+      String versionInstalled =
+          await PubspecLock.getVersionCli(disableLog: true);
+
+      if (versionInstalled == versionInPubDev) {
+        return LogService.info(
+            Translation(LocaleKeys.info_cli_last_version_already_installed.tr));
+      }
     }
+
     LogService.info('Upgrading get_cli …');
     var res;
     if (Platform.script.path.contains('flutter')) {
