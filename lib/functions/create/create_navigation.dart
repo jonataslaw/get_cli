@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:recase/recase.dart';
 
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/functions/create/create_single_file.dart';
-import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
-import 'package:get_cli/samples/impl/arctekko/arc_navigation.dart';
+import '../../common/utils/logger/LogUtils.dart';
+import '../../core/internationalization.dart';
+import '../../core/locales.g.dart';
+import '../../core/structure.dart';
+import '../../samples/impl/arctekko/arc_navigation.dart';
+import '../formatter_dart_file/frommatter_dart_file.dart';
+import 'create_single_file.dart';
 
 void createNavigation() {
   ArcNavigationSample().create(skipFormatter: true);

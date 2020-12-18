@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:get_cli/core/locales.g.dart';
+import 'locales.g.dart';
 
 extension Trans on String {
   String get tr {

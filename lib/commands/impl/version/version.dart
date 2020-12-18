@@ -1,8 +1,8 @@
-import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
-import 'package:get_cli/functions/version/print_get_cli.dart';
+import '../../../common/utils/pubspec/pubspec_lock.dart';
+import '../../../core/internationalization.dart';
+import '../../../core/locales.g.dart';
+import '../../../functions/version/print_get_cli.dart';
+import '../../interface/command.dart';
 
 class VersionCommand extends Command {
   @override

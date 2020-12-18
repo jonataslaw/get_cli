@@ -3,16 +3,16 @@ import 'dart:io';
 import 'package:http/http.dart';
 import 'package:recase/recase.dart';
 
-import 'package:get_cli/commands/impl/args_mixin.dart';
-import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
-import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
-import 'package:get_cli/functions/create/create_single_file.dart';
-import 'package:get_cli/functions/is_url/is_url.dart';
-import 'package:get_cli/functions/replace_vars/replace_vars.dart';
-import 'package:get_cli/samples/impl/get_view.dart';
+import '../../../../common/utils/pubspec/pubspec_utils.dart';
+import '../../../../core/internationalization.dart';
+import '../../../../core/locales.g.dart';
+import '../../../../exception_handler/exceptions/cli_exception.dart';
+import '../../../../functions/create/create_single_file.dart';
+import '../../../../functions/is_url/is_url.dart';
+import '../../../../functions/replace_vars/replace_vars.dart';
+import '../../../../samples/impl/get_view.dart';
+import '../../../interface/command.dart';
+import '../../args_mixin.dart';
 
 class CreateViewCommand extends Command with ArgsMixin {
   @override

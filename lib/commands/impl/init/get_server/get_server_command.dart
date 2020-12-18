@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 
-import 'package:get_cli/commands/impl/init/flutter/init_getxpattern.dart';
-import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/samples/impl/analysis_options.dart';
-import 'package:get_cli/samples/impl/get_server/pubspec.dart';
+import '../../../../common/utils/pubspec/pubspec_utils.dart';
+import '../../../../samples/impl/analysis_options.dart';
+import '../../../../samples/impl/get_server/pubspec.dart';
+import '../../../interface/command.dart';
+import '../flutter/init_getxpattern.dart';
 
 class InitGetServer extends Command {
   @override

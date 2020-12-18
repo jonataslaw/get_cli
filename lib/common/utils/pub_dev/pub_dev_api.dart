@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:http/http.dart';
 
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import '../../../core/internationalization.dart';
+import '../../../core/locales.g.dart';
+import '../logger/LogUtils.dart';
 
 class PubDevApi {
   //Find latest version in the Pub Dev.

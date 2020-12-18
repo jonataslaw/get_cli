@@ -1,11 +1,12 @@
 import 'dart:convert';
 
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/functions/create/create_single_file.dart';
-import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
-import 'package:get_cli/extensions.dart';
 import 'package:path/path.dart';
+
+import '../../common/utils/pubspec/pubspec_utils.dart';
+import '../../core/structure.dart';
+import '../../extensions.dart';
+import '../create/create_single_file.dart';
+import '../formatter_dart_file/frommatter_dart_file.dart';
 
 String sortImports(String content, String packageName,
     {bool renameImport = false,

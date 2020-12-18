@@ -1,4 +1,4 @@
-import 'package:get_cli/commands/impl/commads_export.dart';
+import 'impl/commads_export.dart';
 
 final commands = {
   'create': {

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:get_cli/core/structure.dart';
+import '../../core/structure.dart';
 
 void addExport(String path, String line) {
   File _file = File(Structure.replaceAsExpected(path: path));

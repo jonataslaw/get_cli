@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
+import '../common/utils/logger/LogUtils.dart';
 import '../models/file_model.dart';
+import 'internationalization.dart';
+import 'locales.g.dart';
 
 //import 'package:path/path.dart' as p;
 

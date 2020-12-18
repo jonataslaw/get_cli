@@ -1,4 +1,4 @@
-import 'package:get_cli/samples/interface/sample_interface.dart';
+import '../../interface/sample_interface.dart';
 
 class GetXMainSample extends Sample {
   final bool isServer;

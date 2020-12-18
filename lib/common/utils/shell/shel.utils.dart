@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:process_run/process_run.dart';
 
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
-import 'package:get_cli/core/generator.dart';
+import '../../../core/generator.dart';
+import '../../../core/internationalization.dart';
+import '../../../core/locales.g.dart';
+import '../logger/LogUtils.dart';
+import '../pub_dev/pub_dev_api.dart';
+import '../pubspec/pubspec_lock.dart';
 
 class ShellUtils {
   static void pubGet() async {

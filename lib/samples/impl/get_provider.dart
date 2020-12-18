@@ -1,6 +1,6 @@
 import 'package:recase/recase.dart';
 
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../interface/sample_interface.dart';
 
 /// [Sample] file from Provider file creation.

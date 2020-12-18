@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:get_cli/commands/impl/args_mixin.dart';
-import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
-import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
-import 'package:get_cli/functions/create/create_single_file.dart';
+import '../../../common/utils/logger/LogUtils.dart';
+import '../../../core/internationalization.dart';
+import '../../../core/locales.g.dart';
+import '../../../exception_handler/exceptions/cli_exception.dart';
+import '../../../functions/create/create_single_file.dart';
+import '../../interface/command.dart';
+import '../args_mixin.dart';
 
 class SortCommand extends Command with ArgsMixin {
   @override

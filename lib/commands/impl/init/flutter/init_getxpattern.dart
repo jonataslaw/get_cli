@@ -1,16 +1,16 @@
 import 'dart:io';
 
-import 'package:get_cli/commands/impl/commads_export.dart';
-import 'package:get_cli/commands/impl/install/install_get.dart';
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/common/utils/shell/shel.utils.dart';
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
-import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/functions/create/create_list_directory.dart';
-import 'package:get_cli/functions/create/create_main.dart';
-import 'package:get_cli/samples/impl/getx_pattern/get_main.dart';
+import '../../../../common/utils/logger/LogUtils.dart';
+import '../../../../common/utils/pubspec/pubspec_utils.dart';
+import '../../../../common/utils/shell/shel.utils.dart';
+import '../../../../core/internationalization.dart';
+import '../../../../core/locales.g.dart';
+import '../../../../core/structure.dart';
+import '../../../../functions/create/create_list_directory.dart';
+import '../../../../functions/create/create_main.dart';
+import '../../../../samples/impl/getx_pattern/get_main.dart';
+import '../../commads_export.dart';
+import '../../install/install_get.dart';
 
 Future<void> createInitGetxPattern() async {
   bool canContinue = await createMain();

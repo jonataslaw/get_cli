@@ -1,12 +1,12 @@
 import 'dart:io';
 
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:recase/recase.dart';
 
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/functions/create/create_single_file.dart';
+import '../../common/utils/logger/LogUtils.dart';
+import '../../common/utils/pubspec/pubspec_utils.dart';
+import '../../core/internationalization.dart';
+import '../../core/locales.g.dart';
+import '../create/create_single_file.dart';
 
 void addDependencieToBinding(String path, String controllerName, import) {
   import = '''import 'package:${PubspecUtils.getProjectName()}/$import';''';

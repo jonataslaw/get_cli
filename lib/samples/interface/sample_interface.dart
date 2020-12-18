@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:get_cli/functions/create/create_single_file.dart';
+import '../../functions/create/create_single_file.dart';
 
 /// [Sample] is the Base class in which the files for each command
 /// will be built.

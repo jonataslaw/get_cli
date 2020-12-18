@@ -1,7 +1,7 @@
-import 'package:get_cli/commands/commands_list.dart';
-import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import '../commands/commands_list.dart';
+import '../commands/interface/command.dart';
+import '../common/utils/logger/LogUtils.dart';
+import '../exception_handler/exceptions/cli_exception.dart';
 
 class GetCli {
   final List<String> _arguments;

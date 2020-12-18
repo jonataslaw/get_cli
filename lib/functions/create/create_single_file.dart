@@ -1,15 +1,15 @@
 import 'dart:io';
 
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:path/path.dart';
 
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/functions/sorter_imports/sort.dart';
-import 'package:get_cli/samples/interface/sample_interface.dart';
+import '../../common/utils/logger/LogUtils.dart';
+import '../../common/utils/pubspec/pubspec_utils.dart';
+import '../../core/internationalization.dart';
+import '../../core/locales.g.dart';
 import '../../core/structure.dart';
+import '../../core/structure.dart';
+import '../../samples/interface/sample_interface.dart';
+import '../sorter_imports/sort.dart';
 
 File handleFileCreate(String name, String command, String on, bool extraFolder,
     Sample sample, String folderName,

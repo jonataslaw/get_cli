@@ -4,16 +4,16 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 
-import 'package:get_cli/commands/impl/args_mixin.dart';
-import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
-import 'package:get_cli/core/structure.dart';
-import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
-import 'package:get_cli/get_cli.dart';
-import 'package:get_cli/models/file_model.dart';
-import 'package:get_cli/samples/impl/generate_locales.dart';
+import '../../../../common/utils/logger/LogUtils.dart';
+import '../../../../core/internationalization.dart';
+import '../../../../core/locales.g.dart';
+import '../../../../core/structure.dart';
+import '../../../../exception_handler/exceptions/cli_exception.dart';
+import '../../../../get_cli.dart';
+import '../../../../models/file_model.dart';
+import '../../../../samples/impl/generate_locales.dart';
+import '../../../interface/command.dart';
+import '../../args_mixin.dart';
 
 class GenerateLocalesCommand extends Command with ArgsMixin {
   @override

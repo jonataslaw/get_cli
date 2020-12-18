@@ -1,12 +1,12 @@
-import 'package:get_cli/commands/impl/args_mixin.dart';
-import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
-import 'package:get_cli/common/utils/shell/shel.utils.dart';
-import 'package:get_cli/core/generator.dart';
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
-import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import '../../../common/utils/logger/LogUtils.dart';
+import '../../../common/utils/pubspec/pubspec_utils.dart';
+import '../../../common/utils/shell/shel.utils.dart';
+import '../../../core/generator.dart';
+import '../../../core/internationalization.dart';
+import '../../../core/locales.g.dart';
+import '../../../exception_handler/exceptions/cli_exception.dart';
+import '../../interface/command.dart';
+import '../args_mixin.dart';
 
 class InstallCommand extends Command with ArgsMixin {
   @override

@@ -4,14 +4,14 @@ import 'package:cli_dialog/cli_dialog.dart';
 import 'package:cli_menu/cli_menu.dart';
 import 'package:recase/recase.dart';
 
-import 'package:get_cli/commands/impl/args_mixin.dart';
-import 'package:get_cli/commands/impl/init/flutter/init.dart';
-import 'package:get_cli/commands/impl/init/get_server/get_server_command.dart';
-import 'package:get_cli/commands/interface/command.dart';
-import 'package:get_cli/common/utils/shell/shel.utils.dart';
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
-import 'package:get_cli/core/structure.dart';
+import '../../../../common/utils/shell/shel.utils.dart';
+import '../../../../core/internationalization.dart';
+import '../../../../core/locales.g.dart';
+import '../../../../core/structure.dart';
+import '../../../interface/command.dart';
+import '../../args_mixin.dart';
+import '../../init/flutter/init.dart';
+import '../../init/get_server/get_server_command.dart';
 
 class CreateProjectCommand extends Command with ArgsMixin {
   @override

@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
 
-import 'package:get_cli/core/generator.dart';
+import '../../core/generator.dart';
 
 mixin ArgsMixin {
   final List<String> _args = GetCli.arguments;

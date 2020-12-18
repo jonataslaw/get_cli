@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:get_cli/core/internationalization.dart';
-import 'package:get_cli/core/locales.g.dart';
 import 'package:recase/recase.dart';
 
-import 'package:get_cli/common/utils/logger/LogUtils.dart';
-import 'package:get_cli/functions/create/create_single_file.dart';
-import 'package:get_cli/functions/find_file/find_file_by_name.dart';
-import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
-import 'package:get_cli/functions/routes/get_app_pages.dart';
-import 'package:get_cli/functions/routes/get_support_children.dart';
-import 'package:get_cli/samples/impl/get_route.dart';
+import '../../common/utils/logger/LogUtils.dart';
+import '../../core/internationalization.dart';
+import '../../core/locales.g.dart';
+import '../../samples/impl/get_route.dart';
+import '../create/create_single_file.dart';
+import '../find_file/find_file_by_name.dart';
+import '../formatter_dart_file/frommatter_dart_file.dart';
+import 'get_app_pages.dart';
+import 'get_support_children.dart';
 
 Future<void> addRoute(
     String nameRoute, String bindingDir, String viewDir) async {
