@@ -70,9 +70,9 @@
     "clean_Pattern_generated": "Estrutura CLEAN gerada com sucesso.",
     "file_formatted": " '%s' foi formatado com sucesso",
     "package_removed": "Pacote: %s removido!",
-    "package_installed": "'Pacote: %s instalado!",
+    "package_installed": "Pacote: %s instalado!",
     "update_cli": "Upgrade concluído",
-    "add_controller_in_bindings": "O %s foi adicionado ao binging no path: %s '",
+    "add_controller_in_bindings": "O %s foi adicionado ao binging no path: %s ",
     "navigation_added": "%s navigation adicionada com sucesso.",
     "file_created": "Arquivo: %s criado com sucesso no path: %s",
     "route_created": "Rota %s criada com sucesso."

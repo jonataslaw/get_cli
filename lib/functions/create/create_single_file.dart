@@ -71,7 +71,7 @@ File writeFile(String path, String content,
 String replacePathTypeSeparator(String path, String separator) {
   if (separator.isNotEmpty) {
     int index = path.indexOf(RegExp(r'controller.dart|model.dart|provider.dart|'
-        'binding.dart|view.dart|screen.dart|widget.dart'));
+        'binding.dart|view.dart|screen.dart|widget.dart|repository.dart'));
     if (index != -1) {
       List<String> chars = path.split('');
       index--;
