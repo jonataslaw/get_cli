@@ -4,7 +4,7 @@ version: 1.4.1
 homepage: https://github.com/jonataslaw/get_cli
 
 environment:
-  sdk: '>=2.7.0 <3.0.0'
+  sdk: ">=2.7.0 <3.0.0"
 
 executables:
   get: get
@@ -23,8 +23,7 @@ dependencies:
   intl: ^0.16.1
   cli_dialog: ^0.3.3
   json_ast: ^1.0.5
-  dart_style:  ">=1.0.10 <2.0.0"
-  import_sorter: ^4.4.1 
+  dart_style: ">=1.0.10 <2.0.0"
 
 dev_dependencies:
   pedantic: ^1.7.0
