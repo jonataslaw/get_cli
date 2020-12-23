@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:path/path.dart';
+import 'package:get_cli/functions/path/replace_to_relative.dart';
 
 import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../../core/structure.dart';
 import '../../extensions.dart';
 import '../create/create_single_file.dart';
 import '../formatter_dart_file/frommatter_dart_file.dart';
@@ -66,7 +65,7 @@ String sortImports(String content, String packageName,
   }
   if (filePath.isNotEmpty && useRelative) {
     projectImports
-        .replaceAll((element) => _replaceToRelativeImport(element, filePath));
+        .replaceAll((element) => replaceToRelativeImport(element, filePath));
     projectRelativeImports.addAll(projectImports);
     projectImports.clear();
   }
@@ -92,16 +91,4 @@ String sortImports(String content, String packageName,
     ..addAll(contentLines);
 
   return formatterDartFile(sortedLines.join('\n'));
-}
-
-String _replaceToRelativeImport(String value, String path) {
-  value = value.substring(value.indexOf('/') + 1, value.lastIndexOf("'"));
-  List<String> pathSafe = Structure.safeSplitPath(path);
-  pathSafe.removeWhere((element) => element == 'lib');
-  pathSafe.removeLast();
-  path = pathSafe.join('/');
-
-  String import = relative(value, from: path);
-  import = Structure.safeSplitPath(import).join('/');
-  return "import '$import';";
 }
