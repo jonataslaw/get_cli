@@ -12,7 +12,7 @@ class GenerateLocalesSample extends Sample {
   String get content => '''
 // DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
 
-abstract class AppTranslation {
+class AppTranslation {
 
 \tstatic Map<String, Map<String, String>> translations = {
 $_translationsKeys
@@ -20,11 +20,11 @@ $_translationsKeys
 
 }
 
-abstract class LocaleKeys {
+class LocaleKeys {
 $_keys
 }
 
-abstract class Locales {
+class Locales {
 \t$_locales
 }
 ''';
