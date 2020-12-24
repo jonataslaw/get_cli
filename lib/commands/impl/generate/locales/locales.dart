@@ -120,5 +120,8 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
 }
 
 String _replaceValue(String value) {
-  return value.replaceAll("'", "\\'").replaceAll('\n', '\\n');
+  return value
+      .replaceAll("'", "\\'")
+      .replaceAll('\n', '\\n')
+      .replaceAll('\$', '\\\$');
 }
