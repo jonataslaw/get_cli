@@ -230,10 +230,10 @@ abstract class Locales {
     'sucess_clean_pattern_generated': 'Estrutura CLEAN gerada com sucesso.',
     'sucess_file_formatted': ' \'%s\' foi formatado com sucesso',
     'sucess_package_removed': 'Pacote: %s removido!',
-    'sucess_package_installed': '\'Pacote: %s instalado!',
+    'sucess_package_installed': 'Pacote: %s instalado!',
     'sucess_update_cli': 'Upgrade concluído',
     'sucess_add_controller_in_bindings':
-        'O %s foi adicionado ao binging no path: %s \'',
+        'O %s foi adicionado ao binging no path: %s ',
     'sucess_navigation_added': '%s navigation adicionada com sucesso.',
     'sucess_file_created': 'Arquivo: %s criado com sucesso no path: %s',
     'sucess_route_created': 'Rota %s criada com sucesso.',

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path/path.dart';
-import 'package:recase/recase.dart';
 
 import '../../../../common/utils/logger/LogUtils.dart';
 import '../../../../core/internationalization.dart';
@@ -79,7 +78,6 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
       parsedLocales.writeln('\tstatic const $key = {');
       translationsKeys.writeln('\t\t\'$key\' : Locales.$key,');
       value.forEach((key, value) {
-        key = key.snakeCase;
         value = _replaceValue(value);
         if (RegExp(r'^[0-9]|[!@#<>?":`~;[\]\\|=+)(*&^%-\s]').hasMatch(key)) {
           throw CliException(
