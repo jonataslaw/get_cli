@@ -97,7 +97,7 @@ let's explore the existing commands in the cli
   get create project
 ```
 
-Using to generate a new project, you can choose between [Flutter](https://github.com/flutter/flutter) and [get_sever](https://pub.dev/packages/get_server), after creating the default directory, it will run a `get init` next command
+Using to generate a new project, you can choose between [Flutter](https://github.com/flutter/flutter) and [get_server](https://pub.dev/packages/get_server), after creating the default directory, it will run a `get init` next command
 
 ### Init
 
