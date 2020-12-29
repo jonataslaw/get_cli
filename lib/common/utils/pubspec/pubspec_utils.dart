@@ -10,6 +10,7 @@ import '../../../exception_handler/exceptions/cli_exception.dart';
 import '../logger/LogUtils.dart';
 import '../pub_dev/pub_dev_api.dart';
 import '../shell/shel.utils.dart';
+import 'package:get_cli/extensions.dart';
 
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');
@@ -116,8 +117,15 @@ class PubspecUtils {
     int index =
         lines.indexWhere((element) => element.startsWith('  $package:'));
     if (index != -1) {
-      Version version = Version.parse(lines[index].split(':').last.trim());
-      return version;
+      try {
+        Version version =
+            Version.parse(lines[index].split(':').last.trim().removeAll('^'));
+        return version;
+      } on FormatException catch (_) {
+        return null;
+      } catch (e) {
+        rethrow;
+      }
     } else {
       throw CliException(
           LocaleKeys.info_package_not_installed.trArgs([package]));

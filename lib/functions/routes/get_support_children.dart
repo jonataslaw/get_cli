@@ -9,8 +9,8 @@ bool get supportChildrenRoutes {
   if (PubspecUtils.isServerProject) {
     return false;
   }
-  bool supportChildren = Version.parse('3.21.0')
-          .compareTo(PubspecUtils.getPackageVersion('get')) <=
+  bool supportChildren = Version.parse('3.21.0').compareTo(
+          PubspecUtils.getPackageVersion('get') ?? Version.parse('3.21.0')) <=
       0;
   if (supportChildren) {
     File routesFile = findFileByName('app_routes.dart');
