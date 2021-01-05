@@ -1,5 +1,11 @@
 ## [1.4.1]
 
+- fix generate locales with capital letters issue #47 by @ne3Vubeki
+- fix create page witho `on`option issue #48 by @dhruvanbhalara
+- and others improvements
+
+## [1.4.1]
+
 - update README
 - and others improvements
 - add [separator](https://github.com/jonataslaw/get_cli#separator-file-type)
@@ -10,7 +16,7 @@
 - add internationalization for CLI
 - fix sort routes
 - add option with to controller e view here [more here](https://github.com/jonataslaw/get_cli#generate-controller-for-model-online)
-- add command sort 
+- add command sort
 - and others improvements
 - fix check update
 
