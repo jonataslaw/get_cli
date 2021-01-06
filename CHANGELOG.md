@@ -1,4 +1,4 @@
-## [1.4.1]
+## [1.4.2]
 
 - fix generate locales with capital letters issue #47 by @ne3Vubeki
 - fix create page witho `on`option issue #48 by @dhruvanbhalara
