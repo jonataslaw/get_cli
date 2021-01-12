@@ -1,6 +1,7 @@
 ###### Documentation languages
 
 | [pt_BR](README-pt_BR.md) | en_US - this file |
+|-------|-------|
 
 Official CLI for the GetX™ framework.
 
