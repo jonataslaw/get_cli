@@ -1,7 +1,7 @@
 ###### Documentation languages
 
-| [pt_BR](https://github.com/jonataslaw/get_cli/blob/master/README-pt_BR.md) | en_EN - this file |
-| -------------------------------------------------------------------------- | ----------------- |
+| [pt_BR](README-pt_BR.md) | en_US - this file |
+| ------------------------ | ----------------- |
 
 Official CLI for the GetX™ framework.
 
@@ -213,7 +213,7 @@ pt_BR.json
 }
 ```
 
-en_EN.json
+en_US.json
 
 ```json
 {
@@ -240,7 +240,7 @@ output:
 abstract class AppTranslation {
 
   static Map<String, Map<String, String>> translations = {
-    'en_EN' : Locales.en_EN,
+    'en_EN' : Locales.en_US,
     'pt_BR' : Locales.pt_BR,
   };
 
@@ -256,7 +256,7 @@ abstract class LocaleKeys {
 
 abstract class Locales {
 
-  static const en_EN = {
+  static const en_US = {
    'buttons_login': 'Login',
    'buttons_sign_in': 'Sign-in',
    'buttons_logout': 'Logout',
