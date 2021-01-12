@@ -1,7 +1,6 @@
 ###### Documentation languages
 
 | [pt_BR](README-pt_BR.md) | en_US - this file |
-| ------------------------ | ----------------- |
 
 Official CLI for the GetX™ framework.
 
@@ -240,7 +239,7 @@ output:
 abstract class AppTranslation {
 
   static Map<String, Map<String, String>> translations = {
-    'en_EN' : Locales.en_US,
+    'en_US' : Locales.en_US,
     'pt_BR' : Locales.pt_BR,
   };
 
