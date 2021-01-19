@@ -7,8 +7,9 @@ Official CLI for the GetX™ framework.
 
 ```dart
 // To install:
-pub global activate get_cli (to use this add the following to system PATH: [FlutterSDKInstallDir]\bin\cache\dart-sdk\bin
-// Alt. 
+pub global activate get_cli 
+// (to use this add the following to system PATH: [FlutterSDKInstallDir]\bin\cache\dart-sdk\bin
+
 flutter pub global activate get_cli
 
 // To create a flutter project in the current directory:
