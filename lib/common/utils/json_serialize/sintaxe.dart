@@ -114,7 +114,7 @@ class TypeDefinition {
       return "$fieldKey = DateTime.tryParse(json['$key']);";
     } else if (name == 'List') {
       // list of class
-      return "if (json['$key'] != null) {\n\t\t\t$fieldKey = List<$subtype>();\n\t\t\tjson['$key'].forEach((v) { $fieldKey.add($subtype.fromJson(v)); });\n\t\t}";
+      return "if (json['$key'] != null) {\n\t\t\t$fieldKey = <$subtype>[];\n\t\t\tjson['$key'].forEach((v) { $fieldKey.add($subtype.fromJson(v)); });\n\t\t}";
     } else {
       // class
       return "$fieldKey = json['$key'] != null ? ${_buildParseClass(jsonKey)} : null;";
@@ -308,7 +308,7 @@ class ClassDefinition {
   String get _jsonGenFunc {
     final sb = StringBuffer();
     sb.write(
-        '\tMap<String, dynamic> toJson() {\n\t\tfinal Map<String, dynamic> data = Map<String, dynamic>();\n');
+        '\tMap<String, dynamic> toJson() {\n\t\tfinal Map<String, dynamic> data = <String, dynamic>{};\n');
     fields.keys.forEach((k) {
       sb.write('\t\t${fields[k].toJsonExpression(k, privateFields)}\n');
     });
