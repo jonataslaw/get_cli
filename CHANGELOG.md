@@ -1,3 +1,8 @@
+## [1.4.3]
+- Add super method to onInit, onReady and onReady to GetxControllers by @ChangJoo-Park
+- Improve docs: @stiltet
+- Change List() to Literal [] on model create
+
 ## [1.4.2]
 
 - fix generate locales with capital letters issue #47 by @ne3Vubeki
