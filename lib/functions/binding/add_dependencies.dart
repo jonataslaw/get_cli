@@ -8,7 +8,43 @@ import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
 import '../create/create_single_file.dart';
 
-void addDependencieToBinding(String path, String controllerName, import) {
+/**
+   * Add a new dependency to bindings
+   * 
+   * Example your bindings look like this:
+   * 
+   *      import 'package:get/get.dart';
+   *      import 'package:example/app/modules/home/controllers/home_controller.dart';
+   *      class HomeBinding extends Bindings {
+   *          @override
+   *          void dependencies() {
+   *            Get.lazyPut<HomeController>(
+   *              () => HomeController()
+   *             );
+   *          }
+   *      }
+   * 
+   *      addDependencyToBinding('PATH_YOUR_BINDING',
+   *            'DEPENDENCY_NAME', 'DEPENDENCY_DIR' );
+   * 
+   *      the exit will be:
+   * 
+   *      import 'package:get/get.dart';
+   *      import 'package:example/app/modules/home/controllers/home_controller.dart';
+   *      import 'package:example/DEPENDENCY_DIR;
+   *      class HomeBinding extends Bindings {
+   *          @override
+   *          void dependencies() {
+   *            Get.lazyPut<DEPENDENCY_NAME>(
+   *              () => DEPENDENCY_NAME()
+   *             );
+   *            Get.lazyPut<HomeController>(
+   *              () => HomeController()
+   *             );
+   *          }
+   *      }
+   */
+void addDependencyToBinding(String path, String controllerName, String import) {
   import = '''import 'package:${PubspecUtils.getProjectName()}/$import';''';
   File file = File(path);
   if (file.existsSync()) {

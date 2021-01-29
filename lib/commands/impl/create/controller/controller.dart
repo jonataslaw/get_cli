@@ -85,7 +85,7 @@ class CreateControllerCommand extends Command with ArgsMixin {
     pathSplit.remove('.');
     pathSplit.remove('lib');
     if (binindingPath.isNotEmpty) {
-      addDependencieToBinding(binindingPath, name, pathSplit.join('/'));
+      addDependencyToBinding(binindingPath, name, pathSplit.join('/'));
     }
   }
 }

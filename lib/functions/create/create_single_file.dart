@@ -7,7 +7,6 @@ import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
 import '../../core/structure.dart';
-import '../../core/structure.dart';
 import '../../samples/interface/sample_interface.dart';
 import '../sorter_imports/sort.dart';
 
@@ -21,13 +20,17 @@ File handleFileCreate(String name, String command, String on, bool extraFolder,
   return sample.create();
 }
 
+/**
+ * Create or edit the contents of a file
+ */
 File writeFile(String path, String content,
     {bool overwrite = false,
     bool skipFormatter = false,
-    logger = true,
+    bool logger = true,
     bool skipRename = false,
     bool useRelativeImport = false}) {
   File _file = File(Structure.replaceAsExpected(path: path));
+
   if (!_file.existsSync() || overwrite) {
     if (!skipFormatter) {
       if (path.endsWith('.dart')) {

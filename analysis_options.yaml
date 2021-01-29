@@ -3,5 +3,4 @@ linter:
   rules:
     omit_local_variable_types: false
     prefer_collection_literals: false
-
-    
+    slash_for_doc_comments: false

@@ -1,4 +1,9 @@
+## [1.4.4]
+
+- Add alias getx.
+
 ## [1.4.3]
+
 - Add super method to onInit, onReady and onReady to GetxControllers by @ChangJoo-Park
 - Improve docs: @stiltet
 - Change List() to Literal [] on model create

@@ -1,3 +1,5 @@
+import 'package:get_cli/commands/impl/help/help.dart';
+
 import '../commands/commands_list.dart';
 import '../commands/interface/command.dart';
 import '../common/utils/logger/LogUtils.dart';
@@ -27,7 +29,7 @@ class GetCli {
     } on CliException catch (e) {
       return ErrorCommand(e.message);
     } on RangeError catch (_) {
-      return ErrorCommand('argument is empty');
+      return HelpCommand();
     } catch (e) {
       return ErrorCommand('command not found');
     }
