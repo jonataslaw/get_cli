@@ -42,6 +42,7 @@ class PubspecUtils {
       {String version, bool isDev = false, bool runPubGet = true}) async {
     var lines = _pubspec.readAsLinesSync();
     if (containsPackage(package)) {
+      // ignore: avoid_print
       print(Translation(LocaleKeys.ask_package_already_installed)
           .trArgs([package]));
       final menu = Menu([

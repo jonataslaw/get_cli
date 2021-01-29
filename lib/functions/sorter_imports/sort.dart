@@ -15,7 +15,6 @@ String sortImports(String content, String packageName,
     String filePath = '',
     bool useRelative = false}) {
   content = formatterDartFile(content);
-
   List<String> lines = LineSplitter.split(content).toList();
   List<String> contentLines = [];
   List<String> dartImports = [];
@@ -59,12 +58,9 @@ String sortImports(String content, String packageName,
   }
 
   if (renameImport) {
-    String separator = PubspecUtils.separatorFileType;
-    projectImports
-        .replaceAll((element) => replacePathTypeSeparator(element, separator));
+    projectImports.replaceAll(_replacePath);
 
-    projectRelativeImports
-        .replaceAll((element) => replacePathTypeSeparator(element, separator));
+    projectRelativeImports.replaceAll(_replacePath);
   }
   if (filePath.isNotEmpty && useRelative) {
     projectImports
@@ -94,4 +90,9 @@ String sortImports(String content, String packageName,
     ..addAll(contentLines);
 
   return formatterDartFile(sortedLines.join('\n'));
+}
+
+String _replacePath(String str) {
+  String separator = PubspecUtils.separatorFileType;
+  return replacePathTypeSeparator(str, separator);
 }

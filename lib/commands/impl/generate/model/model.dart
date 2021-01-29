@@ -12,7 +12,6 @@ import '../../../../core/locales.g.dart';
 import '../../../../core/structure.dart';
 import '../../../../exception_handler/exceptions/cli_exception.dart';
 import '../../../../functions/create/create_single_file.dart';
-import '../../../../functions/find_file/find_folder_by_directory.dart';
 import '../../../../models/file_model.dart';
 import '../../../../samples/impl/get_provider.dart';
 import '../../../interface/command.dart';

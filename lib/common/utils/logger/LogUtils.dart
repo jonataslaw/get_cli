@@ -1,4 +1,5 @@
 import 'package:ansicolor/ansicolor.dart';
+// ignore_for_file: avoid_print
 
 class LogService {
   static final AnsiPen _penError = AnsiPen()..red(bold: true);

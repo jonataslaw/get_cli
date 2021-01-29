@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:cli_menu/cli_menu.dart';
 
 import '../../common/utils/logger/LogUtils.dart';
-import '../../common/utils/logger/LogUtils.dart';
 import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
-import '../../core/structure.dart';
 import '../../core/structure.dart';
 import '../../models/file_model.dart';
 

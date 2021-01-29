@@ -11,6 +11,7 @@ class ExceptionHandler {
       LogService.error(e.message);
       if (e.codeSample.isNotEmpty) {
         LogService.info(LocaleKeys.example.tr, false, false);
+        // ignore: avoid_print
         print(LogService.codeBold(e.codeSample));
       }
     } else if (e is FileSystemException) {

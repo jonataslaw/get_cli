@@ -3,6 +3,7 @@ import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../../../functions/version/print_get_cli.dart';
 import '../../interface/command.dart';
+// ignore_for_file: avoid_print
 
 class VersionCommand extends Command {
   @override
