@@ -5,6 +5,9 @@ import 'package:version/version.dart';
 import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../find_file/find_file_by_name.dart';
 
+/**
+ * Checks whether the installed version of get supports child routes
+ */
 bool get supportChildrenRoutes {
   if (PubspecUtils.isServerProject) {
     return false;

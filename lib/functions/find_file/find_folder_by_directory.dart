@@ -1,5 +1,8 @@
 import 'dart:io';
 
+/**
+ * find a folder from the name in the lib folder
+ */
 Directory findFolderByName(String name) {
   Directory current = Directory('./lib');
   final list = current.listSync(recursive: true, followLinks: false);

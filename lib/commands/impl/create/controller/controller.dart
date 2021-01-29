@@ -17,6 +17,15 @@ import '../../../../samples/impl/get_controller.dart';
 import '../../../interface/command.dart';
 import '../../args_mixin.dart';
 
+/**
+ * This command is a controller with the template:
+ *      
+ *      import 'package:get/get.dart';,
+ *
+ *      class NameController extends GetxController {
+ *
+ *      }
+*/
 class CreateControllerCommand extends Command with ArgsMixin {
   @override
   String get hint => LocaleKeys.hint_create_controller.tr;

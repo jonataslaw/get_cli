@@ -18,6 +18,9 @@ import '../../../../samples/impl/get_view.dart';
 import '../../../interface/command.dart';
 import '../../args_mixin.dart';
 
+/**
+ * The command create a Binding and Controller page and view
+ */
 class CreatePageCommand extends Command with ArgsMixin {
   @override
   Future<void> execute() async {

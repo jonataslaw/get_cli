@@ -5,7 +5,7 @@
     "company_domain": "Qual é o domínio da sua empresa?",
     "model_name": "Não foi possível definir o nome do modelo automaticamente, qual nome você deseja usar?",
     "package_already_installed": "pacote: %s já instalado, deseja atualizar?",
-    "lib_not_empty": "Sua pasta lib não está vazia. Tem certeza de que deseja sobrescrever seu aplicativo? \\n AVISO: esta ação é irreversível"
+    "lib_not_empty": "Sua pasta lib não está vazia. Tem certeza de que deseja sobrescrever seu aplicativo? \\n AVISO: essa ação é irreversível"
   },
   "error": {
     "failed_to_connect": "Falha ao conectar com %s",
@@ -31,7 +31,7 @@
   "hint": {
     "create": {
       "controller": "Gerar um novo controller",
-      "page": "Gerar um novo modulo, (controller, view e bindigns) (Use essa opcão se esta usando getx_pattern)",
+      "page": "Gerar um novo modulo, (controller, view e bindigns) (Use essa opcão se está usando getx_pattern)",
       "project": "Crie um novo projeto, escolha flutter ou get server",
       "provider": "Cria uma classe Provider",
       "screen": "Gera uma nova Screen, [controller, view e bindigns] (Use essa opcão se for está usando clean)",

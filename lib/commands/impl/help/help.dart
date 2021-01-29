@@ -26,7 +26,7 @@ $commandsHelp
         result += '\n';
       } else if (value is Function) {
         final command = value() as Command;
-        result += '\n' + '  ' * index + key + ': ' + command.hint;
+        result += '\n' + '  ' * index + key + ': ' + command.hint + '\n';
       }
     });
     return result;

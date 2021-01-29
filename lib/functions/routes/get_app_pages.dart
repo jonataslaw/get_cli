@@ -111,6 +111,11 @@ ${_getTabs(tabEspaces)}),''';
       overwrite: true, logger: false);
 }
 
+/**
+ * Create a tab line
+ *
+ *      _getTabs(2)   // '    ';    
+ */
 String _getTabs(int tabEspaces) {
   String string = '';
   for (var i = 0; i < tabEspaces; i++) {
@@ -119,10 +124,12 @@ String _getTabs(int tabEspaces) {
   return string;
 }
 
+/// count the tabs on the line
 int _countTabs(String line) {
   return '  '.allMatches(line).length;
 }
 
+/// log invalid format file
 void _logInvalidFormart() {
   LogService.info(
       'the app_pages.dart file does not meet the '

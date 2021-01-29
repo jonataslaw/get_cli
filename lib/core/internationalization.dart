@@ -3,6 +3,7 @@ import 'dart:io';
 import 'locales.g.dart';
 
 extension Trans on String {
+  /// Translation
   String get tr {
     Map<String, Map<String, String>> translations = AppTranslation.translations;
     String localeName = Platform.localeName;

@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 
+/**
+ * find a file from the name in the lib folder
+ */
 File findFileByName(String name) {
   Directory current = Directory('./lib');
   final list = current.listSync(recursive: true, followLinks: false);

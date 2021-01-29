@@ -13,6 +13,9 @@ import '../formatter_dart_file/frommatter_dart_file.dart';
 import 'get_app_pages.dart';
 import 'get_support_children.dart';
 
+/**
+ * This command will create the route to the new page
+ */
 Future<void> addRoute(
     String nameRoute, String bindingDir, String viewDir) async {
   File routesFile = findFileByName('app_routes.dart');
@@ -27,9 +30,11 @@ Future<void> addRoute(
     lines = LineSplitter.split(content).toList();
   }
   List<String> pathSplit = viewDir.split('/');
-  //remove file
+
+  ///remove file
   pathSplit.removeLast();
-  // remove view folder
+
+  ///remove view folder
   pathSplit.removeLast();
 
   pathSplit.removeWhere((element) => element == 'app' || element == 'modules');
@@ -70,6 +75,9 @@ Future<void> addRoute(
   await addAppPage(nameRoute, bindingDir, viewDir);
 }
 
+/**
+ * Create routes from the path
+ */
 String _pathsToRoute(List<String> pathSplit) {
   StringBuffer sb = StringBuffer();
   pathSplit.forEach((element) {

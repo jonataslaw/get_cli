@@ -7,6 +7,9 @@ import '../../extensions.dart';
 import '../create/create_single_file.dart';
 import '../formatter_dart_file/frommatter_dart_file.dart';
 
+/**
+ * Sort imports from a dart file
+ */
 String sortImports(String content, String packageName,
     {bool renameImport = false,
     String filePath = '',

@@ -71,6 +71,9 @@ File writeFile(String path, String content,
   return _file;
 }
 
+/**
+ * Replace the file name separator
+ */
 String replacePathTypeSeparator(String path, String separator) {
   if (separator.isNotEmpty) {
     int index = path.indexOf(RegExp(r'controller.dart|model.dart|provider.dart|'
