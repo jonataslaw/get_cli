@@ -2,13 +2,11 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 
-/**
- * find a file from the name in the lib folder
- */
+/// find a file from the name in the lib folder
 File findFileByName(String name) {
-  Directory current = Directory('./lib');
+  var current = Directory('./lib');
   final list = current.listSync(recursive: true, followLinks: false);
-  File contains = list.firstWhere((element) {
+  var contains = list.firstWhere((element) {
     if (element is File) {
       return basename(element.path) == name;
     }
@@ -16,5 +14,5 @@ File findFileByName(String name) {
   }, orElse: () {
     return File('');
   });
-  return contains;
+  return contains as File;
 }

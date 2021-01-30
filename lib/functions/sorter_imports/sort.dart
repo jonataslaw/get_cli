@@ -1,32 +1,32 @@
 import 'dart:convert';
 
-import 'package:get_cli/functions/path/replace_to_relative.dart';
-
 import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../../extensions.dart';
 import '../create/create_single_file.dart';
 import '../formatter_dart_file/frommatter_dart_file.dart';
+import '../path/replace_to_relative.dart';
 
-/**
- * Sort imports from a dart file
- */
+/// Sort imports from a dart file
 String sortImports(String content, String packageName,
     {bool renameImport = false,
     String filePath = '',
     bool useRelative = false}) {
   content = formatterDartFile(content);
-  List<String> lines = LineSplitter.split(content).toList();
-  List<String> contentLines = [];
-  List<String> dartImports = [];
-  List<String> flutterImports = [];
-  List<String> packageImports = [];
-  List<String> projectRelativeImports = [];
-  List<String> projectImports = [];
-  bool stringLine = false;
-  for (int i = 0; i < lines.length; i++) {
-    if (lines[i].startsWith('import ') &&
-        lines[i].endsWith(';') &&
-        !stringLine) {
+  var lines = LineSplitter.split(content).toList();
+
+  var contentLines = <String>[];
+
+  var librarys = <String>[];
+  var dartImports = <String>[];
+  var flutterImports = <String>[];
+  var packageImports = <String>[];
+  var projectRelativeImports = <String>[];
+  var projectImports = <String>[];
+  var exports = <String>[];
+
+  var stringLine = false;
+  for (var i = 0; i < lines.length; i++) {
+    if (lines[i].startsWith('import ') && !stringLine) {
       if (lines[i].contains('dart:')) {
         dartImports.add(lines[i]);
       } else if (lines[i].contains('package:flutter/')) {
@@ -40,8 +40,16 @@ String sortImports(String content, String packageName,
           packageImports.add(lines[i]);
         }
       }
+    } else if (lines[i].startsWith('export ') &&
+        lines[i].endsWith(';') &&
+        !stringLine) {
+      exports.add(lines[i]);
+    } else if (lines[i].startsWith('library ') &&
+        lines[i].endsWith(';') &&
+        !stringLine) {
+      librarys.add(lines[i]);
     } else {
-      bool containsThreeQuotes = lines[i].contains("'''");
+      var containsThreeQuotes = lines[i].contains("'''");
       if (containsThreeQuotes) {
         stringLine = !stringLine;
       }
@@ -53,7 +61,8 @@ String sortImports(String content, String packageName,
       flutterImports.isEmpty &&
       packageImports.isEmpty &&
       projectImports.isEmpty &&
-      projectRelativeImports.isEmpty) {
+      projectRelativeImports.isEmpty &&
+      exports.isEmpty) {
     return content;
   }
 
@@ -74,25 +83,33 @@ String sortImports(String content, String packageName,
   packageImports.sort();
   projectImports.sort();
   projectRelativeImports.sort();
+  exports.sort();
+  librarys.sort();
 
-  List<String> sortedLines = [];
+  var sortedLines = <String>[];
 
-  sortedLines
-    ..addAll(dartImports)
-    ..add('')
-    ..addAll(flutterImports)
-    ..add('')
-    ..addAll(packageImports)
-    ..add('')
-    ..addAll(projectImports)
-    ..addAll(projectRelativeImports)
-    ..add('')
-    ..addAll(contentLines);
+  sortedLines.addAll([
+    ...librarys,
+    '',
+    ...dartImports,
+    '',
+    ...flutterImports,
+    '',
+    ...packageImports,
+    '',
+    ...projectImports,
+    '',
+    ...projectRelativeImports,
+    '',
+    ...exports,
+    '',
+    ...contentLines
+  ]);
 
   return formatterDartFile(sortedLines.join('\n'));
 }
 
 String _replacePath(String str) {
-  String separator = PubspecUtils.separatorFileType;
+  var separator = PubspecUtils.separatorFileType;
   return replacePathTypeSeparator(str, separator);
 }

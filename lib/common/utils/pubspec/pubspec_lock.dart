@@ -25,7 +25,7 @@ class PubspecLock {
       }
       var version = text['packages']['get_cli']['version'].toString();
       return version;
-    } catch (e) {
+    } on Exception catch (_) {
       if (!disableLog) {
         LogService.error(
             Translation(LocaleKeys.error_cli_version_not_found).tr);

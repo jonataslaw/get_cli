@@ -10,7 +10,7 @@ class CreateProviderCommand extends Command with ArgsMixin {
   String get commandName => 'provider';
   @override
   Future<void> execute() async {
-    await handleFileCreate(name, 'provider', onCommand, onCommand != null,
+    handleFileCreate(name, 'provider', onCommand, onCommand != null,
         ProviderSample(name), 'providers');
   }
 

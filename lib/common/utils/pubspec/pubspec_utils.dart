@@ -7,23 +7,20 @@ import 'package:yaml/yaml.dart';
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../../../exception_handler/exceptions/cli_exception.dart';
+import '../../../extensions.dart';
 import '../logger/log_utils.dart';
 import '../pub_dev/pub_dev_api.dart';
 import '../shell/shel.utils.dart';
-import 'package:get_cli/extensions.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');
-  static final Map<String, dynamic> _mapSep = {
-    'separator': '',
-    'isChecked': false
-  };
-  static final Map<String, dynamic> _mapName = {'name': '', 'isChecked': false};
-
+  static final _mapSep = _PubValue();
+  static final _mapName = _PubValue();
   static String _getProjectName() {
-    _mapName['isChecked'] = true;
+    _mapName.isChecked = true;
     var lines = _pubspec.readAsLinesSync();
-    String name = lines
+    var name = lines
         .firstWhere((line) => line.startsWith('name:'), orElse: () => null)
         ?.split(':')
         ?.last
@@ -32,10 +29,10 @@ class PubspecUtils {
   }
 
   static String getProjectName() {
-    if (!_mapName['isChecked']) {
-      _mapName['name'] = _getProjectName();
+    if (!(_mapName.isChecked)) {
+      _mapName.value = _getProjectName();
     }
-    return _mapName['name'];
+    return _mapName.value;
   }
 
   static Future<bool> addDependencies(String package,
@@ -70,7 +67,7 @@ class PubspecUtils {
     return true;
   }
 
-  static void removeDependencies(String package, {bool logger = true}) async {
+  static void removeDependencies(String package, {bool logger = true}) {
     if (logger) LogService.info('Removing package: "$package"');
 
     var lines = _pubspec.readAsLinesSync();
@@ -88,7 +85,7 @@ class PubspecUtils {
   static bool containsPackage(String package) {
     var lines = _pubspec.readAsLinesSync();
 
-    int i = lines.indexWhere((element) => element.startsWith('  $package:'));
+    var i = lines.indexWhere((element) => element.startsWith('  $package:'));
     return i != -1;
   }
 
@@ -115,16 +112,16 @@ class PubspecUtils {
 
   static Version getPackageVersion(String package) {
     var lines = _pubspec.readAsLinesSync();
-    int index =
+    var index =
         lines.indexWhere((element) => element.startsWith('  $package:'));
     if (index != -1) {
       try {
-        Version version =
+        var version =
             Version.parse(lines[index].split(':').last.trim().removeAll('^'));
         return version;
       } on FormatException catch (_) {
         return null;
-      } catch (e) {
+      } on Exception catch (_) {
         rethrow;
       }
     } else {
@@ -134,21 +131,27 @@ class PubspecUtils {
   }
 
   static String get separatorFileType {
-    if (!_mapSep['isChecked']) {
-      _mapSep['separator'] = _separatorFileType;
+    if (!_mapSep.isChecked) {
+      _mapSep.value = _separatorFileType;
     }
-    return _mapSep['separator'];
+    return _mapSep.value;
   }
 
   static String get _separatorFileType {
-    _mapSep['isChecked'] = true;
-    YamlMap yaml = loadYaml(_pubspec.readAsStringSync());
+    _mapSep.isChecked = true;
+    var yaml = loadYaml(_pubspec.readAsStringSync()) as YamlMap;
     if (yaml.containsKey('get_cli')) {
-      if (yaml['get_cli'].containsKey('separator')) {
-        return yaml['get_cli']['separator'] ?? '';
+      if ((yaml['get_cli'] as Map).containsKey('separator')) {
+        return (yaml['get_cli']['separator'] as String) ?? '';
       }
     }
 
     return '';
   }
+}
+
+class _PubValue {
+  bool isChecked;
+  String value;
+  _PubValue([this.value = '', this.isChecked = false]);
 }

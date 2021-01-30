@@ -13,7 +13,7 @@ class SortCommand extends Command with ArgsMixin {
   String get commandName => 'sort';
   @override
   Future<void> execute() async {
-    String path = args[1] == '.' ? 'lib' : args[1];
+    var path = args[1] == '.' ? 'lib' : args[1];
     if (FileSystemEntity.isDirectorySync(path)) {
       sortImportsDirectory(path);
     } else if (FileSystemEntity.isFileSync(path)) {

@@ -10,25 +10,25 @@ import '../pub_dev/pub_dev_api.dart';
 import '../pubspec/pubspec_lock.dart';
 
 class ShellUtils {
-  static void pubGet() async {
+  static Future<void> pubGet() async {
     LogService.info('Running `flutter pub get` …');
     await run('flutter', ['pub', 'get'], verbose: true);
   }
 
-  static void flutterCreate(String path, String org) async {
+  static Future<void> flutterCreate(String path, String org) async {
     LogService.info('Running `flutter create $path` …');
     await run('flutter', ['create', '--org', org, path], verbose: true);
   }
 
-  static void update([isGit = false, forceUpdate = false]) async {
+  static Future<void> update(
+      [bool isGit = false, bool forceUpdate = false]) async {
     isGit = GetCli.arguments.contains('--git');
     forceUpdate = GetCli.arguments.contains('-f');
     if (!isGit && !forceUpdate) {
-      String versionInPubDev =
+      var versionInPubDev =
           await PubDevApi.getLatestVersionFromPackage('get_cli');
 
-      String versionInstalled =
-          await PubspecLock.getVersionCli(disableLog: true);
+      var versionInstalled = await PubspecLock.getVersionCli(disableLog: true);
 
       if (versionInstalled == versionInPubDev) {
         return LogService.info(

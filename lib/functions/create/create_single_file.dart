@@ -12,24 +12,22 @@ import '../sorter_imports/sort.dart';
 
 File handleFileCreate(String name, String command, String on, bool extraFolder,
     Sample sample, String folderName,
-    [sep = '_']) {
+    [String sep = '_']) {
   final fileModel = Structure.model(name, command, extraFolder,
       on: on, folderName: folderName);
-  String path = fileModel.path + '$sep${fileModel.commandName}.dart';
+  var path = '${fileModel.path} $sep${fileModel.commandName}.dart';
   sample.path = path;
   return sample.create();
 }
 
-/**
- * Create or edit the contents of a file
- */
+/// Create or edit the contents of a file
 File writeFile(String path, String content,
     {bool overwrite = false,
     bool skipFormatter = false,
     bool logger = true,
     bool skipRename = false,
     bool useRelativeImport = false}) {
-  File _file = File(Structure.replaceAsExpected(path: path));
+  var _file = File(Structure.replaceAsExpected(path: path));
 
   if (!_file.existsSync() || overwrite) {
     if (!skipFormatter) {
@@ -39,7 +37,7 @@ File writeFile(String path, String content,
               renameImport: !skipRename,
               filePath: path,
               useRelative: useRelativeImport);
-        } catch (e) {
+        } on Exception catch (_) {
           if (_file.existsSync()) {
             LogService.info(LocaleKeys.error_invalid_dart.trArgs([_file.path]));
           }
@@ -48,7 +46,7 @@ File writeFile(String path, String content,
       }
     }
     if (!skipRename) {
-      String separatorFileType = PubspecUtils.separatorFileType;
+      var separatorFileType = PubspecUtils.separatorFileType;
       if (separatorFileType.isNotEmpty) {
         _file = _file.existsSync()
             ? _file = _file
@@ -71,15 +69,13 @@ File writeFile(String path, String content,
   return _file;
 }
 
-/**
- * Replace the file name separator
- */
+/// Replace the file name separator
 String replacePathTypeSeparator(String path, String separator) {
   if (separator.isNotEmpty) {
-    int index = path.indexOf(RegExp(r'controller.dart|model.dart|provider.dart|'
+    var index = path.indexOf(RegExp(r'controller.dart|model.dart|provider.dart|'
         'binding.dart|view.dart|screen.dart|widget.dart|repository.dart'));
     if (index != -1) {
-      List<String> chars = path.split('');
+      var chars = path.split('');
       index--;
       chars.removeAt(index);
       if (separator.length > 1) {

@@ -13,14 +13,14 @@ import '../../commads_export.dart';
 import '../../install/install_get.dart';
 
 Future<void> createInitGetxPattern() async {
-  bool canContinue = await createMain();
+  var canContinue = await createMain();
   if (!canContinue) return;
 
-  bool isServerProject = PubspecUtils.isServerProject;
+  var isServerProject = PubspecUtils.isServerProject;
   if (!isServerProject) {
     await installGet();
   }
-  List<Directory> initialDirs = [
+  var initialDirs = [
     Directory(Structure.replaceAsExpected(path: 'lib/app/data/')),
   ];
   GetXMainSample(isServer: isServerProject).create();

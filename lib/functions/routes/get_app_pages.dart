@@ -11,35 +11,35 @@ import '../find_file/find_file_by_name.dart';
 import '../formatter_dart_file/frommatter_dart_file.dart';
 import 'get_support_children.dart';
 
-Future<void> addAppPage(String name, String bindingDir, String viewDir) async {
-  File appPagesFile = findFileByName('app_pages.dart');
-  String path = viewDir;
-  List<String> lines = [];
+void addAppPage(String name, String bindingDir, String viewDir) {
+  var appPagesFile = findFileByName('app_pages.dart');
+  var path = viewDir;
+  var lines = <String>[];
   if (appPagesFile.path.isEmpty) {
-    await AppPagesSample().create(skipFormatter: true);
+    AppPagesSample().create(skipFormatter: true);
     appPagesFile = File(AppPagesSample().path);
     lines = appPagesFile.readAsLinesSync();
   } else {
-    String content = formatterDartFile(appPagesFile.readAsStringSync());
+    var content = formatterDartFile(appPagesFile.readAsStringSync());
     lines = LineSplitter.split(content).toList();
   }
 
-  String routesOrPath = 'Routes';
+  var routesOrPath = 'Routes';
 
-  int indexRoutes = lines
+  var indexRoutes = lines
       .indexWhere((element) => element.trim().contains('static final routes'));
-  int index =
+  var index =
       lines.indexWhere((element) => element.contains('];'), indexRoutes);
 
-  int tabEspaces = 2;
+  var tabEspaces = 2;
   if (supportChildrenRoutes) {
     routesOrPath = '_Paths';
-    List<String> pathSplit = path.split('/');
+    var pathSplit = path.split('/');
     pathSplit.removeLast();
     pathSplit.removeLast();
     pathSplit
         .removeWhere((element) => element == 'app' || element == 'modules');
-    int onPageIndex = -1;
+    var onPageIndex = -1;
     while (pathSplit.isNotEmpty && onPageIndex == -1) {
       onPageIndex = lines.indexWhere(
           (element) => element
@@ -49,36 +49,36 @@ Future<void> addAppPage(String name, String bindingDir, String viewDir) async {
       pathSplit.removeLast();
     }
     if (onPageIndex != -1) {
-      int onPageStartIndex = lines
+      var onPageStartIndex = lines
           .sublist(0, onPageIndex)
           .lastIndexWhere((element) => element.contains('GetPage'));
 
-      int onPageEndIndex = -1;
+      var onPageEndIndex = -1;
 
       if (onPageStartIndex != -1) {
         onPageEndIndex = lines.indexWhere(
             (element) => element.startsWith(
-                _getTabs(_countTabs(lines[onPageStartIndex])) + '),'),
+                '${_getTabs(_countTabs(lines[onPageStartIndex]))}),'),
             onPageStartIndex);
       } else {
         _logInvalidFormart();
       }
       if (onPageEndIndex != -1) {
-        int indexChildrenStart = lines
+        var indexChildrenStart = lines
             .sublist(onPageStartIndex, onPageEndIndex)
             .indexWhere((element) => element.contains('children'));
         if (indexChildrenStart == -1) {
           tabEspaces = _countTabs(lines[onPageStartIndex]) + 1;
           index = onPageEndIndex;
-          lines.insert(index, _getTabs(tabEspaces) + 'children: [');
+          lines.insert(index, '${_getTabs(tabEspaces)}children: [');
           index++;
-          lines.insert(index, _getTabs(tabEspaces) + '],');
+          lines.insert(index, '${_getTabs(tabEspaces)}],');
           tabEspaces++;
         } else {
-          int indexChildrenEnd = -1;
+          var indexChildrenEnd = -1;
           indexChildrenEnd = lines.indexWhere(
               (element) => element.startsWith(
-                  _getTabs(_countTabs(lines[onPageStartIndex]) + 1) + '],'),
+                  '${_getTabs(_countTabs(lines[onPageStartIndex]) + 1)}],'),
               onPageStartIndex);
           if (indexChildrenEnd != -1) {
             index = indexChildrenEnd;
@@ -92,32 +92,31 @@ Future<void> addAppPage(String name, String bindingDir, String viewDir) async {
       }
     }
   }
-  String nameSnakeCase = name.snakeCase;
-  String namePascalCase = name.pascalCase;
-  String line = '''${_getTabs(tabEspaces)}GetPage(
+  var nameSnakeCase = name.snakeCase;
+  var namePascalCase = name.pascalCase;
+  var line = '''${_getTabs(tabEspaces)}GetPage(
 ${_getTabs(tabEspaces + 1)}name: $routesOrPath.${nameSnakeCase.toUpperCase()}, 
 ${_getTabs(tabEspaces + 1)}page:()=> ${namePascalCase}View(), 
 ${_getTabs(tabEspaces + 1)}binding: ${namePascalCase}Binding(),
 ${_getTabs(tabEspaces)}),''';
 
-  String import = "import 'package:${PubspecUtils.getProjectName()}/";
+  var import = "import 'package:${PubspecUtils.getProjectName()}/";
 
   lines.insert(index, line);
 
-  lines.insert(0, import + bindingDir + "';");
-  lines.insert(0, import + viewDir + "';");
+  lines.insert(0, "$import$bindingDir';");
+  lines.insert(0, "$import$viewDir';");
 
-  await writeFile(appPagesFile.path, lines.join('\n'),
+  writeFile(appPagesFile.path, lines.join('\n'),
       overwrite: true, logger: false);
 }
 
-/**
- * Create a tab line
- *
- *      _getTabs(2)   // '    ';    
- */
+/// Create a tab line
+/// ```
+/// _getTabs(2)   // '    ';
+/// ```
 String _getTabs(int tabEspaces) {
-  String string = '';
+  var string = '';
   for (var i = 0; i < tabEspaces; i++) {
     string += '  ';
   }

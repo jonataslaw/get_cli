@@ -12,8 +12,8 @@ import 'locales.g.dart';
 
 class Structure {
   static final Map<String, String> _paths = {
-    'page': Directory(
-                replaceAsExpected(path: Directory.current.path + '/lib/pages/'))
+    'page': Directory(replaceAsExpected(
+                path: '${Directory.current.path} /lib/pages/'))
             .existsSync()
         ? replaceAsExpected(path: 'lib/pages')
         : replaceAsExpected(path: 'lib/app/modules'),
@@ -40,7 +40,7 @@ class Structure {
       {String on, String folderName}) {
     if (on != null && on != '') {
       on = replaceAsExpected(path: on).replaceAll('\\\\', '\\');
-      Directory current = Directory('./lib');
+      var current = Directory('./lib');
       final list = current.listSync(recursive: true, followLinks: false);
       final contains = list.firstWhere((element) {
         if (element is File) {
@@ -131,7 +131,7 @@ class Structure {
   }
 
   static String pathToDirImport(String path) {
-    List<String> pathSplit = safeSplitPath(path)
+    var pathSplit = safeSplitPath(path)
       ..removeWhere((element) => element == '.' || element == 'lib');
     return pathSplit.join('/');
   }

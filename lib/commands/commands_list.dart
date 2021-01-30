@@ -1,6 +1,5 @@
-import 'package:get_cli/commands/interface/command.dart';
-
 import 'impl/commads_export.dart';
+import 'interface/command.dart';
 
 final List<Command> commands = [
   CommandParent(

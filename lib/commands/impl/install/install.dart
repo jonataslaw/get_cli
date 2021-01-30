@@ -13,7 +13,7 @@ class InstallCommand extends Command with ArgsMixin {
   String get commandName => 'install';
   @override
   Future<void> execute() async {
-    List<String> args = List.from(GetCli.arguments);
+    var args = List<String>.from(GetCli.arguments);
     args.removeAt(0);
     var isDev = containsArg('--dev');
     var runPubGet = true;
@@ -49,7 +49,7 @@ class InstallCommand extends Command with ArgsMixin {
 
   @override
   bool validate() {
-    List<String> args = List.from(GetCli.arguments);
+    var args = List<String>.from(GetCli.arguments);
     args.removeAt(0);
     if (args.isEmpty) {
       final codeSample1 = LogService.code('get install get:3.4.6');

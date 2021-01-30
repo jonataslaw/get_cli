@@ -13,18 +13,18 @@ import '../create/create_single_file.dart';
 import '../formatter_dart_file/frommatter_dart_file.dart';
 
 void arcAddRoute(String nameRoute) {
-  File routesFile = File(Structure.replaceAsExpected(
+  var routesFile = File(Structure.replaceAsExpected(
       path: 'lib/infrastructure/navigation/routes.dart'));
-  List<String> lines = [];
+  var lines = <String>[];
   if (!routesFile.existsSync()) {
     ArcRouteSample(nameRoute.snakeCase.toUpperCase()).create();
     lines = routesFile.readAsLinesSync();
   } else {
-    String content = formatterDartFile(routesFile.readAsStringSync());
+    var content = formatterDartFile(routesFile.readAsStringSync());
     lines = LineSplitter.split(content).toList();
   }
 
-  String line =
+  var line =
       'static const ${nameRoute.snakeCase.toUpperCase()} = \'/${nameRoute.snakeCase.toLowerCase().replaceAll('_', '-')}\';';
   if (lines.contains(line)) {
     return;
@@ -47,12 +47,12 @@ List<String> _routesSort(List<String> lines) {
   var routes = <String>[];
   var lines2 = <String>[];
   lines2.addAll(lines);
-  lines2.forEach((line) {
+  for (var line in lines2) {
     if (line.contains('static const')) {
       routes.add('$line');
       lines.remove(line);
     }
-  });
+  }
   routes.sort();
   lines.insertAll(lines.length - 1, routes);
   return lines;

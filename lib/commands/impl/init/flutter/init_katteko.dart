@@ -14,12 +14,12 @@ import '../../commads_export.dart';
 import '../../install/install_get.dart';
 
 Future<void> createInitKatekko() async {
-  bool canContinue = await createMain();
+  var canContinue = await createMain();
   if (!canContinue) return;
   if (!PubspecUtils.isServerProject) {
     await installGet();
   }
-  List<Directory> initialDirs = [
+  var initialDirs = [
     Directory(Structure.replaceAsExpected(path: 'lib/domain/core/interfaces/')),
     Directory(Structure.replaceAsExpected(
         path: 'lib/infrastructure/navigation/bindings/controllers/')),

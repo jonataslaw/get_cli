@@ -16,7 +16,7 @@ class ProviderSample extends Sample {
       this.createEndpoints = false,
       this.modelPath = '',
       this.isServer = false,
-      path = ''})
+      String path = ''})
       : super(path, overwrite: overwrite) {
     _namePascal = _fileName.pascalCase;
     _nameLower = _fileName.toLowerCase();

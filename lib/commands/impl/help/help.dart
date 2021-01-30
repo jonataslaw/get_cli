@@ -28,10 +28,10 @@ $commandsHelp
       return a.commandName.compareTo(b.commandName);
     });
     var result = '';
-    commands.forEach((command) {
-      result += '\n' + '  ' * index + command.commandName + ': ' + command.hint;
+    for (var command in commands) {
+      result += '\n ${'  ' * index} ${command.commandName}:  ${command.hint}';
       result += _getCommandsHelp(command.childrens, index + 1);
-    });
+    }
     return result;
   }
   /* String _getCommandsHelp(Map commands, int index) {

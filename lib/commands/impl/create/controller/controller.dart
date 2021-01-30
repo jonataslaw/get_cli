@@ -17,26 +17,24 @@ import '../../../../samples/impl/get_controller.dart';
 import '../../../interface/command.dart';
 import '../../args_mixin.dart';
 
-/**
- * This command is a controller with the template:
- *      
- *      import 'package:get/get.dart';,
- *
- *      class NameController extends GetxController {
- *
- *      }
-*/
+/// This command is a controller with the template:
+///```
+///import 'package:get/get.dart';,
+///
+///class NameController extends GetxController {
+///
+///}
+///```
 class CreateControllerCommand extends Command with ArgsMixin {
   @override
   String get hint => LocaleKeys.hint_create_controller.tr;
 
-  String get codeSample =>
-      'get create controller:name [OPTINAL PARAMETERS] \n' +
-      LocaleKeys.optional_parameters.trArgs(['[on, with]']);
+  String get codeSample => 'get create controller:name [OPTINAL PARAMETERS] \n'
+      '${LocaleKeys.optional_parameters.trArgs(['[on, with]'])} ';
   @override
   bool validate() {
     if (args.length > 2) {
-      List<String> unnecessaryParameter = args.skip(2).toList();
+      var unnecessaryParameter = args.skip(2).toList();
       throw CliException(
           LocaleKeys.error_unnecessary_parameter.trArgsPlural(
             LocaleKeys.error_unnecessary_parameter_plural,
@@ -56,22 +54,21 @@ class CreateControllerCommand extends Command with ArgsMixin {
 
   Future<void> createController(String name,
       {String withArgument = '', String onCommand = ''}) async {
-    ControllerSample sample =
-        ControllerSample('', name, PubspecUtils.isServerProject);
+    var sample = ControllerSample('', name, PubspecUtils.isServerProject);
     if (withArgument.isNotEmpty) {
       if (isURL(withArgument)) {
-        Response res = await get(withArgument);
+        var res = await get(withArgument);
         if (res.statusCode == 200) {
-          String content = res.body;
+          var content = res.body;
           sample.customContent = replaceVars(content, name);
         } else {
           throw CliException(
               LocaleKeys.error_failed_to_connect.trArgs([withArgument]));
         }
       } else {
-        File file = File(withArgument);
+        var file = File(withArgument);
         if (file.existsSync()) {
-          String content = file.readAsStringSync();
+          var content = file.readAsStringSync();
           sample.customContent = replaceVars(content, name);
         } else {
           throw CliException(
@@ -79,7 +76,7 @@ class CreateControllerCommand extends Command with ArgsMixin {
         }
       }
     }
-    File controllerFile = await handleFileCreate(
+    var controllerFile = handleFileCreate(
       name,
       'controller',
       onCommand,
@@ -88,9 +85,9 @@ class CreateControllerCommand extends Command with ArgsMixin {
       'controllers',
     );
 
-    String binindingPath =
+    var binindingPath =
         findBindingFromName(controllerFile.path, basename(onCommand));
-    List<String> pathSplit = Structure.safeSplitPath(controllerFile.path);
+    var pathSplit = Structure.safeSplitPath(controllerFile.path);
     pathSplit.remove('.');
     pathSplit.remove('lib');
     if (binindingPath.isNotEmpty) {

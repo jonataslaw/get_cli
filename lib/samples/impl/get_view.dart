@@ -22,7 +22,7 @@ class GetViewSample extends Sample {
 
   String get _flutterView => '''import 'package:flutter/material.dart';
 import 'package:get/get.dart'; 
-${import}
+$import
 
 class $_viewName extends $_controllerName {
   @override
@@ -44,7 +44,7 @@ class $_viewName extends $_controllerName {
   ''';
 
   String get _serverView =>
-      '''import 'package:get_server/get_server.dart'; ${import}
+      '''import 'package:get_server/get_server.dart'; $import
 
 class $_viewName extends GetView<$_controller> {
   @override

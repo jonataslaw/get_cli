@@ -28,6 +28,6 @@ class PubDevApi {
       return null;
     });
 
-    return res;
+    return res as String;
   }
 }

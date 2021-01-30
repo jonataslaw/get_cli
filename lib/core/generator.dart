@@ -1,6 +1,5 @@
-import 'package:get_cli/commands/impl/help/help.dart';
-
 import '../commands/commands_list.dart';
+import '../commands/impl/help/help.dart';
 import '../commands/interface/command.dart';
 import '../common/utils/logger/log_utils.dart';
 
@@ -22,7 +21,7 @@ class GetCli {
     try {
       final currentArgument = arguments[currentIndex].split(':').first;
 
-      Command command = commands.firstWhere(
+      var command = commands.firstWhere(
           (command) =>
               command.commandName == currentArgument ||
               command.alias.contains(currentArgument),
@@ -38,9 +37,10 @@ class GetCli {
         }
       }
       return command;
+      // ignore: avoid_catching_errors
     } on RangeError catch (_) {
       return HelpCommand();
-    } catch (_) {
+    } on Exception catch (_) {
       rethrow;
     }
   }

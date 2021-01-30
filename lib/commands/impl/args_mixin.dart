@@ -4,10 +4,10 @@ import '../../core/generator.dart';
 
 mixin ArgsMixin {
   final List<String> _args = GetCli.arguments;
-  /**
-   * all arguments
-   */
+
+  /// all arguments
   List<String> args = _getArgs();
+
   List<String> flags = _getFlags();
 
   String get onCommand {
@@ -39,12 +39,13 @@ mixin ArgsMixin {
 List<String> _getArgs() {
   var args = List.of(GetCli.arguments);
   var defaultArgs = ['on', 'home', 'from', 'with'];
-  defaultArgs.forEach((arg) {
-    int indexArg = args.indexWhere((element) => (element == arg));
+
+  for (var arg in defaultArgs) {
+    var indexArg = args.indexWhere((element) => (element == arg));
     if (indexArg != -1 && indexArg + 1 < args.length) {
       args..removeAt(indexArg)..removeAt(indexArg);
     }
-  });
+  }
   args.removeWhere((element) => element.startsWith('-'));
   return args;
 }
@@ -62,7 +63,7 @@ int _getIndexArg(String arg) {
 }
 
 String _getArg(String arg) {
-  int index = _getIndexArg(arg);
+  var index = _getIndexArg(arg);
   if (index != -1) {
     if (index + 1 < GetCli.arguments.length) {
       index++;

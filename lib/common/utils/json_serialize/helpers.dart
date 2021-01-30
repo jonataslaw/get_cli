@@ -1,12 +1,11 @@
 import 'dart:convert' as convert;
 import 'dart:io';
 import 'dart:math';
+import 'package:json_ast/json_ast.dart'
+    show Node, ObjectNode, ArrayNode, LiteralNode;
 
 import '../logger/log_utils.dart';
 import 'sintaxe.dart';
-
-import 'package:json_ast/json_ast.dart'
-    show Node, ObjectNode, ArrayNode, LiteralNode;
 
 const Map<String, bool> PRIMITIVE_TYPES = {
   'int': true,
@@ -32,9 +31,9 @@ class MergeableListType {
 }
 
 MergeableListType mergeableListType(List<dynamic> list) {
-  ListType t = ListType.Null;
-  bool isAmbigous = false;
-  list.forEach((e) {
+  var t = ListType.Null;
+  var isAmbigous = false;
+  for (var e in list) {
     ListType inferredType;
     if (e.runtimeType.toString() == 'int') {
       inferredType = ListType.Int;
@@ -49,7 +48,7 @@ MergeableListType mergeableListType(List<dynamic> list) {
       isAmbigous = true;
     }
     t = inferredType;
-  });
+  }
   return MergeableListType(t, isAmbigous);
 }
 
@@ -72,24 +71,24 @@ dynamic decodeJSON(String rawJson) {
   try {
     return convert.json.decode(rawJson);
   } on FormatException catch (e) {
-    LogService.error(
-        'invalid json format: \n${e.toString().split("FormatException:").last}');
+    LogService.error('invalid json format: '
+        '\n${e.toString().split("FormatException:").last}');
     if (!Platform.isWindows) exit(0);
-  } catch (e) {
-    LogService.error('Unexpected error ${e}');
+  } on Exception catch (e) {
+    LogService.error('Unexpected error $e');
     if (!Platform.isWindows) exit(0);
   }
 }
 
 WithWarning<Map> mergeObj(Map obj, Map other, String path) {
-  List<Warning> warnings = List<Warning>();
-  final Map clone = Map.from(obj);
+  var warnings = <Warning>[];
+  final clone = Map.from(obj);
   other.forEach((k, v) {
     if (clone[k] == null) {
       clone[k] = v;
     } else {
-      final String otherType = getTypeName(v);
-      final String t = getTypeName(clone[k]);
+      final otherType = getTypeName(v);
+      final t = getTypeName(clone[k]);
       if (t != otherType) {
         if (t == 'int' && otherType == 'double') {
           // if double was found instead of int, assign the double
@@ -100,11 +99,11 @@ WithWarning<Map> mergeObj(Map obj, Map other, String path) {
           warnings.add(newAmbiguousType('$path/$k'));
         }
       } else if (t == 'List') {
-        List l = List.from(clone[k]);
-        l.addAll(other[k]);
+        var l = List.from(clone[k] as Iterable);
+        l.addAll(other[k] as Iterable);
         final mergeableType = mergeableListType(l);
         if (ListType.Object == mergeableType.listType) {
-          WithWarning<Map> mergedList = mergeObjectList(l, '$path');
+          var mergedList = mergeObjectList(l, '$path');
           warnings.addAll(mergedList.warnings);
           clone[k] = List.filled(1, mergedList.result);
         } else {
@@ -116,7 +115,7 @@ WithWarning<Map> mergeObj(Map obj, Map other, String path) {
           }
         }
       } else if (t == 'Class') {
-        WithWarning<Map> mergedObj = mergeObj(clone[k], other[k], '$path/$k');
+        var mergedObj = mergeObj(clone[k] as Map, other[k] as Map, '$path/$k');
         warnings.addAll(mergedObj.warnings);
         clone[k] = mergedObj.result;
       }
@@ -127,39 +126,38 @@ WithWarning<Map> mergeObj(Map obj, Map other, String path) {
 
 WithWarning<Map> mergeObjectList(List<dynamic> list, String path,
     [int idx = -1]) {
-  List<Warning> warnings = List<Warning>();
-  Map obj = Map();
+  var warnings = <Warning>{};
+  var obj = {};
   for (var i = 0; i < list.length; i++) {
     final toMerge = list[i];
     if (toMerge is Map) {
       toMerge.forEach((k, v) {
-        final String t = getTypeName(obj[k]);
+        final t = getTypeName(obj[k]);
         if (obj[k] == null) {
           obj[k] = v;
         } else {
-          final String otherType = getTypeName(v);
+          final otherType = getTypeName(v);
           if (t != otherType) {
             if (t == 'int' && otherType == 'double') {
               // if double was found instead of int, assign the double
               obj[k] = v;
             } else if (t != 'double' && otherType != 'int') {
               // if types are not equal, then
-              int realIndex = i;
+              var realIndex = i;
               if (idx != -1) {
                 realIndex = idx - i;
               }
-              final String ambiguosTypePath = '$path[$realIndex]/$k';
+              final ambiguosTypePath = '$path[$realIndex]/$k';
               warnings.add(newAmbiguousType(ambiguosTypePath));
             }
           } else if (t == 'List') {
-            List l = List.from(obj[k]);
-            final int beginIndex = l.length;
-            l.addAll(v);
+            var l = List.from(obj[k] as Iterable);
+            final beginIndex = l.length;
+            l.addAll(v as Iterable);
             // bug is here
             final mergeableType = mergeableListType(l);
             if (ListType.Object == mergeableType.listType) {
-              WithWarning<Map> mergedList =
-                  mergeObjectList(l, '$path[$i]/$k', beginIndex);
+              var mergedList = mergeObjectList(l, '$path[$i]/$k', beginIndex);
               warnings.addAll(mergedList.warnings);
               obj[k] = List.filled(1, mergedList.result);
             } else {
@@ -171,13 +169,13 @@ WithWarning<Map> mergeObjectList(List<dynamic> list, String path,
               }
             }
           } else if (t == 'Class') {
-            int properIndex = i;
+            var properIndex = i;
             if (idx != -1) {
               properIndex = i - idx;
             }
-            WithWarning<Map> mergedObj = mergeObj(
-              obj[k],
-              v,
+            var mergedObj = mergeObj(
+              obj[k] as Map,
+              v as Map,
               '$path[$properIndex]/$k',
             );
             warnings.addAll(mergedObj.warnings);
@@ -187,7 +185,7 @@ WithWarning<Map> mergeObjectList(List<dynamic> list, String path,
       });
     }
   }
-  return WithWarning(obj, warnings);
+  return WithWarning(obj, warnings.toList());
 }
 
 bool isPrimitiveType(String typeName) {
@@ -234,7 +232,7 @@ String getTypeName(dynamic obj) {
 Node navigateNode(Node astNode, String path) {
   Node node;
   if (astNode is ObjectNode) {
-    final ObjectNode objectNode = astNode;
+    final objectNode = astNode;
     final propertyNode = objectNode.children.firstWhere((final prop) {
       return prop.key.value == path;
     }, orElse: () {
@@ -245,7 +243,7 @@ Node navigateNode(Node astNode, String path) {
     }
   }
   if (astNode is ArrayNode) {
-    final ArrayNode arrayNode = astNode;
+    final arrayNode = astNode;
     final index = int.tryParse(path);
     if (index != null && arrayNode.children.length > index) {
       node = arrayNode.children[index];
@@ -258,7 +256,7 @@ final _pattern = RegExp(r'([0-9]+)\.{0,1}([0-9]*)e(([-0-9]+))');
 
 bool isASTLiteralDouble(Node astNode) {
   if (astNode != null && astNode is LiteralNode) {
-    final LiteralNode literalNode = astNode;
+    final literalNode = astNode;
     final containsPoint = literalNode.raw.contains('.');
     final containsExponent = literalNode.raw.contains('e');
     if (containsPoint || containsExponent) {

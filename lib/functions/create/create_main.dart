@@ -6,12 +6,11 @@ import '../../common/utils/logger/log_utils.dart';
 import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
 import '../../core/structure.dart';
-import '../../models/file_model.dart';
 
 Future<bool> createMain() async {
-  FileModel _fileModel = Structure.model('', 'init', false);
+  var _fileModel = Structure.model('', 'init', false);
 
-  File _main = await File(_fileModel.path + 'main.dart');
+  var _main = File('${_fileModel.path}main.dart');
 
   if (_main.existsSync()) {
     /// apenas quem chama essa função é o create project e o init,

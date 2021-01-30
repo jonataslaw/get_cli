@@ -11,32 +11,28 @@ import '../../../../core/locales.g.dart';
 import '../../../../core/structure.dart';
 import '../../../../functions/create/create_single_file.dart';
 import '../../../../functions/routes/get_add_route.dart';
-import '../../../../models/file_model.dart';
 import '../../../../samples/impl/get_binding.dart';
 import '../../../../samples/impl/get_controller.dart';
 import '../../../../samples/impl/get_view.dart';
 import '../../../interface/command.dart';
 import '../../args_mixin.dart';
 
-/**
- * The command create a Binding and Controller page and view
- */
+/// The command create a Binding and Controller page and view
 class CreatePageCommand extends Command with ArgsMixin {
   @override
   String get commandName => 'page';
   @override
   Future<void> execute() async {
-    bool isProject = false;
+    var isProject = false;
     if (GetCli.arguments[0] == 'create') {
       isProject = GetCli.arguments[1].split(':').first == 'project';
     }
-    FileModel _fileModel = Structure.model(
-        isProject ? 'home' : name, 'page', true,
+    var _fileModel = Structure.model(isProject ? 'home' : name, 'page', true,
         on: onCommand, folderName: isProject ? 'home' : name);
-    List<String> pathSplit = Structure.safeSplitPath(_fileModel.path);
+    var pathSplit = Structure.safeSplitPath(_fileModel.path);
 
     pathSplit.removeLast();
-    String path = pathSplit.join('/');
+    var path = pathSplit.join('/');
     path = Structure.replaceAsExpected(path: path);
     if (Directory(path).existsSync()) {
       LogService.info(Translation(LocaleKeys.ask_existing_page.trArgs([name])));
@@ -64,9 +60,9 @@ class CreatePageCommand extends Command with ArgsMixin {
 
   Future<void> _writeFiles(String path, String name,
       {bool overwrite = false}) async {
-    bool isServer = PubspecUtils.isServerProject;
+    var isServer = PubspecUtils.isServerProject;
 
-    File controllerFile = handleFileCreate(
+    var controllerFile = handleFileCreate(
       name,
       'controller',
       path,
@@ -74,17 +70,17 @@ class CreatePageCommand extends Command with ArgsMixin {
       ControllerSample('', name, isServer),
       'controllers',
     );
-    String controllerDir = Structure.pathToDirImport(controllerFile.path);
-    File viewFile = handleFileCreate(
+    var controllerDir = Structure.pathToDirImport(controllerFile.path);
+    var viewFile = handleFileCreate(
       name,
       'view',
       path,
       true,
-      GetViewSample('', name.pascalCase + 'View',
-          name.pascalCase + 'Controller', controllerDir, isServer),
+      GetViewSample('', '${name.pascalCase}View',
+          '${name.pascalCase}Controller', controllerDir, isServer),
       'views',
     );
-    File bindingFile = handleFileCreate(
+    var bindingFile = handleFileCreate(
       name,
       'binding',
       path,
@@ -92,7 +88,7 @@ class CreatePageCommand extends Command with ArgsMixin {
       BindingSample(
         '',
         name,
-        name.pascalCase + 'Binding',
+        '${name.pascalCase}Binding',
         controllerDir,
         isServer,
         overwrite: overwrite,
@@ -100,7 +96,7 @@ class CreatePageCommand extends Command with ArgsMixin {
       'bindings',
     );
 
-    await addRoute(
+    addRoute(
       name,
       Structure.pathToDirImport(bindingFile.path),
       Structure.pathToDirImport(viewFile.path),

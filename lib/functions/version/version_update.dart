@@ -12,7 +12,7 @@ import 'check_dev_version.dart';
 import 'print_get_cli.dart';
 
 void checkForUpdate() async {
-  if (!await CliConfig.updateIsCheckingToday()) {
+  if (!CliConfig.updateIsCheckingToday()) {
     if (!isDevVersion()) {
       await PubDevApi.getLatestVersionFromPackage('get_cli')
           .then((versionInPubDev) async {
@@ -31,14 +31,15 @@ void checkForUpdate() async {
             printGetCli();
             final codeSample = LogService.code('get update');
             LogService.info(
-                LocaleKeys.info_update_available2.trArgs([versionInPubDev]) +
-                    ' $codeSample',
+                '${LocaleKeys.info_update_available2.trArgs([
+                  versionInPubDev
+                ])}${' $codeSample'}',
                 false,
                 true);
           }
         });
       });
-      await CliConfig.setUpdateCheckToday();
+      CliConfig.setUpdateCheckToday();
     }
   }
 }

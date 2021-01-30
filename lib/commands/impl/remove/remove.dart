@@ -11,15 +11,13 @@ class RemoveCommand extends Command {
   String get commandName => 'remove';
   @override
   Future<void> execute() async {
-    List<String> args = List.from(GetCli.arguments);
+    var args = List<String>.from(GetCli.arguments);
     var package = args.first;
     if (args.length == 1) {
-      await PubspecUtils.removeDependencies(package);
+      PubspecUtils.removeDependencies(package);
     } else {
       for (var element in args) {
-        await PubspecUtils.removeDependencies(
-          element,
-        );
+        PubspecUtils.removeDependencies(element);
       }
     }
     if (GetCli.arguments.first == 'remove') {
@@ -32,7 +30,7 @@ class RemoveCommand extends Command {
 
   @override
   bool validate() {
-    List<String> args = List.from(GetCli.arguments);
+    var args = List<String>.from(GetCli.arguments);
     args.removeAt(0);
     if (args.isEmpty) {
       LogService.error('Enter the name of the package you wanna remove');

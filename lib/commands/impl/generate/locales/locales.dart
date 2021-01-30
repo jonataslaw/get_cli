@@ -9,7 +9,6 @@ import '../../../../core/locales.g.dart';
 import '../../../../core/structure.dart';
 import '../../../../exception_handler/exceptions/cli_exception.dart';
 import '../../../../get_cli.dart';
-import '../../../../models/file_model.dart';
 import '../../../../samples/impl/generate_locales.dart';
 import '../../../interface/command.dart';
 import '../../args_mixin.dart';
@@ -37,7 +36,7 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
 
     final files = await Directory(inputPath)
         .list(recursive: false)
-        .where((FileSystemEntity entry) => entry.path.endsWith('.json'))
+        .where((entry) => entry.path.endsWith('.json'))
         .toList();
 
     if (files.isEmpty) {
@@ -45,26 +44,26 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
       return;
     }
 
-    final maps = Map<String, Map<String, dynamic>>();
+    final maps = <String, Map<String, dynamic>>{};
     for (var file in files) {
       try {
         final map = jsonDecode(await File(file.path).readAsString());
         final localeKey = basenameWithoutExtension(file.path);
-        maps[localeKey] = map;
-      } catch (_) {
+        maps[localeKey] = map as Map<String, dynamic>;
+      } on Exception catch (_) {
         LogService.error(LocaleKeys.error_invalid_json.trArgs([file.path]));
         rethrow;
       }
     }
 
-    final locales = Map<String, Map<String, String>>();
+    final locales = <String, Map<String, String>>{};
     maps.forEach((key, value) {
-      final result = Map<String, String>();
+      final result = <String, String>{};
       _resolve(value, result);
       locales[key] = result;
     });
 
-    final keys = Set<String>();
+    final keys = <String>{};
     locales.forEach((key, value) {
       value.forEach((key, value) {
         keys.add(key);
@@ -90,12 +89,12 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
       parsedLocales.writeln('\t};');
     });
 
-    FileModel _fileModel =
+    var _fileModel =
         Structure.model('locales', 'generate_locales', false, on: onCommand);
 
-    await GenerateLocalesSample(
+    GenerateLocalesSample(
             parsedKeys, parsedLocales.toString(), translationsKeys.toString(),
-            path: _fileModel.path + '.g.dart')
+            path: '${_fileModel.path}.g.dart')
         .create();
 
     LogService.success(LocaleKeys.sucess_locale_generate.tr);
@@ -109,11 +108,12 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
       if (localization[key] is Map) {
         var nextAccKey = key;
         if (accKey != null) {
-          nextAccKey = '${accKey}_${key}';
+          nextAccKey = '${accKey}_$key';
         }
-        _resolve(localization[key], result, nextAccKey);
+        _resolve(localization[key] as Map<String, dynamic>, result, nextAccKey);
       } else {
-        result[accKey != null ? '${accKey}_${key}' : key] = localization[key];
+        result[accKey != null ? '${accKey}_$key' : key] =
+            localization[key] as String;
       }
     }
   }

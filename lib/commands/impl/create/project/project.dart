@@ -23,16 +23,16 @@ class CreateProjectCommand extends Command with ArgsMixin {
       'Get Server',
     ]);
     final result = menu.choose();
-    String nameProject = name;
+    var nameProject = name;
     if (name == '.') {
       final dialog = CLI_Dialog(questions: [
         [LocaleKeys.ask_name_to_project.tr, 'name']
       ]);
-      nameProject = dialog.ask()['name'];
+      nameProject = dialog.ask()['name'] as String;
     }
 
-    String path = Structure.replaceAsExpected(
-        path: Directory.current.path + '/${nameProject.snakeCase}');
+    var path = Structure.replaceAsExpected(
+        path: '${Directory.current.path}/${nameProject.snakeCase}');
     await Directory(path).create(recursive: true);
 
     Directory.current = path;
@@ -40,15 +40,12 @@ class CreateProjectCommand extends Command with ArgsMixin {
     if (result.index == 0) {
       final dialog = CLI_Dialog(questions: [
         [
-          LocaleKeys.ask_company_domain.tr +
-              ' \x1B[33m' +
-              LocaleKeys.example.tr +
-              ' com.yourcompany \x1B[0m',
+          '${LocaleKeys.ask_company_domain.tr} \x1B[33m '
+              '${LocaleKeys.example.tr} com.yourcompany \x1B[0m',
           'org'
         ]
       ]);
-      final org = dialog.ask()['org'];
-
+      var org = dialog.ask()['org'] as String;
       await ShellUtils.flutterCreate(path, org);
       await InitCommand().execute();
     } else {

@@ -1,6 +1,8 @@
 import 'package:ansicolor/ansicolor.dart';
+
 // ignore_for_file: avoid_print
 
+// ignore: avoid_classes_with_only_static_members
 class LogService {
   static final AnsiPen _penError = AnsiPen()..red(bold: true);
   static final AnsiPen _penSuccess = AnsiPen()..green(bold: true);
@@ -13,23 +15,23 @@ class LogService {
   static final AnsiPen codeBold = AnsiPen()..gray(level: 1);
 
 //  static var _errorWrapper = '_' * 40;
-  static void error(msg) {
+  static void error(String msg) {
     const sep = '\n';
     // to check: ⚠ ❌✖✕
-    msg = '✖ ' + _penError(msg.trim());
+    msg = '✖  + ${_penError(msg.trim())}';
     msg = msg + sep;
     print(msg);
   }
 
-  static void success(msg) {
-    print('✓ ' + _penSuccess(msg));
+  static void success(dynamic msg) {
+    print('✓  ${_penSuccess(msg)}');
   }
 
-  static void info(msg, [bool trim = false, bool newLines = true]) {
+  static void info(dynamic msg, [bool trim = false, bool newLines = true]) {
     final sep = newLines ? '\n' : '';
     if (trim) msg = msg.trim();
     msg = _penInfo(msg);
-    msg = sep + msg + sep;
+    msg = sep + msg.toString() + sep;
     print(msg);
   }
 }

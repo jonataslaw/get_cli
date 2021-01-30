@@ -16,7 +16,7 @@ void createNavigation() {
 }
 
 void addNavigation(String name) {
-  File navigationFile = File(Structure.replaceAsExpected(
+  var navigationFile = File(Structure.replaceAsExpected(
       path: 'lib/infrastructure/navigation/navigation.dart'));
 
   List<String> lines;
@@ -25,7 +25,7 @@ void addNavigation(String name) {
     createNavigation();
     lines = navigationFile.readAsLinesSync();
   } else {
-    String content = formatterDartFile(navigationFile.readAsStringSync());
+    var content = formatterDartFile(navigationFile.readAsStringSync());
     lines = LineSplitter.split(content).toList();
   }
   navigationFile.readAsLinesSync();
@@ -34,10 +34,10 @@ void addNavigation(String name) {
     lines.removeLast();
   }
 
-  int indexStartNavClass = lines.indexWhere(
+  var indexStartNavClass = lines.indexWhere(
     (line) => line.contains('class Nav'),
   );
-  int index =
+  var index =
       lines.indexWhere((element) => element.contains('];'), indexStartNavClass);
 
   lines.insert(index, '''    GetPage(

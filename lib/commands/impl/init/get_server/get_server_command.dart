@@ -16,8 +16,8 @@ class InitGetServer extends Command {
     // bool canContinue = await createMain();
     // if (!canContinue) return;
 
-    await GetServerPubspecSample(basename(Directory.current.path)).create();
-    await AnalysisOptionsSample().create();
+    GetServerPubspecSample(basename(Directory.current.path)).create();
+    AnalysisOptionsSample().create();
     await PubspecUtils.addDependencies('get_server', runPubGet: false);
     await PubspecUtils.addDependencies('pedantic',
         isDev: true, runPubGet: false);

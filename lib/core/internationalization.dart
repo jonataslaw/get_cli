@@ -5,8 +5,8 @@ import 'locales.g.dart';
 extension Trans on String {
   /// Translation
   String get tr {
-    Map<String, Map<String, String>> translations = AppTranslation.translations;
-    String localeName = Platform.localeName;
+    var translations = AppTranslation.translations;
+    var localeName = Platform.localeName;
     // Mac return pt-BR;
     localeName = localeName.replaceAll('-', '_');
     // Returns the key if locale is null.

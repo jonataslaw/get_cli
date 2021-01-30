@@ -13,23 +13,20 @@ import '../formatter_dart_file/frommatter_dart_file.dart';
 import 'get_app_pages.dart';
 import 'get_support_children.dart';
 
-/**
- * This command will create the route to the new page
- */
-Future<void> addRoute(
-    String nameRoute, String bindingDir, String viewDir) async {
-  File routesFile = findFileByName('app_routes.dart');
-  List<String> lines = [];
+/// This command will create the route to the new page
+void addRoute(String nameRoute, String bindingDir, String viewDir) {
+  var routesFile = findFileByName('app_routes.dart');
+  var lines = <String>[];
 
   if (routesFile.path.isEmpty) {
-    await RouteSample().create(skipFormatter: true);
+    RouteSample().create(skipFormatter: true);
     routesFile = File(RouteSample().path);
     lines = routesFile.readAsLinesSync();
   } else {
-    String content = formatterDartFile(routesFile.readAsStringSync());
+    var content = formatterDartFile(routesFile.readAsStringSync());
     lines = LineSplitter.split(content).toList();
   }
-  List<String> pathSplit = viewDir.split('/');
+  var pathSplit = viewDir.split('/');
 
   ///remove file
   pathSplit.removeLast();
@@ -43,20 +40,19 @@ Future<void> addRoute(
     pathSplit[i] =
         pathSplit[i].snakeCase.snakeCase.toLowerCase().replaceAll('_', '-');
   }
-  String route = pathSplit.join('/');
+  var route = pathSplit.join('/');
 
-  int indexEndRoutes = lines.indexWhere((element) => element.startsWith('}'));
+  var indexEndRoutes = lines.indexWhere((element) => element.startsWith('}'));
 
-  String line =
-      "static const ${nameRoute.snakeCase.toUpperCase()} = '/$route';";
+  var line = "static const ${nameRoute.snakeCase.toUpperCase()} = '/$route';";
 
   if (supportChildrenRoutes) {
-    line =
-        'static const ${nameRoute.snakeCase.toUpperCase()} = ${_pathsToRoute(pathSplit)};';
-    int indexEndPaths =
+    line = 'static const ${nameRoute.snakeCase.toUpperCase()} '
+        '= ${_pathsToRoute(pathSplit)};';
+    var indexEndPaths =
         lines.lastIndexWhere((element) => element.startsWith('}'));
 
-    String linePath =
+    var linePath =
         "static const ${nameRoute.snakeCase.toUpperCase()} = '/${pathSplit.last}';";
     lines.insert(indexEndPaths, linePath);
   }
@@ -67,25 +63,22 @@ Future<void> addRoute(
 
   lines.insert(indexEndRoutes, line);
 
-  await writeFile(routesFile.path, lines.join('\n'),
-      overwrite: true, logger: false);
+  writeFile(routesFile.path, lines.join('\n'), overwrite: true, logger: false);
   LogService.success(
       Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
 
-  await addAppPage(nameRoute, bindingDir, viewDir);
+  addAppPage(nameRoute, bindingDir, viewDir);
 }
 
-/**
- * Create routes from the path
- */
+/// Create routes from the path
 String _pathsToRoute(List<String> pathSplit) {
-  StringBuffer sb = StringBuffer();
-  pathSplit.forEach((element) {
+  var sb = StringBuffer();
+  for (var e in pathSplit) {
     sb.write('_Paths.');
-    sb.write(element.snakeCase.toUpperCase());
-    if (element != pathSplit.last) {
+    sb.write(e.snakeCase.toUpperCase());
+    if (e != pathSplit.last) {
       sb.write(' + ');
     }
-  });
+  }
   return sb.toString();
 }

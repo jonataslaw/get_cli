@@ -22,12 +22,12 @@ class GenerateModelCommand extends Command with ArgsMixin {
   String get commandName => 'model';
   @override
   Future<void> execute() async {
-    String name = p.basenameWithoutExtension(withArgument).pascalCase;
+    var name = p.basenameWithoutExtension(withArgument).pascalCase;
     if (withArgument.isEmpty) {
       final dialog = CLI_Dialog(questions: [
         [LocaleKeys.ask_model_name.tr, 'name']
       ]);
-      String result = dialog.ask()['name'];
+      var result = dialog.ask()['name'] as String;
       name = result.pascalCase;
     }
 
@@ -42,19 +42,19 @@ class GenerateModelCommand extends Command with ArgsMixin {
     } */
     _fileModel = Structure.model(name, 'model', false, on: onCommand);
 
-    DartCode dartCode = classGenerator.generateDartClasses(await _jsonRawData);
+    var dartCode = classGenerator.generateDartClasses(await _jsonRawData);
 
-    String modelPath = _fileModel.path + '_model.dart';
+    var modelPath = '${_fileModel.path}_model.dart';
 
-    File model = writeFile(modelPath, dartCode.result, overwrite: true);
+    var model = writeFile(modelPath, dartCode.result, overwrite: true);
 
-    dartCode.warnings.forEach((warning) =>
-        LogService.info('warning: ${warning.path} ${warning.warning} '));
-
+    for (var warning in dartCode.warnings) {
+      LogService.info('warning: ${warning.path} ${warning.warning} ');
+    }
     if (!containsArg('--skipProvider')) {
-      List<String> pathSplit = Structure.safeSplitPath(modelPath);
+      var pathSplit = Structure.safeSplitPath(modelPath);
       pathSplit.removeWhere((element) => element == '.' || element == 'lib');
-      await handleFileCreate(
+      handleFileCreate(
         name,
         'provider',
         onCommand,
@@ -76,7 +76,7 @@ class GenerateModelCommand extends Command with ArgsMixin {
   bool validate() {
     if ((withArgument.isEmpty || p.extension(withArgument) != '.json') &&
         fromArgument.isEmpty) {
-      String codeSample =
+      var codeSample =
           'get generate model on home with assets/models/user.json';
       throw CliException(LocaleKeys.error_invalid_json.trArgs([withArgument]),
           codeSample: codeSample);
@@ -91,7 +91,7 @@ class GenerateModelCommand extends Command with ArgsMixin {
       try {
         var result = await get(fromArgument);
         return result.body;
-      } catch (e) {
+      } on Exception catch (_) {
         throw CliException(
             LocaleKeys.error_failed_to_connect.trArgs([fromArgument]));
       }

@@ -14,7 +14,7 @@ Future<void> main(List<String> arguments) async {
       if (command.validate()) {
         await command.execute().then((value) => checkForUpdate());
       }
-    } catch (e) {
+    } on Exception catch (e) {
       ExceptionHandler().handle(e);
     }
   }

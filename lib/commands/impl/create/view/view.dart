@@ -33,27 +33,27 @@ class CreateViewCommand extends Command with ArgsMixin {
 
 Future<void> createView(String name,
     {String withArgument = '', String onCommand = ''}) async {
-  GetViewSample sample = GetViewSample(
+  var sample = GetViewSample(
     '',
-    name.pascalCase + 'View',
+    '${name.pascalCase}View',
     null,
     null,
     PubspecUtils.isServerProject,
   );
   if (withArgument.isNotEmpty) {
     if (isURL(withArgument)) {
-      Response res = await get(withArgument);
+      var res = await get(withArgument);
       if (res.statusCode == 200) {
-        String content = res.body;
+        var content = res.body;
         sample.customContent = replaceVars(content, name);
       } else {
         throw CliException(
             LocaleKeys.error_failed_to_connect.trArgs([withArgument]));
       }
     } else {
-      File file = File(withArgument);
+      var file = File(withArgument);
       if (file.existsSync()) {
-        String content = file.readAsStringSync();
+        var content = file.readAsStringSync();
         sample.customContent = replaceVars(content, name);
       } else {
         throw CliException(
@@ -62,5 +62,5 @@ Future<void> createView(String name,
     }
   }
 
-  await handleFileCreate(name, 'view', onCommand, true, sample, 'views');
+  handleFileCreate(name, 'view', onCommand, true, sample, 'views');
 }
