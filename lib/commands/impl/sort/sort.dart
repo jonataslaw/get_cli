@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../../../common/utils/logger/LogUtils.dart';
+import '../../../common/utils/logger/log_utils.dart';
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../../../exception_handler/exceptions/cli_exception.dart';
@@ -9,6 +9,8 @@ import '../../interface/command.dart';
 import '../args_mixin.dart';
 
 class SortCommand extends Command with ArgsMixin {
+  @override
+  String get commandName => 'sort';
   @override
   Future<void> execute() async {
     String path = args[1] == '.' ? 'lib' : args[1];

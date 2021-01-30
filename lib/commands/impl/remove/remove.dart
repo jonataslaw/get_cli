@@ -1,4 +1,4 @@
-import '../../../common/utils/logger/LogUtils.dart';
+import '../../../common/utils/logger/log_utils.dart';
 import '../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../common/utils/shell/shel.utils.dart';
 import '../../../core/generator.dart';
@@ -7,6 +7,8 @@ import '../../../core/locales.g.dart';
 import '../../interface/command.dart';
 
 class RemoveCommand extends Command {
+  @override
+  String get commandName => 'remove';
   @override
   Future<void> execute() async {
     List<String> args = List.from(GetCli.arguments);

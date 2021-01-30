@@ -15,6 +15,8 @@ import '../../init/get_server/get_server_command.dart';
 
 class CreateProjectCommand extends Command with ArgsMixin {
   @override
+  String get commandName => 'project';
+  @override
   Future<void> execute() async {
     final menu = Menu([
       'Flutter Project',

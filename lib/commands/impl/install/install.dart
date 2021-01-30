@@ -1,4 +1,4 @@
-import '../../../common/utils/logger/LogUtils.dart';
+import '../../../common/utils/logger/log_utils.dart';
 import '../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../common/utils/shell/shel.utils.dart';
 import '../../../core/generator.dart';
@@ -9,6 +9,8 @@ import '../../interface/command.dart';
 import '../args_mixin.dart';
 
 class InstallCommand extends Command with ArgsMixin {
+  @override
+  String get commandName => 'install';
   @override
   Future<void> execute() async {
     List<String> args = List.from(GetCli.arguments);

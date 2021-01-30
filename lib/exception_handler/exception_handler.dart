@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../common/utils/logger/LogUtils.dart';
+import '../common/utils/logger/log_utils.dart';
 import '../core/internationalization.dart';
 import '../core/locales.g.dart';
 import 'exceptions/cli_exception.dart';

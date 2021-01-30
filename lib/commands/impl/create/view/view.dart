@@ -16,6 +16,8 @@ import '../../args_mixin.dart';
 
 class CreateViewCommand extends Command with ArgsMixin {
   @override
+  String get commandName => 'view';
+  @override
   String get hint => Translation(LocaleKeys.hint_create_view).tr;
 
   @override

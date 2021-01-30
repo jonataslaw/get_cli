@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
-import '../common/utils/logger/LogUtils.dart';
+import '../common/utils/logger/log_utils.dart';
 import '../models/file_model.dart';
 import 'internationalization.dart';
 import 'locales.g.dart';

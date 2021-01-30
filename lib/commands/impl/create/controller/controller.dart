@@ -36,12 +36,12 @@ class CreateControllerCommand extends Command with ArgsMixin {
   @override
   bool validate() {
     if (args.length > 2) {
-      List<String> unnecessary_parameter = args.skip(2).toList();
+      List<String> unnecessaryParameter = args.skip(2).toList();
       throw CliException(
           LocaleKeys.error_unnecessary_parameter.trArgsPlural(
             LocaleKeys.error_unnecessary_parameter_plural,
-            unnecessary_parameter.length,
-            [unnecessary_parameter.toString()],
+            unnecessaryParameter.length,
+            [unnecessaryParameter.toString()],
           ),
           codeSample: codeSample);
     }
@@ -97,4 +97,7 @@ class CreateControllerCommand extends Command with ArgsMixin {
       addDependencyToBinding(binindingPath, name, pathSplit.join('/'));
     }
   }
+
+  @override
+  String get commandName => 'controller';
 }

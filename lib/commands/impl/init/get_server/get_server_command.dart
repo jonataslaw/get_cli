@@ -10,6 +10,8 @@ import '../flutter/init_getxpattern.dart';
 
 class InitGetServer extends Command {
   @override
+  String get commandName => 'init';
+  @override
   Future<void> execute() async {
     // bool canContinue = await createMain();
     // if (!canContinue) return;

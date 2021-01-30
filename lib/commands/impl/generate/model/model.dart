@@ -6,7 +6,7 @@ import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
 import '../../../../common/utils/json_serialize/model_generator.dart';
-import '../../../../common/utils/logger/LogUtils.dart';
+import '../../../../common/utils/logger/log_utils.dart';
 import '../../../../core/internationalization.dart';
 import '../../../../core/locales.g.dart';
 import '../../../../core/structure.dart';
@@ -18,6 +18,8 @@ import '../../../interface/command.dart';
 import '../../args_mixin.dart';
 
 class GenerateModelCommand extends Command with ArgsMixin {
+  @override
+  String get commandName => 'model';
   @override
   Future<void> execute() async {
     String name = p.basenameWithoutExtension(withArgument).pascalCase;

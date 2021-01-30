@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cli_menu/cli_menu.dart';
 import 'package:recase/recase.dart';
 
-import '../../../../common/utils/logger/LogUtils.dart';
+import '../../../../common/utils/logger/log_utils.dart';
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../core/generator.dart';
 import '../../../../core/internationalization.dart';
@@ -20,6 +20,8 @@ import '../../../interface/command.dart';
 import '../../args_mixin.dart';
 
 class CreateScreenCommand extends Command with ArgsMixin {
+  @override
+  String get commandName => 'screen';
   @override
   Future<void> execute() async {
     bool isProject = false;

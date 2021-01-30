@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:version/version.dart';
 
 import '../../cli_config/cli_config.dart';
-import '../../common/utils/logger/LogUtils.dart';
+import '../../common/utils/logger/log_utils.dart';
 import '../../common/utils/pub_dev/pub_dev_api.dart';
 import '../../common/utils/pubspec/pubspec_lock.dart';
 import '../../core/internationalization.dart';

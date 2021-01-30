@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 
-import '../../common/utils/logger/LogUtils.dart';
+import '../../common/utils/logger/log_utils.dart';
 import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';

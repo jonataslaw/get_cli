@@ -5,7 +5,7 @@ import 'package:process_run/process_run.dart';
 import '../../../core/generator.dart';
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
-import '../logger/LogUtils.dart';
+import '../logger/log_utils.dart';
 import '../pub_dev/pub_dev_api.dart';
 import '../pubspec/pubspec_lock.dart';
 

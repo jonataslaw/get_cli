@@ -2,7 +2,7 @@ import 'dart:convert' as convert;
 import 'dart:io';
 import 'dart:math';
 
-import '../logger/LogUtils.dart';
+import '../logger/log_utils.dart';
 import 'sintaxe.dart';
 
 import 'package:json_ast/json_ast.dart'

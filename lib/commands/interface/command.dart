@@ -1,4 +1,7 @@
 abstract class Command {
+  String get commandName;
+  List<String> get alias => [];
+
   /// hint for command line
   String get hint;
 
@@ -7,4 +10,7 @@ abstract class Command {
 
   /// execute command
   Future<void> execute();
+
+  /// childrens command
+  List<Command> get childrens => [];
 }

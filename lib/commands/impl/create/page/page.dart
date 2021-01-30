@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cli_menu/cli_menu.dart';
 import 'package:recase/recase.dart';
 
-import '../../../../common/utils/logger/LogUtils.dart';
+import '../../../../common/utils/logger/log_utils.dart';
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../core/generator.dart';
 import '../../../../core/internationalization.dart';
@@ -22,6 +22,8 @@ import '../../args_mixin.dart';
  * The command create a Binding and Controller page and view
  */
 class CreatePageCommand extends Command with ArgsMixin {
+  @override
+  String get commandName => 'page';
   @override
   Future<void> execute() async {
     bool isProject = false;

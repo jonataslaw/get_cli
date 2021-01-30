@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
-import '../logger/LogUtils.dart';
+import '../logger/log_utils.dart';
 
 class PubDevApi {
   //Find latest version in the Pub Dev.

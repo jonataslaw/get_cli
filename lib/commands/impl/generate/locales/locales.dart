@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 
-import '../../../../common/utils/logger/LogUtils.dart';
+import '../../../../common/utils/logger/log_utils.dart';
 import '../../../../core/internationalization.dart';
 import '../../../../core/locales.g.dart';
 import '../../../../core/structure.dart';
@@ -15,6 +15,8 @@ import '../../../interface/command.dart';
 import '../../args_mixin.dart';
 
 class GenerateLocalesCommand extends Command with ArgsMixin {
+  @override
+  String get commandName => 'locales';
   @override
   String get hint => Translation(LocaleKeys.hint_generate_locales).tr;
 
@@ -49,7 +51,7 @@ class GenerateLocalesCommand extends Command with ArgsMixin {
         final map = jsonDecode(await File(file.path).readAsString());
         final localeKey = basenameWithoutExtension(file.path);
         maps[localeKey] = map;
-      } catch (e) {
+      } catch (_) {
         LogService.error(LocaleKeys.error_invalid_json.trArgs([file.path]));
         rethrow;
       }

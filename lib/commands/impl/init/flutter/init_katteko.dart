@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../../../../common/utils/logger/LogUtils.dart';
+import '../../../../common/utils/logger/log_utils.dart';
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../common/utils/shell/shel.utils.dart';
 import '../../../../core/internationalization.dart';

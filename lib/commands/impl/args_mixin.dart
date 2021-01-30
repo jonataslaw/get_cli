@@ -4,6 +4,9 @@ import '../../core/generator.dart';
 
 mixin ArgsMixin {
   final List<String> _args = GetCli.arguments;
+  /**
+   * all arguments
+   */
   List<String> args = _getArgs();
   List<String> flags = _getFlags();
 
