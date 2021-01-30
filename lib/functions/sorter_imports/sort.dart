@@ -26,7 +26,9 @@ String sortImports(String content, String packageName,
 
   var stringLine = false;
   for (var i = 0; i < lines.length; i++) {
-    if (lines[i].startsWith('import ') && !stringLine) {
+    if (lines[i].startsWith('import ') &&
+        !stringLine &&
+        lines[i].endsWith(';')) {
       if (lines[i].contains('dart:')) {
         dartImports.add(lines[i]);
       } else if (lines[i].contains('package:flutter/')) {
