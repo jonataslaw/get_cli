@@ -9,11 +9,10 @@ import '../../../../core/internationalization.dart';
 import '../../../../core/locales.g.dart';
 import '../../../../core/structure.dart';
 import '../../../interface/command.dart';
-import '../../args_mixin.dart';
 import '../../init/flutter/init.dart';
 import '../../init/get_server/get_server_command.dart';
 
-class CreateProjectCommand extends Command with ArgsMixin {
+class CreateProjectCommand extends Command {
   @override
   String get commandName => 'project';
   @override

@@ -11,9 +11,8 @@ import '../../../../exception_handler/exceptions/cli_exception.dart';
 import '../../../../get_cli.dart';
 import '../../../../samples/impl/generate_locales.dart';
 import '../../../interface/command.dart';
-import '../../args_mixin.dart';
 
-class GenerateLocalesCommand extends Command with ArgsMixin {
+class GenerateLocalesCommand extends Command {
   @override
   String get commandName => 'locales';
   @override

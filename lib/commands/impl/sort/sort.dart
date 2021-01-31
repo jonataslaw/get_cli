@@ -6,13 +6,15 @@ import '../../../core/locales.g.dart';
 import '../../../exception_handler/exceptions/cli_exception.dart';
 import '../../../functions/create/create_single_file.dart';
 import '../../interface/command.dart';
-import '../args_mixin.dart';
 
-class SortCommand extends Command with ArgsMixin {
+class SortCommand extends Command {
   @override
   String get commandName => 'sort';
   @override
+  List<String> get acceptedFlags => ['--skipRename', '--relative'];
+  @override
   Future<void> execute() async {
+    print(flags);
     var path = args[1] == '.' ? 'lib' : args[1];
     if (FileSystemEntity.isDirectorySync(path)) {
       sortImportsDirectory(path);
@@ -35,16 +37,7 @@ class SortCommand extends Command with ArgsMixin {
 
   @override
   bool validate() {
-    flags.removeWhere(
-        (element) => element == '--skipRename' || element == '--relative');
-    if (flags.isNotEmpty) {
-      LogService.info(LocaleKeys.info_unnecessary_flag.trArgsPlural(
-        LocaleKeys.info_unnecessary_flag_prural,
-        flags.length,
-        [flags.toString()],
-      ));
-    }
-
+    super.validate();
     if (args.length < 2) {
       throw CliException(LocaleKeys.error_required_path.tr,
           codeSample: codeSample);

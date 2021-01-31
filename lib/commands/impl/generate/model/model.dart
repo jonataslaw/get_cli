@@ -15,9 +15,8 @@ import '../../../../functions/create/create_single_file.dart';
 import '../../../../models/file_model.dart';
 import '../../../../samples/impl/get_provider.dart';
 import '../../../interface/command.dart';
-import '../../args_mixin.dart';
 
-class GenerateModelCommand extends Command with ArgsMixin {
+class GenerateModelCommand extends Command {
   @override
   String get commandName => 'model';
   @override

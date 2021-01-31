@@ -15,7 +15,6 @@ import '../../../../functions/is_url/is_url.dart';
 import '../../../../functions/replace_vars/replace_vars.dart';
 import '../../../../samples/impl/get_controller.dart';
 import '../../../interface/command.dart';
-import '../../args_mixin.dart';
 
 /// This command is a controller with the template:
 ///```
@@ -25,7 +24,7 @@ import '../../args_mixin.dart';
 ///
 ///}
 ///```
-class CreateControllerCommand extends Command with ArgsMixin {
+class CreateControllerCommand extends Command {
   @override
   String get hint => LocaleKeys.hint_create_controller.tr;
 

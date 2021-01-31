@@ -12,9 +12,8 @@ import '../../../../functions/is_url/is_url.dart';
 import '../../../../functions/replace_vars/replace_vars.dart';
 import '../../../../samples/impl/get_view.dart';
 import '../../../interface/command.dart';
-import '../../args_mixin.dart';
 
-class CreateViewCommand extends Command with ArgsMixin {
+class CreateViewCommand extends Command {
   @override
   String get commandName => 'view';
   @override

@@ -6,11 +6,12 @@ import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../../../exception_handler/exceptions/cli_exception.dart';
 import '../../interface/command.dart';
-import '../args_mixin.dart';
 
-class InstallCommand extends Command with ArgsMixin {
+class InstallCommand extends Command {
   @override
   String get commandName => 'install';
+  @override
+  List<String> get alias => ['i'];
   @override
   Future<void> execute() async {
     var args = List<String>.from(GetCli.arguments);

@@ -15,12 +15,14 @@ import '../../../../samples/impl/get_binding.dart';
 import '../../../../samples/impl/get_controller.dart';
 import '../../../../samples/impl/get_view.dart';
 import '../../../interface/command.dart';
-import '../../args_mixin.dart';
 
 /// The command create a Binding and Controller page and view
-class CreatePageCommand extends Command with ArgsMixin {
+class CreatePageCommand extends Command {
   @override
   String get commandName => 'page';
+
+  @override
+  List<String> get alias => ['module'];
   @override
   Future<void> execute() async {
     var isProject = false;

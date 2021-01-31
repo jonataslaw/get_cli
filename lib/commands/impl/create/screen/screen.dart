@@ -16,9 +16,8 @@ import '../../../../samples/impl/get_binding.dart';
 import '../../../../samples/impl/get_controller.dart';
 import '../../../../samples/impl/get_view.dart';
 import '../../../interface/command.dart';
-import '../../args_mixin.dart';
 
-class CreateScreenCommand extends Command with ArgsMixin {
+class CreateScreenCommand extends Command {
   @override
   String get commandName => 'screen';
   @override
