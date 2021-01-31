@@ -131,7 +131,10 @@ class TypeDefinition {
   String toJsonExpression(String key, bool privateField) {
     final fieldKey =
         fixFieldName(key, typeDef: this, privateField: privateField);
-    final thisKey = 'this.$fieldKey';
+
+    //final thisKey = 'this.$fieldKey';
+    final thisKey = '$fieldKey';
+
     if (isPrimitive) {
       return "data['$key'] = $thisKey;";
     } else if (name == 'List') {
@@ -276,7 +279,8 @@ class ClassDefinition {
           fixFieldName(key, typeDef: f, privateField: false);
       final privateFieldName =
           fixFieldName(key, typeDef: f, privateField: true);
-      sb.write('this.$privateFieldName = $publicFieldName;\n');
+      //sb.write('this.$privateFieldName = $publicFieldName;\n');
+      sb.write('$privateFieldName = $publicFieldName;\n');
     }
     sb.write('}');
     return sb.toString();
@@ -291,7 +295,9 @@ class ClassDefinition {
       final f = fields[key];
       final fieldName =
           fixFieldName(key, typeDef: f, privateField: privateFields);
-      sb.write('this.$fieldName');
+      //sb.write('this.$fieldName');
+      sb.write('$fieldName');
+
       if (i != len) {
         sb.write(', ');
       }
@@ -314,8 +320,12 @@ class ClassDefinition {
 
   String get _jsonGenFunc {
     final sb = StringBuffer();
+    //sb.write('\tMap<String, dynamic> toJson() {'
+    //  '\n\t\tfinal Map<String, dynamic> data = <String, dynamic>{};\n');
+
     sb.write('\tMap<String, dynamic> toJson() {'
-        '\n\t\tfinal Map<String, dynamic> data = <String, dynamic>{};\n');
+        '\n\t\tfinal data = <String, dynamic>{};\n');
+
     for (var k in fields.keys) {
       sb.write('\t\t${fields[k].jsonParseExpression(k, privateFields)}\n');
     }

@@ -48,8 +48,8 @@ class ModelGenerator {
       final node = navigateNode(astNode, '0');
       _generateClassDefinition(className, jsonRawDynamicData[0], path, node);
     } else {
-      final jsonRawData = jsonRawDynamicData as Map<dynamic, dynamic>;
-      final keys = jsonRawData.keys as List<String>;
+      final jsonRawData = jsonRawDynamicData as Map;
+      final keys = jsonRawData.keys.toList() as List<String>;
       var classDefinition = ClassDefinition(className, _privateFields);
       for (var key in keys) {
         TypeDefinition typeDef;
