@@ -96,7 +96,7 @@ class CreateScreenCommand extends Command {
         'controllers',
         '.');
 
-    var exportView = 'package: ${PubspecUtils.getProjectName()}/'
+    var exportView = 'package:${PubspecUtils.getProjectName()}/'
         '${Structure.pathToDirImport(view.path)}';
     addExport('lib/presentation/screens.dart', "export '$exportView';");
 

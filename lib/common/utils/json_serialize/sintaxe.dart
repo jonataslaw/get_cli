@@ -131,10 +131,8 @@ class TypeDefinition {
   String toJsonExpression(String key, bool privateField) {
     final fieldKey =
         fixFieldName(key, typeDef: this, privateField: privateField);
-
     //final thisKey = 'this.$fieldKey';
     final thisKey = '$fieldKey';
-
     if (isPrimitive) {
       return "data['$key'] = $thisKey;";
     } else if (name == 'List') {
@@ -282,6 +280,7 @@ class ClassDefinition {
       //sb.write('this.$privateFieldName = $publicFieldName;\n');
       sb.write('$privateFieldName = $publicFieldName;\n');
     }
+
     sb.write('}');
     return sb.toString();
   }
@@ -295,14 +294,14 @@ class ClassDefinition {
       final f = fields[key];
       final fieldName =
           fixFieldName(key, typeDef: f, privateField: privateFields);
-      //sb.write('this.$fieldName');
+      // sb.write('this.$fieldName');
       sb.write('$fieldName');
-
       if (i != len) {
         sb.write(', ');
       }
       i++;
     }
+
     sb.write('});');
     return sb.toString();
   }
@@ -320,16 +319,11 @@ class ClassDefinition {
 
   String get _jsonGenFunc {
     final sb = StringBuffer();
-    //sb.write('\tMap<String, dynamic> toJson() {'
-    //  '\n\t\tfinal Map<String, dynamic> data = <String, dynamic>{};\n');
-
-    sb.write('\tMap<String, dynamic> toJson() {'
-        '\n\t\tfinal data = <String, dynamic>{};\n');
-
+    sb.write('\tMap<String, dynamic> toJson() {\n\t\t'
+        'final  data = <String, dynamic>{};\n');
     for (var k in fields.keys) {
-      sb.write('\t\t${fields[k].jsonParseExpression(k, privateFields)}\n');
+      sb.write('\t\t${fields[k].toJsonExpression(k, privateFields)}\n');
     }
-
     sb.write('\t\treturn data;\n');
     sb.write('\t}');
     return sb.toString();
@@ -338,8 +332,8 @@ class ClassDefinition {
   @override
   String toString() {
     if (privateFields) {
-      return 'class $name {\n$_fieldList\n\n$_defaultPrivateConstructor'
-          '\n\n$_gettersSetters\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
+      return 'class $name {\n$_fieldList\n\n$_defaultPrivateConstructor\n\n'
+          '$_gettersSetters\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
     } else {
       return 'class $name {\n$_fieldList\n\n$_defaultConstructor'
           '\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';

@@ -25,7 +25,12 @@ abstract class Sample {
   /// This function will create the file in [path] with the
   /// content of [content].
   File create({bool skipFormatter = false}) {
-    return writeFile(path, customContent.isNotEmpty ? customContent : content,
-        overwrite: overwrite, skipFormatter: skipFormatter);
+    return writeFile(
+      path,
+      customContent.isNotEmpty ? customContent : content,
+      overwrite: overwrite,
+      skipFormatter: skipFormatter,
+      useRelativeImport: true,
+    );
   }
 }
