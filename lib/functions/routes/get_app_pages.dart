@@ -116,11 +116,8 @@ ${_getTabs(tabEspaces)}),''';
 /// _getTabs(2)   // '    ';
 /// ```
 String _getTabs(int tabEspaces) {
-  var string = '';
-  for (var i = 0; i < tabEspaces; i++) {
-    string += '  ';
-  }
-  return string;
+  
+  return '  ' * tabEspaces;
 }
 
 /// count the tabs on the line
