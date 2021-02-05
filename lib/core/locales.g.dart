@@ -4,12 +4,13 @@
 // ignore: avoid_classes_with_only_static_members
 class AppTranslation {
   static Map<String, Map<String, String>> translations = {
+    'tr_TR': Locales.tr_TR,
     'en': Locales.en,
     'pt_BR': Locales.pt_BR,
   };
 }
 
-abstract class LocaleKeys {
+class LocaleKeys {
   static const ask_existing_page = 'ask_existing_page';
   static const ask_name_to_project = 'ask_name_to_project';
   static const ask_company_domain = 'ask_company_domain';
@@ -80,7 +81,80 @@ abstract class LocaleKeys {
   static const sucess_route_created = 'sucess_route_created';
 }
 
-abstract class Locales {
+class Locales {
+  static const tr_TR = {
+    'ask_existing_page': '[%s] sayfası zaten mevcut, üzerine mi yazılsın?',
+    'ask_name_to_project': 'Projenin adı nedir?',
+    'ask_company_domain': 'Şirketinizin domain adresi nedir?',
+    'ask_model_name':
+        'Model adı otomatik olarak ayarlanamadı, hangi ad kullanılsın?',
+    'ask_package_already_installed':
+        'Paket: %s zaten yüklü, güncellemek ister misin?',
+    'ask_lib_not_empty':
+        'lib klasörünüz boş değil. Bu uygulamanın üzerine yazmak istediğinden emin misin? \n UYARI: Bu işlem geri alınamaz',
+    'error_failed_to_connect': '%s ile bağlantı başarısız oldu',
+    'error_no_valid_file_or_url': '%s bir dosya veya geçerli bir url değil',
+    'error_unnecessary_parameter': '%s parametresi gerekli değil',
+    'error_unnecessary_parameter_plural': '%s parametreleri gerekli değil',
+    'error_nonexistent_directory': '%s dizini mevcut değil.',
+    'error_empty_directory': '%s dizini boş',
+    'error_invalid_json': '%s, geçerli bir json dosyası değil',
+    'error_special_characters_in_key':
+        'Anahtar içerisinde özel karakterlere izin verilmez. \n karakter: %s',
+    'error_required_path': 'Dosya veya dizin yolunu geçmek için gerekli',
+    'error_invalid_dart': '%s geçerli bir dart dosyası değil',
+    'error_invalid_file_or_directory': '%s geçerli bir dosya veya dizin değil',
+    'error_package_not_found': 'Paket: %s pub.dev\'de bulunamadı',
+    'error_cli_version_not_found': 'Yüklemek istediğiniz sürüm bulunamadı.',
+    'error_update_cli': 'get_cli yükseltilirken bir hata oluştu',
+    'error_folder_not_found': '%s klasörü bulunamadı',
+    'error_file_not_found': '%s içinde dosya bulunamadı',
+    'error_access_denied': '%s için erişim engellendi',
+    'error_unexpected': 'Beklenmeyen bir hata meydana geldi:',
+    'example': 'Örneğin:',
+    'hint_create_controller': 'Controller oluşturur',
+    'hint_create_page': 'Sayfa oluşturur',
+    'hint_create_project': 'Yeni proje oluşturur',
+    'hint_create_provider': 'Provider oluşturur',
+    'hint_create_screen': 'Screen oluşturur',
+    'hint_create_view': 'View oluşturur',
+    'hint_generate_locales': 'Json dosyalarından çeviri dosyası oluşturur.',
+    'hint_generate_model': 'Json\'dan model sınıfı oluşturur',
+    'hint_help': 'Yardımları gösterir',
+    'hint_init': 'Mevcut projede seçilen yapıyı oluşturur:',
+    'hint_install': 'Mevcut projeye bir paket yükler (dependencies):',
+    'hint_remove': 'Mevcut projedeki bir paketi kaldırır (dependencies):',
+    'hint_sort': 'İçe aktarılanları sıralar ve dart dosyalarını biçimlendirir',
+    'hint_update': 'GET_CLI günceller',
+    'hint_version': 'Mevcut CLI sürümünü gösterir\'',
+    'info_unnecessary_flag': '%s gerekli değil',
+    'info_unnecessary_flag_prural': '%s gerekli değil',
+    'info_package_not_installed': 'Paket: %s bu uygulama için yüklenemedi',
+    'info_cli_last_version_already_installed':
+        'get_cli\'nin son sürümü zaten yüklü',
+    'info_no_file_overwritten': 'Hiçbir dosyanın üzerine yazılmadı',
+    'info_update_available': 'Bir güncelleme mevcut! Mevcut yüklü sürüm: %s',
+    'info_update_available2': 'Yeni sürüm mevcut: %s çalıştırın:',
+    'options_yes': 'Evet!',
+    'options_no': 'Hayır',
+    'optional_parameters': 'Opsiyonel parametreler: %s',
+    'sucess_page_create': '%s sayfası başarıyla oluşturuldu.',
+    'sucess_locale_generate': 'yerel dosyalar başarıyla oluşturuldu.',
+    'sucess_getx_pattern_generated':
+        'GetX Pattern yapısı başarıyla oluşturuldu.',
+    'sucess_clean_Pattern_generated':
+        'CLEAN Pattern yapısı başarıyla oluşturuldu.',
+    'sucess_file_formatted': ' \'%s\' başarıyla biçimlendirildi.',
+    'sucess_package_removed': 'Paket: %s kaldırıldı!',
+    'sucess_package_installed': '\'Paket: %s yüklendi!',
+    'sucess_update_cli': 'Yükseltme tamamlandı.',
+    'sucess_add_controller_in_bindings':
+        '%s bağlayıcıya eklendi. Eklendiği dizin: %s\'',
+    'sucess_navigation_added': '%s navigasyonu başarıyla eklendi.',
+    'sucess_file_created':
+        'Dosya: %s başarıyla oluşturuldu. Oluşturulduğu dizin: %s',
+    'sucess_route_created': '%s rotası başarıyla oluşturuldu.',
+  };
   static const en = {
     'ask_existing_page':
         'The page [%s] already exists, do you want to overwrite it?',
@@ -146,7 +220,7 @@ abstract class Locales {
     'sucess_locale_generate': 'locale files generated successfully.',
     'sucess_getx_pattern_generated':
         'GetX Pattern structure successfully generated.',
-    'sucess_clean_pattern_generated':
+    'sucess_clean_Pattern_generated':
         'CLEAN Pattern structure successfully generated.',
     'sucess_file_formatted': ' \'%s\' was successfully formatted',
     'sucess_package_removed': 'Package: %s removed!',
@@ -167,7 +241,7 @@ abstract class Locales {
     'ask_package_already_installed':
         'pacote: %s já instalado, deseja atualizar?',
     'ask_lib_not_empty':
-        'Sua pasta lib não está vazia. Tem certeza de que deseja sobrescrever seu aplicativo? \n AVISO: esta ação é irreversível',
+        'Sua pasta lib não está vazia. Tem certeza de que deseja sobrescrever seu aplicativo? \n AVISO: essa ação é irreversível',
     'error_failed_to_connect': 'Falha ao conectar com %s',
     'error_no_valid_file_or_url': '\'%s\' não é um arquivo ou url válido',
     'error_unnecessary_parameter': 'O parâmetro %s não é necessário',
@@ -194,7 +268,7 @@ abstract class Locales {
     'example': 'Exemplo:',
     'hint_create_controller': 'Gerar um novo controller',
     'hint_create_page':
-        'Gerar um novo modulo, (controller, view e bindigns) (Use essa opcão se esta usando getx_pattern)',
+        'Gerar um novo modulo, (controller, view e bindigns) (Use essa opcão se está usando getx_pattern)',
     'hint_create_project':
         'Crie um novo projeto, escolha flutter ou get server',
     'hint_create_provider': 'Cria uma classe Provider',
@@ -229,7 +303,7 @@ abstract class Locales {
     'sucess_locale_generate': 'Arquivo de tradução gerado com sucesso.',
     'sucess_getx_pattern_generated':
         'Estrutura GetX Pattern gerada com sucesso.',
-    'sucess_clean_pattern_generated': 'Estrutura CLEAN gerada com sucesso.',
+    'sucess_clean_Pattern_generated': 'Estrutura CLEAN gerada com sucesso.',
     'sucess_file_formatted': ' \'%s\' foi formatado com sucesso',
     'sucess_package_removed': 'Pacote: %s removido!',
     'sucess_package_installed': 'Pacote: %s instalado!',
