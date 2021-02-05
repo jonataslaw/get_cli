@@ -1,6 +1,13 @@
+## [1.4.5]
+
+- Add alias for install: `get i PACKAGE`
+- Add alias for create: `get c page:name`
+- Add alias for generate: `get g locales`
+- add turkish translation by @ahm3tcelik 
+
 ## [1.4.4]
 
-- Add alias getx.
+- Add alias getx:  `getx command`
 
 ## [1.4.3]
 
