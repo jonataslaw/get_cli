@@ -11,12 +11,12 @@ class InstallCommand extends Command {
   @override
   String get commandName => 'install';
   @override
-  List<String> get alias => ['i'];
+  List<String> get alias => ['-i'];
   @override
   Future<void> execute() async {
     var args = List<String>.from(GetCli.arguments);
     args.removeAt(0);
-    var isDev = containsArg('--dev');
+    var isDev = containsArg('--dev') || containsArg('-dev');
     var runPubGet = true;
 
     if (args.length == 1) {

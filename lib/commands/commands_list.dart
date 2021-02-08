@@ -12,12 +12,12 @@ final List<Command> commands = [
       CreateScreenCommand(),
       CreateViewCommand()
     ],
-    ['c'],
+    ['-c'],
   ),
   CommandParent(
     'generate',
     [GenerateLocalesCommand(), GenerateModelCommand()],
-    ['g'],
+    ['-g'],
   ),
   HelpCommand(),
   VersionCommand(),
