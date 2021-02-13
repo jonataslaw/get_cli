@@ -23,12 +23,15 @@ class Hint {
 class ModelGenerator {
   final String _rootClassName;
   final bool _privateFields;
+  final bool _withCopyConstructor;
   final List<ClassDefinition> allClasses = <ClassDefinition>[];
   final Map<String, String> sameClassMapping = HashMap<String, String>();
   List<Hint> hints;
 
   ModelGenerator(this._rootClassName,
-      [this._privateFields = false, List<Hint> hints]) {
+      [this._privateFields = false,
+      this._withCopyConstructor,
+      List<Hint> hints]) {
     if (hints != null) {
       this.hints = hints;
     } else {
@@ -50,7 +53,8 @@ class ModelGenerator {
     } else {
       final jsonRawData = jsonRawDynamicData as Map;
       final keys = jsonRawData.keys.cast<String>();
-      var classDefinition = ClassDefinition(className, _privateFields);
+      var classDefinition =
+          ClassDefinition(className, _privateFields, _withCopyConstructor);
       for (var key in keys) {
         TypeDefinition typeDef;
         final hint = _hintForPath('$path/$key');

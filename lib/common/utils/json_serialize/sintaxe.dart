@@ -161,10 +161,12 @@ class Dependency {
 class ClassDefinition {
   final String _name;
   final bool _privateFields;
+  final bool _withCopyConstructor;
   final Map<String, TypeDefinition> fields = <String, TypeDefinition>{};
 
   String get name => _name;
   bool get privateFields => _privateFields;
+  bool get copyConstructor => _withCopyConstructor;
 
   List<Dependency> get dependencies {
     final dependenciesList = <Dependency>[];
@@ -178,7 +180,8 @@ class ClassDefinition {
     return dependenciesList;
   }
 
-  ClassDefinition(this._name, [this._privateFields = false]);
+  ClassDefinition(this._name,
+      [this._privateFields = false, this._withCopyConstructor = false]);
 
   @override
   bool operator ==(dynamic other) {
@@ -223,17 +226,21 @@ class ClassDefinition {
     }
   }
 
-  String get _fieldList {
+  String _generateFieldList({int indentLevel = 1, String delimiter = ";"}) {
     return fields.keys.map((key) {
       final f = fields[key];
       final fieldName =
           fixFieldName(key, typeDef: f, privateField: privateFields);
       final sb = StringBuffer();
-      sb.write('\t');
+      sb.write('\t ' * indentLevel);
       _addTypeDef(f, sb);
-      sb.write(' $fieldName;');
+      sb.write(' $fieldName$delimiter');
       return sb.toString();
     }).join('\n');
+  }
+
+  String get _fieldList {
+    return _generateFieldList();
   }
 
   String get _gettersSetters {
@@ -294,8 +301,8 @@ class ClassDefinition {
       final f = fields[key];
       final fieldName =
           fixFieldName(key, typeDef: f, privateField: privateFields);
-      // sb.write('this.$fieldName');
-      sb.write('$fieldName');
+      sb.write('this.$fieldName');
+      //sb.write('$fieldName');
       if (i != len) {
         sb.write(', ');
       }
@@ -303,6 +310,25 @@ class ClassDefinition {
     }
 
     sb.write('});');
+    return sb.toString();
+  }
+
+  String get _copyConstructor {
+    final sb = StringBuffer();
+    sb.write('\t$name copyWith({');
+    sb.write(_generateFieldList(indentLevel: 2, delimiter: ","));
+    sb.write('\t}) {');
+    sb.write('\t\treturn $name(');
+
+    for (var key in fields.keys) {
+      final f = fields[key];
+      final fieldName =
+          fixFieldName(key, typeDef: f, privateField: privateFields);
+      sb.write('$fieldName: $fieldName ?? this.$fieldName,');
+    }
+
+    sb.write(');'); // return $name(...
+    sb.write('}');
     return sb.toString();
   }
 
@@ -335,8 +361,13 @@ class ClassDefinition {
       return 'class $name {\n$_fieldList\n\n$_defaultPrivateConstructor\n\n'
           '$_gettersSetters\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
     } else {
-      return 'class $name {\n$_fieldList\n\n$_defaultConstructor'
-          '\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
+      if (copyConstructor) {
+        return 'class $name {\n$_fieldList\n\n$_defaultConstructor'
+            '\n\n$_copyConstructor\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
+      } else {
+        return 'class $name {\n$_fieldList\n\n$_defaultConstructor'
+            '\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
+      }
     }
   }
 

@@ -31,7 +31,8 @@ class GenerateModelCommand extends Command {
     }
 
     FileModel _fileModel;
-    final classGenerator = ModelGenerator(name);
+    final classGenerator = ModelGenerator(
+        name, containsArg('--private'), containsArg('--withCopy'));
 
     /* if (findFolderByName('models') != null) {
       _fileModel = Structure.model(name, 'model', onCommand != '',
