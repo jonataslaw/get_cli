@@ -51,6 +51,9 @@ $_defaultEndpoint}
 '''
       : '\n';
   String get _defaultEncoder => createEndpoints
-      ? '\t\thttpClient.defaultDecoder = (map) => $_namePascal.fromJson(map);\n'
+      ? '''\t\thttpClient.defaultDecoder = (map){
+if(map is Map) return $_namePascal.fromJson(map); 
+if(map is List) return map.map((item)=> $_namePascal.fromJson(item)).toList();
+};\n'''
       : '\n';
 }
