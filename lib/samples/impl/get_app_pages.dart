@@ -16,6 +16,7 @@ class AppPagesSample extends Sample {
 part 'app_routes.dart';
 
 class AppPages {
+   AppPages._();
   $_initialRoute
 
   static final routes = [
