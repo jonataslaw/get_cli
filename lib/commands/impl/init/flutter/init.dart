@@ -1,4 +1,6 @@
 import 'package:cli_menu/cli_menu.dart';
+import '../../../../common/utils/pubspec/pubspec_utils.dart';
+import '../../../../common/utils/shell/shel.utils.dart';
 
 import '../../../../core/internationalization.dart';
 import '../../../../core/locales.g.dart';
@@ -16,9 +18,13 @@ class InitCommand extends Command {
       'CLEAN (by Arktekko)',
     ]);
     final result = menu.choose();
+
     result.index == 0
         ? await createInitGetxPattern()
         : await createInitKatekko();
+    if (!PubspecUtils.isServerProject) {
+      await ShellUtils.pubGet();
+    }
     return;
   }
 

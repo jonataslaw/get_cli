@@ -11,6 +11,7 @@ class AppTranslation {
 }
 
 class LocaleKeys {
+  LocaleKeys._();
   static const ask_existing_page = 'ask_existing_page';
   static const ask_name_to_project = 'ask_name_to_project';
   static const ask_company_domain = 'ask_company_domain';
@@ -79,6 +80,9 @@ class LocaleKeys {
   static const sucess_navigation_added = 'sucess_navigation_added';
   static const sucess_file_created = 'sucess_file_created';
   static const sucess_route_created = 'sucess_route_created';
+  static const ask_ios_lang = 'ask_ios_lang';
+  static const ask_android_lang = 'ask_android_lang';
+  static const ask_use_null_safe = 'ask_use_null_safe';
 }
 
 class Locales {
@@ -166,6 +170,9 @@ class Locales {
         'package: %s already installed, do you want to update?',
     'ask_lib_not_empty':
         'Your lib folder is not empty. Are you sure you want to overwrite your application? \n WARNING: This action is irreversible',
+    'ask_ios_lang': 'what language do you want to use on ios?',
+    'ask_android_lang': 'what language do you want to use on android?',
+    'ask_use_null_safe': 'Do you want to use null safe?',
     'error_failed_to_connect': 'Failed to connect with %s',
     'error_no_valid_file_or_url': '%s is not a file or valid url',
     'error_unnecessary_parameter': 'the %s parameter is not necessary',

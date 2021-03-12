@@ -15,9 +15,33 @@ class ShellUtils {
     await run('flutter', ['pub', 'get'], verbose: true);
   }
 
-  static Future<void> flutterCreate(String path, String org) async {
+  static Future<void> activatedNullSafe() async {
+    await run('dart', ['migrate', '--apply-changes', '--skip-import-check'],
+        verbose: true);
+  }
+
+  static Future<void> flutterCreate(
+    String path,
+    String org,
+    String iosLang,
+    String androidLang,
+  ) async {
     LogService.info('Running `flutter create $path` …');
-    await run('flutter', ['create', '--org', org, path], verbose: true);
+
+    await run(
+        'flutter',
+        [
+          'create',
+          '--no-pub',
+          '-i',
+          iosLang,
+          '-a',
+          androidLang,
+          '--org',
+          org,
+          path,
+        ],
+        verbose: true);
   }
 
   static Future<void> update(

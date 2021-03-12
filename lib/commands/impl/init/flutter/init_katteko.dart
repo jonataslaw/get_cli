@@ -38,9 +38,6 @@ Future<void> createInitKatekko() async {
     CreateScreenCommand().execute(),
   ]);
   createListDirectory(initialDirs);
-  if (!PubspecUtils.isServerProject) {
-    await ShellUtils.pubGet();
-  }
 
   LogService.success(Translation(LocaleKeys.sucess_clean_Pattern_generated).tr);
 }

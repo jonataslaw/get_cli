@@ -23,7 +23,7 @@ $_translationsKeys
 }
 
 class LocaleKeys {
-AppPages._();
+LocaleKeys._();
 $_keys
 }
 

@@ -28,8 +28,6 @@ Future<void> createInitGetxPattern() async {
     CreatePageCommand().execute(),
   ]);
   createListDirectory(initialDirs);
-  if (!isServerProject) {
-    await ShellUtils.pubGet();
-  }
+
   LogService.success(Translation(LocaleKeys.sucess_getx_pattern_generated));
 }

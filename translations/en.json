@@ -5,7 +5,11 @@
     "company_domain": "What is your company's domain?",
     "model_name": "Could not set the model name automatically, which name do you want to use?",
     "package_already_installed": "package: %s already installed, do you want to update?",
-    "lib_not_empty": "Your lib folder is not empty. Are you sure you want to overwrite your application? \\n WARNING: This action is irreversible"
+    "lib_not_empty": "Your lib folder is not empty. Are you sure you want to overwrite your application? \\n WARNING: This action is irreversible",
+    "ios_lang": "what language do you want to use on ios?",
+    "android_lang": "what language do you want to use on android?",
+    "use_null_safe": "Do you want to use null safe?"
+
   },
   "error": {
     "failed_to_connect": "Failed to connect with %s",
@@ -60,8 +64,8 @@
     "package_not_installed": "Package: %s is not installed in this application",
     "cli_last_version_already_installed": "Latest version of get_cli already installed",
     "no_file_overwritten": "No files were overwritten",
-    "update_available":"There's an update available! Current installed version: %s",
-    "update_available2":"New version available: %s Please, run:"
+    "update_available": "There's an update available! Current installed version: %s",
+    "update_available2": "New version available: %s Please, run:"
 
   },
 
@@ -83,7 +87,7 @@
     "update_cli": "Upgrade complete",
     "add_controller_in_bindings": "The %s has been added to binging at path: %s'",
     "navigation_added": "%s navigation added successfully.",
-    "file_created":"File: %s created successfully at path: %s",
+    "file_created": "File: %s created successfully at path: %s",
     "route_created": "%s route created successfully."
   }
 

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
 import 'package:cli_menu/cli_menu.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
 import 'package:recase/recase.dart';
 
 import '../../../../common/utils/shell/shel.utils.dart';
@@ -44,8 +45,34 @@ class CreateProjectCommand extends Command {
           'org'
         ]
       ]);
+
       var org = dialog.ask()['org'] as String;
-      await ShellUtils.flutterCreate(path, org);
+
+      LogService.info(LocaleKeys.ask_ios_lang.tr);
+      final iosLangMenu = Menu(['Swift', 'Objective-C']);
+      final iosResult = iosLangMenu.choose();
+
+      var iosLang = iosResult.index == 0 ? 'swift' : 'objc';
+
+      LogService.info(LocaleKeys.ask_android_lang.tr);
+      final androidLangMenu = Menu(['Kotlin', 'Java']);
+      final androidResult = androidLangMenu.choose();
+
+      var androidLang = androidResult.index == 0 ? 'kotlin' : 'java';
+
+      LogService.info(LocaleKeys.ask_use_null_safe.tr);
+      final nullSafeMenu =
+          Menu([LocaleKeys.options_yes.tr, LocaleKeys.options_no.tr]);
+      final nullSafeMenuResult = nullSafeMenu.choose();
+
+      var useNullSafe = nullSafeMenuResult.index == 0;
+      await ShellUtils.flutterCreate(path, org, iosLang, androidLang);
+
+      File('test/widget_test.dart').writeAsStringSync('');
+
+      if (useNullSafe) {
+        await ShellUtils.activatedNullSafe();
+      }
       await InitCommand().execute();
     } else {
       await InitGetServer().execute();
