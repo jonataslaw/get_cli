@@ -116,7 +116,6 @@ ${_getTabs(tabEspaces)}),''';
 /// _getTabs(2)   // '    ';
 /// ```
 String _getTabs(int tabEspaces) {
-  
   return '  ' * tabEspaces;
 }
 

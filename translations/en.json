@@ -8,8 +8,8 @@
     "lib_not_empty": "Your lib folder is not empty. Are you sure you want to overwrite your application? \\n WARNING: This action is irreversible",
     "ios_lang": "what language do you want to use on ios?",
     "android_lang": "what language do you want to use on android?",
-    "use_null_safe": "Do you want to use null safe?"
-
+    "use_null_safe": "Do you want to use null safe?",
+    "use_linter": "do you want to use some linter?"
   },
   "error": {
     "failed_to_connect": "Failed to connect with %s",

@@ -63,12 +63,12 @@ class CreatePageCommand extends Command {
   Future<void> _writeFiles(String path, String name,
       {bool overwrite = false}) async {
     var isServer = PubspecUtils.isServerProject;
-
+    var extraFolder = PubspecUtils.extraFolder ?? true;
     var controllerFile = handleFileCreate(
       name,
       'controller',
       path,
-      true,
+      extraFolder,
       ControllerSample('', name, isServer),
       'controllers',
     );
@@ -77,7 +77,7 @@ class CreatePageCommand extends Command {
       name,
       'view',
       path,
-      true,
+      extraFolder,
       GetViewSample('', '${name.pascalCase}View',
           '${name.pascalCase}Controller', controllerDir, isServer),
       'views',
@@ -86,7 +86,7 @@ class CreatePageCommand extends Command {
       name,
       'binding',
       path,
-      true,
+      extraFolder,
       BindingSample(
         '',
         name,

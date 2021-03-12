@@ -10,7 +10,7 @@ class CreateProviderCommand extends Command {
   @override
   Future<void> execute() async {
     handleFileCreate(name, 'provider', onCommand, onCommand != null,
-        ProviderSample(name), 'providers');
+        ProviderSample(name), onCommand != null ? 'providers' : '');
   }
 
   @override

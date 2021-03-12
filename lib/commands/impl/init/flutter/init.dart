@@ -1,7 +1,7 @@
 import 'package:cli_menu/cli_menu.dart';
+
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../common/utils/shell/shel.utils.dart';
-
 import '../../../../core/internationalization.dart';
 import '../../../../core/locales.g.dart';
 import '../../../interface/command.dart';

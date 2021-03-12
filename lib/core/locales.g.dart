@@ -83,6 +83,7 @@ class LocaleKeys {
   static const ask_ios_lang = 'ask_ios_lang';
   static const ask_android_lang = 'ask_android_lang';
   static const ask_use_null_safe = 'ask_use_null_safe';
+  static const ask_use_linter = 'ask_use_linter';
 }
 
 class Locales {
@@ -173,6 +174,7 @@ class Locales {
     'ask_ios_lang': 'what language do you want to use on ios?',
     'ask_android_lang': 'what language do you want to use on android?',
     'ask_use_null_safe': 'Do you want to use null safe?',
+    'ask_use_linter': 'do you want to use some linter?',
     'error_failed_to_connect': 'Failed to connect with %s',
     'error_no_valid_file_or_url': '%s is not a file or valid url',
     'error_unnecessary_parameter': 'the %s parameter is not necessary',

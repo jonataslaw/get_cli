@@ -15,8 +15,9 @@ import '../shell/shel.utils.dart';
 // ignore: avoid_classes_with_only_static_members
 class PubspecUtils {
   static final _pubspec = File('pubspec.yaml');
-  static final _mapSep = _PubValue();
-  static final _mapName = _PubValue();
+  static final _mapSep = _PubValue<String>();
+  static final _mapName = _PubValue<String>();
+  static final _extraFolder = _PubValue<bool>();
   static String _getProjectName() {
     _mapName.isChecked = true;
     var lines = _pubspec.readAsLinesSync();
@@ -148,10 +149,32 @@ class PubspecUtils {
 
     return '';
   }
+
+  static bool get extraFolder {
+    if (!_extraFolder.isChecked) {
+      _extraFolder.value = _getExtraFolder;
+    }
+    return _extraFolder.value;
+  }
+
+  static bool get _getExtraFolder {
+    _extraFolder.isChecked = true;
+    try {
+      var yaml = loadYaml(_pubspec.readAsStringSync()) as YamlMap;
+      if (yaml.containsKey('get_cli')) {
+        if ((yaml['get_cli'] as Map).containsKey('sub_folder')) {
+          return (yaml['get_cli']['sub_folder'] as bool);
+        }
+      }
+    } on Exception catch (_) {}
+    // ignore: avoid_returning_null
+    //esse retorno vai ser tratado;
+    return null;
+  }
 }
 
-class _PubValue {
+class _PubValue<T> {
   bool isChecked;
-  String value;
-  _PubValue([this.value = '', this.isChecked = false]);
+  T value;
+  _PubValue([this.value, this.isChecked = false]);
 }

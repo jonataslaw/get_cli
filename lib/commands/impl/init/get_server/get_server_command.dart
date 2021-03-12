@@ -17,7 +17,9 @@ class InitGetServer extends Command {
     // if (!canContinue) return;
 
     GetServerPubspecSample(basename(Directory.current.path)).create();
-    AnalysisOptionsSample().create();
+    AnalysisOptionsSample(
+      include: 'include: package:pedantic/analysis_options.yaml',
+    ).create();
     await PubspecUtils.addDependencies('get_server', runPubGet: false);
     await PubspecUtils.addDependencies('pedantic',
         isDev: true, runPubGet: false);

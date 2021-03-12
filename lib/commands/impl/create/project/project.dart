@@ -2,13 +2,15 @@ import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
 import 'package:cli_menu/cli_menu.dart';
-import 'package:get_cli/common/utils/logger/log_utils.dart';
 import 'package:recase/recase.dart';
 
+import '../../../../common/utils/logger/log_utils.dart';
+import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../common/utils/shell/shel.utils.dart';
 import '../../../../core/internationalization.dart';
 import '../../../../core/locales.g.dart';
 import '../../../../core/structure.dart';
+import '../../../../samples/impl/analysis_options.dart';
 import '../../../interface/command.dart';
 import '../../init/flutter/init.dart';
 import '../../init/get_server/get_server_command.dart';
@@ -66,12 +68,34 @@ class CreateProjectCommand extends Command {
       final nullSafeMenuResult = nullSafeMenu.choose();
 
       var useNullSafe = nullSafeMenuResult.index == 0;
+
+      LogService.info(LocaleKeys.ask_use_linter.tr);
+      final linterMenu = Menu(['no', 'Pedantic', 'Effective Dart']);
+      final linterResult = linterMenu.choose();
+
       await ShellUtils.flutterCreate(path, org, iosLang, androidLang);
 
       File('test/widget_test.dart').writeAsStringSync('');
 
       if (useNullSafe) {
         await ShellUtils.activatedNullSafe();
+      }
+      switch (linterResult.index) {
+        case 1:
+          PubspecUtils.addDependencies('pedantic',
+              isDev: true, runPubGet: false);
+          AnalysisOptionsSample(
+                  include: 'include: package:pedantic/analysis_options.yaml')
+              .create();
+          break;
+        case 2:
+          PubspecUtils.addDependencies('effective_dart',
+              isDev: true, runPubGet: false);
+          AnalysisOptionsSample(
+              include: 'include: package:effective_dart/analysis_options.yaml');
+          break;
+        default:
+          AnalysisOptionsSample().create();
       }
       await InitCommand().execute();
     } else {

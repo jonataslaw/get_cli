@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:recase/recase.dart';
 
 import '../../common/utils/logger/log_utils.dart';
+import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
 import '../../samples/impl/get_route.dart';
@@ -32,7 +33,9 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
   pathSplit.removeLast();
 
   ///remove view folder
-  pathSplit.removeLast();
+  if (PubspecUtils.extraFolder ?? true) {
+    pathSplit.removeLast();
+  }
 
   pathSplit.removeWhere((element) => element == 'app' || element == 'modules');
 
