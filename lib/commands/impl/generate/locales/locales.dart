@@ -25,7 +25,6 @@ class GenerateLocalesCommand extends Command {
 
   @override
   Future<void> execute() async {
-    print(args);
     final inputPath = args.isNotEmpty ? args.first : 'assets/locales';
 
     if (!await Directory(inputPath).exists()) {
