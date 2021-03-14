@@ -22,7 +22,7 @@ class CreatePageCommand extends Command {
   String get commandName => 'page';
 
   @override
-  List<String> get alias => ['module'];
+  List<String> get alias => ['module', '-p', '-m'];
   @override
   Future<void> execute() async {
     var isProject = false;
@@ -56,9 +56,7 @@ class CreatePageCommand extends Command {
   String get hint => LocaleKeys.hint_create_page.tr;
 
   @override
-  bool validate() {
-    return true;
-  }
+  bool validate() => super.validate();
 
   Future<void> _writeFiles(String path, String name,
       {bool overwrite = false}) async {
@@ -106,4 +104,10 @@ class CreatePageCommand extends Command {
     LogService.success(LocaleKeys.sucess_page_create.trArgs([name.pascalCase]));
     return;
   }
+
+  @override
+  String get codeSample => 'get create page:product';
+
+  @override
+  int get maxParameters => 0;
 }

@@ -34,12 +34,6 @@ class GenerateModelCommand extends Command {
     final classGenerator = ModelGenerator(
         name, containsArg('--private'), containsArg('--withCopy'));
 
-    /* if (findFolderByName('models') != null) {
-      _fileModel = Structure.model(name, 'model', onCommand != '',
-          on: onCommand != '' ? onCommand : 'models', folderName: 'models');
-    } else {
-      _fileModel = Structure.model(name, 'model', false, on: onCommand);
-    } */
     _fileModel = Structure.model(name, 'model', false, on: onCommand);
 
     var dartCode = classGenerator.generateDartClasses(await _jsonRawData);
@@ -97,4 +91,19 @@ class GenerateModelCommand extends Command {
       }
     }
   }
+
+  final codeSample1 = LogService.code(
+      'get generate model on home with assets/models/user.json');
+  final codeSample2 = LogService.code(
+      'get generate model on home from "https://api.github.com/users/CpdnCristiano"');
+
+  @override
+  String get codeSample => '''
+  $codeSample1
+  or
+  $codeSample2
+''';
+
+  @override
+  int get maxParameters => 0;
 }

@@ -9,5 +9,5 @@ String replaceVars(String content, String name) {
       .replaceAll('@controller', '${name.pascalCase}Controller')
       .replaceAll('@binding', '${name.pascalCase}Binding')
       .replaceAll('@import', PubspecUtils.getPackageImport)
-      .replaceAll('@package', PubspecUtils.getProjectName());
+      .replaceAll('@package', PubspecUtils.projectName);
 }

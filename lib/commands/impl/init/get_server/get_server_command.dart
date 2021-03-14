@@ -33,6 +33,14 @@ class InitGetServer extends Command {
 
   @override
   bool validate() {
+    super.validate();
+
     return true;
   }
+
+  @override
+  String get codeSample => '';
+
+  @override
+  int get maxParameters => 0;
 }

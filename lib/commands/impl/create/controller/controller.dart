@@ -28,10 +28,12 @@ class CreateControllerCommand extends Command {
   @override
   String get hint => LocaleKeys.hint_create_controller.tr;
 
+  @override
   String get codeSample => 'get create controller:name [OPTINAL PARAMETERS] \n'
       '${LocaleKeys.optional_parameters.trArgs(['[on, with]'])} ';
   @override
   bool validate() {
+    super.validate();
     if (args.length > 2) {
       var unnecessaryParameter = args.skip(2).toList();
       throw CliException(
@@ -96,4 +98,7 @@ class CreateControllerCommand extends Command {
 
   @override
   String get commandName => 'controller';
+
+  @override
+  int get maxParameters => 0;
 }

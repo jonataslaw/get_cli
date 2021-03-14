@@ -25,8 +25,8 @@ class GenerateLocalesCommand extends Command {
 
   @override
   Future<void> execute() async {
-    final inputPath =
-        GetCli.arguments.length >= 3 ? GetCli.arguments[2] : 'assets/locales';
+    print(args);
+    final inputPath = args.isNotEmpty ? args.first : 'assets/locales';
 
     if (!await Directory(inputPath).exists()) {
       LogService.error(
@@ -117,6 +117,14 @@ class GenerateLocalesCommand extends Command {
       }
     }
   }
+
+  @override
+  String get codeSample =>
+      LogService.code('get generate locales assets/locales \n'
+          'get generate locales assets/locales on locales');
+
+  @override
+  int get maxParameters => 1;
 }
 
 String _replaceValue(String value) {

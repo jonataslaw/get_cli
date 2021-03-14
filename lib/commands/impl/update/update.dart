@@ -20,6 +20,14 @@ class UpdateCommand extends Command {
 
   @override
   bool validate() {
+    super.validate();
+
     return true;
   }
+
+  @override
+  String get codeSample => 'get update';
+
+  @override
+  int get maxParameters => 0;
 }

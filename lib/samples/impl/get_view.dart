@@ -14,7 +14,7 @@ class GetViewSample extends Sample {
       : super(path, overwrite: overwrite);
 
   String get import => _controllerDir != null
-      ? '''import 'package:${PubspecUtils.getProjectName()}/$_controllerDir';'''
+      ? '''import 'package:${PubspecUtils.projectName}/$_controllerDir';'''
       : '';
 
   String get _controllerName =>

@@ -1,7 +1,6 @@
 import '../../../common/utils/logger/log_utils.dart';
 import '../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../common/utils/shell/shel.utils.dart';
-import '../../../core/generator.dart';
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../../../exception_handler/exceptions/cli_exception.dart';
@@ -14,34 +13,27 @@ class InstallCommand extends Command {
   List<String> get alias => ['-i'];
   @override
   Future<void> execute() async {
-    var args = List<String>.from(GetCli.arguments);
-    args.removeAt(0);
+    print(args);
     var isDev = containsArg('--dev') || containsArg('-dev');
-    var runPubGet = true;
+    var runPubGet = false;
 
-    if (args.length == 1) {
-      var packageInfo = args.first.split(':');
+    for (var element in args) {
+      var packageInfo = element.split(':');
       LogService.info('Installing package "${packageInfo.first}" …');
       if (packageInfo.length == 1) {
         runPubGet = await PubspecUtils.addDependencies(packageInfo.first,
-            isDev: isDev, runPubGet: false);
+                isDev: isDev, runPubGet: false)
+            ? true
+            : runPubGet;
       } else {
         runPubGet = await PubspecUtils.addDependencies(packageInfo.first,
-            version: packageInfo[1], isDev: isDev, runPubGet: false);
-      }
-    } else {
-      for (var element in args) {
-        var packageInfo = element.split(':');
-        LogService.info('Installing package "${packageInfo.first}" …');
-        if (packageInfo.length == 1) {
-          await PubspecUtils.addDependencies(packageInfo.first,
-              isDev: isDev, runPubGet: false);
-        } else {
-          await PubspecUtils.addDependencies(packageInfo.first,
-              version: packageInfo[1], isDev: isDev, runPubGet: false);
-        }
+                version: packageInfo[1], isDev: isDev, runPubGet: false)
+            ? true
+            : runPubGet;
+        ;
       }
     }
+
     if (runPubGet) await ShellUtils.pubGet();
   }
 
@@ -50,19 +42,26 @@ class InstallCommand extends Command {
 
   @override
   bool validate() {
-    var args = List<String>.from(GetCli.arguments);
-    args.removeAt(0);
+    super.validate();
+
     if (args.isEmpty) {
-      final codeSample1 = LogService.code('get install get:3.4.6');
-      final codeSample2 = LogService.code('get install get');
       throw CliException(
           'Please, enter the name of a package you wanna install',
-          codeSample: '''
-  $codeSample1
-  if you wanna install the latest version:
-  $codeSample2
-''');
+          codeSample: codeSample);
     }
     return true;
   }
+
+  final codeSample1 = LogService.code('get install get:3.4.6');
+  final codeSample2 = LogService.code('get install get');
+
+  @override
+  String get codeSample => '''
+  $codeSample1
+  if you wanna install the latest version:
+  $codeSample2
+''';
+
+  @override
+  int get maxParameters => 999;
 }

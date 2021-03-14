@@ -28,6 +28,12 @@ class CreateViewCommand extends Command {
   Future<void> execute() async {
     return createView(name, withArgument: withArgument, onCommand: onCommand);
   }
+
+  @override
+  String get codeSample => 'get create view:delete_dialog';
+
+  @override
+  int get maxParameters => 0;
 }
 
 Future<void> createView(String name,

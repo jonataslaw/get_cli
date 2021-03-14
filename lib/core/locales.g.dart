@@ -84,6 +84,7 @@ class LocaleKeys {
   static const ask_android_lang = 'ask_android_lang';
   static const ask_use_null_safe = 'ask_use_null_safe';
   static const ask_use_linter = 'ask_use_linter';
+  static const error_no_package_to_remove = 'error_no_package_to_remove';
 }
 
 class Locales {
@@ -196,6 +197,8 @@ class Locales {
     'error_file_not_found': 'File not found in %s',
     'error_access_denied': 'Access denied to %s',
     'error_unexpected': 'Unexpected error occurred:',
+    'error_no_package_to_remove':
+        'Enter the name of the package you wanna remove',
     'example': 'Example:',
     'hint_create_controller': 'Generate controller',
     'hint_create_page': 'Use to generate pages',

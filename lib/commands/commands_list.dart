@@ -49,4 +49,10 @@ class CommandParent extends Command {
 
   @override
   bool validate() => true;
+
+  @override
+  String get codeSample => '';
+
+  @override
+  int get maxParameters => 0;
 }

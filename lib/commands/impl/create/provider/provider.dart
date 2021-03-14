@@ -9,6 +9,7 @@ class CreateProviderCommand extends Command {
   String get commandName => 'provider';
   @override
   Future<void> execute() async {
+    var name = this.name;
     handleFileCreate(name, 'provider', onCommand, onCommand != null,
         ProviderSample(name), onCommand != null ? 'providers' : '');
   }
@@ -17,7 +18,11 @@ class CreateProviderCommand extends Command {
   String get hint => Translation(LocaleKeys.hint_create_provider).tr;
 
   @override
-  bool validate() {
-    return true;
-  }
+  bool validate() => super.validate();
+
+  @override
+  String get codeSample => 'get create provider:user on data';
+
+  @override
+  int get maxParameters => 0;
 }

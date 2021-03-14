@@ -37,10 +37,12 @@ File writeFile(String path, String content,
     if (!skipFormatter) {
       if (path.endsWith('.dart')) {
         try {
-          content = sortImports(content, PubspecUtils.getProjectName(),
-              renameImport: !skipRename,
-              filePath: path,
-              useRelative: useRelativeImport);
+          content = sortImports(
+            content,
+            renameImport: !skipRename,
+            filePath: path,
+            useRelative: useRelativeImport,
+          );
         } on Exception catch (_) {
           if (_file.existsSync()) {
             LogService.info(LocaleKeys.error_invalid_dart.trArgs([_file.path]));

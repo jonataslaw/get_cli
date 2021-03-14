@@ -1,6 +1,8 @@
 import 'package:http/http.dart';
+import 'package:recase/recase.dart';
 
 import '../../core/generator.dart';
+import 'create/provider/provider.dart';
 
 mixin ArgsMixin {
   final List<String> _args = GetCli.arguments;
@@ -11,7 +13,7 @@ mixin ArgsMixin {
   /// `get create page:product on home`
   ///
   /// ```
-  /// print(args); // [create, page:product]
+  /// print(args); // [page:product]
   /// ```
   List<String> args = _getArgs();
 
@@ -70,13 +72,25 @@ mixin ArgsMixin {
   /// print(name); // product
   /// ```
   String get name {
-    if (_args.first == 'init') {
-      return 'home';
-    } else {
-      return _args[1].split(':').length == 1 || _args[1].split(':')[1].isEmpty
-          ? (_args[1].split(':').first == 'project' ? '.' : 'home')
-          : _args[1].split(':')[1];
+    if (_args.length > 1) {
+      var split = _args[1].split(':');
+      var type = split.first;
+      var name = split.last;
+
+      if (name == type) {
+        if (_args.length > 2) {
+          name = _args[2];
+        } else {
+          name = '';
+        }
+      }
+      if (type == 'project') {
+        return name.isEmpty ? '.' : name.snakeCase;
+      } else {
+        return name.isEmpty ? 'home' : name.snakeCase;
+      }
     }
+    return '';
   }
 
   /// return [true] if conatains flags
@@ -94,12 +108,15 @@ mixin ArgsMixin {
 }
 List<String> _getArgs() {
   var args = List.of(GetCli.arguments);
-  var defaultArgs = ['on', 'home', 'from', 'with'];
+  var defaultArgs = ['on', 'from', 'with'];
 
   for (var arg in defaultArgs) {
     var indexArg = args.indexWhere((element) => (element == arg));
-    if (indexArg != -1 && indexArg + 1 < args.length) {
-      args..removeAt(indexArg)..removeAt(indexArg);
+    if (indexArg != -1 && indexArg < args.length) {
+      args.removeAt(indexArg);
+      if (indexArg < args.length) {
+        args.removeAt(indexArg);
+      }
     }
   }
   args.removeWhere((element) => element.startsWith('-'));

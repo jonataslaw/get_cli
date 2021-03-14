@@ -1,5 +1,6 @@
 import 'package:cli_menu/cli_menu.dart';
 
+import '../../../../common/utils/logger/log_utils.dart';
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../common/utils/shell/shel.utils.dart';
 import '../../../../core/internationalization.dart';
@@ -33,6 +34,13 @@ class InitCommand extends Command {
 
   @override
   bool validate() {
+    super.validate();
     return true;
   }
+
+  @override
+  String get codeSample => LogService.code('get init');
+
+  @override
+  int get maxParameters => 0;
 }

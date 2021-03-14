@@ -29,7 +29,8 @@
     "folder_not_found": "Folder %s not found",
     "file_not_found": "File not found in %s",
     "access_denied": "Access denied to %s",
-    "unexpected": "Unexpected error occurred:"
+    "unexpected": "Unexpected error occurred:",
+    "no_package_to_remove": "Enter the name of the package you wanna remove"
   },
 
   "example": "Example:",

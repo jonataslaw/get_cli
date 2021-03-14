@@ -110,4 +110,10 @@ class CreateProjectCommand extends Command {
   bool validate() {
     return true;
   }
+
+  @override
+  String get codeSample => 'get create project';
+
+  @override
+  int get maxParameters => 0;
 }

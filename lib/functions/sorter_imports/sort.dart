@@ -7,10 +7,14 @@ import '../formatter_dart_file/frommatter_dart_file.dart';
 import '../path/replace_to_relative.dart';
 
 /// Sort imports from a dart file
-String sortImports(String content, String packageName,
-    {bool renameImport = false,
-    String filePath = '',
-    bool useRelative = false}) {
+String sortImports(
+  String content, {
+  String packageName,
+  bool renameImport = false,
+  String filePath = '',
+  bool useRelative = false,
+}) {
+  packageName = packageName ?? PubspecUtils.projectName;
   content = formatterDartFile(content);
   var lines = LineSplitter.split(content).toList();
 

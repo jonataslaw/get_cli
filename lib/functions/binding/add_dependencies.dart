@@ -31,7 +31,7 @@ import '../create/create_single_file.dart';
 ///
 ///import 'package:get/get.dart';
 ///import 'home_controller.dart';
-///import 'package:example/DEPENDENCY_DIR;
+///import 'package:example/DEPENDENCY_DIR';
 ///class HomeBinding extends Bindings {
 ///    @override
 ///    void dependencies() {
@@ -45,7 +45,7 @@ import '../create/create_single_file.dart';
 ///}
 ///```
 void addDependencyToBinding(String path, String controllerName, String import) {
-  import = '''import 'package:${PubspecUtils.getProjectName()}/$import';''';
+  import = '''import 'package:${PubspecUtils.projectName}/$import';''';
   var file = File(path);
   if (file.existsSync()) {
     var lines = file.readAsLinesSync();

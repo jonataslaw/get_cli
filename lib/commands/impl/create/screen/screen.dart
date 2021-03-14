@@ -96,13 +96,19 @@ class CreateScreenCommand extends Command {
         'controllers',
         '.');
 
-    var exportView = 'package:${PubspecUtils.getProjectName()}/'
+    var exportView = 'package:${PubspecUtils.projectName}/'
         '${Structure.pathToDirImport(view.path)}';
     addExport('lib/presentation/screens.dart', "export '$exportView';");
 
     addExport(
         'lib/infrastructure/navigation/bindings/controllers/controllers_bindings.dart',
-        "export 'package:${PubspecUtils.getProjectName()}/${Structure.pathToDirImport(binding.path)}'; ");
+        "export 'package:${PubspecUtils.projectName}/${Structure.pathToDirImport(binding.path)}'; ");
     arcAddRoute(name);
   }
+
+  @override
+  String get codeSample => 'get create screen:name';
+
+  @override
+  int get maxParameters => 0;
 }

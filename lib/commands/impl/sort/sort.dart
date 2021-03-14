@@ -9,13 +9,16 @@ import '../../interface/command.dart';
 
 class SortCommand extends Command {
   @override
+  int get maxParameters => 1;
+  @override
   String get commandName => 'sort';
+
   @override
   List<String> get acceptedFlags => ['--skipRename', '--relative'];
+
   @override
   Future<void> execute() async {
-    print(flags);
-    var path = args[1] == '.' ? 'lib' : args[1];
+    var path = args.first == '.' ? 'lib' : args.first;
     if (FileSystemEntity.isDirectorySync(path)) {
       sortImportsDirectory(path);
     } else if (FileSystemEntity.isFileSync(path)) {
@@ -29,6 +32,7 @@ class SortCommand extends Command {
   @override
   String get hint => Translation(LocaleKeys.hint_sort).tr;
 
+  @override
   String get codeSample => 'get sort lib/app \n'
       'or\n'
       'get sort lib/main.dart\n'
@@ -38,17 +42,8 @@ class SortCommand extends Command {
   @override
   bool validate() {
     super.validate();
-    if (args.length < 2) {
+    if (args.isEmpty) {
       throw CliException(LocaleKeys.error_required_path.tr,
-          codeSample: codeSample);
-    } else if (args.length > 2) {
-      List pars = args.skip(2).toList();
-      throw CliException(
-          LocaleKeys.error_unnecessary_parameter.trArgsPlural(
-            LocaleKeys.error_unnecessary_parameter_plural,
-            pars.length,
-            [pars.toString()],
-          ),
           codeSample: codeSample);
     }
     return true;

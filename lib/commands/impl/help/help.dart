@@ -34,21 +34,13 @@ $commandsHelp
     }
     return result;
   }
-  /* String _getCommandsHelp(Map commands, int index) {
-    var result = '';
-    commands.forEach((key, value) {
-      if (value is Map) {
-        result += '\n' + '  ' * index + key + ':';
-        result += _getCommandsHelp(value, index + 1);
-        result += '\n';
-      } else if (value is Function) {
-        final command = value() as Command;
-        result += '\n' + '  ' * index + key + ': ' + command.hint + '\n';
-      }
-    });
-    return result;
-  } */
 
   @override
-  bool validate() => true;
+  bool validate() => super.validate();
+
+  @override
+  String get codeSample => '';
+
+  @override
+  int get maxParameters => 0;
 }
