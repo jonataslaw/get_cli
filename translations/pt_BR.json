@@ -60,7 +60,9 @@
   },
   "options": {
     "yes": "Sim!",
-    "no": "Não"
+    "no": "Não!",
+    "rename": "Quero renomear!"
+
   },
   "optional_parameters": "Parâmetros opcionais: %s",
   "sucess": {

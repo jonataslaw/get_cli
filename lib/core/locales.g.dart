@@ -84,7 +84,9 @@ class LocaleKeys {
   static const ask_android_lang = 'ask_android_lang';
   static const ask_use_null_safe = 'ask_use_null_safe';
   static const ask_use_linter = 'ask_use_linter';
+  static const ask_new_page_name = 'ask_new_page_name';
   static const error_no_package_to_remove = 'error_no_package_to_remove';
+  static const options_rename = 'options_rename';
 }
 
 class Locales {
@@ -176,6 +178,7 @@ class Locales {
     'ask_android_lang': 'what language do you want to use on android?',
     'ask_use_null_safe': 'Do you want to use null safe?',
     'ask_use_linter': 'do you want to use some linter?',
+    'ask_new_page_name': 'what new name for the page?',
     'error_failed_to_connect': 'Failed to connect with %s',
     'error_no_valid_file_or_url': '%s is not a file or valid url',
     'error_unnecessary_parameter': 'the %s parameter is not necessary',
@@ -227,6 +230,7 @@ class Locales {
     'info_update_available2': 'New version available: %s Please, run:',
     'options_yes': 'Yes!',
     'options_no': 'No',
+    'options_rename': 'I want to rename',
     'optional_parameters': 'Optional parameters: %s',
     'sucess_page_create': '%s page created successfully.',
     'sucess_locale_generate': 'locale files generated successfully.',
@@ -309,7 +313,8 @@ class Locales {
         'Há uma atualização disponível! Versão atual instalada: %s',
     'info_update_available2': 'Nova versão disponível: %s Por favor, execute:',
     'options_yes': 'Sim!',
-    'options_no': 'Não',
+    'options_no': 'Não!',
+    'options_rename': 'Quero renomear!',
     'optional_parameters': 'Parâmetros opcionais: %s',
     'sucess_page_create': 'Página %s criada com sucesso.',
     'sucess_locale_generate': 'Arquivo de tradução gerado com sucesso.',

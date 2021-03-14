@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cli_dialog/cli_dialog.dart';
 import 'package:cli_menu/cli_menu.dart';
 import 'package:recase/recase.dart';
 
@@ -29,6 +30,16 @@ class CreatePageCommand extends Command {
     if (GetCli.arguments[0] == 'create') {
       isProject = GetCli.arguments[1].split(':').first == 'project';
     }
+    checkForAlreadyExists(isProject, name);
+  }
+
+  @override
+  String get hint => LocaleKeys.hint_create_page.tr;
+
+  @override
+  bool validate() => super.validate();
+
+  void checkForAlreadyExists(bool isProject, String name) {
     var _fileModel = Structure.model(isProject ? 'home' : name, 'page', true,
         on: onCommand, folderName: isProject ? 'home' : name);
     var pathSplit = Structure.safeSplitPath(_fileModel.path);
@@ -41,25 +52,25 @@ class CreatePageCommand extends Command {
       final menu = Menu([
         LocaleKeys.options_yes.tr,
         LocaleKeys.options_no.tr,
+        LocaleKeys.options_rename.tr,
       ]);
       final result = menu.choose();
       if (result.index == 0) {
-        await _writeFiles(path, isProject ? 'home' : name, overwrite: true);
+        _writeFiles(path, isProject ? 'home' : name, overwrite: true);
+      } else if (result.index == 2) {
+        final dialog = CLI_Dialog();
+        dialog.addQuestion(LocaleKeys.ask_new_page_name.tr, 'name');
+        name = dialog.ask()['name'] as String;
+
+        checkForAlreadyExists(isProject, name.trim().snakeCase);
       }
     } else {
       Directory(path).createSync(recursive: true);
-      await _writeFiles(path, isProject ? 'home' : name, overwrite: false);
+      _writeFiles(path, isProject ? 'home' : name, overwrite: false);
     }
   }
 
-  @override
-  String get hint => LocaleKeys.hint_create_page.tr;
-
-  @override
-  bool validate() => super.validate();
-
-  Future<void> _writeFiles(String path, String name,
-      {bool overwrite = false}) async {
+  void _writeFiles(String path, String name, {bool overwrite = false}) {
     var isServer = PubspecUtils.isServerProject;
     var extraFolder = PubspecUtils.extraFolder ?? true;
     var controllerFile = handleFileCreate(
@@ -102,7 +113,6 @@ class CreatePageCommand extends Command {
       Structure.pathToDirImport(viewFile.path),
     );
     LogService.success(LocaleKeys.sucess_page_create.trArgs([name.pascalCase]));
-    return;
   }
 
   @override

@@ -6,6 +6,8 @@ import '../../interface/command.dart';
 class UpdateCommand extends Command {
   @override
   String get commandName => 'update';
+  @override
+  List<String> get acceptedFlags => ['-f', '--git'];
 
   @override
   Future<void> execute() async {
@@ -21,7 +23,6 @@ class UpdateCommand extends Command {
   @override
   bool validate() {
     super.validate();
-
     return true;
   }
 
