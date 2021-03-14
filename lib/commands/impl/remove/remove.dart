@@ -12,7 +12,7 @@ class RemoveCommand extends Command {
   @override
   Future<void> execute() async {
     for (var package in args) {
-      PubspecUtils.removeDependencies(package);
+      await PubspecUtils.removeDependencies(package);
     }
 
     //if (GetCli.arguments.first == 'remove') {

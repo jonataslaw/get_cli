@@ -2,8 +2,7 @@ import 'dart:io';
 
 import 'package:cli_menu/cli_menu.dart';
 import 'package:pubspec/pubspec.dart';
-import 'package:version/version.dart';
-import 'package:yaml/yaml.dart';
+import 'package:version/version.dart' as v;
 
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
@@ -22,7 +21,7 @@ class PubspecUtils {
 
   /// separtor
   static final _mapSep = _PubValue<String>(() {
-    var yaml = loadYaml(_pubspecFile.readAsStringSync()) as YamlMap;
+    var yaml = pubSpec.unParsedYaml;
     if (yaml.containsKey('get_cli')) {
       if ((yaml['get_cli'] as Map).containsKey('separator')) {
         return (yaml['get_cli']['separator'] as String) ?? '';
@@ -39,7 +38,7 @@ class PubspecUtils {
   static final _extraFolder = _PubValue<bool>(
     () {
       try {
-        var yaml = loadYaml(_pubspecFile.readAsStringSync()) as YamlMap;
+        var yaml = pubSpec.unParsedYaml;
         if (yaml.containsKey('get_cli')) {
           if ((yaml['get_cli'] as Map).containsKey('sub_folder')) {
             return (yaml['get_cli']['sub_folder'] as bool);
@@ -84,13 +83,22 @@ class PubspecUtils {
     return true;
   }
 
-  static void removeDependencies(String package, {bool logger = true}) {
+  static Future<void> removeDependencies(String package,
+      {bool logger = true}) async {
     if (logger) LogService.info('Removing package: "$package"');
 
-    var lines = _pubspecFile.readAsLinesSync();
     if (containsPackage(package)) {
-      lines.removeWhere((element) => element.startsWith('  $package:'));
-      _pubspecFile.writeAsStringSync(lines.join('\n'));
+      var dependencies = pubSpec.dependencies;
+      var devDependencies = pubSpec.devDependencies;
+
+      dependencies.removeWhere((key, value) => key == package);
+      devDependencies.removeWhere((key, value) => key == package);
+      pubSpec
+          .copy(
+            devDependencies: devDependencies,
+            dependencies: dependencies,
+          )
+          .save(Directory.current);
       if (logger) {
         LogService.success(LocaleKeys.sucess_package_removed.trArgs([package]));
       }
@@ -100,10 +108,12 @@ class PubspecUtils {
   }
 
   static bool containsPackage(String package, [bool isDev = false]) {
-    var pubSpec = PubSpec.fromYamlString(_pubspecFile.readAsStringSync());
     var dependencies = isDev ? pubSpec.devDependencies : pubSpec.dependencies;
     return dependencies.containsKey(package.trim());
   }
+
+  static bool get nullSafeSupport => !pubSpec.environment.sdkConstraint
+      .allowsAny(HostedReference.fromJson('<2.12.0').versionConstraint);
 
   /// make sure it is a get_server project
   static bool get isServerProject {
@@ -114,15 +124,11 @@ class PubspecUtils {
       ? "import 'package:get/get.dart';"
       : "import 'package:get_server/get_server.dart';";
 
-  static Version getPackageVersion(String package) {
-    var lines = _pubspecFile.readAsLinesSync();
-    var index =
-        lines.indexWhere((element) => element.startsWith('  $package:'));
-    if (index != -1) {
+  static v.Version getPackageVersion(String package) {
+    if (containsPackage(package)) {
+      var version = pubSpec.allDependencies[package];
       try {
-        var version =
-            Version.parse(lines[index].split(':').last.trim().removeAll('^'));
-        return version;
+        return v.Version.parse(version.toJson() as String);
       } on FormatException catch (_) {
         return null;
       } on Exception catch (_) {

@@ -2,7 +2,6 @@ import 'package:http/http.dart';
 import 'package:recase/recase.dart';
 
 import '../../core/generator.dart';
-import 'create/provider/provider.dart';
 
 mixin ArgsMixin {
   final List<String> _args = GetCli.arguments;
