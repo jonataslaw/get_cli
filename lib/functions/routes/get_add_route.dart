@@ -62,8 +62,9 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
     }
   }
 
-  if (lines.indexWhere((element) => element.trim().startsWith(declareRoute),
-          indexEndRoutes) ==
+  if (lines.sublist(0, indexEndRoutes).indexWhere(
+            (element) => element.trim().startsWith(declareRoute),
+          ) ==
       -1) {
     lines.insert(indexEndRoutes, line);
     addAppPage(nameRoute, bindingDir, viewDir);
