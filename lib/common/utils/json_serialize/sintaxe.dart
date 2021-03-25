@@ -120,11 +120,11 @@ class TypeDefinition {
       // list of class
       return "if (json['$key'] != null) {\n\t\t\t$fieldKey = <$subtype>[];"
           "\n\t\t\tjson['$key'].forEach((v) { "
-          "$fieldKey.add($subtype.fromJson(v)); });\n\t\t}";
+          '$fieldKey.add($subtype.fromJson(v)); });\n\t\t}';
     } else {
       // class
       return "$fieldKey = json['$key'] != null ?"
-          " ${_buildParseClass(jsonKey)} : null;";
+          ' ${_buildParseClass(jsonKey)} : null;';
     }
   }
 
@@ -226,7 +226,7 @@ class ClassDefinition {
     }
   }
 
-  String _generateFieldList({int indentLevel = 1, String delimiter = ";"}) {
+  String _generateFieldList({int indentLevel = 1, String delimiter = ';'}) {
     return fields.keys.map((key) {
       final f = fields[key];
       final fieldName =
@@ -316,7 +316,7 @@ class ClassDefinition {
   String get _copyConstructor {
     final sb = StringBuffer();
     sb.write('\t$name copyWith({');
-    sb.write(_generateFieldList(indentLevel: 2, delimiter: ","));
+    sb.write(_generateFieldList(indentLevel: 2, delimiter: ','));
     sb.write('\t}) {');
     sb.write('\t\treturn $name(');
 

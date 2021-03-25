@@ -30,7 +30,11 @@ class CreatePageCommand extends Command {
     if (GetCli.arguments[0] == 'create') {
       isProject = GetCli.arguments[1].split(':').first == 'project';
     }
-    checkForAlreadyExists(isProject, name);
+    var name = this.name;
+    if (name.isEmpty || isProject) {
+      name = 'home';
+    }
+    checkForAlreadyExists(name);
   }
 
   @override
@@ -39,9 +43,9 @@ class CreatePageCommand extends Command {
   @override
   bool validate() => super.validate();
 
-  void checkForAlreadyExists(bool isProject, String name) {
-    var _fileModel = Structure.model(isProject ? 'home' : name, 'page', true,
-        on: onCommand, folderName: isProject ? 'home' : name);
+  void checkForAlreadyExists(String name) {
+    var _fileModel =
+        Structure.model(name, 'page', true, on: onCommand, folderName: name);
     var pathSplit = Structure.safeSplitPath(_fileModel.path);
 
     pathSplit.removeLast();
@@ -56,17 +60,17 @@ class CreatePageCommand extends Command {
       ]);
       final result = menu.choose();
       if (result.index == 0) {
-        _writeFiles(path, isProject ? 'home' : name, overwrite: true);
+        _writeFiles(path, name, overwrite: true);
       } else if (result.index == 2) {
         final dialog = CLI_Dialog();
         dialog.addQuestion(LocaleKeys.ask_new_page_name.tr, 'name');
         name = dialog.ask()['name'] as String;
 
-        checkForAlreadyExists(isProject, name.trim().snakeCase);
+        checkForAlreadyExists(name.trim().snakeCase);
       }
     } else {
       Directory(path).createSync(recursive: true);
-      _writeFiles(path, isProject ? 'home' : name, overwrite: false);
+      _writeFiles(path, name, overwrite: false);
     }
   }
 
@@ -78,7 +82,12 @@ class CreatePageCommand extends Command {
       'controller',
       path,
       extraFolder,
-      ControllerSample('', name, isServer),
+      ControllerSample(
+        '',
+        name,
+        isServer,
+        overwrite: overwrite,
+      ),
       'controllers',
     );
     var controllerDir = Structure.pathToDirImport(controllerFile.path);
@@ -87,8 +96,14 @@ class CreatePageCommand extends Command {
       'view',
       path,
       extraFolder,
-      GetViewSample('', '${name.pascalCase}View',
-          '${name.pascalCase}Controller', controllerDir, isServer),
+      GetViewSample(
+        '',
+        '${name.pascalCase}View',
+        '${name.pascalCase}Controller',
+        controllerDir,
+        isServer,
+        overwrite: overwrite,
+      ),
       'views',
     );
     var bindingFile = handleFileCreate(

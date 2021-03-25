@@ -35,6 +35,7 @@
   },
 
   "example": "Example:",
+  "warning": "Warning:",
 
   "hint": {
     "create": {

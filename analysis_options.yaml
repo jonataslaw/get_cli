@@ -83,3 +83,6 @@ linter:
     hash_and_equals: true
     avoid_equals_and_hash_code_on_mutable_classes: true # avoid
     avoid_null_checks_in_equality_operators: true
+
+    avoid_print: true
+    prefer_single_quotes: true

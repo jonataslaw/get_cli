@@ -13,7 +13,6 @@ class InstallCommand extends Command {
   List<String> get alias => ['-i'];
   @override
   Future<void> execute() async {
-    print(args);
     var isDev = containsArg('--dev') || containsArg('-dev');
     var runPubGet = false;
 

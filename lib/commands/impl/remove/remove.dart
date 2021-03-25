@@ -12,7 +12,7 @@ class RemoveCommand extends Command {
   @override
   Future<void> execute() async {
     for (var package in args) {
-      await PubspecUtils.removeDependencies(package);
+      PubspecUtils.removeDependencies(package);
     }
 
     //if (GetCli.arguments.first == 'remove') {
@@ -38,4 +38,6 @@ class RemoveCommand extends Command {
 
   @override
   int get maxParameters => 999;
+  @override
+  List<String> get alias => ['-rm'];
 }

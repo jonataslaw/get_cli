@@ -72,21 +72,22 @@ mixin ArgsMixin {
   /// ```
   String get name {
     if (_args.length > 1) {
-      var split = _args[1].split(':');
-      var type = split.first;
-      var name = split.last;
+      var arg = _args[1];
+      if (arg.contains(':')) {
+        var split = arg.split(':');
+        var type = split.first;
+        var name = split.last;
 
-      if (name == type) {
-        if (_args.length > 2) {
-          name = _args[2];
-        } else {
-          name = '';
+        if (name == type) {
+          if (_args.length > 2) {
+            name = _args[2];
+          } else {
+            name = '';
+          }
         }
-      }
-      if (type == 'project') {
-        return name.isEmpty ? '.' : name.snakeCase;
-      } else {
-        return name.isEmpty ? 'home' : name.snakeCase;
+        if (type == 'project') {
+          return name.isEmpty ? '.' : name.snakeCase;
+        }
       }
     }
     return '';

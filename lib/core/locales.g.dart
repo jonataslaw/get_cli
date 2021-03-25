@@ -86,6 +86,7 @@ class LocaleKeys {
   static const ask_use_linter = 'ask_use_linter';
   static const ask_new_page_name = 'ask_new_page_name';
   static const error_no_package_to_remove = 'error_no_package_to_remove';
+  static const warning = 'warning';
   static const options_rename = 'options_rename';
 }
 
@@ -203,6 +204,7 @@ class Locales {
     'error_no_package_to_remove':
         'Enter the name of the package you wanna remove',
     'example': 'Example:',
+    'warning': 'Warning:',
     'hint_create_controller': 'Generate controller',
     'hint_create_page': 'Use to generate pages',
     'hint_create_project': 'Use to generate new project',

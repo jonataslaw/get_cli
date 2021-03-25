@@ -46,31 +46,35 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
   var route = pathSplit.join('/');
 
   var indexEndRoutes = lines.indexWhere((element) => element.startsWith('}'));
-
-  var line = "static const ${nameRoute.snakeCase.toUpperCase()} = '/$route';";
+  var declareRoute = 'static const ${nameRoute.snakeCase.toUpperCase()} =';
+  var line = "$declareRoute '/$route';";
 
   if (supportChildrenRoutes) {
-    line = 'static const ${nameRoute.snakeCase.toUpperCase()} '
+    line = '$declareRoute '
         '= ${_pathsToRoute(pathSplit)};';
     var indexEndPaths =
         lines.lastIndexWhere((element) => element.startsWith('}'));
 
-    var linePath =
-        "static const ${nameRoute.snakeCase.toUpperCase()} = '/${pathSplit.last}';";
-    lines.insert(indexEndPaths, linePath);
+    var linePath = "$declareRoute = '/${pathSplit.last}';";
+    if (lines.indexWhere((element) => element.trim().startsWith(declareRoute),
+            indexEndRoutes) ==
+        -1) {
+      lines.insert(indexEndPaths, linePath);
+    }
   }
 
-  if (lines.contains(line)) {
-    return;
+  if (lines.indexWhere((element) => element.trim().startsWith(declareRoute),
+          indexEndRoutes) ==
+      -1) {
+    lines.insert(indexEndRoutes, line);
+    addAppPage(nameRoute, bindingDir, viewDir);
+    LogService.success(
+        Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
+  } else {
+    LogService.error('${LocaleKeys.warning.tr}, route not created by conflict');
   }
-
-  lines.insert(indexEndRoutes, line);
 
   writeFile(routesFile.path, lines.join('\n'), overwrite: true, logger: false);
-  LogService.success(
-      Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
-
-  addAppPage(nameRoute, bindingDir, viewDir);
 }
 
 /// Create routes from the path

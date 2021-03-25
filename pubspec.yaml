@@ -11,7 +11,7 @@ executables:
   getx: get
 
 dependencies:
-  pubspec: 0.1.5
+  pubspec: ^2.0.1
   meta: ^1.2.3
   recase: ^3.0.0
   cli_menu: ^0.2.2

@@ -11,6 +11,7 @@ import '../../../extensions.dart';
 import '../logger/log_utils.dart';
 import '../pub_dev/pub_dev_api.dart';
 import '../shell/shel.utils.dart';
+import 'yaml_to.string.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class PubspecUtils {
@@ -77,14 +78,13 @@ class PubspecUtils {
     if (version == null) return false;
     pubSpec.dependencies[package] = HostedReference.fromJson(version);
 
-    await pubSpec.save(Directory.current);
+    _savePub(pubSpec);
     if (runPubGet) await ShellUtils.pubGet();
     LogService.success(LocaleKeys.sucess_package_installed.trArgs([package]));
     return true;
   }
 
-  static Future<void> removeDependencies(String package,
-      {bool logger = true}) async {
+  static void removeDependencies(String package, {bool logger = true}) {
     if (logger) LogService.info('Removing package: "$package"');
 
     if (containsPackage(package)) {
@@ -93,12 +93,11 @@ class PubspecUtils {
 
       dependencies.removeWhere((key, value) => key == package);
       devDependencies.removeWhere((key, value) => key == package);
-      pubSpec
-          .copy(
-            devDependencies: devDependencies,
-            dependencies: dependencies,
-          )
-          .save(Directory.current);
+      var newPub = pubSpec.copy(
+        devDependencies: devDependencies,
+        dependencies: dependencies,
+      );
+      _savePub(newPub);
       if (logger) {
         LogService.success(LocaleKeys.sucess_package_removed.trArgs([package]));
       }
@@ -138,6 +137,11 @@ class PubspecUtils {
       throw CliException(
           LocaleKeys.info_package_not_installed.trArgs([package]));
     }
+  }
+
+  static void _savePub(PubSpec pub) {
+    var value = CliYamlToString().toYamlString(pub.toJson());
+    _pubspecFile.writeAsStringSync(value);
   }
 }
 
