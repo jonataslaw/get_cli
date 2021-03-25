@@ -8,7 +8,8 @@ import '../logger/log_utils.dart';
 
 class PubDevApi {
   static Future<String> getLatestVersionFromPackage(String package) async {
-    var res = await get('https://pub.dev/api/packages/$package').then((value) {
+    var uri = Uri.parse('https://pub.dev/api/packages/$package');
+    var res = await get(uri).then((value) {
       if (value.statusCode == 200) {
         return json.decode(value.body)['latest']['version'];
       } else if (value.statusCode == 404) {

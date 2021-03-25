@@ -58,7 +58,7 @@ class CreateControllerCommand extends Command {
     var sample = ControllerSample('', name, PubspecUtils.isServerProject);
     if (withArgument.isNotEmpty) {
       if (isURL(withArgument)) {
-        var res = await get(withArgument);
+        var res = await get(Uri.parse(withArgument));
         if (res.statusCode == 200) {
           var content = res.body;
           sample.customContent = replaceVars(content, name);

@@ -83,7 +83,7 @@ class GenerateModelCommand extends Command {
       return await File(withArgument).readAsString();
     } else {
       try {
-        var result = await get(fromArgument);
+        var result = await get(Uri.parse(fromArgument));
         return result.body;
       } on Exception catch (_) {
         throw CliException(
