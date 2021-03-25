@@ -73,7 +73,7 @@ mixin ArgsMixin {
   String get name {
     if (_args.length > 1) {
       var arg = _args[1];
-      if (arg.contains(':')) {
+      if (_args[0] == 'create' || _args[0] == '-c') {
         var split = arg.split(':');
         var type = split.first;
         var name = split.last;
@@ -88,6 +88,7 @@ mixin ArgsMixin {
         if (type == 'project') {
           return name.isEmpty ? '.' : name.snakeCase;
         }
+        return name;
       }
     }
     return '';
