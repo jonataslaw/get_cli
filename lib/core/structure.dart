@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
-import '../common/utils/logger/log_utils.dart';
+import '../exception_handler/exceptions/cli_exception.dart';
 import '../models/file_model.dart';
 import 'internationalization.dart';
 import 'locales.g.dart';

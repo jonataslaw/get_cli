@@ -50,12 +50,11 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
   var line = "$declareRoute '/$route';";
 
   if (supportChildrenRoutes) {
-    line = '$declareRoute '
-        '= ${_pathsToRoute(pathSplit)};';
+    line = '$declareRoute ${_pathsToRoute(pathSplit)};';
     var indexEndPaths =
         lines.lastIndexWhere((element) => element.startsWith('}'));
 
-    var linePath = "$declareRoute = '/${pathSplit.last}';";
+    var linePath = "$declareRoute '/${pathSplit.last}';";
     if (lines.indexWhere((element) => element.trim().startsWith(declareRoute),
             indexEndRoutes) ==
         -1) {
