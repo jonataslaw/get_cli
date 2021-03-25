@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
@@ -56,9 +57,7 @@ class Structure {
           }
           return element.path.contains(on);
         }, orElse: () {
-          LogService.error(LocaleKeys.error_folder_not_found.trArgs([on]));
-          if (!Platform.isWindows) exit(0);
-          return;
+          throw CliException(LocaleKeys.error_folder_not_found.trArgs([on]));
         });
       });
 
