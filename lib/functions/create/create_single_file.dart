@@ -51,7 +51,7 @@ File writeFile(String path, String content,
         }
       }
     }
-    if (!skipRename) {
+    if (!skipRename && _file.path != 'pubspec.yaml') {
       var separatorFileType = PubspecUtils.separatorFileType;
       if (separatorFileType.isNotEmpty) {
         _file = _file.existsSync()

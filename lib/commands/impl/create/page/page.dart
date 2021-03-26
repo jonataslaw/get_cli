@@ -27,7 +27,7 @@ class CreatePageCommand extends Command {
   @override
   Future<void> execute() async {
     var isProject = false;
-    if (GetCli.arguments[0] == 'create') {
+    if (GetCli.arguments[0] == 'create' || GetCli.arguments[0] == '-c') {
       isProject = GetCli.arguments[1].split(':').first == 'project';
     }
     var name = this.name;

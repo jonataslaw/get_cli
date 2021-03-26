@@ -15,7 +15,6 @@ class InitGetServer extends Command {
   Future<void> execute() async {
     // bool canContinue = await createMain();
     // if (!canContinue) return;
-
     GetServerPubspecSample(basename(Directory.current.path)).create();
     AnalysisOptionsSample(
       include: 'include: package:pedantic/analysis_options.yaml',
