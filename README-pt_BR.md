@@ -89,8 +89,8 @@ pt_BR.json
     "sign_in": "Cadastrar-se",
     "logout": "Sair",
     "sign_in_fb": "Entrar com o Facebook",
-    "sign_in_google": "Entar com o Google",
-    "sign_in_apple": "Entar com a  Apple"
+    "sign_in_google": "Entrar com o Google",
+    "sign_in_apple": "Entrar com a  Apple"
   }
 }
 ```
@@ -147,8 +147,8 @@ abstract class Locales {
    'buttons_sign_in': 'Cadastrar-se',
    'buttons_logout': 'Sair',
    'buttons_sign_in_fb': 'Entrar com o Facebook',
-   'buttons_sign_in_google': 'Entar com o Google',
-   'buttons_sign_in_apple': 'Entar com a  Apple',
+   'buttons_sign_in_google': 'Entrar com o Google',
+   'buttons_sign_in_apple': 'Entrar com a  Apple',
   };
 
 }
