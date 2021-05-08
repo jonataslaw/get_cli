@@ -9,8 +9,8 @@ class ProviderSample extends Sample {
   final bool isServer;
   final bool createEndpoints;
   final String modelPath;
-  String _namePascal;
-  String _nameLower;
+  String? _namePascal;
+  String? _nameLower;
   ProviderSample(this._fileName,
       {bool overwrite = false,
       this.createEndpoints = false,

@@ -10,12 +10,12 @@ class CreateProviderCommand extends Command {
   @override
   Future<void> execute() async {
     var name = this.name;
-    handleFileCreate(name, 'provider', onCommand, onCommand != null,
-        ProviderSample(name), onCommand != null ? 'providers' : '');
+    handleFileCreate(name, 'provider', onCommand, onCommand.isNotEmpty,
+        ProviderSample(name), onCommand.isNotEmpty ? 'providers' : '');
   }
 
   @override
-  String get hint => Translation(LocaleKeys.hint_create_provider).tr;
+  String? get hint => Translation(LocaleKeys.hint_create_provider).tr;
 
   @override
   bool validate() => super.validate();

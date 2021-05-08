@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dart_style/dart_style.dart';
 import 'package:json_ast/json_ast.dart' show parse, Settings, Node;
 
@@ -23,15 +24,15 @@ class Hint {
 class ModelGenerator {
   final String _rootClassName;
   final bool _privateFields;
-  final bool _withCopyConstructor;
+  final bool? _withCopyConstructor;
   final List<ClassDefinition> allClasses = <ClassDefinition>[];
   final Map<String, String> sameClassMapping = HashMap<String, String>();
-  List<Hint> hints;
+  late List<Hint> hints;
 
   ModelGenerator(this._rootClassName,
       [this._privateFields = false,
       this._withCopyConstructor,
-      List<Hint> hints]) {
+      List<Hint>? hints]) {
     if (hints != null) {
       this.hints = hints;
     } else {
@@ -39,12 +40,12 @@ class ModelGenerator {
     }
   }
 
-  Hint _hintForPath(String path) {
-    return hints.firstWhere((h) => h.path == path, orElse: () => null);
+  Hint? _hintForPath(String path) {
+    return hints.firstWhereOrNull((h) => h.path == path);
   }
 
-  List<Warning> _generateClassDefinition(
-      String className, dynamic jsonRawDynamicData, String path, Node astNode) {
+  List<Warning> _generateClassDefinition(String className,
+      dynamic jsonRawDynamicData, String path, Node? astNode) {
     var warnings = <Warning>[];
     if (jsonRawDynamicData is List) {
       // if first element is an array, start in the first element.
@@ -73,13 +74,13 @@ class ModelGenerator {
         if (typeDef.subtype != null && typeDef.subtype == 'Class') {
           typeDef.subtype = camelCase(key);
         }
-        if (typeDef.isAmbiguous) {
+        if (typeDef.isAmbiguous!) {
           warnings.add(newAmbiguousListWarn('$path/$key'));
         }
         classDefinition.addField(key, typeDef);
       }
-      final similarClass = allClasses.firstWhere((cd) => cd == classDefinition,
-          orElse: () => null);
+      final similarClass =
+          allClasses.firstWhereOrNull((cd) => cd == classDefinition);
       if (similarClass != null) {
         final similarClassName = similarClass.name;
         final currentClassName = classDefinition.name;
@@ -90,7 +91,7 @@ class ModelGenerator {
       final dependencies = classDefinition.dependencies;
 
       for (var dependency in dependencies) {
-        List<Warning> warns;
+        List<Warning>? warns;
         if (dependency.typeDef.name == 'List') {
           // only generate dependency class if the array is not empty
           if ((jsonRawData[dependency.name] as List).length > 0) {
@@ -98,7 +99,7 @@ class ModelGenerator {
             // otherwise merge all objects
             // into a single one
             dynamic toAnalyze;
-            if (!dependency.typeDef.isAmbiguous) {
+            if (!dependency.typeDef.isAmbiguous!) {
               var mergeWithWarning = mergeObjectList(
                   jsonRawData[dependency.name] as List,
                   '$path/${dependency.name}');
@@ -137,9 +138,9 @@ class ModelGenerator {
     for (var c in allClasses) {
       final fieldsKeys = c.fields.keys;
       for (var f in fieldsKeys) {
-        final typeForField = c.fields[f];
+        final typeForField = c.fields[f]!;
         if (sameClassMapping.containsKey(typeForField.name)) {
-          c.fields[f].name = sameClassMapping[typeForField.name];
+          c.fields[f]!.name = sameClassMapping[typeForField.name!];
         }
       }
     }

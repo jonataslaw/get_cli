@@ -22,27 +22,27 @@ class PubspecUtils {
 
   /// separtor
   static final _mapSep = _PubValue<String>(() {
-    var yaml = pubSpec.unParsedYaml;
+    var yaml = pubSpec.unParsedYaml!;
     if (yaml.containsKey('get_cli')) {
       if ((yaml['get_cli'] as Map).containsKey('separator')) {
-        return (yaml['get_cli']['separator'] as String) ?? '';
+        return (yaml['get_cli']['separator'] as String?) ?? '';
       }
     }
 
     return '';
   });
-  static String get separatorFileType => _mapSep.value;
+  static String? get separatorFileType => _mapSep.value;
 
   static final _mapName = _PubValue<String>(() => pubSpec.name?.trim() ?? '');
-  static String get projectName => _mapName.value;
+  static String? get projectName => _mapName.value;
 
-  static final _extraFolder = _PubValue<bool>(
+  static final _extraFolder = _PubValue<bool?>(
     () {
       try {
-        var yaml = pubSpec.unParsedYaml;
+        var yaml = pubSpec.unParsedYaml!;
         if (yaml.containsKey('get_cli')) {
           if ((yaml['get_cli'] as Map).containsKey('sub_folder')) {
-            return (yaml['get_cli']['sub_folder'] as bool);
+            return (yaml['get_cli']['sub_folder'] as bool?);
           }
         }
       } on Exception catch (_) {}
@@ -51,15 +51,15 @@ class PubspecUtils {
       return null;
     },
   );
-  static bool get extraFolder => _extraFolder.value;
+  static bool? get extraFolder => _extraFolder.value;
 
   static Future<bool> addDependencies(String package,
-      {String version, bool isDev = false, bool runPubGet = true}) async {
+      {String? version, bool isDev = false, bool runPubGet = true}) async {
     var pubSpec = PubSpec.fromYamlString(_pubspecFile.readAsStringSync());
 
     if (containsPackage(package)) {
       LogService.info(
-          LocaleKeys.ask_package_already_installed.trArgs([package]),
+          LocaleKeys.ask_package_already_installed.trArgs([package])!,
           false,
           false);
       final menu = Menu([
@@ -102,7 +102,7 @@ class PubspecUtils {
         LogService.success(LocaleKeys.sucess_package_removed.trArgs([package]));
       }
     } else if (logger) {
-      LogService.info(LocaleKeys.info_package_not_installed.trArgs([package]));
+      LogService.info(LocaleKeys.info_package_not_installed.trArgs([package])!);
     }
   }
 
@@ -111,7 +111,7 @@ class PubspecUtils {
     return dependencies.containsKey(package.trim());
   }
 
-  static bool get nullSafeSupport => !pubSpec.environment.sdkConstraint
+  static bool get nullSafeSupport => !pubSpec.environment!.sdkConstraint!
       .allowsAny(HostedReference.fromJson('<2.12.0').versionConstraint);
 
   /// make sure it is a get_server project
@@ -123,11 +123,11 @@ class PubspecUtils {
       ? "import 'package:get/get.dart';"
       : "import 'package:get_server/get_server.dart';";
 
-  static v.Version getPackageVersion(String package) {
+  static v.Version? getPackageVersion(String package) {
     if (containsPackage(package)) {
-      var version = pubSpec.allDependencies[package];
+      var version = pubSpec.allDependencies[package]!;
       try {
-        return v.Version.parse(version.toJson() as String);
+        return v.Version.parse(version.toJson() as String?);
       } on FormatException catch (_) {
         return null;
       } on Exception catch (_) {
@@ -149,14 +149,14 @@ class PubspecUtils {
 class _PubValue<T> {
   final T Function() _setValue;
   bool _isChecked = false;
-  T _value;
+  T? _value;
 
   /// takes the value of the file,
   /// if not already called it will call the first time
-  T get value {
+  T? get value {
     if (!_isChecked) {
       _isChecked = true;
-      _value = _setValue?.call();
+      _value = _setValue.call();
     }
     return _value;
   }

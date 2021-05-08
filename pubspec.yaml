@@ -3,7 +3,7 @@ version: 1.4.7
 homepage: https://github.com/jonataslaw/get_cli
 description: Official CLI for GetX™ framework to build Flutter and Server Applications easily
 environment: 
-  sdk: '>=2.7.0 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies: 
   pubspec: ^2.0.1
@@ -21,6 +21,7 @@ dependencies:
   json_ast: ^1.0.5
   dart_style: '>=2.0.1 <3.0.0'
   yaml: ^3.1.0
+  collection: ^1.15.0-nullsafety.4
 
 dev_dependencies: 
   test: ^1.5.0

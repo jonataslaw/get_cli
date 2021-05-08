@@ -16,7 +16,7 @@ class GenerateLocalesCommand extends Command {
   @override
   String get commandName => 'locales';
   @override
-  String get hint => Translation(LocaleKeys.hint_generate_locales).tr;
+  String? get hint => Translation(LocaleKeys.hint_generate_locales).tr;
 
   @override
   bool validate() {
@@ -29,7 +29,7 @@ class GenerateLocalesCommand extends Command {
 
     if (!await Directory(inputPath).exists()) {
       LogService.error(
-          LocaleKeys.error_nonexistent_directory.trArgs([inputPath]));
+          LocaleKeys.error_nonexistent_directory.trArgs([inputPath])!);
       return;
     }
 
@@ -39,18 +39,18 @@ class GenerateLocalesCommand extends Command {
         .toList();
 
     if (files.isEmpty) {
-      LogService.info(LocaleKeys.error_empty_directory.trArgs([inputPath]));
+      LogService.info(LocaleKeys.error_empty_directory.trArgs([inputPath])!);
       return;
     }
 
-    final maps = <String, Map<String, dynamic>>{};
+    final maps = <String, Map<String, dynamic>?>{};
     for (var file in files) {
       try {
         final map = jsonDecode(await File(file.path).readAsString());
         final localeKey = basenameWithoutExtension(file.path);
-        maps[localeKey] = map as Map<String, dynamic>;
+        maps[localeKey] = map as Map<String, dynamic>?;
       } on Exception catch (_) {
-        LogService.error(LocaleKeys.error_invalid_json.trArgs([file.path]));
+        LogService.error(LocaleKeys.error_invalid_json.trArgs([file.path])!);
         rethrow;
       }
     }
@@ -58,7 +58,7 @@ class GenerateLocalesCommand extends Command {
     final locales = <String, Map<String, String>>{};
     maps.forEach((key, value) {
       final result = <String, String>{};
-      _resolve(value, result);
+      _resolve(value!, result);
       locales[key] = result;
     });
 
@@ -96,11 +96,11 @@ class GenerateLocalesCommand extends Command {
             path: '${_fileModel.path}.g.dart')
         .create();
 
-    LogService.success(LocaleKeys.sucess_locale_generate.tr);
+    LogService.success(LocaleKeys.sucess_locale_generate.tr!);
   }
 
-  void _resolve(Map<String, dynamic> localization, Map<String, String> result,
-      [String accKey]) {
+  void _resolve(Map<String, dynamic> localization, Map<String, String?> result,
+      [String? accKey]) {
     final sortedKeys = localization.keys.toList();
 
     for (var key in sortedKeys) {
@@ -112,13 +112,13 @@ class GenerateLocalesCommand extends Command {
         _resolve(localization[key] as Map<String, dynamic>, result, nextAccKey);
       } else {
         result[accKey != null ? '${accKey}_$key' : key] =
-            localization[key] as String;
+            localization[key] as String?;
       }
     }
   }
 
   @override
-  String get codeSample =>
+  String? get codeSample =>
       LogService.code('get generate locales assets/locales \n'
           'get generate locales assets/locales on locales');
 

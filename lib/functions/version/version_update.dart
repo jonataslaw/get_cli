@@ -26,10 +26,11 @@ void checkForUpdate() async {
           // needs update.
           if (needsUpdate == 1) {
             LogService.info(Translation(
-                LocaleKeys.info_update_available.trArgs([versionInstalled])));
+                    LocaleKeys.info_update_available.trArgs([versionInstalled]))
+                .toString());
             //await versionCommand();
             printGetCli();
-            final codeSample = LogService.code('get update');
+            final String? codeSample = LogService.code('get update');
             LogService.info(
                 '${LocaleKeys.info_update_available2.trArgs([
                   versionInPubDev

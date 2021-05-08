@@ -10,10 +10,10 @@ class GetCli {
     _instance = this;
   }
 
-  static GetCli _instance;
-  static GetCli get to => _instance;
+  static GetCli? _instance;
+  static GetCli? get to => _instance;
 
-  static List<String> get arguments => to._arguments;
+  static List<String> get arguments => to!._arguments;
 
   Command findCommand() => _findCommand(0, commands);
 

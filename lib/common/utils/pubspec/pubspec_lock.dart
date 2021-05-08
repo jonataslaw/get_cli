@@ -9,7 +9,7 @@ import '../../../functions/version/check_dev_version.dart';
 import '../logger/log_utils.dart';
 
 class PubspecLock {
-  static Future<String> getVersionCli({bool disableLog = false}) async {
+  static Future<String?> getVersionCli({bool disableLog = false}) async {
     try {
       var scriptFile = Platform.script.toFilePath();
       var pathToPubLock = join(dirname(scriptFile), '../pubspec.lock');
@@ -28,7 +28,7 @@ class PubspecLock {
     } on Exception catch (_) {
       if (!disableLog) {
         LogService.error(
-            Translation(LocaleKeys.error_cli_version_not_found).tr);
+            Translation(LocaleKeys.error_cli_version_not_found).tr!);
       }
       return null;
     }

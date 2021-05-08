@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:json_ast/json_ast.dart' show Node;
 
 import 'helpers.dart';
@@ -35,12 +36,12 @@ class WithWarning<T> {
 }
 
 class TypeDefinition {
-  String name;
-  String subtype;
-  bool isAmbiguous = false;
+  String? name;
+  String? subtype;
+  bool? isAmbiguous = false;
   bool _isPrimitive = false;
 
-  factory TypeDefinition.fromDynamic(dynamic obj, Node astNode) {
+  factory TypeDefinition.fromDynamic(dynamic obj, Node? astNode) {
     var isAmbiguous = false;
     final type = getTypeName(obj);
     if (type == 'List') {
@@ -64,7 +65,7 @@ class TypeDefinition {
     return TypeDefinition(type, astNode: astNode, isAmbiguous: isAmbiguous);
   }
 
-  TypeDefinition(this.name, {this.subtype, this.isAmbiguous, Node astNode}) {
+  TypeDefinition(this.name, {this.subtype, this.isAmbiguous, Node? astNode}) {
     if (subtype == null) {
       _isPrimitive = isPrimitiveType(name);
       if (name == 'int' && isASTLiteralDouble(astNode)) {
@@ -161,18 +162,18 @@ class Dependency {
 class ClassDefinition {
   final String _name;
   final bool _privateFields;
-  final bool _withCopyConstructor;
+  final bool? _withCopyConstructor;
   final Map<String, TypeDefinition> fields = <String, TypeDefinition>{};
 
   String get name => _name;
   bool get privateFields => _privateFields;
-  bool get copyConstructor => _withCopyConstructor;
+  bool? get copyConstructor => _withCopyConstructor;
 
   List<Dependency> get dependencies {
     final dependenciesList = <Dependency>[];
     final keys = fields.keys;
     for (var k in keys) {
-      final f = fields[k];
+      final f = fields[k]!;
       if (!f.isPrimitive) {
         dependenciesList.add(Dependency(k, f));
       }
@@ -211,7 +212,7 @@ class ClassDefinition {
 
   bool hasField(TypeDefinition otherField) {
     return fields.keys
-            .firstWhere((k) => fields[k] == otherField, orElse: () => null) !=
+            .firstWhereOrNull((k) => fields[k] == otherField) !=
         null;
   }
 
@@ -228,7 +229,7 @@ class ClassDefinition {
 
   String _generateFieldList({int indentLevel = 1, String delimiter = ';'}) {
     return fields.keys.map((key) {
-      final f = fields[key];
+      final f = fields[key]!;
       final fieldName =
           fixFieldName(key, typeDef: f, privateField: privateFields);
       final sb = StringBuffer();
@@ -245,7 +246,7 @@ class ClassDefinition {
 
   String get _gettersSetters {
     return fields.keys.map((key) {
-      final f = fields[key];
+      final f = fields[key]!;
       final publicFieldName =
           fixFieldName(key, typeDef: f, privateField: false);
       final privateFieldName =
@@ -267,7 +268,7 @@ class ClassDefinition {
     var i = 0;
     var len = fields.keys.length - 1;
     for (var key in fields.keys) {
-      final f = fields[key];
+      final f = fields[key]!;
       final publicFieldName =
           fixFieldName(key, typeDef: f, privateField: false);
       _addTypeDef(f, sb);
@@ -337,7 +338,7 @@ class ClassDefinition {
     sb.write('\t$name');
     sb.write('.fromJson(Map<String, dynamic> json) {\n');
     for (var k in fields.keys) {
-      sb.write('\t\t${fields[k].jsonParseExpression(k, privateFields)}\n');
+      sb.write('\t\t${fields[k]!.jsonParseExpression(k, privateFields)}\n');
     }
     sb.write('\t}');
     return sb.toString();
@@ -348,7 +349,7 @@ class ClassDefinition {
     sb.write('\tMap<String, dynamic> toJson() {\n\t\t'
         'final  data = <String, dynamic>{};\n');
     for (var k in fields.keys) {
-      sb.write('\t\t${fields[k].toJsonExpression(k, privateFields)}\n');
+      sb.write('\t\t${fields[k]!.toJsonExpression(k, privateFields)}\n');
     }
     sb.write('\t\treturn data;\n');
     sb.write('\t}');
@@ -361,7 +362,7 @@ class ClassDefinition {
       return 'class $name {\n$_fieldList\n\n$_defaultPrivateConstructor\n\n'
           '$_gettersSetters\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
     } else {
-      if (copyConstructor) {
+      if (copyConstructor!) {
         return 'class $name {\n$_fieldList\n\n$_defaultConstructor'
             '\n\n$_copyConstructor\n\n$_jsonParseFunc\n\n$_jsonGenFunc\n}\n';
       } else {

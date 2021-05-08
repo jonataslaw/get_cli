@@ -15,7 +15,7 @@ class UpdateCommand extends Command {
   }
 
   @override
-  String get hint => Translation(LocaleKeys.hint_update).tr;
+  String? get hint => Translation(LocaleKeys.hint_update).tr;
 
   @override
   List<String> get alias => ['upgrade'];

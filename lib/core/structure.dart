@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 
 import '../exception_handler/exceptions/cli_exception.dart';
@@ -36,8 +34,8 @@ class Structure {
     'generate_locales': replaceAsExpected(path: 'lib/generated'),
   };
 
-  static FileModel model(String name, String command, bool wrapperFolder,
-      {String on, String folderName}) {
+  static FileModel model(String? name, String command, bool wrapperFolder,
+      {String? on, String? folderName}) {
     if (on != null && on != '') {
       on = replaceAsExpected(path: on).replaceAll('\\\\', '\\');
       var current = Directory('./lib');
@@ -54,7 +52,7 @@ class Structure {
           if (element is File) {
             return false;
           }
-          return element.path.contains(on);
+          return element.path.contains(on!);
         }, orElse: () {
           throw CliException(LocaleKeys.error_folder_not_found.trArgs([on]));
         });
@@ -64,7 +62,7 @@ class Structure {
         name: name,
         path: Structure.getPathWithName(
           contains.path,
-          ReCase(name).snakeCase,
+          ReCase(name!).snakeCase,
           createWithWrappedFolder: wrapperFolder,
           folderName: folderName,
         ),
@@ -75,7 +73,7 @@ class Structure {
       name: name,
       path: Structure.getPathWithName(
         _paths[command],
-        ReCase(name).snakeCase,
+        ReCase(name!).snakeCase,
         createWithWrappedFolder: wrapperFolder,
         folderName: folderName,
       ),
@@ -83,7 +81,7 @@ class Structure {
     );
   }
 
-  static String replaceAsExpected({String path, String replaceChar}) {
+  static String replaceAsExpected({required String path, String? replaceChar}) {
     if (path.contains('\\')) {
       if (Platform.isLinux || Platform.isMacOS) {
         return path.replaceAll('\\', '/');
@@ -101,9 +99,9 @@ class Structure {
     }
   }
 
-  static String getPathWithName(String firstPath, String secondPath,
-      {bool createWithWrappedFolder = false, @required String folderName}) {
-    String betweenPaths;
+  static String? getPathWithName(String? firstPath, String secondPath,
+      {bool createWithWrappedFolder = false, required String? folderName}) {
+    late String betweenPaths;
     if (Platform.isWindows) {
       betweenPaths = '\\\\';
     } else if (Platform.isMacOS || Platform.isLinux) {
@@ -111,13 +109,13 @@ class Structure {
     }
     if (betweenPaths.isNotEmpty) {
       if (createWithWrappedFolder) {
-        return firstPath +
+        return firstPath! +
             betweenPaths +
-            folderName +
+            folderName! +
             betweenPaths +
             secondPath;
       } else {
-        return firstPath + betweenPaths + secondPath;
+        return firstPath! + betweenPaths + secondPath;
       }
     }
     return null;
@@ -125,7 +123,7 @@ class Structure {
 
   static List<String> safeSplitPath(String path) {
     return path.replaceAll('\\', '/').split('/')
-      ..removeWhere((element) => element == null || element.isEmpty);
+      ..removeWhere((element) => element.isEmpty);
   }
 
   static String pathToDirImport(String path) {

@@ -1,7 +1,7 @@
 class FileModel {
-  final String name;
-  final String path;
-  final String commandName;
+  final String? name;
+  final String? path;
+  final String? commandName;
 
   FileModel({
     this.name,

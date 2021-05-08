@@ -9,7 +9,7 @@ class HelpCommand extends Command {
   String get commandName => 'help';
 
   @override
-  String get hint => Translation(LocaleKeys.hint_help).tr;
+  String? get hint => Translation(LocaleKeys.hint_help).tr;
 
   @override
   Future<void> execute() async {

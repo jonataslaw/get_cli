@@ -9,7 +9,7 @@ import '../path/replace_to_relative.dart';
 /// Sort imports from a dart file
 String sortImports(
   String content, {
-  String packageName,
+  String? packageName,
   bool renameImport = false,
   String filePath = '',
   bool useRelative = false,
@@ -116,6 +116,6 @@ String sortImports(
 }
 
 String _replacePath(String str) {
-  var separator = PubspecUtils.separatorFileType;
+  var separator = PubspecUtils.separatorFileType!;
   return replacePathTypeSeparator(str, separator);
 }

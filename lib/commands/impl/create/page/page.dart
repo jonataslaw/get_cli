@@ -38,21 +38,22 @@ class CreatePageCommand extends Command {
   }
 
   @override
-  String get hint => LocaleKeys.hint_create_page.tr;
+  String? get hint => LocaleKeys.hint_create_page.tr;
 
   @override
   bool validate() => super.validate();
 
-  void checkForAlreadyExists(String name) {
+  void checkForAlreadyExists(String? name) {
     var _fileModel =
         Structure.model(name, 'page', true, on: onCommand, folderName: name);
-    var pathSplit = Structure.safeSplitPath(_fileModel.path);
+    var pathSplit = Structure.safeSplitPath(_fileModel.path!);
 
     pathSplit.removeLast();
     var path = pathSplit.join('/');
     path = Structure.replaceAsExpected(path: path);
     if (Directory(path).existsSync()) {
-      LogService.info(Translation(LocaleKeys.ask_existing_page.trArgs([name])));
+      LogService.info(
+          Translation(LocaleKeys.ask_existing_page.trArgs([name])).toString());
       final menu = Menu([
         LocaleKeys.options_yes.tr,
         LocaleKeys.options_no.tr,
@@ -60,17 +61,17 @@ class CreatePageCommand extends Command {
       ]);
       final result = menu.choose();
       if (result.index == 0) {
-        _writeFiles(path, name, overwrite: true);
+        _writeFiles(path, name!, overwrite: true);
       } else if (result.index == 2) {
         final dialog = CLI_Dialog();
         dialog.addQuestion(LocaleKeys.ask_new_page_name.tr, 'name');
-        name = dialog.ask()['name'] as String;
+        name = dialog.ask()['name'] as String?;
 
-        checkForAlreadyExists(name.trim().snakeCase);
+        checkForAlreadyExists(name!.trim().snakeCase);
       }
     } else {
       Directory(path).createSync(recursive: true);
-      _writeFiles(path, name, overwrite: false);
+      _writeFiles(path, name!, overwrite: false);
     }
   }
 
@@ -127,7 +128,8 @@ class CreatePageCommand extends Command {
       Structure.pathToDirImport(bindingFile.path),
       Structure.pathToDirImport(viewFile.path),
     );
-    LogService.success(LocaleKeys.sucess_page_create.trArgs([name.pascalCase]));
+    LogService.success(
+        LocaleKeys.sucess_page_create.trArgs([name.pascalCase])!);
   }
 
   @override
