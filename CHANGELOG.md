@@ -1,3 +1,7 @@
+## [1.4.6]
+
+- Fix get create project on get_server error
+
 ## [1.4.5]
 
 - Add alias for install: `get -i PACKAGE`
