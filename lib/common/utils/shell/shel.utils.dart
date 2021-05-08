@@ -6,6 +6,7 @@ import '../../../core/generator.dart';
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../logger/log_utils.dart';
+import '../logger/log_utils.dart';
 import '../pub_dev/pub_dev_api.dart';
 import '../pubspec/pubspec_lock.dart';
 
@@ -50,27 +51,29 @@ class ShellUtils {
     }
 
     LogService.info('Upgrading get_cli …');
-    var res;
-    if (Platform.script.path.contains('flutter')) {
-      if (isGit) {
-        res = await run(
-            'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
-            verbose: true);
+    List<ProcessResult> res;
+    try {
+      if (Platform.script.path.contains('flutter')) {
+        if (isGit) {
+          res = await run(
+              'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
+              verbose: true);
+        } else {
+          res = await run('flutter pub global activate get_cli', verbose: true);
+        }
       } else {
-        res = await run('flutter pub global activate get_cli', verbose: true);
+        if (isGit) {
+          res = await run(
+              'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
+              verbose: true);
+        } else {
+          res = await run('flutter pub global activate get_cli', verbose: true);
+        }
       }
-    } else {
-      if (isGit) {
-        res = await run(
-            'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
-            verbose: true);
-      } else {
-        res = await run('flutter pub global activate get_cli', verbose: true);
-      }
-    }
-    if (res.stderr.toString().isNotEmpty) {
+      return LogService.success(LocaleKeys.sucess_update_cli.tr);
+    } on Exception catch (err) {
+      LogService.info(err.toString());
       return LogService.error(LocaleKeys.error_update_cli.tr);
     }
-    LogService.success(LocaleKeys.sucess_update_cli.tr);
   }
 }
