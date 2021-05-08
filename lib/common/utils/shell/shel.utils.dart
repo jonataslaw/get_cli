@@ -6,7 +6,6 @@ import '../../../core/generator.dart';
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../logger/log_utils.dart';
-import '../logger/log_utils.dart';
 import '../pub_dev/pub_dev_api.dart';
 import '../pubspec/pubspec_lock.dart';
 
@@ -51,8 +50,9 @@ class ShellUtils {
     }
 
     LogService.info('Upgrading get_cli …');
-    List<ProcessResult> res;
+
     try {
+      List<ProcessResult> res;
       if (Platform.script.path.contains('flutter')) {
         if (isGit) {
           res = await run(
