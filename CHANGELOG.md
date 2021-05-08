@@ -1,3 +1,7 @@
+## [1.4.7]
+
+- Update dependencies
+
 ## [1.4.6]
 
 - Fix get create project on get_server error

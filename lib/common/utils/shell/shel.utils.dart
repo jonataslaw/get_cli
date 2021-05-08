@@ -52,22 +52,21 @@ class ShellUtils {
     LogService.info('Upgrading get_cli …');
 
     try {
-      List<ProcessResult> res;
       if (Platform.script.path.contains('flutter')) {
         if (isGit) {
-          res = await run(
+          await run(
               'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
               verbose: true);
         } else {
-          res = await run('flutter pub global activate get_cli', verbose: true);
+          await run('flutter pub global activate get_cli', verbose: true);
         }
       } else {
         if (isGit) {
-          res = await run(
+          await run(
               'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
               verbose: true);
         } else {
-          res = await run('flutter pub global activate get_cli', verbose: true);
+          await run('flutter pub global activate get_cli', verbose: true);
         }
       }
       return LogService.success(LocaleKeys.sucess_update_cli.tr);
