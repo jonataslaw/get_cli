@@ -38,12 +38,17 @@ void onInit() {
 $_defaultEncoder httpClient.baseUrl = 'YOUR-API-URL';
 }
 $_defaultEndpoint}
+super.onInit();
 ''';
 
   String get _defaultEndpoint => createEndpoints
       ? ''' 
-\tFuture<Response<$_namePascal>> get$_namePascal(int id) async => 
-\t\tawait get('$_nameLower/\$id');
+\tFuture<$_namePascal?> get$_namePascal(int id) async {
+\t\tfinal response = await get('$_nameLower/\$id');
+\t\treturn response.body;
+}
+
+
 \tFuture<Response<$_namePascal>> post$_namePascal($_namePascal $_nameLower) async => 
 \t\tawait post('$_nameLower', $_nameLower);
 \tFuture<Response> delete$_namePascal(int id) async => 
@@ -52,7 +57,7 @@ $_defaultEndpoint}
       : '\n';
   String get _defaultEncoder => createEndpoints
       ? '''\t\thttpClient.defaultDecoder = (map){
-if(map is Map) return $_namePascal.fromJson(map); 
+if(map is Map<String, dynamic>) return $_namePascal.fromJson(map); 
 if(map is List) return map.map((item)=> $_namePascal.fromJson(item)).toList();
 };\n'''
       : '\n';
