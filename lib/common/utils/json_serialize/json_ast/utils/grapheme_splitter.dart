@@ -21,14 +21,15 @@ const int BreakStart = 1;
 const int Break = 2;
 const int BreakLastRegional = 3;
 const int BreakPenultimateRegional = 4;
-bool isSurrogate(String str, int pos) {
+
+bool _isSurrogate(String str, int pos) {
   return 0xd800 <= str.codeUnitAt(pos) &&
       str.codeUnitAt(pos) <= 0xdbff &&
       0xdc00 <= str.codeUnitAt(pos + 1) &&
       str.codeUnitAt(pos + 1) <= 0xdfff;
 }
 
-int codePointAt(String str, [int? idx]) {
+int _codePointAt(String str, [int? idx]) {
   if (idx == null) {
     idx = 0;
   }
@@ -1543,13 +1544,13 @@ class GraphemeSplitter {
     if (index >= string.length - 1) {
       return string.length;
     }
-    final prev = getGraphemeBreakProperty(codePointAt(string, index));
+    final prev = getGraphemeBreakProperty(_codePointAt(string, index));
     final mid = <int>[];
     for (var i = index + 1; i < string.length; i++) {
-      if (isSurrogate(string, i - 1)) {
+      if (_isSurrogate(string, i - 1)) {
         continue;
       }
-      final next = getGraphemeBreakProperty(codePointAt(string, i));
+      final next = getGraphemeBreakProperty(_codePointAt(string, i));
       if (shouldBreak(prev, mid, next) != 0) {
         return i;
       }
