@@ -38,7 +38,6 @@ void onInit() {
 $_defaultEncoder httpClient.baseUrl = 'YOUR-API-URL';
 }
 $_defaultEndpoint}
-super.onInit();
 ''';
 
   String get _defaultEndpoint => createEndpoints
