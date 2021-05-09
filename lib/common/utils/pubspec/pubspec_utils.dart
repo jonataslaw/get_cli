@@ -59,7 +59,7 @@ class PubspecUtils {
 
     if (containsPackage(package)) {
       LogService.info(
-          LocaleKeys.ask_package_already_installed.trArgs([package])!,
+          LocaleKeys.ask_package_already_installed.trArgs([package]),
           false,
           false);
       final menu = Menu([
@@ -102,7 +102,7 @@ class PubspecUtils {
         LogService.success(LocaleKeys.sucess_package_removed.trArgs([package]));
       }
     } else if (logger) {
-      LogService.info(LocaleKeys.info_package_not_installed.trArgs([package])!);
+      LogService.info(LocaleKeys.info_package_not_installed.trArgs([package]));
     }
   }
 

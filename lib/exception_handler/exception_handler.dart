@@ -10,16 +10,16 @@ class ExceptionHandler {
     if (e is CliException) {
       LogService.error(e.message!);
       if (e.codeSample!.isNotEmpty) {
-        LogService.info(LocaleKeys.example.tr!, false, false);
+        LogService.info(LocaleKeys.example.tr, false, false);
         // ignore: avoid_print
         print(LogService.codeBold(e.codeSample!));
       }
     } else if (e is FileSystemException) {
       if (e.osError!.errorCode == 2) {
-        LogService.error(LocaleKeys.error_file_not_found.trArgs([e.path])!);
+        LogService.error(LocaleKeys.error_file_not_found.trArgs([e.path]));
         return;
       } else if (e.osError!.errorCode == 13) {
-        LogService.error(LocaleKeys.error_access_denied.trArgs([e.path])!);
+        LogService.error(LocaleKeys.error_access_denied.trArgs([e.path]));
         return;
       }
       _logException(e.message);

@@ -21,7 +21,7 @@ class PubDevApi {
         return version;
       } else if (value.statusCode == 404) {
         LogService.info(
-          LocaleKeys.error_package_not_found.trArgs([package])!,
+          LocaleKeys.error_package_not_found.trArgs([package]),
           false,
           false,
         );

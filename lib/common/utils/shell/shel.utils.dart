@@ -73,7 +73,7 @@ class ShellUtils {
       return LogService.success(LocaleKeys.sucess_update_cli.tr);
     } on Exception catch (err) {
       LogService.info(err.toString());
-      return LogService.error(LocaleKeys.error_update_cli.tr!);
+      return LogService.error(LocaleKeys.error_update_cli.tr);
     }
   }
 }

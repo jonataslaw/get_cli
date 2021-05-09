@@ -45,8 +45,7 @@ File writeFile(String path, String content,
           );
         } on Exception catch (_) {
           if (_file.existsSync()) {
-            LogService.info(
-                LocaleKeys.error_invalid_dart.trArgs([_file.path])!);
+            LogService.info(LocaleKeys.error_invalid_dart.trArgs([_file.path]));
           }
           rethrow;
         }

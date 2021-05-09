@@ -29,7 +29,7 @@ class GenerateLocalesCommand extends Command {
 
     if (!await Directory(inputPath).exists()) {
       LogService.error(
-          LocaleKeys.error_nonexistent_directory.trArgs([inputPath])!);
+          LocaleKeys.error_nonexistent_directory.trArgs([inputPath]));
       return;
     }
 
@@ -39,7 +39,7 @@ class GenerateLocalesCommand extends Command {
         .toList();
 
     if (files.isEmpty) {
-      LogService.info(LocaleKeys.error_empty_directory.trArgs([inputPath])!);
+      LogService.info(LocaleKeys.error_empty_directory.trArgs([inputPath]));
       return;
     }
 
@@ -50,7 +50,7 @@ class GenerateLocalesCommand extends Command {
         final localeKey = basenameWithoutExtension(file.path);
         maps[localeKey] = map as Map<String, dynamic>?;
       } on Exception catch (_) {
-        LogService.error(LocaleKeys.error_invalid_json.trArgs([file.path])!);
+        LogService.error(LocaleKeys.error_invalid_json.trArgs([file.path]));
         rethrow;
       }
     }
@@ -96,7 +96,7 @@ class GenerateLocalesCommand extends Command {
             path: '${_fileModel.path}.g.dart')
         .create();
 
-    LogService.success(LocaleKeys.sucess_locale_generate.tr!);
+    LogService.success(LocaleKeys.sucess_locale_generate.tr);
   }
 
   void _resolve(Map<String, dynamic> localization, Map<String, String?> result,

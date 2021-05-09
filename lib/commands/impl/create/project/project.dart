@@ -50,26 +50,26 @@ class CreateProjectCommand extends Command {
 
       var org = dialog.ask()['org'] as String?;
 
-      LogService.info(LocaleKeys.ask_ios_lang.tr!);
+      LogService.info(LocaleKeys.ask_ios_lang.tr);
       final iosLangMenu = Menu(['Swift', 'Objective-C']);
       final iosResult = iosLangMenu.choose();
 
       var iosLang = iosResult.index == 0 ? 'swift' : 'objc';
 
-      LogService.info(LocaleKeys.ask_android_lang.tr!);
+      LogService.info(LocaleKeys.ask_android_lang.tr);
       final androidLangMenu = Menu(['Kotlin', 'Java']);
       final androidResult = androidLangMenu.choose();
 
       var androidLang = androidResult.index == 0 ? 'kotlin' : 'java';
 
-      LogService.info(LocaleKeys.ask_use_null_safe.tr!);
+      LogService.info(LocaleKeys.ask_use_null_safe.tr);
       final nullSafeMenu =
           Menu([LocaleKeys.options_yes.tr, LocaleKeys.options_no.tr]);
       final nullSafeMenuResult = nullSafeMenu.choose();
 
       var useNullSafe = nullSafeMenuResult.index == 0;
 
-      LogService.info(LocaleKeys.ask_use_linter.tr!);
+      LogService.info(LocaleKeys.ask_use_linter.tr);
       final linterMenu = Menu(['no', 'Pedantic', 'Effective Dart']);
       final linterResult = linterMenu.choose();
 
