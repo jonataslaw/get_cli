@@ -1,3 +1,7 @@
+## [1.5.0]
+
+- Add support to null safety
+
 ## [1.4.7]
 
 - Update dependencies
