@@ -20,7 +20,7 @@ abstract class Command with ArgsMixin {
 
   //int get minParameters;
 
-  String get codeSample;
+  String? get codeSample;
   String get commandName;
 
   List<String> get alias => [];
@@ -28,7 +28,7 @@ abstract class Command with ArgsMixin {
   List<String> get acceptedFlags => [];
 
   /// hint for command line
-  String get hint;
+  String? get hint;
 
   /// validate command line arguments
   bool validate() {
@@ -41,7 +41,7 @@ abstract class Command with ArgsMixin {
           LocaleKeys.info_unnecessary_flag_prural,
           flagsNotAceppts.length,
           [flagsNotAceppts.toString()],
-        ));
+        )!);
       }
 
       if (args.length > maxParameters) {

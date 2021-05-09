@@ -13,7 +13,7 @@ import '../sorter_imports/sort.dart';
 File handleFileCreate(String name, String command, String on, bool extraFolder,
     Sample sample, String folderName,
     [String sep = '_']) {
-  folderName = folderName ?? '';
+  folderName = folderName;
   /* if (folderName.isNotEmpty) {
     extraFolder = PubspecUtils.extraFolder ?? extraFolder;
   } */
@@ -52,7 +52,7 @@ File writeFile(String path, String content,
       }
     }
     if (!skipRename && _file.path != 'pubspec.yaml') {
-      var separatorFileType = PubspecUtils.separatorFileType;
+      var separatorFileType = PubspecUtils.separatorFileType!;
       if (separatorFileType.isNotEmpty) {
         _file = _file.existsSync()
             ? _file = _file

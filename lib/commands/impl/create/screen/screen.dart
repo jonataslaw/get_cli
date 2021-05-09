@@ -30,12 +30,13 @@ class CreateScreenCommand extends Command {
 
     var _fileModel =
         Structure.model('', 'screen', true, on: onCommand, folderName: name);
-    var pathSplit = Structure.safeSplitPath(_fileModel.path);
+    var pathSplit = Structure.safeSplitPath(_fileModel.path!);
 
     var path = pathSplit.join('/');
     path = Structure.replaceAsExpected(path: path);
     if (Directory(path).existsSync()) {
-      LogService.info(Translation(LocaleKeys.ask_existing_page.trArgs([name])));
+      LogService.info(
+          Translation(LocaleKeys.ask_existing_page.trArgs([name])).toString());
       final menu = Menu([
         LocaleKeys.options_yes.tr,
         LocaleKeys.options_no.tr,
@@ -51,7 +52,7 @@ class CreateScreenCommand extends Command {
   }
 
   @override
-  String get hint => Translation(LocaleKeys.hint_create_screen).tr;
+  String? get hint => Translation(LocaleKeys.hint_create_screen).tr;
 
   @override
   bool validate() {

@@ -8,7 +8,7 @@ import '../../../core/locales.g.dart';
 import '../logger/log_utils.dart';
 
 class PubDevApi {
-  static Future<String> getLatestVersionFromPackage(String package) async {
+  static Future<String?> getLatestVersionFromPackage(String package) async {
     final languageCode = Platform.localeName.split('_')[0];
     final pubSite = languageCode == 'zh'
         ? 'https://pub.flutter-io.cn/api/packages/$package'
@@ -17,7 +17,7 @@ class PubDevApi {
     try {
       var value = await get(uri);
       if (value.statusCode == 200) {
-        final version = json.decode(value.body)['latest']['version'] as String;
+        final version = json.decode(value.body)['latest']['version'] as String?;
         return version;
       } else if (value.statusCode == 404) {
         LogService.info(

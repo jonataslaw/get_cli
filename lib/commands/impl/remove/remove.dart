@@ -21,7 +21,7 @@ class RemoveCommand extends Command {
   }
 
   @override
-  String get hint => Translation(LocaleKeys.hint_remove).tr;
+  String? get hint => Translation(LocaleKeys.hint_remove).tr;
 
   @override
   bool validate() {
@@ -34,7 +34,7 @@ class RemoveCommand extends Command {
   }
 
   @override
-  String get codeSample => LogService.code('get remove http');
+  String? get codeSample => LogService.code('get remove http');
 
   @override
   int get maxParameters => 999;

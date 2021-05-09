@@ -30,7 +30,7 @@ class SortCommand extends Command {
   }
 
   @override
-  String get hint => Translation(LocaleKeys.hint_sort).tr;
+  String? get hint => Translation(LocaleKeys.hint_sort).tr;
 
   @override
   String get codeSample => 'get sort lib/app \n'

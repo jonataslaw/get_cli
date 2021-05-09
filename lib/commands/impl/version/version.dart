@@ -19,7 +19,7 @@ class VersionCommand extends Command {
   }
 
   @override
-  String get hint => Translation(LocaleKeys.hint_version).tr;
+  String? get hint => Translation(LocaleKeys.hint_version).tr;
 
   @override
   List<String> get alias => ['-v'];

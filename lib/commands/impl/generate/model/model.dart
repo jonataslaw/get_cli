@@ -64,7 +64,7 @@ class GenerateModelCommand extends Command {
   }
 
   @override
-  String get hint => LocaleKeys.hint_generate_model.tr;
+  String? get hint => LocaleKeys.hint_generate_model.tr;
 
   @override
   bool validate() {
@@ -92,9 +92,9 @@ class GenerateModelCommand extends Command {
     }
   }
 
-  final codeSample1 = LogService.code(
+  final String? codeSample1 = LogService.code(
       'get generate model on home with assets/models/user.json');
-  final codeSample2 = LogService.code(
+  final String? codeSample2 = LogService.code(
       'get generate model on home from "https://api.github.com/users/CpdnCristiano"');
 
   @override

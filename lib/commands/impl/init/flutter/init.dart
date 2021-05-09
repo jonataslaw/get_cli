@@ -30,7 +30,7 @@ class InitCommand extends Command {
   }
 
   @override
-  String get hint => Translation(LocaleKeys.hint_init).tr;
+  String? get hint => Translation(LocaleKeys.hint_init).tr;
 
   @override
   bool validate() {
@@ -39,7 +39,7 @@ class InitCommand extends Command {
   }
 
   @override
-  String get codeSample => LogService.code('get init');
+  String? get codeSample => LogService.code('get init');
 
   @override
   int get maxParameters => 0;

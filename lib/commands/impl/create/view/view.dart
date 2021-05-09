@@ -17,7 +17,7 @@ class CreateViewCommand extends Command {
   @override
   String get commandName => 'view';
   @override
-  String get hint => Translation(LocaleKeys.hint_create_view).tr;
+  String? get hint => Translation(LocaleKeys.hint_create_view).tr;
 
   @override
   bool validate() {

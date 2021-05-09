@@ -24,10 +24,10 @@ class LogService {
   }
 
   static void success(dynamic msg) {
-    print('✓  ${_penSuccess(msg)}');
+    print('✓  ${_penSuccess(msg.toString())}');
   }
 
-  static void info(dynamic msg, [bool trim = false, bool newLines = true]) {
+  static void info(String msg, [bool trim = false, bool newLines = true]) {
     final sep = newLines ? '\n' : '';
     if (trim) msg = msg.trim();
     msg = _penInfo(msg);

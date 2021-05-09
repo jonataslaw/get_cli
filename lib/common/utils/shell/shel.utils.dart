@@ -22,7 +22,7 @@ class ShellUtils {
 
   static Future<void> flutterCreate(
     String path,
-    String org,
+    String? org,
     String iosLang,
     String androidLang,
   ) async {
@@ -45,7 +45,8 @@ class ShellUtils {
 
       if (versionInstalled == versionInPubDev) {
         return LogService.info(
-            Translation(LocaleKeys.info_cli_last_version_already_installed.tr));
+            Translation(LocaleKeys.info_cli_last_version_already_installed.tr)
+                .toString());
       }
     }
 

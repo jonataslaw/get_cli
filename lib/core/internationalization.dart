@@ -11,36 +11,36 @@ extension Trans on String {
     localeName = localeName.replaceAll('-', '_');
     // Returns the key if locale is null.
 
-    if (localeName == null) return this;
+    // if (localeName == null) return this;
 
     // Checks whether the language code and country code are present, and
     // whether the key is also present.
     if (translations.containsKey(localeName) &&
-        translations[localeName].containsKey(this)) {
-      return translations[localeName][this];
+        translations[localeName]!.containsKey(this)) {
+      return translations[localeName]![this]!;
 
       // Checks if there is a callback language in the absence of the specific
       // country, and if it contains that key.
     } else if (translations.containsKey(localeName.languageCode) &&
-        translations[localeName.languageCode].containsKey(this)) {
-      return translations[localeName.languageCode][this];
+        translations[localeName.languageCode]!.containsKey(this)) {
+      return translations[localeName.languageCode]![this]!;
       // If there is no corresponding language or corresponding key, return
       // the key.
     } else {
       final key = 'en';
       if (translations.containsKey(key) &&
-          translations[key].containsKey(this)) {
-        return translations[key][this];
+          translations[key]!.containsKey(this)) {
+        return translations[key]![this]!;
       }
       if (translations.containsKey(key.languageCode) &&
-          translations[key.languageCode].containsKey(this)) {
-        return translations[key.languageCode][this];
+          translations[key.languageCode]!.containsKey(this)) {
+        return translations[key.languageCode]![this]!;
       }
       return this;
     }
   }
 
-  String trArgs([List<String> args = const []]) {
+  String trArgs([List<String?> args = const []]) {
     var key = tr;
     if (args.isNotEmpty) {
       for (final arg in args) {
@@ -50,13 +50,13 @@ extension Trans on String {
     return key;
   }
 
-  String trPlural([String plural, int i = 0]) {
-    return i > 1 ? plural.tr : tr;
+  String? trPlural([String? plural, int i = 0]) {
+    return i > 1 ? plural?.tr : tr;
   }
 
-  String trArgsPlural(
-      [String plural, int i = 0, List<String> args = const []]) {
-    return i > 1 ? plural.trArgs(args) : trArgs(args);
+  String? trArgsPlural(
+      [String? plural, int i = 0, List<String> args = const []]) {
+    return i > 1 ? plural?.trArgs(args) : trArgs(args);
   }
 }
 
@@ -73,5 +73,5 @@ class Translation {
 
   String get tr => _key.tr;
 
-  String trArgs([List<String> args]) => _key.trArgs(args);
+  String? trArgs([List<String>? args]) => _key.trArgs(args ?? []);
 }

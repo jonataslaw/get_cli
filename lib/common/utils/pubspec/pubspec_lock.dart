@@ -9,7 +9,7 @@ import '../../../functions/version/check_dev_version.dart';
 import '../logger/log_utils.dart';
 
 class PubspecLock {
-  static Future<String> getVersionCli({bool disableLog = false}) async {
+  static Future<String?> getVersionCli({bool disableLog = false}) async {
     try {
       var scriptFile = Platform.script.toFilePath();
       var pathToPubLock = join(dirname(scriptFile), '../pubspec.lock');

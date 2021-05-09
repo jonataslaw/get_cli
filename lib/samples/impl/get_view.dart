@@ -3,9 +3,9 @@ import '../interface/sample_interface.dart';
 
 /// [Sample] file from Module_View file creation.
 class GetViewSample extends Sample {
-  final String _controllerDir;
+  final String? _controllerDir;
   final String _viewName;
-  final String _controller;
+  final String? _controller;
   final bool _isServer;
 
   GetViewSample(String path, this._viewName, this._controller,

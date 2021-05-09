@@ -25,16 +25,16 @@ class CreateProjectCommand extends Command {
       'Get Server',
     ]);
     final result = menu.choose();
-    var nameProject = name;
+    String? nameProject = name;
     if (name == '.') {
       final dialog = CLI_Dialog(questions: [
         [LocaleKeys.ask_name_to_project.tr, 'name']
       ]);
-      nameProject = dialog.ask()['name'] as String;
+      nameProject = dialog.ask()['name'] as String?;
     }
 
     var path = Structure.replaceAsExpected(
-        path: '${Directory.current.path}/${nameProject.snakeCase}');
+        path: '${Directory.current.path}/${nameProject!.snakeCase}');
     await Directory(path).create(recursive: true);
 
     Directory.current = path;
@@ -48,7 +48,7 @@ class CreateProjectCommand extends Command {
         ]
       ]);
 
-      var org = dialog.ask()['org'] as String;
+      var org = dialog.ask()['org'] as String?;
 
       LogService.info(LocaleKeys.ask_ios_lang.tr);
       final iosLangMenu = Menu(['Swift', 'Objective-C']);
@@ -104,7 +104,7 @@ class CreateProjectCommand extends Command {
   }
 
   @override
-  String get hint => LocaleKeys.hint_create_project.tr;
+  String? get hint => LocaleKeys.hint_create_project.tr;
 
   @override
   bool validate() {

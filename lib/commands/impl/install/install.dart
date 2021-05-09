@@ -37,7 +37,7 @@ class InstallCommand extends Command {
   }
 
   @override
-  String get hint => Translation(LocaleKeys.hint_install).tr;
+  String? get hint => Translation(LocaleKeys.hint_install).tr;
 
   @override
   bool validate() {
@@ -51,8 +51,8 @@ class InstallCommand extends Command {
     return true;
   }
 
-  final codeSample1 = LogService.code('get install get:3.4.6');
-  final codeSample2 = LogService.code('get install get');
+  final String? codeSample1 = LogService.code('get install get:3.4.6');
+  final String? codeSample2 = LogService.code('get install get');
 
   @override
   String get codeSample => '''

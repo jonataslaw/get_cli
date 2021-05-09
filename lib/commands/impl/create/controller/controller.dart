@@ -26,7 +26,7 @@ import '../../../interface/command.dart';
 ///```
 class CreateControllerCommand extends Command {
   @override
-  String get hint => LocaleKeys.hint_create_controller.tr;
+  String? get hint => LocaleKeys.hint_create_controller.tr;
 
   @override
   String get codeSample => 'get create controller:name [OPTINAL PARAMETERS] \n'

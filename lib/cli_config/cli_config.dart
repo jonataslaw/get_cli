@@ -40,7 +40,7 @@ class CliConfig {
     var lastUpdateIndex = lines.indexWhere(
       (element) => element.startsWith('last_update_check:'),
     );
-    if (lines == null || lines.isEmpty || lastUpdateIndex == -1) {
+    if (lines.isEmpty || lastUpdateIndex == -1) {
       return false;
     }
     var dateLatsUpdate = lines[lastUpdateIndex].split(':').last.trim();

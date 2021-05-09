@@ -1,7 +1,7 @@
 import '../../interface/sample_interface.dart';
 
 class GetXMainSample extends Sample {
-  final bool isServer;
+  final bool? isServer;
   GetXMainSample({this.isServer}) : super('lib/main.dart', overwrite: true);
 
   String get _flutterMain => '''import 'package:flutter/material.dart';
@@ -31,5 +31,5 @@ void main() {
   ''';
 
   @override
-  String get content => isServer ? _serverMain : _flutterMain;
+  String get content => isServer! ? _serverMain : _flutterMain;
 }
