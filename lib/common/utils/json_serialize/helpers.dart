@@ -221,7 +221,8 @@ String getTypeName(dynamic obj) {
   } else if (obj is bool) {
     return 'bool';
   } else if (obj == null) {
-    return 'Null';
+    // return 'Null';
+    return 'dynamic';
   } else if (obj is List) {
     return 'List';
   } else {
