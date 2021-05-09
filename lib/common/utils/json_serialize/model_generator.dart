@@ -2,9 +2,9 @@ import 'dart:collection';
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dart_style/dart_style.dart';
-import 'package:json_ast/json_ast.dart' show parse, Settings, Node;
 
 import 'helpers.dart';
+import 'json_ast/json_ast.dart' show parse, Settings, Node;
 import 'sintaxe.dart';
 
 class DartCode extends WithWarning<String> {

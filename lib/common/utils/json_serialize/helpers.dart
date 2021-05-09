@@ -2,9 +2,10 @@ import 'dart:convert' as convert;
 import 'dart:io';
 import 'dart:math';
 
-import 'package:json_ast/json_ast.dart';
+import 'package:collection/collection.dart';
 
 import '../logger/log_utils.dart';
+import 'json_ast/json_ast.dart';
 import 'sintaxe.dart';
 
 const Map<String, bool> PRIMITIVE_TYPES = {
@@ -233,10 +234,8 @@ Node? navigateNode(Node? astNode, String path) {
   Node? node;
   if (astNode is ObjectNode) {
     final objectNode = astNode;
-    final propertyNode = objectNode.children.firstWhere((final prop) {
-      return prop.key.value == path;
-    }, orElse: () {
-      return null;
+    final propertyNode = objectNode.children.firstWhereOrNull((final prop) {
+      return prop.key!.value == path;
     });
     if (propertyNode != null) {
       node = propertyNode.value;
@@ -257,12 +256,12 @@ final _pattern = RegExp(r'([0-9]+)\.{0,1}([0-9]*)e(([-0-9]+))');
 bool isASTLiteralDouble(Node? astNode) {
   if (astNode != null && astNode is LiteralNode) {
     final literalNode = astNode;
-    final containsPoint = literalNode.raw.contains('.');
-    final containsExponent = literalNode.raw.contains('e');
+    final containsPoint = literalNode.raw!.contains('.');
+    final containsExponent = literalNode.raw!.contains('e');
     if (containsPoint || containsExponent) {
       var isDouble = containsPoint;
       if (containsExponent) {
-        final matches = _pattern.firstMatch(literalNode.raw);
+        final matches = _pattern.firstMatch(literalNode.raw!);
         if (matches != null) {
           final integer = matches[1]!;
           final comma = matches[2]!;
@@ -280,15 +279,13 @@ bool _isDoubleWithExponential(String integer, String comma, String exponent) {
   final integerNumber = int.tryParse(integer) ?? 0;
   final exponentNumber = int.tryParse(exponent) ?? 0;
   final commaNumber = int.tryParse(comma) ?? 0;
-  if (exponentNumber != null) {
-    if (exponentNumber == 0) {
-      return commaNumber > 0;
-    }
-    if (exponentNumber > 0) {
-      return exponentNumber < comma.length && commaNumber > 0;
-    }
-    return commaNumber > 0 ||
-        ((integerNumber.toDouble() * pow(10, exponentNumber)).remainder(1) > 0);
+
+  if (exponentNumber == 0) {
+    return commaNumber > 0;
   }
-  return false;
+  if (exponentNumber > 0) {
+    return exponentNumber < comma.length && commaNumber > 0;
+  }
+  return commaNumber > 0 ||
+      ((integerNumber.toDouble() * pow(10, exponentNumber)).remainder(1) > 0);
 }

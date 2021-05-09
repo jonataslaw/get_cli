@@ -33,8 +33,8 @@ void checkForUpdate() async {
             final String? codeSample = LogService.code('get update');
             LogService.info(
                 '${LocaleKeys.info_update_available2.trArgs([
-                  versionInPubDev
-                ])}${' $codeSample'}',
+                      versionInPubDev
+                    ])}${' $codeSample'}',
                 false,
                 true);
           }

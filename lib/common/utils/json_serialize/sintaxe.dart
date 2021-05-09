@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart' show IterableExtension;
-import 'package:json_ast/json_ast.dart' show Node;
 
 import 'helpers.dart';
+import 'json_ast/json_ast.dart' show Node;
 
 // ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
@@ -211,9 +211,7 @@ class ClassDefinition {
   }
 
   bool hasField(TypeDefinition otherField) {
-    return fields.keys
-            .firstWhereOrNull((k) => fields[k] == otherField) !=
-        null;
+    return fields.keys.firstWhereOrNull((k) => fields[k] == otherField) != null;
   }
 
   void addField(String name, TypeDefinition typeDef) {
