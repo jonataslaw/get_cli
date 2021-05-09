@@ -76,7 +76,7 @@ class TypeDefinition {
       _isPrimitive = isPrimitiveType('$name<$subtype>');
     }
     isAmbiguous ??= false;
-    if (PubspecUtils.nullSafeSupport && name != dynamic) {
+    if (PubspecUtils.nullSafeSupport && name != 'dynamic') {
       name = '$name?';
     }
   }
