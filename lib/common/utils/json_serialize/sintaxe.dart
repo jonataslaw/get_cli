@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart' show IterableExtension;
 
+import '../pubspec/pubspec_utils.dart';
 import 'helpers.dart';
 import 'json_ast/json_ast.dart' show Node;
 
@@ -75,6 +76,9 @@ class TypeDefinition {
       _isPrimitive = isPrimitiveType('$name<$subtype>');
     }
     isAmbiguous ??= false;
+    if (PubspecUtils.nullSafeSupport && name != dynamic) {
+      name = '$name?';
+    }
   }
 
   @override
