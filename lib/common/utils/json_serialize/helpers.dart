@@ -20,6 +20,7 @@ const Map<String, bool> PRIMITIVE_TYPES = {
   'List<String>': true,
   'List<bool>': true,
   'Null': true,
+  'dynamic': true,
 };
 
 enum ListType { Object, String, Double, Int, Null }
