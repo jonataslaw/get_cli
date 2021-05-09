@@ -41,8 +41,8 @@ Future<void> createView(String name,
   var sample = GetViewSample(
     '',
     '${name.pascalCase}View',
-    null,
-    null,
+    '',
+    '',
     PubspecUtils.isServerProject,
   );
   if (withArgument.isNotEmpty) {
