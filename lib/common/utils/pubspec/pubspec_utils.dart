@@ -127,7 +127,11 @@ class PubspecUtils {
     if (containsPackage(package)) {
       var version = pubSpec.allDependencies[package]!;
       try {
-        return v.Version.parse(version.toJson() as String?);
+        final json = version.toJson();
+        if (json is String) {
+          return v.Version.parse(json);
+        }
+        return null;
       } on FormatException catch (_) {
         return null;
       } on Exception catch (_) {
