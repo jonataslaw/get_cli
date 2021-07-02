@@ -77,7 +77,11 @@ class TypeDefinition {
     }
     isAmbiguous ??= false;
     if (PubspecUtils.nullSafeSupport && name != 'dynamic') {
-      name = '$name?';
+      if (subtype == null) {
+        name = '$name?';
+      } else {
+        name = '$name';
+      }
     }
   }
 
@@ -226,6 +230,9 @@ class ClassDefinition {
     sb.write('${typeDef.name}');
     if (typeDef.subtype != null) {
       sb.write('<${typeDef.subtype}>');
+      if (PubspecUtils.nullSafeSupport && typeDef.name != 'dynamic') {
+        sb.write('?');
+      }
     }
   }
 
