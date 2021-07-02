@@ -70,7 +70,12 @@ class CreateProjectCommand extends Command {
       var useNullSafe = nullSafeMenuResult.index == 0;
 
       LogService.info(LocaleKeys.ask_use_linter.tr);
-      final linterMenu = Menu(['no', 'Pedantic', 'Effective Dart']);
+      final linterMenu = Menu([
+        'no',
+        'Pedantic [Deprecated]',
+        'Effective Dart [Deprecated]',
+        'Dart Recommended',
+      ]);
       final linterResult = linterMenu.choose();
 
       await ShellUtils.flutterCreate(path, org, iosLang, androidLang);
@@ -93,6 +98,13 @@ class CreateProjectCommand extends Command {
               isDev: true, runPubGet: false);
           AnalysisOptionsSample(
               include: 'include: package:effective_dart/analysis_options.yaml');
+          break;
+        case 3:
+          await PubspecUtils.addDependencies('lints',
+              isDev: true, runPubGet: true);
+          AnalysisOptionsSample(
+                  include: 'include: package:lints/recommended.yaml')
+              .create();
           break;
         default:
           AnalysisOptionsSample().create();
