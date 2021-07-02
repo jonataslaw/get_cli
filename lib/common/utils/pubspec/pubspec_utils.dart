@@ -76,7 +76,11 @@ class PubspecUtils {
         ? await PubDevApi.getLatestVersionFromPackage(package)
         : '^$version';
     if (version == null) return false;
-    pubSpec.dependencies[package] = HostedReference.fromJson(version);
+    if (isDev) {
+      pubSpec.devDependencies[package] = HostedReference.fromJson(version);
+    } else {
+      pubSpec.dependencies[package] = HostedReference.fromJson(version);
+    }
 
     _savePub(pubSpec);
     if (runPubGet) await ShellUtils.pubGet();
