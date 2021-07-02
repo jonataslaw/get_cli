@@ -100,9 +100,11 @@ class CreateProjectCommand extends Command {
               include: 'include: package:effective_dart/analysis_options.yaml');
           break;
         case 3:
-          PubspecUtils.addDependencies('lints', isDev: true, runPubGet: true);
+          await PubspecUtils.addDependencies('lints',
+              isDev: true, runPubGet: true);
           AnalysisOptionsSample(
-              include: 'include: package:lints/recommended.yaml');
+                  include: 'include: package:lints/recommended.yaml')
+              .create();
           break;
         default:
           AnalysisOptionsSample().create();
