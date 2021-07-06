@@ -5,6 +5,7 @@
 class AppTranslation {
   static Map<String, Map<String, String>> translations = {
     'tr_TR': Locales.tr_TR,
+    'de': Locales.de,
     'en': Locales.en,
     'pt_BR': Locales.pt_BR,
   };
@@ -164,6 +165,98 @@ class Locales {
         'Dosya: %s başarıyla oluşturuldu. Oluşturulduğu dizin: %s',
     'sucess_route_created': '%s rotası başarıyla oluşturuldu.',
   };
+  static const de = {
+    'ask_existing_page':
+        'Die Seite [%s] existiert bereits, möchten Sie die Seite überschreiben?',
+    'ask_name_to_project': 'Wie lautet der Name des Projekts?',
+    'ask_company_domain': 'Wie lautet die Domäne Ihres Unternehmens?',
+    'ask_model_name':
+        'Der Modellname konnte nicht automatisch gesetzt werden, welchen Namen möchten Sie verwenden?',
+    'ask_package_already_installed':
+        'Paket: %s bereits installiert, möchten Sie es aktualisieren?',
+    'ask_lib_not_empty':
+        'Der lib-Ordner ist nicht leer. Sind Sie sicher, dass Sie Ihre Anwendung überschreiben möchten? \n WARNUNG: Diese Aktion ist nicht umkehrbar',
+    'ask_ios_lang': 'Welche Sprache möchten Sie auf iOS verwenden?',
+    'ask_android_lang': 'Welche Sprache möchten Sie auf Android verwenden?',
+    'ask_use_null_safe': 'Möchten Sie Null-Safe verwenden?',
+    'ask_use_linter': 'Wollen Sie einen Linter verwenden?',
+    'ask_new_page_name': 'Wie soll der Name der neuen Seite lauten?',
+    'error_failed_to_connect': 'Verbindung mit %s fehlgeschlagen',
+    'error_no_valid_file_or_url': '%s ist keine Datei oder gültige Url',
+    'error_unnecessary_parameter': 'der Parameter %s ist nicht notwendig',
+    'error_unnecessary_parameter_plural':
+        'die Parameter %s ist nicht notwendig',
+    'error_nonexistent_directory': 'Das Verzeichnis %s existiert nicht.',
+    'error_empty_directory': 'Das Verzeichnis %s ist leer',
+    'error_invalid_json': '%s ist keine gültige JSON-Datei',
+    'error_special_characters_in_key':
+        'Sonderzeichen sind in der Key nicht erlaubt. \n Key: %s',
+    'error_required_path':
+        'Wird benötigt, um den Datei- oder Verzeichnispfad zu übergeben',
+    'error_invalid_dart': 'Die %s ist keine gültige Dart-Datei',
+    'error_invalid_file_or_directory':
+        'Die %s ist keine gültige Datei oder Verzeichnis',
+    'error_package_not_found': 'Paket: %s wurde nicht in pub.dev gefunden',
+    'error_cli_version_not_found':
+        'die von Ihnen installierte Version wurde nicht gefunden.',
+    'error_update_cli':
+        'Es gab einen Fehler bei der Aktualisierung von get_cli',
+    'error_folder_not_found': 'Ordner %s nicht gefunden',
+    'error_file_not_found': 'Datei nicht gefunden in %s',
+    'error_access_denied': 'Zugriff auf %s verweigert',
+    'error_unexpected': 'Unerwarteter Fehler ist aufgetreten:',
+    'error_no_package_to_remove':
+        'Geben Sie den Namen des Pakets ein, das Sie entfernen möchten',
+    'example': 'Beispiel:',
+    'warning': 'Warnung:',
+    'hint_create_controller': 'Controller generieren',
+    'hint_create_page': 'Verwendung zum Erzeugen von Pages',
+    'hint_create_project': 'Zum Erzeugen eines neuen Projekts verwenden',
+    'hint_create_provider': 'Einen neuen Provider erstellen',
+    'hint_create_screen': 'Neues Screen generieren',
+    'hint_create_view': 'Neues view generieren',
+    'hint_generate_locales': 'Übersetzungsdatei aus JSON-Dateien generieren',
+    'hint_generate_model': 'Klassenmodell aus JSON generieren',
+    'hint_help': 'Diese Hilfe anzeigen',
+    'hint_init':
+        'die gewählte Struktur an einem bestehenden Projekt zu erzeugen:',
+    'hint_install':
+        'Dient zur Installation eines Pakets in Ihrem Projekt (dependencies):',
+    'hint_remove':
+        'Verwenden Sie diese Option, um ein Paket in Ihrem Projekt zu entfernen (dependencies):',
+    'hint_sort': 'Importierte Dart-Dateien sortieren und formatieren',
+    'hint_update': 'So aktualisieren Sie GET_CLI',
+    'hint_version': 'Zeigt die aktuelle CLI-Version an\'',
+    'info_unnecessary_flag': 'Das %s ist nicht notwendig',
+    'info_unnecessary_flag_prural': 'Die %s ist nicht notwendig',
+    'info_package_not_installed':
+        'Paket: %s ist in dieser Anwendung nicht installiert',
+    'info_cli_last_version_already_installed':
+        'Neueste Version von get_cli bereits installiert',
+    'info_no_file_overwritten': 'Es wurden keine Dateien überschrieben',
+    'info_update_available':
+        'Es ist ein Update verfügbar! Aktuell installierte Version: %s',
+    'info_update_available2': 'Neue Version verfügbar: %s Bitte, ausführen:',
+    'options_yes': 'Ja!',
+    'options_no': 'Nein',
+    'options_rename': 'Ich möchte es umbenennen',
+    'optional_parameters': 'Optionale Parameter: %s',
+    'sucess_page_create': '%s-Page erfolgreich erstellt.',
+    'sucess_locale_generate': 'Sprachumgebungsdateien erfolgreich generiert.',
+    'sucess_getx_pattern_generated':
+        'GetX Pattern-Struktur erfolgreich erzeugt.',
+    'sucess_clean_Pattern_generated':
+        'CLEAN Pattern-Struktur erfolgreich erzeugt.',
+    'sucess_file_formatted': ' \'%s\' wurde erfolgreich formatiert',
+    'sucess_package_removed': 'Paket: %s entfernt!',
+    'sucess_package_installed': '\'Paket: %s installiert!',
+    'sucess_update_cli': 'Upgrade abgeschlossen',
+    'sucess_add_controller_in_bindings':
+        'Das %s wurde dem Binding unter Pfad: %s\' hinzugefügt.',
+    'sucess_navigation_added': '%s Navigation erfolgreich hinzugefügt.',
+    'sucess_file_created': 'Datei: %s erfolgreich erstellt unter Pfad: %s',
+    'sucess_route_created': '%s-Route erfolgreich erstellt.',
+  };
   static const en = {
     'ask_existing_page':
         'The page [%s] already exists, do you want to overwrite it?',
@@ -245,7 +338,7 @@ class Locales {
     'sucess_package_installed': '\'Package: %s installed!',
     'sucess_update_cli': 'Upgrade complete',
     'sucess_add_controller_in_bindings':
-        'The %s has been added to binging at path: %s\'',
+        'The %s has been added to binding at path: %s\'',
     'sucess_navigation_added': '%s navigation added successfully.',
     'sucess_file_created': 'File: %s created successfully at path: %s',
     'sucess_route_created': '%s route created successfully.',
