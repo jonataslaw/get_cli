@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
 import 'package:cli_menu/cli_menu.dart';
+import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
 import '../../../../common/utils/logger/log_utils.dart';
@@ -34,7 +35,7 @@ class CreateProjectCommand extends Command {
     }
 
     var path = Structure.replaceAsExpected(
-        path: '${Directory.current.path}/${nameProject!.snakeCase}');
+        path: Directory.current.path + p.separator + nameProject!.snakeCase);
     await Directory(path).create(recursive: true);
 
     Directory.current = path;
