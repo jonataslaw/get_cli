@@ -1,13 +1,12 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
 import '../exception_handler/exceptions/cli_exception.dart';
 import '../models/file_model.dart';
 import 'internationalization.dart';
 import 'locales.g.dart';
-
-//import 'package:path/path.dart' as p;
 
 class Structure {
   static final Map<String, String> _paths = {
@@ -46,7 +45,7 @@ class Structure {
           return false;
         }
 
-        return '${element.path}/'.contains('$on/');
+        return '${element.path}${p.separator}'.contains('$on${p.separator}');
       }, orElse: () {
         return list.firstWhere((element) {
           //Fix erro ao encontrar arquivo com nome
