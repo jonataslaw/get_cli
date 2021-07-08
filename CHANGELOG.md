@@ -1,3 +1,11 @@
+## [1.6.0]
+- Fix cast error on local dependencies (@ahmednfwela)
+- Fix null safety model creator (@prabhah)
+- Fix windows path separator error (@CpdnCristiano)
+- Added new official linter (@Illusion47586)
+- Added german language(@ngjoni)
+
+
 ## [1.5.0]
 
 - Add support to null safety

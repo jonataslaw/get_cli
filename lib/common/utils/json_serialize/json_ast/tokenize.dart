@@ -275,7 +275,7 @@ class LiteralNode extends Node {
   int get hashCode => super.hashCode;
 
   LiteralNode copyWith({
-    dynamic? value,
+    dynamic value,
     String? raw,
     String? type,
     Location? loc,

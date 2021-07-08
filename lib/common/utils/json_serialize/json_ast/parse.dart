@@ -379,10 +379,10 @@ ValueIndex<LiteralNode>? parseLiteral(
   return ValueIndex(literal, index + 1);
 }
 
-typedef _parserFun<T> = ValueIndex<T>? Function(
+typedef ParserFun<T> = ValueIndex<T>? Function(
     String input, List<Token> tokenList, int index, Settings settings);
 
-List<_parserFun> _parsersList = [parseLiteral, parseObject, parseArray];
+List<ParserFun> _parsersList = [parseLiteral, parseObject, parseArray];
 
 ValueIndex<T>? _findValueIndex<T>(
     String input, List<Token> tokenList, int index, Settings settings) {
