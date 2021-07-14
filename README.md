@@ -49,7 +49,7 @@ get generate locales assets/locales
 // Note: 'assets/models/user.json' path of your template file in json format
 // Note: on  == folder output file
 // Getx will automatically search for the home folder
-// and insert your view there.
+// and insert your class model there.
 get generate model on home with assets/models/user.json
 
 //to generate the model without the provider
