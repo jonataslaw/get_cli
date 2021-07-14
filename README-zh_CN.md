@@ -1,6 +1,6 @@
 ###### 文档支持语言
 
-| [pt_BR](README-pt_BR.md) | [en_US](README.md) | zh_CN |
+| [pt_BR](README-pt_BR.md) | [en_US](README.md) | zh_CN - 本文件 |
 |-------|-------|-------|
 
 GetX™ 框架的官方 CLI。
