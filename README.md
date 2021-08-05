@@ -24,7 +24,14 @@ get init
 // To create a page:
 // (Pages have controller, view, and binding)
 // Note: you can use any name, ex: `get create page:login`
+// Nota: use this option if the chosen structure was Getx_pattern
 get create page:home
+
+// To create a screen
+// (Screens have controller, view, and binding)
+// Note: you can use any name, ex: `get screen page:login`
+// Nota: use this option if the chosen structure was CLEAN (by Arktekko)
+get create screen:home 
 
 // To create a new controller in a specific folder:
 // Note: you don't need to reference the folder,
