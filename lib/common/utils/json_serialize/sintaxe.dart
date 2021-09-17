@@ -128,8 +128,8 @@ class TypeDefinition {
     } else if (name == 'List') {
       // list of class
       return "if (json['$key'] != null) {\n\t\t\t$fieldKey = <$subtype>[];"
-          "\n\t\t\tjson['$key'].forEach((v) { "
-          '$fieldKey.add($subtype.fromJson(v)); });\n\t\t}';
+          "\n\t\t\tjson['$key']?.forEach((v) { "
+          '$fieldKey!.add($subtype.fromJson(v)); });\n\t\t}';
     } else {
       // class
       return "$fieldKey = json['$key'] != null ?"
