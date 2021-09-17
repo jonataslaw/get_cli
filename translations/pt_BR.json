@@ -51,7 +51,7 @@
   },
   "info": {
     "unnecessary_flag": "A flag: %s não é necessária",
-    "unnecessary_flag_prural": "As flags: %s não são necessárias",
+    "unnecessary_flag_plural": "As flags: %s não são necessárias",
     "package_not_installed": "Pacote: %s não está instalado neste aplicativo",
     "cli_last_version_already_installed": "Versão mais recente de get_cli já instalada",
     "no_file_overwritten": "Nenhum arquivo foi sobrescrito",
@@ -62,7 +62,6 @@
     "yes": "Sim!",
     "no": "Não!",
     "rename": "Quero renomear!"
-
   },
   "optional_parameters": "Parâmetros opcionais: %s",
   "sucess": {

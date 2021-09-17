@@ -29,7 +29,7 @@ class CreateControllerCommand extends Command {
   String? get hint => LocaleKeys.hint_create_controller.tr;
 
   @override
-  String get codeSample => 'get create controller:name [OPTINAL PARAMETERS] \n'
+  String get codeSample => 'get create controller:name [OPTIONAL PARAMETERS] \n'
       '${LocaleKeys.optional_parameters.trArgs(['[on, with]'])} ';
   @override
   bool validate() {

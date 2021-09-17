@@ -10,7 +10,7 @@ import '../../core/locales.g.dart';
 import '../../samples/impl/get_route.dart';
 import '../create/create_single_file.dart';
 import '../find_file/find_file_by_name.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
+import '../formatter_dart_file/formatter_dart_file.dart';
 import 'get_app_pages.dart';
 import 'get_support_children.dart';
 
@@ -69,7 +69,7 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
     lines.insert(indexEndRoutes, line);
     addAppPage(nameRoute, bindingDir, viewDir);
     LogService.success(
-        Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
+        Translation(LocaleKeys.success_route_created).trArgs([nameRoute]));
   } else {
     LogService.error('${LocaleKeys.warning.tr}, route not created by conflict');
   }

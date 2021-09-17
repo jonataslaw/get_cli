@@ -3,7 +3,7 @@ import 'dart:convert';
 import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../../extensions.dart';
 import '../create/create_single_file.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
+import '../formatter_dart_file/formatter_dart_file.dart';
 import '../path/replace_to_relative.dart';
 
 /// Sort imports from a dart file
@@ -20,7 +20,7 @@ String sortImports(
 
   var contentLines = <String>[];
 
-  var librarys = <String>[];
+  var libraries = <String>[];
   var dartImports = <String>[];
   var flutterImports = <String>[];
   var packageImports = <String>[];
@@ -53,7 +53,7 @@ String sortImports(
     } else if (lines[i].startsWith('library ') &&
         lines[i].endsWith(';') &&
         !stringLine) {
-      librarys.add(lines[i]);
+      libraries.add(lines[i]);
     } else {
       var containsThreeQuotes = lines[i].contains("'''");
       if (containsThreeQuotes) {
@@ -90,12 +90,12 @@ String sortImports(
   projectImports.sort();
   projectRelativeImports.sort();
   exports.sort();
-  librarys.sort();
+  libraries.sort();
 
   var sortedLines = <String>[];
 
   sortedLines.addAll([
-    ...librarys,
+    ...libraries,
     '',
     ...dartImports,
     '',

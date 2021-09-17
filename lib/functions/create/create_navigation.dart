@@ -8,7 +8,7 @@ import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
 import '../../core/structure.dart';
 import '../../samples/impl/arctekko/arc_navigation.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
+import '../formatter_dart_file/formatter_dart_file.dart';
 import 'create_single_file.dart';
 
 void createNavigation() {
@@ -50,5 +50,5 @@ void addNavigation(String name) {
       overwrite: true, logger: false);
 
   LogService.success(Translation(
-      LocaleKeys.sucess_navigation_added.trArgs([name.pascalCase])));
+      LocaleKeys.success_navigation_added.trArgs([name.pascalCase])));
 }

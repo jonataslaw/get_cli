@@ -94,7 +94,7 @@ mixin ArgsMixin {
     return '';
   }
 
-  /// return [true] if conatains flags
+  /// return [true] if contains flags
   ///
   /// example run
   /// `get sort . --skipRename`

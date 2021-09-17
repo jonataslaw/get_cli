@@ -58,7 +58,7 @@
     },
     "info": {
         "unnecessary_flag": "Das %s ist nicht notwendig",
-        "unnecessary_flag_prural": "Die %s ist nicht notwendig",
+        "unnecessary_flag_plural": "Die %s ist nicht notwendig",
         "package_not_installed": "Paket: %s ist in dieser Anwendung nicht installiert",
         "cli_last_version_already_installed": "Neueste Version von get_cli bereits installiert",
         "no_file_overwritten": "Es wurden keine Dateien überschrieben",

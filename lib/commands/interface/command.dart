@@ -34,13 +34,13 @@ abstract class Command with ArgsMixin {
   bool validate() {
     if (GetCli.arguments.contains(commandName) ||
         GetCli.arguments.contains('$commandName:$name')) {
-      var flagsNotAceppts = flags;
-      flagsNotAceppts.removeWhere((element) => acceptedFlags.contains(element));
-      if (flagsNotAceppts.isNotEmpty) {
+      var flagsNotAccepts = flags;
+      flagsNotAccepts.removeWhere((element) => acceptedFlags.contains(element));
+      if (flagsNotAccepts.isNotEmpty) {
         LogService.info(LocaleKeys.info_unnecessary_flag.trArgsPlural(
-          LocaleKeys.info_unnecessary_flag_prural,
-          flagsNotAceppts.length,
-          [flagsNotAceppts.toString()],
+          LocaleKeys.info_unnecessary_flag_plural,
+          flagsNotAccepts.length,
+          [flagsNotAccepts.toString()],
         )!);
       }
 
@@ -61,6 +61,6 @@ abstract class Command with ArgsMixin {
   /// execute command
   Future<void> execute();
 
-  /// childrens command
-  List<Command> get childrens => [];
+  /// children command
+  List<Command> get children => [];
 }

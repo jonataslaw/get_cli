@@ -30,7 +30,7 @@ $commandsHelp
     var result = '';
     for (var command in commands) {
       result += '\n ${'  ' * index} ${command.commandName}:  ${command.hint}';
-      result += _getCommandsHelp(command.childrens, index + 1);
+      result += _getCommandsHelp(command.children, index + 1);
     }
     return result;
   }

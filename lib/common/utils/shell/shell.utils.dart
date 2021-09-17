@@ -72,7 +72,7 @@ class ShellUtils {
           await run('flutter pub global activate get_cli', verbose: true);
         }
       }
-      return LogService.success(LocaleKeys.sucess_update_cli.tr);
+      return LogService.success(LocaleKeys.success_update_cli.tr);
     } on Exception catch (err) {
       LogService.info(err.toString());
       return LogService.error(LocaleKeys.error_update_cli.tr);
