@@ -22,7 +22,6 @@ final List<Command> commands = [
   HelpCommand(),
   VersionCommand(),
   InitCommand(),
-  InstallCommand(),
   RemoveCommand(),
   SortCommand(),
   UpdateCommand(),

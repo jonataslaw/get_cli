@@ -1,13 +1,13 @@
 ###### Documentation languages
 
-| [pt_BR](README-pt_BR.md) | en_US - this file |[zh_CN](README-zh_CN.md) |
-|-------|-------|-------|
+| [pt_BR](README-pt_BR.md) | en_US - this file | [zh_CN](README-zh_CN.md) |
+| ------------------------ | ----------------- | ------------------------ |
 
 Official CLI for the GetX™ framework.
 
 ```dart
 // To install:
-pub global activate get_cli 
+pub global activate get_cli
 // (to use this add the following to system PATH: [FlutterSDKInstallDir]\bin\cache\dart-sdk\bin
 
 flutter pub global activate get_cli
@@ -31,7 +31,7 @@ get create page:home
 // (Screens have controller, view, and binding)
 // Note: you can use any name, ex: `get screen page:login`
 // Nota: use this option if the chosen structure was CLEAN (by Arktekko)
-get create screen:home 
+get create screen:home
 
 // To create a new controller in a specific folder:
 // Note: you don't need to reference the folder,
@@ -64,20 +64,6 @@ get generate model on home with assets/models/user.json --skipProvider
 
 //Note: the URL must return a json format
 get generate model on home from "https://api.github.com/users/CpdnCristiano"
-
-// To install a package in your project (dependencies):
-get install camera
-
-// To install several packages from your project:
-get install http path camera
-
-// To install a package with specific version:
-get install path:1.6.4
-
-// You can also specify several packages with version numbers
-
-// To install a dev package in your project (dependencies_dev):
-get install flutter_launcher_icons --dev
 
 // To remove a package from your project:
 get remove http
