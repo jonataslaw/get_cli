@@ -134,7 +134,7 @@ class ModelGenerator {
     final astNode = parse(rawJson, Settings());
     var warnings =
         _generateClassDefinition(_rootClassName, jsonRawData, '', astNode);
-    // after generating all classes, replace the omited similar classes.
+    // after generating all classes, replace the omitted similar classes.
     for (var c in allClasses) {
       final fieldsKeys = c.fields.keys;
       for (var f in fieldsKeys) {

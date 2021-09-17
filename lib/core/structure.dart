@@ -48,7 +48,7 @@ class Structure {
         return '${element.path}${p.separator}'.contains('$on${p.separator}');
       }, orElse: () {
         return list.firstWhere((element) {
-          //Fix erro ao encontrar arquivo com nome
+          //Fix error ao encontrar arquivo com nome
           if (element is File) {
             return false;
           }

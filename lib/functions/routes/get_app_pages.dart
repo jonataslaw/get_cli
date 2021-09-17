@@ -8,7 +8,7 @@ import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../../samples/impl/get_app_pages.dart';
 import '../create/create_single_file.dart';
 import '../find_file/find_file_by_name.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
+import '../formatter_dart_file/formatter_dart_file.dart';
 import 'get_support_children.dart';
 
 void addAppPage(String name, String bindingDir, String viewDir) {
@@ -61,7 +61,7 @@ void addAppPage(String name, String bindingDir, String viewDir) {
                 '${_getTabs(_countTabs(lines[onPageStartIndex]))}),'),
             onPageStartIndex);
       } else {
-        _logInvalidFormart();
+        _logInvalidFormat();
       }
       if (onPageEndIndex != -1) {
         var indexChildrenStart = lines
@@ -84,11 +84,11 @@ void addAppPage(String name, String bindingDir, String viewDir) {
             index = indexChildrenEnd;
             tabEspaces = _countTabs(lines[onPageStartIndex]) + 2;
           } else {
-            _logInvalidFormart();
+            _logInvalidFormat();
           }
         }
       } else {
-        _logInvalidFormart();
+        _logInvalidFormat();
       }
     }
   }
@@ -125,7 +125,7 @@ int _countTabs(String line) {
 }
 
 /// log invalid format file
-void _logInvalidFormart() {
+void _logInvalidFormat() {
   LogService.info(
       'the app_pages.dart file does not meet the '
       'expected format, fails to create children pages',

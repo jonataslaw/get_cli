@@ -129,7 +129,7 @@ class CreatePageCommand extends Command {
       Structure.pathToDirImport(viewFile.path),
     );
     LogService.success(
-        LocaleKeys.sucess_page_create.trArgs([name.pascalCase]));
+        LocaleKeys.success_page_create.trArgs([name.pascalCase]));
   }
 
   @override

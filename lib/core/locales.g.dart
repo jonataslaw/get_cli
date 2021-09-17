@@ -57,7 +57,7 @@ class LocaleKeys {
   static const hint_update = 'hint_update';
   static const hint_version = 'hint_version';
   static const info_unnecessary_flag = 'info_unnecessary_flag';
-  static const info_unnecessary_flag_prural = 'info_unnecessary_flag_prural';
+  static const info_unnecessary_flag_plural = 'info_unnecessary_flag_plural';
   static const info_package_not_installed = 'info_package_not_installed';
   static const info_cli_last_version_already_installed =
       'info_cli_last_version_already_installed';
@@ -67,20 +67,21 @@ class LocaleKeys {
   static const options_yes = 'options_yes';
   static const options_no = 'options_no';
   static const optional_parameters = 'optional_parameters';
-  static const sucess_page_create = 'sucess_page_create';
-  static const sucess_locale_generate = 'sucess_locale_generate';
-  static const sucess_getx_pattern_generated = 'sucess_getx_pattern_generated';
-  static const sucess_clean_Pattern_generated =
-      'sucess_clean_Pattern_generated';
-  static const sucess_file_formatted = 'sucess_file_formatted';
-  static const sucess_package_removed = 'sucess_package_removed';
-  static const sucess_package_installed = 'sucess_package_installed';
-  static const sucess_update_cli = 'sucess_update_cli';
-  static const sucess_add_controller_in_bindings =
-      'sucess_add_controller_in_bindings';
-  static const sucess_navigation_added = 'sucess_navigation_added';
-  static const sucess_file_created = 'sucess_file_created';
-  static const sucess_route_created = 'sucess_route_created';
+  static const success_page_create = 'success_page_create';
+  static const success_locale_generate = 'success_locale_generate';
+  static const success_getx_pattern_generated =
+      'success_getx_pattern_generated';
+  static const success_clean_Pattern_generated =
+      'success_clean_Pattern_generated';
+  static const success_file_formatted = 'success_file_formatted';
+  static const success_package_removed = 'success_package_removed';
+  static const success_package_installed = 'success_package_installed';
+  static const success_update_cli = 'success_update_cli';
+  static const success_add_controller_in_bindings =
+      'success_add_controller_in_bindings';
+  static const success_navigation_added = 'success_navigation_added';
+  static const success_file_created = 'success_file_created';
+  static const success_route_created = 'success_route_created';
   static const ask_ios_lang = 'ask_ios_lang';
   static const ask_android_lang = 'ask_android_lang';
   static const ask_use_null_safe = 'ask_use_null_safe';
@@ -138,7 +139,7 @@ class Locales {
     'hint_update': 'GET_CLI günceller',
     'hint_version': 'Mevcut CLI sürümünü gösterir\'',
     'info_unnecessary_flag': '%s gerekli değil',
-    'info_unnecessary_flag_prural': '%s gerekli değil',
+    'info_unnecessary_flag_plural': '%s gerekli değil',
     'info_package_not_installed': 'Paket: %s bu uygulama için yüklenemedi',
     'info_cli_last_version_already_installed':
         'get_cli\'nin son sürümü zaten yüklü',
@@ -148,22 +149,22 @@ class Locales {
     'options_yes': 'Evet!',
     'options_no': 'Hayır',
     'optional_parameters': 'Opsiyonel parametreler: %s',
-    'sucess_page_create': '%s sayfası başarıyla oluşturuldu.',
-    'sucess_locale_generate': 'yerel dosyalar başarıyla oluşturuldu.',
-    'sucess_getx_pattern_generated':
+    'success_page_create': '%s sayfası başarıyla oluşturuldu.',
+    'success_locale_generate': 'yerel dosyalar başarıyla oluşturuldu.',
+    'success_getx_pattern_generated':
         'GetX Pattern yapısı başarıyla oluşturuldu.',
-    'sucess_clean_Pattern_generated':
+    'success_clean_Pattern_generated':
         'CLEAN Pattern yapısı başarıyla oluşturuldu.',
-    'sucess_file_formatted': ' \'%s\' başarıyla biçimlendirildi.',
-    'sucess_package_removed': 'Paket: %s kaldırıldı!',
-    'sucess_package_installed': '\'Paket: %s yüklendi!',
-    'sucess_update_cli': 'Yükseltme tamamlandı.',
-    'sucess_add_controller_in_bindings':
+    'success_file_formatted': ' \'%s\' başarıyla biçimlendirildi.',
+    'success_package_removed': 'Paket: %s kaldırıldı!',
+    'success_package_installed': '\'Paket: %s yüklendi!',
+    'success_update_cli': 'Yükseltme tamamlandı.',
+    'success_add_controller_in_bindings':
         '%s bağlayıcıya eklendi. Eklendiği dizin: %s\'',
-    'sucess_navigation_added': '%s navigasyonu başarıyla eklendi.',
-    'sucess_file_created':
+    'success_navigation_added': '%s navigasyonu başarıyla eklendi.',
+    'success_file_created':
         'Dosya: %s başarıyla oluşturuldu. Oluşturulduğu dizin: %s',
-    'sucess_route_created': '%s rotası başarıyla oluşturuldu.',
+    'success_route_created': '%s rotası başarıyla oluşturuldu.',
   };
   static const de = {
     'ask_existing_page':
@@ -228,7 +229,7 @@ class Locales {
     'hint_update': 'So aktualisieren Sie GET_CLI',
     'hint_version': 'Zeigt die aktuelle CLI-Version an\'',
     'info_unnecessary_flag': 'Das %s ist nicht notwendig',
-    'info_unnecessary_flag_prural': 'Die %s ist nicht notwendig',
+    'info_unnecessary_flag_plural': 'Die %s ist nicht notwendig',
     'info_package_not_installed':
         'Paket: %s ist in dieser Anwendung nicht installiert',
     'info_cli_last_version_already_installed':
@@ -241,21 +242,21 @@ class Locales {
     'options_no': 'Nein',
     'options_rename': 'Ich möchte es umbenennen',
     'optional_parameters': 'Optionale Parameter: %s',
-    'sucess_page_create': '%s-Page erfolgreich erstellt.',
-    'sucess_locale_generate': 'Sprachumgebungsdateien erfolgreich generiert.',
-    'sucess_getx_pattern_generated':
+    'success_page_create': '%s-Page erfolgreich erstellt.',
+    'success_locale_generate': 'Sprachumgebungsdateien erfolgreich generiert.',
+    'success_getx_pattern_generated':
         'GetX Pattern-Struktur erfolgreich erzeugt.',
-    'sucess_clean_Pattern_generated':
+    'success_clean_Pattern_generated':
         'CLEAN Pattern-Struktur erfolgreich erzeugt.',
-    'sucess_file_formatted': ' \'%s\' wurde erfolgreich formatiert',
-    'sucess_package_removed': 'Paket: %s entfernt!',
-    'sucess_package_installed': '\'Paket: %s installiert!',
-    'sucess_update_cli': 'Upgrade abgeschlossen',
-    'sucess_add_controller_in_bindings':
+    'success_file_formatted': ' \'%s\' wurde erfolgreich formatiert',
+    'success_package_removed': 'Paket: %s entfernt!',
+    'success_package_installed': '\'Paket: %s installiert!',
+    'success_update_cli': 'Upgrade abgeschlossen',
+    'success_add_controller_in_bindings':
         'Das %s wurde dem Binding unter Pfad: %s\' hinzugefügt.',
-    'sucess_navigation_added': '%s Navigation erfolgreich hinzugefügt.',
-    'sucess_file_created': 'Datei: %s erfolgreich erstellt unter Pfad: %s',
-    'sucess_route_created': '%s-Route erfolgreich erstellt.',
+    'success_navigation_added': '%s Navigation erfolgreich hinzugefügt.',
+    'success_file_created': 'Datei: %s erfolgreich erstellt unter Pfad: %s',
+    'success_route_created': '%s-Route erfolgreich erstellt.',
   };
   static const en = {
     'ask_existing_page':
@@ -314,7 +315,7 @@ class Locales {
     'hint_update': 'To update GET_CLI',
     'hint_version': 'Shows the current CLI version\'',
     'info_unnecessary_flag': 'The %s is not necessary',
-    'info_unnecessary_flag_prural': 'The %s are not necessary',
+    'info_unnecessary_flag_plural': 'The %s are not necessary',
     'info_package_not_installed':
         'Package: %s is not installed in this application',
     'info_cli_last_version_already_installed':
@@ -327,21 +328,21 @@ class Locales {
     'options_no': 'No',
     'options_rename': 'I want to rename',
     'optional_parameters': 'Optional parameters: %s',
-    'sucess_page_create': '%s page created successfully.',
-    'sucess_locale_generate': 'locale files generated successfully.',
-    'sucess_getx_pattern_generated':
+    'success_page_create': '%s page created successfully.',
+    'success_locale_generate': 'locale files generated successfully.',
+    'success_getx_pattern_generated':
         'GetX Pattern structure successfully generated.',
-    'sucess_clean_Pattern_generated':
+    'success_clean_Pattern_generated':
         'CLEAN Pattern structure successfully generated.',
-    'sucess_file_formatted': ' \'%s\' was successfully formatted',
-    'sucess_package_removed': 'Package: %s removed!',
-    'sucess_package_installed': '\'Package: %s installed!',
-    'sucess_update_cli': 'Upgrade complete',
-    'sucess_add_controller_in_bindings':
+    'success_file_formatted': ' \'%s\' was successfully formatted',
+    'success_package_removed': 'Package: %s removed!',
+    'success_package_installed': '\'Package: %s installed!',
+    'success_update_cli': 'Upgrade complete',
+    'success_add_controller_in_bindings':
         'The %s has been added to binding at path: %s\'',
-    'sucess_navigation_added': '%s navigation added successfully.',
-    'sucess_file_created': 'File: %s created successfully at path: %s',
-    'sucess_route_created': '%s route created successfully.',
+    'success_navigation_added': '%s navigation added successfully.',
+    'success_file_created': 'File: %s created successfully at path: %s',
+    'success_route_created': '%s route created successfully.',
   };
   static const pt_BR = {
     'ask_existing_page': 'A página [%s] já existe, deseja sobrescrevê-la?',
@@ -398,7 +399,7 @@ class Locales {
     'hint_update': 'Para atualizar GET_CLI',
     'hint_version': 'Mostra a versão atual do get_cli',
     'info_unnecessary_flag': 'A flag: %s não é necessária',
-    'info_unnecessary_flag_prural': 'As flags: %s não são necessárias',
+    'info_unnecessary_flag_plural': 'As flags: %s não são necessárias',
     'info_package_not_installed':
         'Pacote: %s não está instalado neste aplicativo',
     'info_cli_last_version_already_installed':
@@ -411,19 +412,19 @@ class Locales {
     'options_no': 'Não!',
     'options_rename': 'Quero renomear!',
     'optional_parameters': 'Parâmetros opcionais: %s',
-    'sucess_page_create': 'Página %s criada com sucesso.',
-    'sucess_locale_generate': 'Arquivo de tradução gerado com sucesso.',
-    'sucess_getx_pattern_generated':
-        'Estrutura GetX Pattern gerada com sucesso.',
-    'sucess_clean_Pattern_generated': 'Estrutura CLEAN gerada com sucesso.',
-    'sucess_file_formatted': ' \'%s\' foi formatado com sucesso',
-    'sucess_package_removed': 'Pacote: %s removido!',
-    'sucess_package_installed': 'Pacote: %s instalado!',
-    'sucess_update_cli': 'Upgrade concluído',
-    'sucess_add_controller_in_bindings':
+    'success_page_create': 'Página %s criada com successo.',
+    'success_locale_generate': 'Arquivo de tradução gerado com successo.',
+    'success_getx_pattern_generated':
+        'Estrutura GetX Pattern gerada com successo.',
+    'success_clean_Pattern_generated': 'Estrutura CLEAN gerada com successo.',
+    'success_file_formatted': ' \'%s\' foi formatado com successo',
+    'success_package_removed': 'Pacote: %s removido!',
+    'success_package_installed': 'Pacote: %s instalado!',
+    'success_update_cli': 'Upgrade concluído',
+    'success_add_controller_in_bindings':
         'O %s foi adicionado ao binging no path: %s ',
-    'sucess_navigation_added': '%s navigation adicionada com sucesso.',
-    'sucess_file_created': 'Arquivo: %s criado com sucesso no path: %s',
-    'sucess_route_created': 'Rota %s criada com sucesso.',
+    'success_navigation_added': '%s navigation adicionada com successo.',
+    'success_file_created': 'Arquivo: %s criado com successo no path: %s',
+    'success_route_created': 'Rota %s criada com successo.',
   };
 }

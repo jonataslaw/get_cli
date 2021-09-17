@@ -58,7 +58,7 @@
   },
   "info": {
     "unnecessary_flag": "%s 是多余的",
-    "unnecessary_flag_prural": "%s 是多余的",
+    "unnecessary_flag_plural": "%s 是多余的",
     "package_not_installed": "Package: %s 在本应用中未安装",
     "cli_last_version_already_installed": "您已安装 get_cli 最新版本",
     "no_file_overwritten": "没有文件被覆盖",

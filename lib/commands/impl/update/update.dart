@@ -1,4 +1,4 @@
-import '../../../common/utils/shell/shel.utils.dart';
+import '../../../common/utils/shell/shell.utils.dart';
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../../interface/command.dart';

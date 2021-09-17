@@ -1,6 +1,6 @@
 import '../../../common/utils/logger/log_utils.dart';
 import '../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../common/utils/shell/shel.utils.dart';
+import '../../../common/utils/shell/shell.utils.dart';
 import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../../../exception_handler/exceptions/cli_exception.dart';

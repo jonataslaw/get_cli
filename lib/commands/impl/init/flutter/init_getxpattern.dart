@@ -8,7 +8,7 @@ import '../../../../core/structure.dart';
 import '../../../../functions/create/create_list_directory.dart';
 import '../../../../functions/create/create_main.dart';
 import '../../../../samples/impl/getx_pattern/get_main.dart';
-import '../../commads_export.dart';
+import '../../commands_export.dart';
 import '../../install/install_get.dart';
 
 Future<void> createInitGetxPattern() async {
@@ -28,5 +28,5 @@ Future<void> createInitGetxPattern() async {
   ]);
   createListDirectory(initialDirs);
 
-  LogService.success(Translation(LocaleKeys.sucess_getx_pattern_generated));
+  LogService.success(Translation(LocaleKeys.success_getx_pattern_generated));
 }

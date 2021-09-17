@@ -26,11 +26,11 @@ class GetCli {
               command.commandName == currentArgument ||
               command.alias.contains(currentArgument),
           orElse: () => ErrorCommand('command not found'));
-      if (command.childrens.isNotEmpty) {
+      if (command.children.isNotEmpty) {
         if (command is CommandParent) {
-          command = _findCommand(++currentIndex, command.childrens);
+          command = _findCommand(++currentIndex, command.children);
         } else {
-          var childrenCommand = _findCommand(++currentIndex, command.childrens);
+          var childrenCommand = _findCommand(++currentIndex, command.children);
           if (!(childrenCommand is ErrorCommand)) {
             command = childrenCommand;
           }
@@ -58,7 +58,7 @@ class ErrorCommand extends Command {
   }
 
   @override
-  String get hint => 'Print on erro';
+  String get hint => 'Print on error';
 
   @override
   String get codeSample => '';
@@ -70,9 +70,9 @@ class ErrorCommand extends Command {
   bool validate() => true;
 }
 
-class NotFoundComannd extends Command {
+class NotFoundCommand extends Command {
   @override
-  String get commandName => 'Not Found Comannd';
+  String get commandName => 'Not Found Command';
 
   @override
   Future<void> execute() async {
@@ -80,7 +80,7 @@ class NotFoundComannd extends Command {
   }
 
   @override
-  String get hint => 'Not Found Comannd';
+  String get hint => 'Not Found Command';
 
   @override
   String get codeSample => '';

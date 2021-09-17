@@ -66,7 +66,7 @@ File writeFile(String path, String content,
 
     if (logger) {
       LogService.success(
-        LocaleKeys.sucess_file_created.trArgs(
+        LocaleKeys.success_file_created.trArgs(
           [basename(_file.path), _file.path],
         ),
       );

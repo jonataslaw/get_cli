@@ -60,7 +60,7 @@ class SortCommand extends Command {
             skipRename: containsArg('--skipRename'),
             useRelativeImport: containsArg('--relative'));
         LogService.success(
-            LocaleKeys.sucess_file_formatted.trArgs([element.path]));
+            LocaleKeys.success_file_formatted.trArgs([element.path]));
       }
     });
   }
@@ -72,7 +72,7 @@ class SortCommand extends Command {
           logger: false,
           skipRename: containsArg('--skipRename'),
           useRelativeImport: containsArg('--relative'));
-      LogService.success(LocaleKeys.sucess_file_formatted.trArgs([path]));
+      LogService.success(LocaleKeys.success_file_formatted.trArgs([path]));
     } else {
       throw CliException(LocaleKeys.error_invalid_dart.trArgs([path]));
     }

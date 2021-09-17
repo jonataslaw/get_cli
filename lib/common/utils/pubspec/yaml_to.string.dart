@@ -1,4 +1,4 @@
-final _unsuportedCharacters = RegExp(
+final _unSupportedCharacters = RegExp(
     r'''^[\n\t ,[\]{}#&*!|<>'"%@']|^[?-]$|^[?-][ \t]|[\n:][ \t]|[ \t]\n|[\n\t ]#|[\n\t :]$''');
 
 class CliYamlToString {
@@ -40,7 +40,7 @@ class CliYamlToString {
   String _escapeString(String line) {
     line = line.replaceAll('"', r'\"').replaceAll('\n', r'\n');
 
-    if (line.contains(_unsuportedCharacters)) {
+    if (line.contains(_unSupportedCharacters)) {
       line = quotes + line + quotes;
     }
 
@@ -68,14 +68,18 @@ class CliYamlToString {
         if (value is Iterable || value is Map) {
           _writeIndent(indentCount, stringSink);
         }
-        stringSink..write(key)..write(_divider);
+        stringSink
+          ..write(key)
+          ..write(_divider);
         _writeYamlString(value, indentCount, stringSink, false, false);
       }
     } else {
       for (var key in keys) {
         final value = node[key];
         _writeIndent(indentCount, stringSink);
-        stringSink..write(key)..write(_divider);
+        stringSink
+          ..write(key)
+          ..write(_divider);
         _writeYamlString(value, indentCount, stringSink, false, false);
         if (value is Map || value is Iterable) {
           if (isTopLevel) {

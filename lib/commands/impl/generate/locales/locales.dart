@@ -96,7 +96,7 @@ class GenerateLocalesCommand extends Command {
             path: '${_fileModel.path}.g.dart')
         .create();
 
-    LogService.success(LocaleKeys.sucess_locale_generate.tr);
+    LogService.success(LocaleKeys.success_locale_generate.tr);
   }
 
   void _resolve(Map<String, dynamic> localization, Map<String, String?> result,

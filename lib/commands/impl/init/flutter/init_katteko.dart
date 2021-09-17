@@ -9,7 +9,7 @@ import '../../../../functions/create/create_list_directory.dart';
 import '../../../../functions/create/create_main.dart';
 import '../../../../samples/impl/arctekko/arc_main.dart';
 import '../../../../samples/impl/arctekko/config_example.dart';
-import '../../commads_export.dart';
+import '../../commands_export.dart';
 import '../../install/install_get.dart';
 
 Future<void> createInitKatekko() async {
@@ -38,5 +38,6 @@ Future<void> createInitKatekko() async {
   ]);
   createListDirectory(initialDirs);
 
-  LogService.success(Translation(LocaleKeys.sucess_clean_Pattern_generated).tr);
+  LogService.success(
+      Translation(LocaleKeys.success_clean_Pattern_generated).tr);
 }

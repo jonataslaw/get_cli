@@ -11,7 +11,7 @@ abstract class Sample {
   String path;
 
   /// If the file is found in the path, it can be ignored or
-  /// overwritten. If overrite = false, the source file will not be changed.
+  /// overwritten. If overwrite = false, the source file will not be changed.
   /// The default is [false].
   bool overwrite;
 

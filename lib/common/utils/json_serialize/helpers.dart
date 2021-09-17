@@ -25,16 +25,16 @@ const Map<String, bool> PRIMITIVE_TYPES = {
 
 enum ListType { Object, String, Double, Int, Null }
 
-class MergeableListType {
+class MergeAbleListType {
   final ListType? listType;
-  final bool isAmbigous;
+  final bool isAmbiguous;
 
-  MergeableListType(this.listType, this.isAmbigous);
+  MergeAbleListType(this.listType, this.isAmbiguous);
 }
 
-MergeableListType mergeableListType(List<dynamic> list) {
+MergeAbleListType mergeAbleListType(List<dynamic> list) {
   ListType? t = ListType.Null;
-  var isAmbigous = false;
+  var isAmbiguous = false;
   for (var e in list) {
     ListType? inferredType;
     if (e.runtimeType.toString() == 'int') {
@@ -47,11 +47,11 @@ MergeableListType mergeableListType(List<dynamic> list) {
       inferredType = ListType.Object;
     }
     if (t != ListType.Null && t != inferredType) {
-      isAmbigous = true;
+      isAmbiguous = true;
     }
     t = inferredType;
   }
-  return MergeableListType(t, isAmbigous);
+  return MergeAbleListType(t, isAmbiguous);
 }
 
 String camelCase(String text) {
@@ -103,8 +103,8 @@ WithWarning<Map> mergeObj(Map obj, Map other, String path) {
       } else if (t == 'List') {
         var l = List.from(clone[k] as Iterable);
         l.addAll(other[k] as Iterable);
-        final mergeableType = mergeableListType(l);
-        if (ListType.Object == mergeableType.listType) {
+        final mergeAbleType = mergeAbleListType(l);
+        if (ListType.Object == mergeAbleType.listType) {
           var mergedList = mergeObjectList(l, '$path');
           warnings.addAll(mergedList.warnings);
           clone[k] = List.filled(1, mergedList.result);
@@ -112,7 +112,7 @@ WithWarning<Map> mergeObj(Map obj, Map other, String path) {
           if (l.isNotEmpty) {
             clone[k] = List.filled(1, l[0]);
           }
-          if (mergeableType.isAmbigous) {
+          if (mergeAbleType.isAmbiguous) {
             warnings.add(newAmbiguousType('$path/$k'));
           }
         }
@@ -149,16 +149,16 @@ WithWarning<Map> mergeObjectList(List<dynamic> list, String path,
               if (idx != -1) {
                 realIndex = idx - i;
               }
-              final ambiguosTypePath = '$path[$realIndex]/$k';
-              warnings.add(newAmbiguousType(ambiguosTypePath));
+              final ambiguousTypePath = '$path[$realIndex]/$k';
+              warnings.add(newAmbiguousType(ambiguousTypePath));
             }
           } else if (t == 'List') {
             var l = List.from(obj[k] as Iterable);
             final beginIndex = l.length;
             l.addAll(v as Iterable);
             // bug is here
-            final mergeableType = mergeableListType(l);
-            if (ListType.Object == mergeableType.listType) {
+            final mergeAbleType = mergeAbleListType(l);
+            if (ListType.Object == mergeAbleType.listType) {
               var mergedList = mergeObjectList(l, '$path[$i]/$k', beginIndex);
               warnings.addAll(mergedList.warnings);
               obj[k] = List.filled(1, mergedList.result);
@@ -166,7 +166,7 @@ WithWarning<Map> mergeObjectList(List<dynamic> list, String path,
               if (l.isNotEmpty) {
                 obj[k] = List.filled(1, l[0]);
               }
-              if (mergeableType.isAmbigous) {
+              if (mergeAbleType.isAmbiguous) {
                 warnings.add(newAmbiguousType('$path[$i]/$k'));
               }
             }

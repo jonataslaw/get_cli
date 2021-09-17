@@ -10,7 +10,7 @@ import '../../../exception_handler/exceptions/cli_exception.dart';
 import '../../../extensions.dart';
 import '../logger/log_utils.dart';
 import '../pub_dev/pub_dev_api.dart';
-import '../shell/shel.utils.dart';
+import '../shell/shell.utils.dart';
 import 'yaml_to.string.dart';
 
 // ignore: avoid_classes_with_only_static_members
@@ -20,7 +20,7 @@ class PubspecUtils {
   static PubSpec get pubSpec =>
       PubSpec.fromYamlString(_pubspecFile.readAsStringSync());
 
-  /// separtor
+  /// separator
   static final _mapSep = _PubValue<String>(() {
     var yaml = pubSpec.unParsedYaml!;
     if (yaml.containsKey('get_cli')) {
@@ -84,7 +84,7 @@ class PubspecUtils {
 
     _savePub(pubSpec);
     if (runPubGet) await ShellUtils.pubGet();
-    LogService.success(LocaleKeys.sucess_package_installed.trArgs([package]));
+    LogService.success(LocaleKeys.success_package_installed.trArgs([package]));
     return true;
   }
 
@@ -103,7 +103,8 @@ class PubspecUtils {
       );
       _savePub(newPub);
       if (logger) {
-        LogService.success(LocaleKeys.sucess_package_removed.trArgs([package]));
+        LogService.success(
+            LocaleKeys.success_package_removed.trArgs([package]));
       }
     } else if (logger) {
       LogService.info(LocaleKeys.info_package_not_installed.trArgs([package]));
