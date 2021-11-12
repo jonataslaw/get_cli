@@ -71,16 +71,18 @@ mixin ArgsMixin {
   /// print(name); // product
   /// ```
   String get name {
-    if (_args.length > 1) {
-      var arg = _args[1];
-      if (_args[0] == 'create' || _args[0] == '-c') {
+    var args = List.of(_args);
+    _removeDefaultArgs(args);
+    if (args.length > 1) {
+      if (args[0] == 'create' || args[0] == '-c') {
+        var arg = args[1];
         var split = arg.split(':');
         var type = split.first;
         var name = split.last;
 
         if (name == type) {
-          if (_args.length > 2) {
-            name = _args[2];
+          if (args.length > 2) {
+            name = args[2];
           } else {
             name = '';
           }
@@ -109,6 +111,12 @@ mixin ArgsMixin {
 }
 List<String> _getArgs() {
   var args = List.of(GetCli.arguments);
+  _removeDefaultArgs(args);
+  args.removeWhere((element) => element.startsWith('-'));
+  return args;
+}
+
+void _removeDefaultArgs(List<String> args) {
   var defaultArgs = ['on', 'from', 'with'];
 
   for (var arg in defaultArgs) {
@@ -120,8 +128,6 @@ List<String> _getArgs() {
       }
     }
   }
-  args.removeWhere((element) => element.startsWith('-'));
-  return args;
 }
 
 List<String> _getFlags() {

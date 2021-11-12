@@ -16,7 +16,10 @@ final List<Command> commands = [
   ),
   CommandParent(
     'generate',
-    [GenerateLocalesCommand(), GenerateModelCommand()],
+    [
+      GenerateLocalesCommand(),
+      GenerateModelCommand(),
+    ],
     ['-g'],
   ),
   HelpCommand(),
