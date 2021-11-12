@@ -33,7 +33,8 @@ extension StringExt on String {
   ///
   String appendClassContent(String className, String value) {
     var matches =
-        RegExp('class $className {(\n+)?.*(\n+)?(})').allMatches(this);
+        RegExp('class $className {.*?(^})', multiLine: true, dotAll: true)
+            .allMatches(this);
     //TODO: Add exception in the translations
     if (matches.isEmpty) {
       throw CliException('The class $className is not found in the file $this');
