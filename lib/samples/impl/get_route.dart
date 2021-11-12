@@ -14,6 +14,7 @@ abstract class Routes{
 
 abstract class _Paths {
   
+  _Paths._();
 
 }
 
