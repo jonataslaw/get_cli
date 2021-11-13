@@ -60,7 +60,13 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
   LogService.success(
       Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
 
-  writeFile(routesFile.path, content, overwrite: true, logger: false);
+  writeFile(
+    routesFile.path,
+    content,
+    overwrite: true,
+    logger: false,
+    useRelativeImport: true,
+  );
 }
 
 /// Create routes from the path

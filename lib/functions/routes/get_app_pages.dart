@@ -107,8 +107,13 @@ ${_getTabs(tabEspaces)}),''';
   lines.insert(0, "$import$bindingDir';");
   lines.insert(0, "$import$viewDir';");
 
-  writeFile(appPagesFile.path, lines.join('\n'),
-      overwrite: true, logger: false);
+  writeFile(
+    appPagesFile.path,
+    lines.join('\n'),
+    overwrite: true,
+    logger: false,
+    useRelativeImport: true,
+  );
 }
 
 /// Create a tab line
