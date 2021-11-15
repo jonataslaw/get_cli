@@ -20,16 +20,20 @@ import '../../../interface/command.dart';
 class CreateScreenCommand extends Command {
   @override
   String get commandName => 'screen';
+
   @override
   Future<void> execute() async {
     var isProject = false;
     if (GetCli.arguments[0] == 'create') {
       isProject = GetCli.arguments[1].split(':').first == 'project';
     }
-    var name = isProject ? 'home' : this.name;
+    var name = this.name;
+    if (name.isEmpty || isProject) {
+      name = 'home';
+    }
 
     var _fileModel =
-        Structure.model('', 'screen', true, on: onCommand, folderName: name);
+        Structure.model(name, 'screen', true, on: onCommand, folderName: name);
     var pathSplit = Structure.safeSplitPath(_fileModel.path!);
 
     var path = pathSplit.join('/');

@@ -31,11 +31,14 @@ Future<void> createInitKatekko() async {
     Directory(Structure.replaceAsExpected(path: 'lib/presentation/')),
     Directory(Structure.replaceAsExpected(path: 'lib/infrastructure/theme/')),
   ];
+
   ArcMainSample().create();
   ConfigExampleSample().create();
+
   await Future.wait([
     CreateScreenCommand().execute(),
   ]);
+
   createListDirectory(initialDirs);
 
   LogService.success(Translation(LocaleKeys.sucess_clean_Pattern_generated).tr);
