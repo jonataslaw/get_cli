@@ -32,6 +32,11 @@ class CreateScreenCommand extends Command {
       name = 'home';
     }
 
+    final menu = Menu([
+      'home :=> $name',
+      'CLEAN ',
+    ]);
+    final result = menu.choose();
     var _fileModel =
         Structure.model(name, 'screen', true, on: onCommand, folderName: name);
     var pathSplit = Structure.safeSplitPath(_fileModel.path!);
