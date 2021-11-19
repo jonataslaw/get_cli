@@ -31,8 +31,8 @@ class ModelGenerator {
 
   ModelGenerator(this._rootClassName,
       [this._privateFields = false,
-      this._withCopyConstructor,
-      List<Hint>? hints]) {
+        this._withCopyConstructor,
+        List<Hint>? hints]) {
     if (hints != null) {
       this.hints = hints;
     } else {
@@ -55,7 +55,7 @@ class ModelGenerator {
       final jsonRawData = jsonRawDynamicData as Map;
       final keys = jsonRawData.keys.cast<String>();
       var classDefinition =
-          ClassDefinition(className, _privateFields, _withCopyConstructor);
+      ClassDefinition(className, _privateFields, _withCopyConstructor);
       for (var key in keys) {
         TypeDefinition typeDef;
         final hint = _hintForPath('$path/$key');
@@ -74,16 +74,19 @@ class ModelGenerator {
         if (typeDef.subtype != null && typeDef.subtype == 'Class') {
           typeDef.subtype = camelCase(key);
         }
+        if (typeDef.name == 'Class?') {
+          typeDef.name = '${camelCase(key)}?';
+        }
         if (typeDef.isAmbiguous!) {
           warnings.add(newAmbiguousListWarn('$path/$key'));
         }
         classDefinition.addField(key, typeDef);
       }
       final similarClass =
-          allClasses.firstWhereOrNull((cd) => cd == classDefinition);
+      allClasses.firstWhereOrNull((cd) => cd == classDefinition);
       if (similarClass != null) {
-        final similarClassName = similarClass.name;
-        final currentClassName = classDefinition.name;
+        final similarClassName = '${similarClass.name}?';
+        final currentClassName = '${classDefinition.name}?';
         sameClassMapping[currentClassName] = similarClassName;
       } else {
         allClasses.add(classDefinition);
@@ -133,14 +136,25 @@ class ModelGenerator {
     final jsonRawData = decodeJSON(rawJson);
     final astNode = parse(rawJson, Settings());
     var warnings =
-        _generateClassDefinition(_rootClassName, jsonRawData, '', astNode);
+    _generateClassDefinition(_rootClassName, jsonRawData, '', astNode);
     // after generating all classes, replace the omited similar classes.
     for (var c in allClasses) {
       final fieldsKeys = c.fields.keys;
       for (var f in fieldsKeys) {
         final typeForField = c.fields[f]!;
-        if (sameClassMapping.containsKey(typeForField.name)) {
-          c.fields[f]!.name = sameClassMapping[typeForField.name!];
+        var fieldName = typeForField.name;
+
+        if (sameClassMapping.containsKey(fieldName)) {
+          c.fields[f]!.name = sameClassMapping[fieldName];
+        }
+
+        // check subtype for list
+        if (fieldName == 'List') {
+          fieldName = '${typeForField.subtype}?';
+          if (sameClassMapping.containsKey(fieldName)) {
+            c.fields[f]!.subtype =
+                sameClassMapping[fieldName]!.replaceAll('?', '');
+          }
         }
       }
     }
