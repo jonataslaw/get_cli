@@ -31,9 +31,11 @@ class PubspecUtils {
 
     return '';
   });
+
   static String? get separatorFileType => _mapSep.value;
 
   static final _mapName = _PubValue<String>(() => pubSpec.name?.trim() ?? '');
+
   static String? get projectName => _mapName.value;
 
   static final _extraFolder = _PubValue<bool?>(
@@ -51,6 +53,7 @@ class PubspecUtils {
       return null;
     },
   );
+
   static bool? get extraFolder => _extraFolder.value;
 
   static Future<bool> addDependencies(String package,
@@ -115,7 +118,7 @@ class PubspecUtils {
     return dependencies.containsKey(package.trim());
   }
 
-  static bool get nullSafeSupport => !pubSpec.environment!.sdkConstraint!
+  static bool get nullSafeSupport =>  !pubSpec.environment!.sdkConstraint!
       .allowsAny(HostedReference.fromJson('<2.12.0').versionConstraint);
 
   /// make sure it is a get_server project

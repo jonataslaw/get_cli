@@ -119,7 +119,7 @@ class TypeDefinition {
   String jsonParseExpression(String key, bool privateField) {
     final jsonKey = "json['$key']";
     final fieldKey =
-    fixFieldName(key, typeDef: this, privateField: privateField);
+        fixFieldName(key, typeDef: this, privateField: privateField);
     if (isPrimitive) {
       if (name == 'List') {
         return "$fieldKey = json['$key'].cast<$subtype>();";
@@ -133,7 +133,7 @@ class TypeDefinition {
       // list of class
       return "if (json['$key'] != null) {\n\t\t\t$fieldKey = <$subtype>[];"
           "\n\t\t\tjson['$key'].forEach((v) { "
-          '$fieldKey?.add($subtype.fromJson(v)); });\n\t\t}';
+          '$fieldKey${PubspecUtils.nullSafeSupport ? '?' : ''}.add($subtype.fromJson(v)); });\n\t\t}';
     } else {
       // class
       return "$fieldKey = json['$key'] != null ?"
@@ -143,7 +143,7 @@ class TypeDefinition {
 
   String toJsonExpression(String key, bool privateField) {
     final fieldKey =
-    fixFieldName(key, typeDef: this, privateField: privateField);
+        fixFieldName(key, typeDef: this, privateField: privateField);
     //final thisKey = 'this.$fieldKey';
     final thisKey = '$fieldKey';
     if (isPrimitive) {
@@ -151,12 +151,12 @@ class TypeDefinition {
     } else if (name == 'List') {
       // class list
       return """if ($thisKey != null) {
-      data['$key'] = $thisKey?.map((v) => ${_buildToJsonClass('v', nullSafe: false)}).toList();
+      data['$key'] = $thisKey${PubspecUtils.nullSafeSupport ? '?' : ''}.map((v) => ${_buildToJsonClass('v', nullSafe: false)}).toList();
     }""";
     } else {
       // class
       return """if ($thisKey != null) {
-      data['$key'] = ${_buildToJsonClass(thisKey, nullSafe: true)};
+      data['$key'] = ${_buildToJsonClass(thisKey, nullSafe: PubspecUtils.nullSafeSupport)};
     }""";
     }
   }
@@ -246,7 +246,7 @@ class ClassDefinition {
     return fields.keys.map((key) {
       final f = fields[key]!;
       final fieldName =
-      fixFieldName(key, typeDef: f, privateField: privateFields);
+          fixFieldName(key, typeDef: f, privateField: privateFields);
       final sb = StringBuffer();
       sb.write('\t ' * indentLevel);
       _addTypeDef(f, sb);
@@ -263,9 +263,9 @@ class ClassDefinition {
     return fields.keys.map((key) {
       final f = fields[key]!;
       final publicFieldName =
-      fixFieldName(key, typeDef: f, privateField: false);
+          fixFieldName(key, typeDef: f, privateField: false);
       final privateFieldName =
-      fixFieldName(key, typeDef: f, privateField: true);
+          fixFieldName(key, typeDef: f, privateField: true);
       final sb = StringBuffer();
       sb.write('\t');
       _addTypeDef(f, sb);
@@ -285,7 +285,7 @@ class ClassDefinition {
     for (var key in fields.keys) {
       final f = fields[key]!;
       final publicFieldName =
-      fixFieldName(key, typeDef: f, privateField: false);
+          fixFieldName(key, typeDef: f, privateField: false);
       _addTypeDef(f, sb);
       sb.write(' $publicFieldName');
       if (i != len) {
@@ -297,9 +297,9 @@ class ClassDefinition {
     for (var key in fields.keys) {
       final f = fields[key];
       final publicFieldName =
-      fixFieldName(key, typeDef: f, privateField: false);
+          fixFieldName(key, typeDef: f, privateField: false);
       final privateFieldName =
-      fixFieldName(key, typeDef: f, privateField: true);
+          fixFieldName(key, typeDef: f, privateField: true);
       //sb.write('this.$privateFieldName = $publicFieldName;\n');
       sb.write('$privateFieldName = $publicFieldName;\n');
     }
@@ -316,7 +316,7 @@ class ClassDefinition {
     for (var key in fields.keys) {
       final f = fields[key];
       final fieldName =
-      fixFieldName(key, typeDef: f, privateField: privateFields);
+          fixFieldName(key, typeDef: f, privateField: privateFields);
       sb.write('this.$fieldName');
       //sb.write('$fieldName');
       if (i != len) {
@@ -339,7 +339,7 @@ class ClassDefinition {
     for (var key in fields.keys) {
       final f = fields[key];
       final fieldName =
-      fixFieldName(key, typeDef: f, privateField: privateFields);
+          fixFieldName(key, typeDef: f, privateField: privateFields);
       sb.write('$fieldName: $fieldName ?? this.$fieldName,');
     }
 
