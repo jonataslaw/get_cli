@@ -12,6 +12,7 @@ import 'init_katteko.dart';
 class InitCommand extends Command {
   @override
   String get commandName => 'init';
+
   @override
   Future<void> execute() async {
     final menu = Menu([
