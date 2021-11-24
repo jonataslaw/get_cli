@@ -90,7 +90,7 @@ class Structure {
       }
     } else if (path.contains('/')) {
       if (Platform.isWindows) {
-        return path.replaceAll('/', '\\\\');
+        return path.replaceAll('/', '\\\\').replaceAll('.\\', './');
       } else {
         return path;
       }
