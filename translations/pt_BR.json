@@ -31,14 +31,14 @@
   "hint": {
     "create": {
       "controller": "Gerar um novo controller",
-      "page": "Gerar um novo modulo, (controller, view e bindigns) (Use essa opcão se está usando getx_pattern)",
+      "page": "Gerar um novo modulo, (controller, view e bindigns) (Use essa opção se está usando getx_pattern)",
       "project": "Crie um novo projeto, escolha flutter ou get server",
       "provider": "Cria uma classe Provider",
-      "screen": "Gera uma nova Screen, [controller, view e bindigns] (Use essa opcão se for está usando clean)",
+      "screen": "Gera uma nova Screen, [controller, view e bindigns] (Use essa opção se for está usando clean)",
       "view": "Cria uma nova view"
     },
     "generate": {
-      "locales": "Gera um arquivo de traduçao comativel com getx usando json files",
+      "locales": "Gerar um arquivo de tradução compatível com getx usando json",
       "model": "Crie sua classe model apartir de um json"
     },
     "help": "mostra a tela de help",

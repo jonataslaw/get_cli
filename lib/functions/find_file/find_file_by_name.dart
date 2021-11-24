@@ -4,7 +4,7 @@ import 'package:path/path.dart';
 
 /// find a file from the name in the lib folder
 File findFileByName(String name) {
-  var current = Directory('./lib');
+  var current = Directory('lib');
   final list = current.listSync(recursive: true, followLinks: false);
   var contains = list.firstWhere((element) {
     if (element is File) {

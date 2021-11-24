@@ -15,8 +15,8 @@ import 'bindings/controllers/controllers_bindings.dart';
 import 'routes.dart';
 
 class EnvironmentsBadge extends StatelessWidget {
-  final Widget? child;
-  EnvironmentsBadge({@required this.child});
+  final Widget child;
+  EnvironmentsBadge({required this.child});
   @override
   Widget build(BuildContext context) {
     var env = ConfigEnvironments.getEnvironments()['env'];
