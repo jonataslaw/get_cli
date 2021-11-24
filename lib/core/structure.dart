@@ -38,7 +38,7 @@ class Structure {
       {String? on, String? folderName}) {
     if (on != null && on != '') {
       on = replaceAsExpected(path: on).replaceAll('\\\\', '\\');
-      var current = Directory('./lib');
+      var current = Directory('lib');
       final list = current.listSync(recursive: true, followLinks: false);
       final contains = list.firstWhere((element) {
         if (element is File) {
@@ -90,7 +90,7 @@ class Structure {
       }
     } else if (path.contains('/')) {
       if (Platform.isWindows) {
-        return path.replaceAll('/', '\\\\').replaceAll('.\\', './');
+        return path.replaceAll('/', '\\\\');
       } else {
         return path;
       }

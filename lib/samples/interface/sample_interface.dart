@@ -25,10 +25,6 @@ abstract class Sample {
   /// This function will create the file in [path] with the
   /// content of [content].
   File create({bool skipFormatter = false}) {
-    if (Platform.isWindows) {
-      path = path.replaceAll('./', '');
-      path = path.replaceAll('.\\', '');
-    }
     return writeFile(
       path,
       customContent.isNotEmpty ? customContent : content,
