@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:get_cli/functions/find_file/find_file_by_name.dart';
 import 'package:path/path.dart';
 
 import '../../common/utils/logger/log_utils.dart';
@@ -63,7 +64,6 @@ File writeFile(String path, String content,
 
     _file.createSync(recursive: true);
     _file.writeAsStringSync(content);
-
     if (logger) {
       LogService.success(
         LocaleKeys.sucess_file_created.trArgs(
