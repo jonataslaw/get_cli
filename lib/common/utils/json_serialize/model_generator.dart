@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dart_style/dart_style.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 
 import 'helpers.dart';
 import 'json_ast/json_ast.dart' show parse, Settings, Node;
@@ -56,6 +57,7 @@ class ModelGenerator {
       final keys = jsonRawData.keys.cast<String>();
       var classDefinition =
           ClassDefinition(className, _privateFields, _withCopyConstructor);
+
       for (var key in keys) {
         TypeDefinition typeDef;
         final hint = _hintForPath('$path/$key');
@@ -74,16 +76,26 @@ class ModelGenerator {
         if (typeDef.subtype != null && typeDef.subtype == 'Class') {
           typeDef.subtype = camelCase(key);
         }
+        if (typeDef.name == 'Class?') {
+          typeDef.name = '${camelCase(key)}?';
+        }
         if (typeDef.isAmbiguous!) {
           warnings.add(newAmbiguousListWarn('$path/$key'));
         }
         classDefinition.addField(key, typeDef);
       }
+
       final similarClass =
           allClasses.firstWhereOrNull((cd) => cd == classDefinition);
       if (similarClass != null) {
-        final similarClassName = similarClass.name;
-        final currentClassName = classDefinition.name;
+        final similarClassName = PubspecUtils.nullSafeSupport
+            ? '${similarClass.name}?'
+            : similarClass.name;
+
+        final currentClassName = PubspecUtils.nullSafeSupport
+            ? '${classDefinition.name}?'
+            : classDefinition.name;
+
         sameClassMapping[currentClassName] = similarClassName;
       } else {
         allClasses.add(classDefinition);
@@ -139,8 +151,22 @@ class ModelGenerator {
       final fieldsKeys = c.fields.keys;
       for (var f in fieldsKeys) {
         final typeForField = c.fields[f]!;
-        if (sameClassMapping.containsKey(typeForField.name)) {
-          c.fields[f]!.name = sameClassMapping[typeForField.name!];
+        var fieldName = typeForField.name;
+
+        if (sameClassMapping.containsKey(fieldName)) {
+          c.fields[f]!.name = sameClassMapping[fieldName];
+        }
+
+        // check subtype for list
+        if (fieldName == 'List') {
+          fieldName = PubspecUtils.nullSafeSupport
+              ? '${typeForField.subtype}?'
+              : typeForField.subtype;
+
+          if (sameClassMapping.containsKey(fieldName)) {
+            c.fields[f]!.subtype =
+                sameClassMapping[fieldName]!.replaceAll('?', '');
+          }
         }
       }
     }
