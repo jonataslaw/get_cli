@@ -36,6 +36,7 @@ class CreateScreenCommand extends Command {
         Structure.model(name, 'screen', true, on: onCommand, folderName: name);
     var pathSplit = Structure.safeSplitPath(_fileModel.path!);
 
+    pathSplit.removeLast();
     var path = pathSplit.join('/');
     path = Structure.replaceAsExpected(path: path);
     if (Directory(path).existsSync()) {
