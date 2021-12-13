@@ -6,7 +6,7 @@ import '../../common/utils/logger/log_utils.dart';
 import '../../common/utils/pubspec/pubspec_utils.dart';
 import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
-import 'package:get_cli/extensions.dart';
+import '../../extensions.dart';
 import '../../samples/impl/get_route.dart';
 import '../create/create_single_file.dart';
 import '../find_file/find_file_by_name.dart';

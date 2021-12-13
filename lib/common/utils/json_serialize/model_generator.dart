@@ -2,8 +2,8 @@ import 'dart:collection';
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dart_style/dart_style.dart';
-import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 
+import '../pubspec/pubspec_utils.dart';
 import 'helpers.dart';
 import 'json_ast/json_ast.dart' show parse, Settings, Node;
 import 'sintaxe.dart';

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:get_cli/functions/find_file/find_file_by_name.dart';
 import 'package:path/path.dart';
 
 import '../../common/utils/logger/log_utils.dart';

@@ -8,7 +8,6 @@ import '../../../../core/internationalization.dart';
 import '../../../../core/locales.g.dart';
 import '../../../../core/structure.dart';
 import '../../../../exception_handler/exceptions/cli_exception.dart';
-import '../../../../get_cli.dart';
 import '../../../../samples/impl/generate_locales.dart';
 import '../../../interface/command.dart';
 

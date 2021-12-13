@@ -1,4 +1,4 @@
-import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import '../exception_handler/exceptions/cli_exception.dart';
 
 extension StringExt on String {
   /// Removes all characters.

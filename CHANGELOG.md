@@ -1,3 +1,13 @@
+## [1.7.0]
+- Fix Path and null safety errors (@CpdnCristiano)
+- Translation to Chinese (@iwpz @zhangwanping)
+- Update Portugueses docs @ricardodalarme 
+- Add Italian translation (@giannuzzoexe)
+- Fix Generate Model null-safety error (@maxzod)
+- Fixed errors in Arc clean: (@Babar-Bashir, @shawon1fb)
+
+
+
 ## [1.6.0]
 - Fix cast error on local dependencies (@ahmednfwela)
 - Fix null safety model creator (@prabhah)

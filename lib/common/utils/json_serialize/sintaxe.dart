@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:collection/collection.dart' show IterableExtension;
 
 import '../pubspec/pubspec_utils.dart';
@@ -132,10 +134,8 @@ class TypeDefinition {
     } else if (name == 'List') {
       // list of class
       return "if (json['$key'] != null) {\n\t\t\t$fieldKey = <$subtype>[];"
-
           "\n\t\t\tjson['$key'].forEach((v) { "
           '$fieldKey${PubspecUtils.nullSafeSupport ? '?' : ''}.add($subtype.fromJson(v)); });\n\t\t}';
-
     } else {
       // class
       return "$fieldKey = json['$key'] != null ?"

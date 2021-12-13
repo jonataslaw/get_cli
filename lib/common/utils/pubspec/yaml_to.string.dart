@@ -68,14 +68,18 @@ class CliYamlToString {
         if (value is Iterable || value is Map) {
           _writeIndent(indentCount, stringSink);
         }
-        stringSink..write(key)..write(_divider);
+        stringSink
+          ..write(key)
+          ..write(_divider);
         _writeYamlString(value, indentCount, stringSink, false, false);
       }
     } else {
       for (var key in keys) {
         final value = node[key];
         _writeIndent(indentCount, stringSink);
-        stringSink..write(key)..write(_divider);
+        stringSink
+          ..write(key)
+          ..write(_divider);
         _writeYamlString(value, indentCount, stringSink, false, false);
         if (value is Map || value is Iterable) {
           if (isTopLevel) {
