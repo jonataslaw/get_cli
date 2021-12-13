@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cli_menu/cli_menu.dart';
 import 'package:pubspec/pubspec.dart';
 import 'package:version/version.dart' as v;
 
@@ -8,6 +7,7 @@ import '../../../core/internationalization.dart';
 import '../../../core/locales.g.dart';
 import '../../../exception_handler/exceptions/cli_exception.dart';
 import '../../../extensions.dart';
+import '../../menu/menu.dart';
 import '../logger/log_utils.dart';
 import '../pub_dev/pub_dev_api.dart';
 import '../shell/shel.utils.dart';
@@ -65,10 +65,12 @@ class PubspecUtils {
           LocaleKeys.ask_package_already_installed.trArgs([package]),
           false,
           false);
-      final menu = Menu([
-        LocaleKeys.options_yes.tr,
-        LocaleKeys.options_no.tr,
-      ]);
+      final menu = Menu(
+        [
+          LocaleKeys.options_yes.tr,
+          LocaleKeys.options_no.tr,
+        ],
+      );
       final result = menu.choose();
       if (result.index != 0) {
         return false;

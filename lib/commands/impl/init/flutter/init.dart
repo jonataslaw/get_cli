@@ -1,5 +1,4 @@
-import 'package:cli_menu/cli_menu.dart';
-
+import '../../../../common/menu/menu.dart';
 import '../../../../common/utils/logger/log_utils.dart';
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../common/utils/shell/shel.utils.dart';

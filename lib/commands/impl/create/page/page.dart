@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
-import 'package:cli_menu/cli_menu.dart';
 import 'package:recase/recase.dart';
 
+import '../../../../common/menu/menu.dart';
 import '../../../../common/utils/logger/log_utils.dart';
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../core/generator.dart';
@@ -52,13 +52,15 @@ class CreatePageCommand extends Command {
     var path = pathSplit.join('/');
     path = Structure.replaceAsExpected(path: path);
     if (Directory(path).existsSync()) {
-      LogService.info(
-          Translation(LocaleKeys.ask_existing_page.trArgs([name])).toString());
-      final menu = Menu([
-        LocaleKeys.options_yes.tr,
-        LocaleKeys.options_no.tr,
-        LocaleKeys.options_rename.tr,
-      ]);
+      final menu = Menu(
+        [
+          LocaleKeys.options_yes.tr,
+          LocaleKeys.options_no.tr,
+          LocaleKeys.options_rename.tr,
+        ],
+        title:
+            Translation(LocaleKeys.ask_existing_page.trArgs([name])).toString(),
+      );
       final result = menu.choose();
       if (result.index == 0) {
         _writeFiles(path, name!, overwrite: true);

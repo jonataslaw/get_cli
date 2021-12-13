@@ -1,11 +1,10 @@
 import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
-import 'package:cli_menu/cli_menu.dart';
 import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
-import '../../../../common/utils/logger/log_utils.dart';
+import '../../../../common/menu/menu.dart';
 import '../../../../common/utils/pubspec/pubspec_utils.dart';
 import '../../../../common/utils/shell/shel.utils.dart';
 import '../../../../core/internationalization.dart';
@@ -51,32 +50,31 @@ class CreateProjectCommand extends Command {
 
       var org = dialog.ask()['org'] as String?;
 
-      LogService.info(LocaleKeys.ask_ios_lang.tr);
-      final iosLangMenu = Menu(['Swift', 'Objective-C']);
+      final iosLangMenu =
+          Menu(['Swift', 'Objective-C'], title: LocaleKeys.ask_ios_lang.tr);
       final iosResult = iosLangMenu.choose();
 
       var iosLang = iosResult.index == 0 ? 'swift' : 'objc';
 
-      LogService.info(LocaleKeys.ask_android_lang.tr);
-      final androidLangMenu = Menu(['Kotlin', 'Java']);
+      final androidLangMenu =
+          Menu(['Kotlin', 'Java'], title: LocaleKeys.ask_android_lang.tr);
       final androidResult = androidLangMenu.choose();
 
       var androidLang = androidResult.index == 0 ? 'kotlin' : 'java';
 
-      LogService.info(LocaleKeys.ask_use_null_safe.tr);
-      final nullSafeMenu =
-          Menu([LocaleKeys.options_yes.tr, LocaleKeys.options_no.tr]);
+      final nullSafeMenu = Menu(
+          [LocaleKeys.options_yes.tr, LocaleKeys.options_no.tr],
+          title: LocaleKeys.ask_use_null_safe.tr);
       final nullSafeMenuResult = nullSafeMenu.choose();
 
       var useNullSafe = nullSafeMenuResult.index == 0;
 
-      LogService.info(LocaleKeys.ask_use_linter.tr);
       final linterMenu = Menu([
         'no',
         'Pedantic [Deprecated]',
         'Effective Dart [Deprecated]',
         'Dart Recommended',
-      ]);
+      ], title: LocaleKeys.ask_use_linter.tr);
       final linterResult = linterMenu.choose();
 
       await ShellUtils.flutterCreate(path, org, iosLang, androidLang);
