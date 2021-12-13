@@ -1,3 +1,6 @@
+## [1.7.1]
+- Remove unmaintained dependencies
+
 ## [1.7.0]
 - Fix Path and null safety errors (@CpdnCristiano)
 - Translation to Chinese (@iwpz @zhangwanping)
