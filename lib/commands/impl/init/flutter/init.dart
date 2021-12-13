@@ -17,7 +17,7 @@ class InitCommand extends Command {
     final menu = Menu([
       'GetX Pattern (by Kauê)',
       'CLEAN (by Arktekko)',
-    ]);
+    ], title: 'Which architecture do you want to use?');
     final result = menu.choose();
 
     result.index == 0
