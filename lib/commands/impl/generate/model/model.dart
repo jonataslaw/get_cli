@@ -32,7 +32,7 @@ class GenerateModelCommand extends Command {
         for (var element in list) {
           var ext = p.extension(element.path);
           if (ext == ".json") {
-            var r_name = p.basenameWithoutExtension(element.path);
+            var r_name = p.basenameWithoutExtension(element.path).pascalCase;
             start(r_name, suffix, await _jsonRawData(element.path));
           }
         }
