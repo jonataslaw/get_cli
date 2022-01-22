@@ -50,6 +50,16 @@ mixin ArgsMixin {
     return _getArg('with');
   }
 
+  /// model suffix
+  String get onSuffix {
+    return _getArg('suffix');
+  }
+
+  /// model recursive Directory
+  String get onRecursive {
+    return _getArg('recursive');
+  }
+
   /// return parameter `from`
   ///
   /// example run

@@ -1,0 +1,22 @@
+{
+  "code": 0,
+  "msg": "操作成功",
+  "data": [
+    {
+      "id": null,
+      "remark": null,
+      "createdBy": null,
+      "createdAt": null,
+      "updatedBy": null,
+      "updatedAt": null,
+      "delFlag": null,
+      "belongCustomerId": null,
+      "appCode": null,
+      "agreementName": "用户协议",
+      "functionCode": "USER_AGREEMENT",
+      "richTextId": null,
+      "richTextContent": "html",
+      "updateBy": null
+    }
+  ]
+}
