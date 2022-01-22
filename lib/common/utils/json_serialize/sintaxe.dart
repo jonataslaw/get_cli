@@ -152,9 +152,7 @@ class TypeDefinition {
       return "data['$key'] = $thisKey;";
     } else if (name == 'List') {
       // class list
-      return """if ($thisKey != null) {
-      data['$key'] = $thisKey${PubspecUtils.nullSafeSupport ? '?' : ''}.map((v) => ${_buildToJsonClass('v', nullSafe: false)}).toList();
-    }""";
+      return "data['$key'] = this.$thisKey${PubspecUtils.nullSafeSupport ? '?' : ''}.map((v) => ${_buildToJsonClass('v', nullSafe: false)}).toList();";
     } else {
       // class
       return """if ($thisKey != null) {
