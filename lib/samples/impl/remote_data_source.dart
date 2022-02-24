@@ -12,8 +12,6 @@ class RemoteDataSourceSample extends Sample {
   String get content => '''
 
 class $_name  {
-
-
 }
   ''';
 }

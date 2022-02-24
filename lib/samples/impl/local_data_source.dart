@@ -11,7 +11,7 @@ class LocalDataSourceSample extends Sample {
   String get content => '''
 
 class $_name  {
-
+ 
 }
   ''';
 }

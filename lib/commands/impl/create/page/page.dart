@@ -16,6 +16,7 @@ import '../../../../functions/routes/get_add_route.dart';
 import '../../../../samples/impl/get_binding.dart';
 import '../../../../samples/impl/get_controller.dart';
 import '../../../../samples/impl/get_view.dart';
+import '../../../../samples/impl/local_data_source.dart';
 import '../../../interface/command.dart';
 
 /// The command create a Binding and Controller page and view
@@ -144,7 +145,7 @@ class CreatePageCommand extends Command {
       'local_data_source',
       path,
       extraFolder,
-      RemoteDataSourceSample(
+      LocalDataSourceSample(
         '',
         '${name.pascalCase}LocalDataSource',
         overwrite: overwrite,
