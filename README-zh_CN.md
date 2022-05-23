@@ -193,7 +193,7 @@ class AuthController extends GetxController {
 
 在指定目录创建 view
 
-### 生成国家化文件
+### 生成国际化文件
 
 在 assets/locales 目录创建 json 格式的语言文件
 
