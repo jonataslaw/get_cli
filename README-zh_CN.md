@@ -8,7 +8,7 @@ GetX™ 框架的官方 CLI。
 ```dart
 // 安装:
 pub global activate get_cli 
-// 使用本命令需要设置系统环境变量: [FlutterSDK安装目录]\bin\cache\dart-sdk\bin
+// 使用本命令需要设置系统环境变量: [FlutterSDK安装目录]\bin\cache\dart-sdk\bin 和 [FlutterSDK安装目录]\.pub-cache\bin
 
 flutter pub global activate get_cli
 
