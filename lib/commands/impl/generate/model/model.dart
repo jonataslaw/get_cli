@@ -21,22 +21,44 @@ class GenerateModelCommand extends Command {
   String get commandName => 'model';
   @override
   Future<void> execute() async {
-    var name = p.basenameWithoutExtension(withArgument).pascalCase;
-    if (withArgument.isEmpty) {
-      final dialog = CLI_Dialog(questions: [
-        [LocaleKeys.ask_model_name.tr, 'name']
-      ]);
-      var result = dialog.ask()['name'] as String;
-      name = result.pascalCase;
-    }
+    var recursiveDir = onRecursive;
 
+    var suffix = onSuffix;
+
+    if (recursiveDir.isNotEmpty) {
+        var current = Directory(recursiveDir);
+        final list = current.listSync(recursive: false, followLinks: false);
+
+        for (var element in list) {
+          var ext = p.extension(element.path);
+          if (ext == ".json") {
+            var r_name = p.basenameWithoutExtension(element.path).pascalCase;
+            start(r_name, suffix, await _jsonRawData(element.path));
+          }
+        }
+    } else {
+      var name = p.basenameWithoutExtension(withArgument);
+
+      if (withArgument.isEmpty) {
+        final dialog = CLI_Dialog(questions: [
+          [LocaleKeys.ask_model_name.tr, 'name']
+        ]);
+        var result = dialog.ask()['name'] as String;
+        name = result.pascalCase;
+      }
+
+      start(name, suffix, await _jsonRawData(withArgument));
+    }
+  }
+
+  void start(String name, String suffix, String jsonRawData) async {
     FileModel _fileModel;
     final classGenerator = ModelGenerator(
-        name, containsArg('--private'), containsArg('--withCopy'));
+        name + suffix, containsArg('--private'), containsArg('--withCopy'));
 
     _fileModel = Structure.model(name, 'model', false, on: onCommand);
 
-    var dartCode = classGenerator.generateDartClasses(await _jsonRawData);
+    var dartCode = classGenerator.generateDartClasses(jsonRawData);
 
     var modelPath = '${_fileModel.path}_model.dart';
 
@@ -68,6 +90,7 @@ class GenerateModelCommand extends Command {
 
   @override
   bool validate() {
+    if (onRecursive.isNotEmpty) return true;
     if ((withArgument.isEmpty || p.extension(withArgument) != '.json') &&
         fromArgument.isEmpty) {
       var codeSample =
@@ -78,9 +101,9 @@ class GenerateModelCommand extends Command {
     return true;
   }
 
-  Future<String> get _jsonRawData async {
-    if (withArgument.isNotEmpty) {
-      return await File(withArgument).readAsString();
+  Future<String> _jsonRawData(String file) async {
+    if (file.isNotEmpty) {
+      return await File(file).readAsString();
     } else {
       try {
         var result = await get(Uri.parse(fromArgument));
