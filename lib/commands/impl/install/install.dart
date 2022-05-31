@@ -29,7 +29,6 @@ class InstallCommand extends Command {
                 version: packageInfo[1], isDev: isDev, runPubGet: false)
             ? true
             : runPubGet;
-        ;
       }
     }
 

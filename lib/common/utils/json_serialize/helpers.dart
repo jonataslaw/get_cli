@@ -105,7 +105,7 @@ WithWarning<Map> mergeObj(Map obj, Map other, String path) {
         l.addAll(other[k] as Iterable);
         final mergeableType = mergeableListType(l);
         if (ListType.Object == mergeableType.listType) {
-          var mergedList = mergeObjectList(l, '$path');
+          var mergedList = mergeObjectList(l, path);
           warnings.addAll(mergedList.warnings);
           clone[k] = List.filled(1, mergedList.result);
         } else {

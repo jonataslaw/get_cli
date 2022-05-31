@@ -87,12 +87,12 @@ class GenerateLocalesCommand extends Command {
       parsedLocales.writeln('\t};');
     });
 
-    var _fileModel =
+    var newFileModel =
         Structure.model('locales', 'generate_locales', false, on: onCommand);
 
     GenerateLocalesSample(
             parsedKeys, parsedLocales.toString(), translationsKeys.toString(),
-            path: '${_fileModel.path}.g.dart')
+            path: '${newFileModel.path}.g.dart')
         .create();
 
     LogService.success(LocaleKeys.sucess_locale_generate.tr);

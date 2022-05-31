@@ -30,15 +30,15 @@ class GenerateModelCommand extends Command {
       name = result.pascalCase;
     }
 
-    FileModel _fileModel;
+    FileModel newFileModel;
     final classGenerator = ModelGenerator(
         name, containsArg('--private'), containsArg('--withCopy'));
 
-    _fileModel = Structure.model(name, 'model', false, on: onCommand);
+    newFileModel = Structure.model(name, 'model', false, on: onCommand);
 
     var dartCode = classGenerator.generateDartClasses(await _jsonRawData);
 
-    var modelPath = '${_fileModel.path}_model.dart';
+    var modelPath = '${newFileModel.path}_model.dart';
 
     var model = writeFile(modelPath, dartCode.result, overwrite: true);
 

@@ -3,13 +3,13 @@ import 'dart:io';
 import '../../core/structure.dart';
 
 void addExport(String path, String line) {
-  var _file = File(Structure.replaceAsExpected(path: path));
-  if (!_file.existsSync()) {
-    _file.createSync(recursive: true);
-    _file.writeAsStringSync(line);
+  var newFile = File(Structure.replaceAsExpected(path: path));
+  if (!newFile.existsSync()) {
+    newFile.createSync(recursive: true);
+    newFile.writeAsStringSync(line);
     return;
   }
-  var lines = _file.readAsLinesSync();
+  var lines = newFile.readAsLinesSync();
 
   if (lines.length > 1) {
     if (lines.contains(line)) {
@@ -27,5 +27,5 @@ void addExport(String path, String line) {
 
   lines.sort();
 
-  _file.writeAsStringSync(lines.join('\n'));
+  newFile.writeAsStringSync(lines.join('\n'));
 }

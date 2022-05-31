@@ -36,9 +36,6 @@ $commandsHelp
   }
 
   @override
-  bool validate() => super.validate();
-
-  @override
   String get codeSample => '';
 
   @override

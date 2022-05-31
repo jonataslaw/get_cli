@@ -30,9 +30,7 @@ bool _isSurrogate(String str, int pos) {
 }
 
 int _codePointAt(String str, [int? idx]) {
-  if (idx == null) {
-    idx = 0;
-  }
+  idx ??= 0;
   var code = str.codeUnitAt(idx);
   if (0xD800 <= code && code <= 0xDBFF && idx < str.length - 1) {
     var hi = code;
@@ -66,13 +64,13 @@ int shouldBreak(int start, List<int> mid, int end) {
   final eModifierIndex = all.lastIndexOf(E_Modifier);
   if (eModifierIndex > 1 &&
       all.sublist(1, eModifierIndex).every((c) => c == Extend) &&
-      [Extend, E_Base, E_Base_GAZ].indexOf(start) == -1) {
+      ![Extend, E_Base, E_Base_GAZ].contains(start)) {
     return Break;
   }
   var rIIndex = all.lastIndexOf(Regional_Indicator);
   if (rIIndex > 0 &&
       all.sublist(1, rIIndex).every((c) => c == Regional_Indicator) &&
-      [Prepend, Regional_Indicator].indexOf(previous) == -1) {
+      ![Prepend, Regional_Indicator].contains(previous)) {
     if (all.where((c) => c == Regional_Indicator).length % 2 == 1) {
       return BreakLastRegional;
     } else {
@@ -104,18 +102,18 @@ int shouldBreak(int start, List<int> mid, int end) {
     return NotBreak;
   }
   final previousNonExtendIndex =
-      all.indexOf(Extend) != -1 ? all.lastIndexOf(Extend) - 1 : all.length - 2;
+      all.contains(Extend) ? all.lastIndexOf(Extend) - 1 : all.length - 2;
   if (previousNonExtendIndex != -1 &&
-      [E_Base, E_Base_GAZ].indexOf(all[previousNonExtendIndex]) != -1 &&
+      [E_Base, E_Base_GAZ].contains(all[previousNonExtendIndex]) &&
       all.length > previousNonExtendIndex + 1 &&
       sliceFromEnd(all, previousNonExtendIndex + 1).every((c) => c == Extend) &&
       next == E_Modifier) {
     return NotBreak;
   }
-  if (previous == ZWJ && [Glue_After_Zwj, E_Base_GAZ].indexOf(next) != -1) {
+  if (previous == ZWJ && [Glue_After_Zwj, E_Base_GAZ].contains(next)) {
     return NotBreak;
   }
-  if (mid.indexOf(Regional_Indicator) != -1) {
+  if (mid.contains(Regional_Indicator)) {
     return Break;
   }
   if (previous == Regional_Indicator && next == Regional_Indicator) {
@@ -1535,9 +1533,7 @@ int getGraphemeBreakProperty(int code) {
 
 class GraphemeSplitter {
   int nextBreak(String string, [int? index]) {
-    if (index == null) {
-      index = 0;
-    }
+    index ??= 0;
     if (index < 0) {
       return 0;
     }

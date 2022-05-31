@@ -49,7 +49,9 @@ class ${_fileName.pascalCase}Controller extends GetxController {
     super.onReady();
   }
   @override
-  void onClose() {}
+  void onClose() {
+    super.onClose();
+  }
   void increment() => count.value++;
 }
 ''';

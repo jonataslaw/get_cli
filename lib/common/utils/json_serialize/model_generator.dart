@@ -106,7 +106,7 @@ class ModelGenerator {
         List<Warning>? warns;
         if (dependency.typeDef.name == 'List') {
           // only generate dependency class if the array is not empty
-          if ((jsonRawData[dependency.name] as List).length > 0) {
+          if ((jsonRawData[dependency.name] as List).isNotEmpty) {
             // when list has ambiguous values, take the first one,
             // otherwise merge all objects
             // into a single one
