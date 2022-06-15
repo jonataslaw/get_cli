@@ -30,7 +30,7 @@ class $_viewName extends $_controllerName {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$_viewName'),
+        title: const Text('$_viewName'),
         centerTitle: true,
       ),
       body: Center(
@@ -50,7 +50,7 @@ class $_viewName extends $_controllerName {
 class $_viewName extends $_controllerName {
   @override
   Widget build(BuildContext context) {
-    return Text('GetX to Server is working!');
+    return const Text('GetX to Server is working!');
   }
 }
   ''';
