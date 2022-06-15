@@ -96,7 +96,7 @@ void addAppPage(String name, String bindingDir, String viewDir) {
   var namePascalCase = name.pascalCase;
   var line = '''${_getTabs(tabEspaces)}GetPage(
 ${_getTabs(tabEspaces + 1)}name: $routesOrPath.${nameSnakeCase.toUpperCase()}, 
-${_getTabs(tabEspaces + 1)}page:()=> ${namePascalCase}View(), 
+${_getTabs(tabEspaces + 1)}page:()=> const ${namePascalCase}View(), 
 ${_getTabs(tabEspaces + 1)}binding: ${namePascalCase}Binding(),
 ${_getTabs(tabEspaces)}),''';
 

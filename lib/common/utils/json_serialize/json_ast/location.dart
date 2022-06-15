@@ -22,7 +22,7 @@ class Segment extends Loc {
       offset == other.offset;
 
   @override
-  int get hashCode => super.hashCode;
+  int get hashCode => line.hashCode ^ column.hashCode ^ offset.hashCode;
 }
 
 @immutable
@@ -49,5 +49,5 @@ class Location {
   }
 
   @override
-  int get hashCode => super.hashCode;
+  int get hashCode => start.hashCode ^ end.hashCode ^ source.hashCode;
 }

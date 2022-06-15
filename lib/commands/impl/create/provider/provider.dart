@@ -18,9 +18,6 @@ class CreateProviderCommand extends Command {
   String? get hint => Translation(LocaleKeys.hint_create_provider).tr;
 
   @override
-  bool validate() => super.validate();
-
-  @override
   String get codeSample => 'get create provider:user on data';
 
   @override

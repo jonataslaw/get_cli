@@ -42,7 +42,7 @@ void addNavigation(String name) {
 
   lines.insert(index, '''    GetPage(
       name: Routes.${name.snakeCase.toUpperCase()},
-      page: () => ${name.pascalCase}Screen(),
+      page: () => const ${name.pascalCase}Screen(),
       binding: ${name.pascalCase}ControllerBinding(),
     ),    ''');
 

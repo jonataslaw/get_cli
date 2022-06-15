@@ -40,13 +40,10 @@ class CreatePageCommand extends Command {
   @override
   String? get hint => LocaleKeys.hint_create_page.tr;
 
-  @override
-  bool validate() => super.validate();
-
   void checkForAlreadyExists(String? name) {
-    var _fileModel =
+    var newFileModel =
         Structure.model(name, 'page', true, on: onCommand, folderName: name);
-    var pathSplit = Structure.safeSplitPath(_fileModel.path!);
+    var pathSplit = Structure.safeSplitPath(newFileModel.path!);
 
     pathSplit.removeLast();
     var path = pathSplit.join('/');

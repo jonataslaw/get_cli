@@ -7,11 +7,11 @@ import '../../core/locales.g.dart';
 import '../../core/structure.dart';
 
 Future<bool> createMain() async {
-  var _fileModel = Structure.model('', 'init', false);
+  var newFileModel = Structure.model('', 'init', false);
 
-  var _main = File('${_fileModel.path}main.dart');
+  var main = File('${newFileModel.path}main.dart');
 
-  if (_main.existsSync()) {
+  if (main.existsSync()) {
     /// apenas quem chama essa função é o create project e o init,
     /// ambas funções iniciam um projeto e sobrescreve os arquivos
 

@@ -88,19 +88,22 @@ class TypeDefinition {
   }
 
   @override
-  int get hashCode => super.hashCode;
-
-  @override
   bool operator ==(dynamic other) {
     if (other is TypeDefinition) {
-      var otherTypeDef = other;
-      return name == otherTypeDef.name &&
-          subtype == otherTypeDef.subtype &&
-          isAmbiguous == otherTypeDef.isAmbiguous &&
-          _isPrimitive == otherTypeDef._isPrimitive;
+      return name == other.name &&
+          subtype == other.subtype &&
+          isAmbiguous == other.isAmbiguous &&
+          _isPrimitive == other._isPrimitive;
     }
     return false;
   }
+
+  @override
+  int get hashCode =>
+      name.hashCode ^
+      subtype.hashCode ^
+      isAmbiguous.hashCode ^
+      _isPrimitive.hashCode;
 
   bool get isPrimitive => _isPrimitive;
 
@@ -147,7 +150,7 @@ class TypeDefinition {
     final fieldKey =
         fixFieldName(key, typeDef: this, privateField: privateField);
     //final thisKey = 'this.$fieldKey';
-    final thisKey = '$fieldKey';
+    final thisKey = fieldKey;
     if (isPrimitive) {
       return "data['$key'] = $thisKey;";
     } else if (name == 'List') {
@@ -390,5 +393,6 @@ class ClassDefinition {
   }
 
   @override
+  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
