@@ -30,7 +30,7 @@ void checkForUpdate() async {
                 .toString());
             //await versionCommand();
             printGetCli();
-            final String? codeSample = LogService.code('get update');
+            final String codeSample = LogService.code('get update');
             LogService.info(
                 '${LocaleKeys.info_update_available2.trArgs([
                       versionInPubDev

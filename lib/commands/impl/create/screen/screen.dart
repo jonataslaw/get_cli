@@ -31,9 +31,9 @@ class CreateScreenCommand extends Command {
       name = 'home';
     }
 
-    var _fileModel =
+    var newFileModel =
         Structure.model(name, 'screen', true, on: onCommand, folderName: name);
-    var pathSplit = Structure.safeSplitPath(_fileModel.path!);
+    var pathSplit = Structure.safeSplitPath(newFileModel.path!);
 
     pathSplit.removeLast();
     var path = pathSplit.join('/');
@@ -83,7 +83,6 @@ class CreateScreenCommand extends Command {
         ),
         '',
         '.');
-    ;
     var binding = handleFileCreate(
         name,
         'controller.binding',

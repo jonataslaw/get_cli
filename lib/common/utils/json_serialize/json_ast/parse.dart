@@ -14,7 +14,7 @@ enum _ArrayState { _START_, OPEN_ARRAY, VALUE, COMMA }
 
 JSONASTException errorEof(
     String input, List<dynamic> tokenList, Settings settings) {
-  final loc = (tokenList.length > 0
+  final loc = (tokenList.isNotEmpty
       ? tokenList[tokenList.length - 1].loc.end as Loc
       : Loc(line: 1, column: 1));
 
@@ -52,7 +52,7 @@ String parseString(String string) {
       if (nextChar == 'u') {
         result.write(parseHexEscape(safeSubstring(string, i + 1, i + 5)));
         i += 4;
-      } else if (passEscapes.indexOf(nextChar) != -1) {
+      } else if (passEscapes.contains(nextChar)) {
         result.write(nextChar);
       } else if (escapes.containsKey(nextChar)) {
         result.write(escapes[nextChar]);
@@ -345,10 +345,8 @@ ValueIndex<LiteralNode>? parseLiteral(
       }
     case TokenType.NUMBER:
       {
-        value = int.tryParse(token.value!) ?? null;
-        if (value == null) {
-          value = double.tryParse(token.value!) ?? null;
-        }
+        value = int.tryParse(token.value!);
+        value ??= double.tryParse(token.value!);
         break;
       }
     case TokenType.TRUE:
@@ -420,7 +418,7 @@ ValueIndex<T> _parseValue<T>(
 Node parse(String input, Settings settings) {
   final tokenList = tokenize(input, settings);
 
-  if (tokenList.length == 0) {
+  if (tokenList.isEmpty) {
     throw errorEof(input, tokenList, settings);
   }
 

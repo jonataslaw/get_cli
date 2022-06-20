@@ -1,3 +1,6 @@
+## [1.8.0]
+- Update dependencies, remove pedantic and effective dart from lints options
+
 ## [1.7.1]
 - Remove unmaintained dependencies
 

@@ -3,9 +3,7 @@ import 'dart:math';
 import 'grapheme_splitter.dart' show GraphemeSplitter;
 
 String substring(String str, int start, [int? end]) {
-  if (end == null) {
-    end = start + 1;
-  }
+  end ??= start + 1;
   final splitter = GraphemeSplitter();
   final iterator = splitter.iterateGraphemes(str.substring(start));
   final strBuffer = StringBuffer();

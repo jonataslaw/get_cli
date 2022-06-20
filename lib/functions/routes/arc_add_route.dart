@@ -49,7 +49,7 @@ List<String> _routesSort(List<String> lines) {
   lines2.addAll(lines);
   for (var line in lines2) {
     if (line.contains('static const')) {
-      routes.add('$line');
+      routes.add(line);
       lines.remove(line);
     }
   }

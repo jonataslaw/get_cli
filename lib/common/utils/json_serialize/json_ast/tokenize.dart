@@ -116,7 +116,8 @@ class ValueNode extends Node {
       raw == other.raw;
 
   @override
-  int get hashCode => super.hashCode;
+  int get hashCode =>
+      value.hashCode ^ raw.hashCode ^ type.hashCode ^ loc.hashCode;
 
   ValueNode copyWith({
     String? value,
@@ -171,6 +172,7 @@ class ObjectNode extends Node {
       _compareDynamicList(children, other.children);
 
   @override
+  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
 
@@ -201,6 +203,7 @@ class ArrayNode extends Node {
       _compareDynamicList(children, other.children);
 
   @override
+  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
 
@@ -230,9 +233,6 @@ class PropertyNode extends Node {
       value == other.value &&
       _compareDynamicList(children, other.children);
 
-  @override
-  int get hashCode => super.hashCode;
-
   PropertyNode copyWith({
     List<Node>? children,
     int? index,
@@ -250,6 +250,10 @@ class PropertyNode extends Node {
       loc: loc ?? this.loc,
     );
   }
+
+  @override
+  // TODO: implement hashCode
+  int get hashCode => super.hashCode;
 }
 
 class LiteralNode extends Node {
@@ -271,9 +275,6 @@ class LiteralNode extends Node {
       value == other.value &&
       raw == other.raw;
 
-  @override
-  int get hashCode => super.hashCode;
-
   LiteralNode copyWith({
     dynamic value,
     String? raw,
@@ -287,6 +288,10 @@ class LiteralNode extends Node {
       loc: loc ?? this.loc,
     );
   }
+
+  @override
+  // TODO: implement hashCode
+  int get hashCode => super.hashCode;
 }
 
 @immutable
@@ -301,6 +306,7 @@ class ValueIndex<T> {
       other is ValueIndex<T> && value == other.value && index == other.index;
 
   @override
+  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
 

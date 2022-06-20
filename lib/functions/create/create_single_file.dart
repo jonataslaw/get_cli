@@ -31,9 +31,9 @@ File writeFile(String path, String content,
     bool logger = true,
     bool skipRename = false,
     bool useRelativeImport = false}) {
-  var _file = File(Structure.replaceAsExpected(path: path));
+  var newFile = File(Structure.replaceAsExpected(path: path));
 
-  if (!_file.existsSync() || overwrite) {
+  if (!newFile.existsSync() || overwrite) {
     if (!skipFormatter) {
       if (path.endsWith('.dart')) {
         try {
@@ -44,34 +44,35 @@ File writeFile(String path, String content,
             useRelative: useRelativeImport,
           );
         } on Exception catch (_) {
-          if (_file.existsSync()) {
-            LogService.info(LocaleKeys.error_invalid_dart.trArgs([_file.path]));
+          if (newFile.existsSync()) {
+            LogService.info(
+                LocaleKeys.error_invalid_dart.trArgs([newFile.path]));
           }
           rethrow;
         }
       }
     }
-    if (!skipRename && _file.path != 'pubspec.yaml') {
+    if (!skipRename && newFile.path != 'pubspec.yaml') {
       var separatorFileType = PubspecUtils.separatorFileType!;
       if (separatorFileType.isNotEmpty) {
-        _file = _file.existsSync()
-            ? _file = _file
+        newFile = newFile.existsSync()
+            ? newFile = newFile
                 .renameSync(replacePathTypeSeparator(path, separatorFileType))
             : File(replacePathTypeSeparator(path, separatorFileType));
       }
     }
 
-    _file.createSync(recursive: true);
-    _file.writeAsStringSync(content);
+    newFile.createSync(recursive: true);
+    newFile.writeAsStringSync(content);
     if (logger) {
       LogService.success(
         LocaleKeys.sucess_file_created.trArgs(
-          [basename(_file.path), _file.path],
+          [basename(newFile.path), newFile.path],
         ),
       );
     }
   }
-  return _file;
+  return newFile;
 }
 
 /// Replace the file name separator

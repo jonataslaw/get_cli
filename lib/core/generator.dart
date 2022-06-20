@@ -31,7 +31,7 @@ class GetCli {
           command = _findCommand(++currentIndex, command.childrens);
         } else {
           var childrenCommand = _findCommand(++currentIndex, command.childrens);
-          if (!(childrenCommand is ErrorCommand)) {
+          if (childrenCommand is! ErrorCommand) {
             command = childrenCommand;
           }
         }
