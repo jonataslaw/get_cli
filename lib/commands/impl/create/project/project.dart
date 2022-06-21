@@ -23,7 +23,7 @@ class CreateProjectCommand extends Command {
     final menu = Menu([
       'Flutter Project',
       'Get Server',
-    ]);
+    ],title: 'Select which type of project you want to create ?');
     final result = menu.choose();
     String? nameProject = name;
     if (name == '.') {
