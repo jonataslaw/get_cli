@@ -1,4 +1,5 @@
-import 'package:cli_dialog/cli_dialog.dart';
+
+import 'package:dcli/dcli.dart';
 
 class Menu {
   final List<String> choices;
@@ -7,15 +8,16 @@ class Menu {
   Menu(this.choices, {this.title = ''});
 
   Answer choose() {
-    final dialog = CLI_Dialog(listQuestions: [
-      [
-        {'question': title, 'options': choices},
-        'result'
-      ]
-    ]);
+    // final dialog = CLI_Dialog(listQuestions: [
+    //   [
+    //     {'question': title, 'options': choices},
+    //     'result'
+    //   ]
+    // ]);
 
-    final answer = dialog.ask();
-    final result = answer['result'] as String;
+    // final answer = dialog.ask();
+    // final result = answer['result'] as String;
+    final result = menu(prompt: title, options: choices);
     final index = choices.indexOf(result);
 
     return Answer(result: result, index: index);
