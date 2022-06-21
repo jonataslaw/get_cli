@@ -1,9 +1,11 @@
+
 ## [1.8.1]
 - Fixed null error in pub version
 - Fixed get view by adding const
 
 ## [1.8.0]
 - Update dependencies, remove pedantic and effective dart from lints options
+
 ## [1.7.1]
 - Remove unmaintained dependencies
 
