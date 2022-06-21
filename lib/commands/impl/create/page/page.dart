@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cli_dialog/cli_dialog.dart';
+import 'package:get_cli/samples/impl/remote_data_source.dart';
 import 'package:recase/recase.dart';
 
 import '../../../../common/menu/menu.dart';
@@ -15,6 +16,7 @@ import '../../../../functions/routes/get_add_route.dart';
 import '../../../../samples/impl/get_binding.dart';
 import '../../../../samples/impl/get_controller.dart';
 import '../../../../samples/impl/get_view.dart';
+import '../../../../samples/impl/local_data_source.dart';
 import '../../../interface/command.dart';
 
 /// The command create a Binding and Controller page and view
@@ -24,6 +26,7 @@ class CreatePageCommand extends Command {
 
   @override
   List<String> get alias => ['module', '-p', '-m'];
+
   @override
   Future<void> execute() async {
     var isProject = false;
@@ -106,6 +109,7 @@ class CreatePageCommand extends Command {
       ),
       'views',
     );
+
     var bindingFile = handleFileCreate(
       name,
       'binding',
@@ -121,7 +125,30 @@ class CreatePageCommand extends Command {
       ),
       'bindings',
     );
-
+    var remoteDataSourceFile = handleFileCreate(
+      name,
+      'remote_data_source',
+      path,
+      extraFolder,
+      RemoteDataSourceSample(
+        '',
+        '${name.pascalCase}RemoteDataSource',
+        overwrite: overwrite,
+      ),
+      'data_sources',
+    );
+    var localDataSourceFile = handleFileCreate(
+      name,
+      'local_data_source',
+      path,
+      extraFolder,
+      LocalDataSourceSample(
+        '',
+        '${name.pascalCase}LocalDataSource',
+        overwrite: overwrite,
+      ),
+      'data_sources',
+    );
     addRoute(
       name,
       Structure.pathToDirImport(bindingFile.path),
