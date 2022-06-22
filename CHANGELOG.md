@@ -1,3 +1,8 @@
+## [1.8.2]
+- Replace cli_dialog with dcli
+- version dependency updated
+- Added dafault value to menu & spaces
+- Fixed some lints with views
 
 ## [1.8.1]
 - Fixed null error in pub version
