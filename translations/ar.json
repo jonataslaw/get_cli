@@ -1,0 +1,88 @@
+{
+  "ask": {
+    "existing_page": "الصفحة [%s] موجودة بالفعل, هل تريد استبدالها?",
+    "name_to_project": "ماهو اسم مشروعك?",
+    "company_domain": "ماهو النطاق الخاص بشركتك?",
+    "model_name": "لم نتمكن من اختيار اسم الموديل تلقائيا, ماهو الإسم الذى تريد ان تستخدم?",
+    "package_already_installed": "المكتبة: %s مثبتة سابقا, هل تريد تحديثها?",
+    "lib_not_empty": "مجلد lib غير فارغ. هل تريد استبداله? \\n تنبيه: لايمكن التراجع عن هذه الخطوة",
+    "ios_lang": "ماهي اللغة التى تريد استخدامها على ios?",
+    "android_lang": "ماهي اللغة التى تريد ان تستخدم على android?",
+    "use_null_safe": "هل تريد استخدام null safe?",
+    "use_linter": "هل تريد استخدام بعض linter?",
+    "new_page_name": "ماهو اسم الصفحة الجديد?"
+  },
+  "error": {
+    "failed_to_connect": "فشل الاتصال مع %s",
+    "no_valid_file_or_url": "%s ليس ملفا او رابط صحيحا",
+    "unnecessary_parameter": "%s هذا المعامل ليس الزاميا",
+    "unnecessary_parameter_plural": "%s معاملات ليست الزامية",
+    "nonexistent_directory": "%s مجلد غير موجود.",
+    "empty_directory": "%s فارغ",
+    "invalid_json": "%s ليس ملف json صحيحا",
+    "special_characters_in_key": "الرموز ليست مقبولة فى المفتاح. \\n المفتاح: %s",
+    "required_path": "تحتاج الى ارسال الملف او مسار المجلد",
+    "invalid_dart": "%s ليس ملف dart صحيحا",
+    "invalid_file_or_directory": "%s ليس ملفات او مجلدا صحيحا",
+    "package_not_found": "المكتبة: %s ليست موجودة فى pub.dev",
+    "cli_version_not_found": "لم يتم العثور على الاصدار الذى قمت بتثبيته.",
+    "update_cli": "هناك خطأ اثناء تحديث get_cli",
+    "folder_not_found": "المجلد %s غير موجود",
+    "file_not_found": "لم يتم العثور على الملف %s",
+    "access_denied": "اذن الوصول غير مرخص %s",
+    "unexpected": "حدث خطأ غير متوقع:",
+    "no_package_to_remove": "ادخل اسم المكتبة التى حذفها"
+  },
+  "example": "مثال:",
+  "warning": "تنبيه:",
+  "hint": {
+    "create": {
+      "controller": "انشاء Controller",
+      "page": "يستخدم لإنشاء الصفحات",
+      "project": "يستخدم لإنشاء مشروع جديد",
+      "provider": "إنشاء Provider جديد",
+      "screen": "إنشاء شاشة جديدة",
+      "view": "إنشاء view"
+    },
+    "generate": {
+      "locales": "إنشاء ملف الترجمة من ملفات json",
+      "model": "إنشاء Class Model من json"
+    },
+    "help": "طلب المساعدة",
+    "init": "إنشاء هيكل المشروع المختار فى مشروع موجود مسبقا:",
+    "install": "يستخدم لتثبيت مكتبة فى مشروعك (dependencies):",
+    "remove": "يستخدم لحذف مكتبة من مشروعك (dependencies):",
+    "sort": "ترتيب (Format) ملفات dart",
+    "update": "لتحديث GET_CLI",
+    "version": "اظهار اصدار CLI الحالي'"
+  },
+  "info": {
+    "unnecessary_flag": "%s ليس ضروريا",
+    "unnecessary_flag_prural": "%s ليس ضروريا",
+    "package_not_installed": "المكتبة: %s ليست مثبتة فى تطبيقك",
+    "cli_last_version_already_installed": "الإصدار الأخير من get_cli مثبت بالفعل",
+    "no_file_overwritten": "لم يتم استبدال اي ملفات",
+    "update_available": "هناك تحديث متوفر! الإصدار الحالي: %s",
+    "update_available2": "الإصدار الجديد: %s يرجى تشغيل:"
+  },
+  "options": {
+    "yes": "نعم!",
+    "no": "لا",
+    "rename": "اريد اعادة التسمية"
+  },
+  "optional_parameters": "معامل اختياري: %s",
+  "sucess": {
+    "page_create": "%s تم انشاء الصفحة بنجاح.",
+    "locale_generate": "تم انشاء الملفات محليا بنجاح.",
+    "getx_pattern_generated": "GetX Pattern structure تم انشاؤه بنجاح.",
+    "clean_Pattern_generated": "CLEAN Pattern structure تم انشاؤه بنجاح.",
+    "file_formatted": " '%s' تم اعادة هيكلته بنجاح",
+    "package_removed": "تم حذف المكتبة: %s!",
+    "package_installed": "تم تثبيت المكتبة: %s",
+    "update_cli": "تم تحديث CLI",
+    "add_controller_in_bindings": "%s تمت اضافته لل binding فى المسار: %s'",
+    "navigation_added": "تم انشاء navigation: %s بنجاح.",
+    "file_created": "تم انشاء الملف: %s بنجاح فى المسار: %s",
+    "route_created": "تم انشاء route %s بنجاح."
+  }
+}
