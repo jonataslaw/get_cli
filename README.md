@@ -356,6 +356,17 @@ get_cli:
   separator: "."
 ```
 
+### Configure Getx directory layout
+
+When you create a page or screen, each module will have bindings, controllers, views sub directories.
+
+If you prefer to have a flat file hierarchy, add the following lines to your `pubspec.yaml`:
+
+```yml
+get_cli:
+    sub_folder: false
+```
+
 ### Are your imports disorganized?
 
 To help you organize your imports a new command was created: `get sort`, in addition to organizing your imports the command will also format your dart file. thanks to [dart_style](https://pub.dev/packages/dart_style).
