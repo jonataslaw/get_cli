@@ -8,18 +8,19 @@ Future<void> main(List<String> arguments) async {
   time.start();
   final command = GetCli(arguments).findCommand();
 
-  if (arguments.contains('--debug')) {
+  try {
     if (command.validate()) {
-      await command.execute().then((value) => checkForUpdate());
+      await command.execute().then((value) {
+        if (!arguments.contains('--no-version-check')) {
+          checkForUpdate();
+        }
+      });
     }
-  } else {
-    try {
-      if (command.validate()) {
-        await command.execute().then((value) => checkForUpdate());
-      }
-    } on Exception catch (e) {
-      ExceptionHandler().handle(e);
+  } on Exception catch (e) {
+    if (arguments.contains('--debug')) {
+      rethrow;
     }
+    ExceptionHandler().handle(e);
   }
   time.stop();
   LogService.info('Time: ${time.elapsed.inMilliseconds} Milliseconds');
