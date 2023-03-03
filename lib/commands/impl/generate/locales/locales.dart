@@ -37,6 +37,8 @@ class GenerateLocalesCommand extends Command {
         .where((entry) => entry.path.endsWith('.json'))
         .toList();
 
+    files.sort((a, b) => basename(a.path).compareTo(basename(b.path)));
+
     if (files.isEmpty) {
       LogService.info(LocaleKeys.error_empty_directory.trArgs([inputPath]));
       return;
