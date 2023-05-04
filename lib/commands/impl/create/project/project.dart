@@ -73,8 +73,8 @@ class CreateProjectCommand extends Command {
       var useNullSafe = nullSafeMenuResult.index == 0;
 
       final linterMenu = Menu([
-        'yes',
-        'no',
+        'Yes',
+        'No',
       ], title: LocaleKeys.ask_use_linter.tr);
       final linterResult = linterMenu.choose();
 
