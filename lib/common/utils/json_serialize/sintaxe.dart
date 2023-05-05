@@ -127,7 +127,10 @@ class TypeDefinition {
         fixFieldName(key, typeDef: this, privateField: privateField);
     if (isPrimitive) {
       if (name == 'List') {
-        return "$fieldKey = json['$key'].cast<$subtype>();";
+        return "$fieldKey = json['$key']?.cast<$subtype>();";
+      }
+      if (name == 'double?') {
+        return "$fieldKey = (json['$key'] as num?)?.toDouble();";
       }
       return "$fieldKey = json['$key'];";
     } else if (name == 'List' && subtype == 'DateTime') {
