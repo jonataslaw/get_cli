@@ -21,10 +21,17 @@ get create project
 // 在现有项目中生成所选结构:
 get init
 
-// 创建页面:
+// 创建page:
 // (页面包括 controller, view, 和 binding)
 // 注: 你可以随便命名, 例如: `get create page:login`
+// 注: 选择了 Getx_pattern 结构才用这个选项
 get create page:home
+
+// 创建 Screen:
+// (Screens 有 controller, view, 和 binding)
+// 注: 你可以随便命名，例如: `get screen page:login`
+// 注: 选择了 CLEAN 结构才用这个选项 (by Arktekko)
+get create screen:home 
 
 // 在指定文件夹创建新 controller:
 // 注: 你无需引用文件夹, Getx 会自动搜索 home 目录,
@@ -345,6 +352,17 @@ class User {
 ```yaml
 get_cli:
   separator: "."
+```
+
+### 配置 Getx 路径样式
+
+当你创建一个 Page 或 Screen 时，每个模块都会有 binding , controller, view 子目录。
+
+如果你更想要一个平级文件结构，添加以下内容到你的`pubspec.yaml`:
+
+```yml
+get_cli:
+    sub_folder: false
 ```
 
 ### 你的 import 乱不乱?
