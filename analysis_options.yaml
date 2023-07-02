@@ -5,11 +5,6 @@
 
 include: package:lints/recommended.yaml
 
-analyzer:
-  strong-mode:
-    implicit-casts: false
-
 linter:
   rules:
     constant_identifier_names: false
-
