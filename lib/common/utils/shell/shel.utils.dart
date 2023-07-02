@@ -17,6 +17,8 @@ class ShellUtils {
 
   static Future<void> activatedNullSafe() async {
     await pubGet();
+    await run('dart migrate --apply-changes --skip-import-check',
+        verbose: true);
   }
 
   static Future<void> flutterCreate(
