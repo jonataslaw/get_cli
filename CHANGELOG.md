@@ -1,3 +1,13 @@
+## [1.9.0]
+- Update to Getx 5 standards
+
+## [1.8.4]
+- Update dependencies
+
+## [1.8.3]
+- jsonToJson updated
+- version dependency updated
+
 ## [1.8.2]
 - Replace cli_dialog with dcli
 - version dependency updated

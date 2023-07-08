@@ -1,5 +1,3 @@
-import 'package:meta/meta.dart';
-
 import './error.dart';
 import './location.dart';
 import './tokenize_error_types.dart';
@@ -78,7 +76,6 @@ bool _compareDynamicList(List? l, List? other) {
   return true;
 }
 
-@immutable
 class Node {
   final String type;
   final Location? loc;
@@ -170,10 +167,6 @@ class ObjectNode extends Node {
       type == other.type &&
       loc == other.loc &&
       _compareDynamicList(children, other.children);
-
-  @override
-  // TODO: implement hashCode
-  int get hashCode => super.hashCode;
 }
 
 class ArrayNode extends Node {
@@ -201,10 +194,6 @@ class ArrayNode extends Node {
       type == other.type &&
       loc == other.loc &&
       _compareDynamicList(children, other.children);
-
-  @override
-  // TODO: implement hashCode
-  int get hashCode => super.hashCode;
 }
 
 class PropertyNode extends Node {
@@ -250,10 +239,6 @@ class PropertyNode extends Node {
       loc: loc ?? this.loc,
     );
   }
-
-  @override
-  // TODO: implement hashCode
-  int get hashCode => super.hashCode;
 }
 
 class LiteralNode extends Node {
@@ -288,13 +273,8 @@ class LiteralNode extends Node {
       loc: loc ?? this.loc,
     );
   }
-
-  @override
-  // TODO: implement hashCode
-  int get hashCode => super.hashCode;
 }
 
-@immutable
 class ValueIndex<T> {
   final T value;
   final int index;
@@ -306,8 +286,7 @@ class ValueIndex<T> {
       other is ValueIndex<T> && value == other.value && index == other.index;
 
   @override
-  // TODO: implement hashCode
-  int get hashCode => super.hashCode;
+  int get hashCode => value.hashCode ^ index.hashCode;
 }
 
 // HELPERS

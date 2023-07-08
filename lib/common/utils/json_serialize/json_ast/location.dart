@@ -1,6 +1,3 @@
-import 'package:meta/meta.dart';
-
-@immutable
 class Loc {
   final int? line;
   final int? column;
@@ -25,7 +22,6 @@ class Segment extends Loc {
   int get hashCode => line.hashCode ^ column.hashCode ^ offset.hashCode;
 }
 
-@immutable
 class Location {
   final Segment start;
   final Segment end;
