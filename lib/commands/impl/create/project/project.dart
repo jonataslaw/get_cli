@@ -23,7 +23,7 @@ class CreateProjectCommand extends Command {
     final menu = Menu([
       'Flutter Project',
       'Get Server',
-    ],title: 'Select which type of project you want to create ?');
+    ], title: 'Select which type of project you want to create ?');
     final result = menu.choose();
     String? nameProject = name;
     if (name == '.') {
@@ -68,9 +68,10 @@ class CreateProjectCommand extends Command {
       final nullSafeMenu = Menu(
           [LocaleKeys.options_yes.tr, LocaleKeys.options_no.tr],
           title: LocaleKeys.ask_use_null_safe.tr);
-      final nullSafeMenuResult = nullSafeMenu.choose();
-
-      var useNullSafe = nullSafeMenuResult.index == 0;
+      final nullSafeMenuResult =
+          double.parse(Platform.version.split(' ').first[0]);
+      print(nullSafeMenuResult);
+      var useNullSafe = nullSafeMenuResult < 3;
 
       final linterMenu = Menu([
         'yes',
