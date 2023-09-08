@@ -65,14 +65,6 @@ class CreateProjectCommand extends Command {
 
       var androidLang = androidResult.index == 0 ? 'kotlin' : 'java';
 
-      final nullSafeMenu = Menu(
-          [LocaleKeys.options_yes.tr, LocaleKeys.options_no.tr],
-          title: LocaleKeys.ask_use_null_safe.tr);
-      final nullSafeMenuResult =
-          double.parse(Platform.version.split(' ').first[0]);
-      print(nullSafeMenuResult);
-      var useNullSafe = nullSafeMenuResult < 3;
-
       final linterMenu = Menu([
         'yes',
         'no',
@@ -83,9 +75,6 @@ class CreateProjectCommand extends Command {
 
       File('test/widget_test.dart').writeAsStringSync('');
 
-      if (useNullSafe) {
-        await ShellUtils.activatedNullSafe();
-      }
       switch (linterResult.index) {
         case 0:
           if (PubspecUtils.isServerProject) {
