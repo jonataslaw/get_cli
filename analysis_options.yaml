@@ -7,7 +7,7 @@ include: package:lints/recommended.yaml
 
 analyzer:
   strong-mode:
-    implicit-casts: false
+    
 
 linter:
   rules:
