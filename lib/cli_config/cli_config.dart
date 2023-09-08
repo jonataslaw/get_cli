@@ -5,7 +5,7 @@ import 'package:path/path.dart';
 
 class CliConfig {
   static final DateFormat _formatter = DateFormat('yyyy-MM-dd');
-  // Em devsevolvimento
+
   static File getFileConfig() {
     var scriptFile = Platform.script.toFilePath();
     var path = join(dirname(scriptFile), '.get_cli.yaml');
