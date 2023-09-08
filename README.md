@@ -381,7 +381,7 @@ CLI now has an internationalization system.
 
 to translate the cli into your language:
 
-1. create a new json file with your language, in the [tranlations](/translations) folder
+1. create a new json file with your language, in the [translations](/translations) folder
 2. Copy the keys from the [file](/translations/en.json), and translate the values
 3. send your PR.
 
