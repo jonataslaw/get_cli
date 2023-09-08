@@ -81,7 +81,7 @@ class Structure {
     );
   }
 
-  static String replaceAsExpected({required String path, String? replaceChar}) {
+  static String replaceAsExpected({required String path}) {
     if (path.contains('\\')) {
       if (Platform.isLinux || Platform.isMacOS) {
         return path.replaceAll('\\', '/');
