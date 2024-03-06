@@ -23,10 +23,10 @@ class ${fileName.pascalCase}Screen extends GetView<${fileName.pascalCase}Control
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${fileName.pascalCase}Screen'),
+        title:const Text('${fileName.pascalCase}Screen'),
         centerTitle: true,
       ),
-      body: Center(
+      body:const Center(
         child: Text(
           '${fileName.pascalCase}Screen  is working', 
           style: TextStyle(fontSize:20),
@@ -46,9 +46,9 @@ class CounterScreen extends GetView<CounterController> {
   Widget build(context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter Demo Home Page with GetX"),
+        title:const Text("Flutter Demo Home Page with GetX"),
       ),
-      body: Center(
+      body:const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
