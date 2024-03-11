@@ -61,16 +61,24 @@ class GenerateLocalesCommand extends Command {
       locales[key] = result;
     });
 
-    final keys = <String>{};
-    locales.forEach((key, value) {
+    final keys = <String, String>{};
+    locales.forEach((locale, value) {
       value.forEach((key, value) {
-        keys.add(key);
+        var comment = '\t/// $locale: $value\n';
+        if (keys.containsKey(key)) {
+          var comments = '${keys[key]!}\t///\n$comment';
+          keys[key] = comments;
+        } else {
+          keys[key] = comment;
+        }
       });
     });
 
-    final parsedKeys =
-        keys.map((e) => '\tstatic const $e = \'$e\';').join('\n');
-
+    var parsedKeys = '';
+    keys.forEach((key, comments) {
+      parsedKeys += comments;
+      parsedKeys += '\tstatic const $key = \'$key\';\n';
+    });
     final parsedLocales = StringBuffer('\n');
     final translationsKeys = StringBuffer();
     locales.forEach((key, value) {
