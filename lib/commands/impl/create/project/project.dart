@@ -66,8 +66,8 @@ class CreateProjectCommand extends Command {
       var androidLang = androidResult.index == 0 ? 'kotlin' : 'java';
 
       final linterMenu = Menu([
-        'yes',
-        'no',
+        'Yes',
+        'No',
       ], title: LocaleKeys.ask_use_linter.tr);
       final linterResult = linterMenu.choose();
 
