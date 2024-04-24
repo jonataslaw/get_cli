@@ -68,8 +68,9 @@ class GenerateLocalesCommand extends Command {
       });
     });
 
-    final parsedKeys =
-        keys.map((e) => '\tstatic const $e = \'$e\';').join('\n');
+    final parsedKeys = keys
+        .map((e) => '\tstatic const ${e.replaceAll(r'.', '_')} = \'$e\';')
+        .join('\n');
 
     final parsedLocales = StringBuffer('\n');
     final translationsKeys = StringBuffer();
@@ -106,11 +107,11 @@ class GenerateLocalesCommand extends Command {
       if (localization[key] is Map) {
         var nextAccKey = key;
         if (accKey != null) {
-          nextAccKey = '${accKey}_$key';
+          nextAccKey = '$accKey.$key';
         }
         _resolve(localization[key] as Map<String, dynamic>, result, nextAccKey);
       } else {
-        result[accKey != null ? '${accKey}_$key' : key] =
+        result[accKey != null ? '$accKey.$key' : key] =
             localization[key] as String?;
       }
     }
