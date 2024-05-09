@@ -203,7 +203,7 @@
 
 ## [0.11.3]
 
-- add generates locates
+- add generates locales
 
 ## [0.11.2]
 
