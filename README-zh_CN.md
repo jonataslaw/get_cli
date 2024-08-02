@@ -121,10 +121,9 @@ get help
 ```shell
   get create page:name
 ```
+该命令允许您创建模块，建议选择使用 getx_pattern 的用户使用，
 
-这条命令允许你创建模块，建议选择getx_pattern的人使用。
-
-创建 view, controller 和 binding 文件, 除了自动添加路由。
+创建 view, controller 和 binding 文件, 此外还可以自动添加路由。
 
 你可以在一个模块内创建另一个模块。
 
