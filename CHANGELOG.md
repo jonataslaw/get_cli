@@ -1,7 +1,14 @@
+## [1.9.1]
+
+- Fix yaml parse error
+
 ## [1.9.0]
 
 - Update to dart 3
 - Make null safety mandatory
+- Update impl/get_view.dart to adhere Flutter's - use_super_parameters
+- Add support for Flutter 2.10
+- Fix chinese translation
 
 ## [1.8.2]
 
