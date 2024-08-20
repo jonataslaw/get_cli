@@ -15,9 +15,11 @@ import '../shell/shel.utils.dart';
 class PubspecUtils {
   static final _pubspecFile = File('pubspec.yaml');
 
-  static Pubspec get pubSpec => Pubspec.parse(pubspecJson);
+  static Pubspec get pubSpec => Pubspec.parse(pubspecString);
 
-  static get pubspecJson => loadYaml(_pubspecFile.readAsStringSync());
+  static String get pubspecString => _pubspecFile.readAsStringSync();
+
+  static get pubspecJson => loadYaml(pubspecString);
 
   /// separtor
   static final _mapSep = _PubValue<String>(() {
