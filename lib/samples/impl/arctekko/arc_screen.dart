@@ -6,9 +6,8 @@ import '../../interface/sample_interface.dart';
 class ArcScreenSample extends Sample {
   late String fileName;
   bool isExample;
-  ArcScreenSample(String path, String fileName,
-      {bool overwrite = false, this.isExample = false})
-      : super(path, overwrite: overwrite);
+  ArcScreenSample(super.path, String fileName,
+      {super.overwrite, this.isExample = false});
 
   @override
   String get content => !isExample

@@ -15,7 +15,7 @@ class Segment extends Loc {
       : super(line: line, column: column);
 
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       other is Segment &&
       line == other.line &&
       column == other.column &&
@@ -34,7 +34,7 @@ class Location {
   const Location(this.start, this.end, [this.source]);
 
   @override
-  bool operator ==(dynamic other) =>
+  bool operator ==(Object other) =>
       other is Location &&
       start == other.start &&
       end == other.end &&

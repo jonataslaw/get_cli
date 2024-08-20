@@ -8,7 +8,6 @@ import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
 import '../../extensions.dart';
 import '../../samples/impl/get_route.dart';
-import '../create/create_single_file.dart';
 import '../find_file/find_file_by_name.dart';
 import 'get_app_pages.dart';
 import 'get_support_children.dart';
@@ -16,12 +15,12 @@ import 'get_support_children.dart';
 /// This command will create the route to the new page
 void addRoute(String nameRoute, String bindingDir, String viewDir) {
   var routesFile = findFileByName('app_routes.dart');
-  var content = '';
+  // var content = '';
 
   if (routesFile.path.isEmpty) {
     RouteSample().create();
     routesFile = File(RouteSample().path);
-    content = routesFile.readAsStringSync();
+    // content = routesFile.readAsStringSync();
   }
   var pathSplit = viewDir.split('/');
 
