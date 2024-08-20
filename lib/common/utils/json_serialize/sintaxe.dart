@@ -88,7 +88,7 @@ class TypeDefinition {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (other is TypeDefinition) {
       return name == other.name &&
           subtype == other.subtype &&
@@ -127,7 +127,10 @@ class TypeDefinition {
         fixFieldName(key, typeDef: this, privateField: privateField);
     if (isPrimitive) {
       if (name == 'List') {
-        return "$fieldKey = json['$key'].cast<$subtype>();";
+        return "$fieldKey = json['$key']?.cast<$subtype>();";
+      }
+      if (name == 'double?') {
+        return "$fieldKey = (json['$key'] as num?)?.toDouble();";
       }
       return "$fieldKey = json['$key'];";
     } else if (name == 'List' && subtype == 'DateTime') {
@@ -204,7 +207,7 @@ class ClassDefinition {
       [this._privateFields = false, this._withCopyConstructor = false]);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (other is ClassDefinition) {
       var otherClassDef = other;
       return isSubsetOf(otherClassDef) && otherClassDef.isSubsetOf(this);

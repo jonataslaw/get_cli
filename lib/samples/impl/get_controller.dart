@@ -6,9 +6,8 @@ import '../interface/sample_interface.dart';
 class ControllerSample extends Sample {
   final String _fileName;
   final bool _isServer;
-  ControllerSample(String path, this._fileName, this._isServer,
-      {bool overwrite = false})
-      : super(path, overwrite: overwrite);
+  ControllerSample(super.path, this._fileName, this._isServer,
+      {super.overwrite});
 
   @override
   String get content => _isServer ? serverController : flutterController;
