@@ -9,7 +9,7 @@ import 'json_ast/json_ast.dart' show parse, Settings, Node;
 import 'sintaxe.dart';
 
 class DartCode extends WithWarning<String> {
-  DartCode(String result, List<Warning> warnings) : super(result, warnings);
+  DartCode(super.result, super.warnings);
 
   String get code => result;
 }

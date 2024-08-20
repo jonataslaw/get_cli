@@ -12,7 +12,17 @@ import '../pubspec/pubspec_lock.dart';
 class ShellUtils {
   static Future<void> pubGet() async {
     LogService.info('Running `flutter pub get` …');
-    await run('flutter pub get', verbose: true);
+    await run('dart pub get', verbose: true);
+  }
+
+  static Future<void> addPackage(String package) async {
+    LogService.info('Adding package $package …');
+    await run('dart pub add $package', verbose: true);
+  }
+
+  static Future<void> removePackage(String package) async {
+    LogService.info('Removing package $package …');
+    await run('dart pub remove $package', verbose: true);
   }
 
   static Future<void> flutterCreate(

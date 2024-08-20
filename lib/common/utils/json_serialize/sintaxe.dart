@@ -88,7 +88,7 @@ class TypeDefinition {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (other is TypeDefinition) {
       return name == other.name &&
           subtype == other.subtype &&
@@ -207,7 +207,7 @@ class ClassDefinition {
       [this._privateFields = false, this._withCopyConstructor = false]);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (other is ClassDefinition) {
       var otherClassDef = other;
       return isSubsetOf(otherClassDef) && otherClassDef.isSubsetOf(this);
