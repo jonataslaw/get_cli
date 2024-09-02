@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:path/path.dart' as path_lib;
 import 'package:pubspec_parse/pubspec_parse.dart';
 
 import '../../functions/create/create_single_file.dart';
@@ -29,9 +28,7 @@ abstract class Sample {
 
   /// check if project using GetX 5
   bool isUsingGetX5() {
-    final pubspecFile = File(
-      path_lib.join(Directory.current.toString(), 'pubspec.yaml'),
-    );
+    final pubspecFile = File('pubspec.yaml');
     final pubSpec = Pubspec.parse(pubspecFile.readAsStringSync());
 
     if(pubSpec.dependencies['get'] == null ) return false;
