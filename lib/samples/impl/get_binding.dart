@@ -42,7 +42,7 @@ class $_bindingName extends Binding {
     return [
       Bind.lazyPut<${_fileName.pascalCase}Controller>(
         () => ${_fileName.pascalCase}Controller(),
-      );
+      ),
     ];
   }
 }
