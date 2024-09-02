@@ -18,4 +18,7 @@ dependencies:
 dev_dependencies:
 
 ''';
+
+  @override
+  String? get getX5Content => null;
 }

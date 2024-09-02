@@ -19,4 +19,7 @@ abstract class _Paths {
 }
 
 ''';
+
+  @override
+  String? get getX5Content => null;
 }

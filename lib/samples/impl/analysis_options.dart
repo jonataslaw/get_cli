@@ -13,4 +13,7 @@ linter:
   rules:
     
 ''';
+
+  @override
+  String? get getX5Content => null;
 }

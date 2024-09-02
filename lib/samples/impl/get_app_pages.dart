@@ -23,4 +23,7 @@ class AppPages {
   ];
 }
 ''';
+
+  @override
+  String? get getX5Content => null;
 }
