@@ -31,4 +31,20 @@ class $_bindingName extends Bindings {
   }
 }
 ''';
+
+  @override
+  String? get getX5Content => '''$_import
+import 'package:${PubspecUtils.projectName}/$_controllerDir';
+
+class $_bindingName extends Binding {
+  @override
+  List<Bind> dependencies() {
+    return [
+      Bind.lazyPut<${_fileName.pascalCase}Controller>(
+        () => ${_fileName.pascalCase}Controller(),
+      );
+    ];
+  }
+}
+''';
 }
