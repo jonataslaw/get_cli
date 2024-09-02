@@ -31,4 +31,7 @@ class Locales {
 \t$_locales
 }
 ''';
+
+  @override
+  String? get getX5Content => null;
 }
