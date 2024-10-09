@@ -1,10 +1,34 @@
-# Include option is buggy:
-# https://github.com/flutter/flutter/issues/62591
-# In case the include issue gets fixed, lines below INCLUDE_FIX
-# can be removed
-
 include: package:lints/recommended.yaml
 
 linter:
   rules:
     constant_identifier_names: false
+    always_use_package_imports: true
+    always_declare_return_types: true
+    avoid_print: true
+    prefer_is_empty: true
+    prefer_is_not_empty: true
+    prefer_is_not_operator: true
+    prefer_single_quotes: true
+    require_trailing_commas: true
+    unnecessary_overrides: false
+    avoid_function_literals_in_foreach_calls: false
+    unrelated_type_equality_checks: true
+
+analyzer:
+  errors:
+    always_use_package_imports: error
+    always_declare_return_types: error
+    avoid_init_to_null: error
+    avoid_print: error
+    prefer_const_constructors: error
+    prefer_const_constructors_in_immutables: error
+    prefer_const_literals_to_create_immutables: error
+    prefer_is_empty: error
+    prefer_is_not_empty: error
+    prefer_is_not_operator: error
+    prefer_single_quotes: error 
+    require_trailing_commas: error
+    unrelated_type_equality_checks: error
+    unused_element: error
+    unused_local_variable: error

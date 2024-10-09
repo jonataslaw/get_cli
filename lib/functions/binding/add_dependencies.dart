@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:recase/recase.dart';
 
-import '../../common/utils/logger/log_utils.dart';
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../../core/internationalization.dart';
-import '../../core/locales.g.dart';
-import '../create/create_single_file.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 
 ///
 /// Add a new dependency to bindings
@@ -59,7 +59,9 @@ void addDependencyToBinding(String path, String controllerName, String import) {
           () => ${controllerName.pascalCase}Controller(),
 );''');
     writeFile(file.path, lines.join('\n'), overwrite: true, logger: false);
-    LogService.success(LocaleKeys.sucess_add_controller_in_bindings
-        .trArgs([controllerName.pascalCase, path]));
+    LogService.success(
+      LocaleKeys.sucess_add_controller_in_bindings
+          .trArgs([controllerName.pascalCase, path]),
+    );
   }
 }

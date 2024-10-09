@@ -4,26 +4,29 @@ import 'package:dcli/dcli.dart';
 import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
-import '../../../../common/menu/menu.dart';
-import '../../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../../common/utils/shell/shel.utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../core/structure.dart';
-import '../../../../samples/impl/analysis_options.dart';
-import '../../../interface/command.dart';
-import '../../init/flutter/init.dart';
-import '../../init/get_server/get_server_command.dart';
+import 'package:get_cli/common/menu/menu.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/common/utils/shell/shel.utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/samples/impl/analysis_options.dart';
+import 'package:get_cli/commands/interface/command.dart';
+import 'package:get_cli/commands/impl/init/flutter/init.dart';
+import 'package:get_cli/commands/impl/init/get_server/get_server_command.dart';
 
 class CreateProjectCommand extends Command {
   @override
   String get commandName => 'project';
   @override
   Future<void> execute() async {
-    final menu = Menu([
-      'Flutter Project',
-      'Get Server',
-    ], title: 'Select which type of project you want to create ?');
+    final menu = Menu(
+      [
+        'Flutter Project',
+        'Get Server',
+      ],
+      title: 'Select which type of project you want to create ?',
+    );
     final result = menu.choose();
     String? nameProject = name;
     if (name == '.') {
@@ -34,7 +37,8 @@ class CreateProjectCommand extends Command {
     }
 
     var path = Structure.replaceAsExpected(
-        path: Directory.current.path + p.separator + nameProject.snakeCase);
+      path: Directory.current.path + p.separator + nameProject.snakeCase,
+    );
     await Directory(path).create(recursive: true);
 
     Directory.current = path;
@@ -65,10 +69,13 @@ class CreateProjectCommand extends Command {
 
       var androidLang = androidResult.index == 0 ? 'kotlin' : 'java';
 
-      final linterMenu = Menu([
-        'Yes',
-        'No',
-      ], title: LocaleKeys.ask_use_linter.tr);
+      final linterMenu = Menu(
+        [
+          'Yes',
+          'No',
+        ],
+        title: LocaleKeys.ask_use_linter.tr,
+      );
       final linterResult = linterMenu.choose();
 
       await ShellUtils.flutterCreate(path, org, iosLang, androidLang);
@@ -78,17 +85,23 @@ class CreateProjectCommand extends Command {
       switch (linterResult.index) {
         case 0:
           if (PubspecUtils.isServerProject) {
-            await PubspecUtils.addDependencies('lints',
-                isDev: true, runPubGet: true);
+            await PubspecUtils.addDependencies(
+              'lints',
+              isDev: true,
+              runPubGet: true,
+            );
             AnalysisOptionsSample(
-                    include: 'include: package:lints/recommended.yaml')
-                .create();
+              include: 'include: package:lints/recommended.yaml',
+            ).create();
           } else {
-            await PubspecUtils.addDependencies('flutter_lints',
-                isDev: true, runPubGet: true);
+            await PubspecUtils.addDependencies(
+              'flutter_lints',
+              isDev: true,
+              runPubGet: true,
+            );
             AnalysisOptionsSample(
-                    include: 'include: package:flutter_lints/flutter.yaml')
-                .create();
+              include: 'include: package:flutter_lints/flutter.yaml',
+            ).create();
           }
           break;
 

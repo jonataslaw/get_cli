@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'locales.g.dart';
+import 'package:get_cli/core/locales.g.dart';
 
 extension TranslationExt on String {
   /// Translation
@@ -54,8 +54,11 @@ extension TranslationExt on String {
     return i > 1 ? plural?.tr : tr;
   }
 
-  String? trArgsPlural(
-      [String? plural, int i = 0, List<String> args = const []]) {
+  String? trArgsPlural([
+    String? plural,
+    int i = 0,
+    List<String> args = const [],
+  ]) {
     return i > 1 ? plural?.trArgs(args) : trArgs(args);
   }
 }

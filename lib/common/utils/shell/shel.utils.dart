@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:process_run/shell_run.dart';
 
-import '../../../core/generator.dart';
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../logger/log_utils.dart';
-import '../pub_dev/pub_dev_api.dart';
-import '../pubspec/pubspec_lock.dart';
+import 'package:get_cli/core/generator.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/common/utils/pub_dev/pub_dev_api.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_lock.dart';
 
 class ShellUtils {
   static Future<void> pubGet() async {
@@ -34,13 +34,16 @@ class ShellUtils {
     LogService.info('Running `flutter create $path` …');
 
     await run(
-        'flutter create --no-pub -i $iosLang -a $androidLang --org $org'
-        ' "$path"',
-        verbose: true);
+      'flutter create --no-pub -i $iosLang -a $androidLang --org $org'
+      ' "$path"',
+      verbose: true,
+    );
   }
 
-  static Future<void> update(
-      [bool isGit = false, bool forceUpdate = false]) async {
+  static Future<void> update([
+    bool isGit = false,
+    bool forceUpdate = false,
+  ]) async {
     isGit = GetCli.arguments.contains('--git');
     forceUpdate = GetCli.arguments.contains('-f');
     if (!isGit && !forceUpdate) {
@@ -51,8 +54,9 @@ class ShellUtils {
 
       if (versionInstalled == versionInPubDev) {
         return LogService.info(
-            Translation(LocaleKeys.info_cli_last_version_already_installed.tr)
-                .toString());
+          Translation(LocaleKeys.info_cli_last_version_already_installed.tr)
+              .toString(),
+        );
       }
     }
 
@@ -62,16 +66,18 @@ class ShellUtils {
       if (Platform.script.path.contains('flutter')) {
         if (isGit) {
           await run(
-              'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
-              verbose: true);
+            'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
+            verbose: true,
+          );
         } else {
           await run('flutter pub global activate get_cli', verbose: true);
         }
       } else {
         if (isGit) {
           await run(
-              'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
-              verbose: true);
+            'flutter pub global activate -sgit https://github.com/jonataslaw/get_cli/',
+            verbose: true,
+          );
         } else {
           await run('flutter pub global activate get_cli', verbose: true);
         }

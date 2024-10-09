@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:http/http.dart';
 import 'package:recase/recase.dart';
 
-import '../../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../exception_handler/exceptions/cli_exception.dart';
-import '../../../../functions/create/create_single_file.dart';
-import '../../../../functions/is_url/is_url.dart';
-import '../../../../functions/replace_vars/replace_vars.dart';
-import '../../../../samples/impl/get_view.dart';
-import '../../../interface/command.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/functions/is_url/is_url.dart';
+import 'package:get_cli/functions/replace_vars/replace_vars.dart';
+import 'package:get_cli/samples/impl/get_view.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 class CreateViewCommand extends Command {
   @override
@@ -36,8 +36,11 @@ class CreateViewCommand extends Command {
   int get maxParameters => 0;
 }
 
-Future<void> createView(String name,
-    {String withArgument = '', String onCommand = ''}) async {
+Future<void> createView(
+  String name, {
+  String withArgument = '',
+  String onCommand = '',
+}) async {
   var sample = GetViewSample(
     '',
     '${name.pascalCase}View',
@@ -53,7 +56,8 @@ Future<void> createView(String name,
         sample.customContent = replaceVars(content, name);
       } else {
         throw CliException(
-            LocaleKeys.error_failed_to_connect.trArgs([withArgument]));
+          LocaleKeys.error_failed_to_connect.trArgs([withArgument]),
+        );
       }
     } else {
       var file = File(withArgument);
@@ -62,7 +66,8 @@ Future<void> createView(String name,
         sample.customContent = replaceVars(content, name);
       } else {
         throw CliException(
-            LocaleKeys.error_no_valid_file_or_url.trArgs([withArgument]));
+          LocaleKeys.error_no_valid_file_or_url.trArgs([withArgument]),
+        );
       }
     }
   }

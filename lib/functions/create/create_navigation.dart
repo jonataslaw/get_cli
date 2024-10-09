@@ -3,21 +3,24 @@ import 'dart:io';
 
 import 'package:recase/recase.dart';
 
-import '../../common/utils/logger/log_utils.dart';
-import '../../core/internationalization.dart';
-import '../../core/locales.g.dart';
-import '../../core/structure.dart';
-import '../../samples/impl/arctekko/arc_navigation.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
-import 'create_single_file.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/samples/impl/arctekko/arc_navigation.dart';
+import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
 
 void createNavigation() {
   ArcNavigationSample().create(skipFormatter: true);
 }
 
 void addNavigation(String name) {
-  var navigationFile = File(Structure.replaceAsExpected(
-      path: 'lib/infrastructure/navigation/navigation.dart'));
+  var navigationFile = File(
+    Structure.replaceAsExpected(
+      path: 'lib/infrastructure/navigation/navigation.dart',
+    ),
+  );
 
   List<String> lines;
 
@@ -46,9 +49,16 @@ void addNavigation(String name) {
       binding: ${name.pascalCase}ControllerBinding(),
     ),    ''');
 
-  writeFile(navigationFile.path, lines.join('\n'),
-      overwrite: true, logger: false);
+  writeFile(
+    navigationFile.path,
+    lines.join('\n'),
+    overwrite: true,
+    logger: false,
+  );
 
-  LogService.success(Translation(
-      LocaleKeys.sucess_navigation_added.trArgs([name.pascalCase])));
+  LogService.success(
+    Translation(
+      LocaleKeys.sucess_navigation_added.trArgs([name.pascalCase]),
+    ),
+  );
 }

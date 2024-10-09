@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
 
-import './error.dart';
-import './location.dart';
-import './tokenize_error_types.dart';
-import './utils/substring.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/error.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/location.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/tokenize_error_types.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/utils/substring.dart';
 
 enum TokenType {
   LEFT_BRACE, // {
@@ -25,13 +25,13 @@ final Map<String, TokenType> punctuatorTokensMap = {
   '[': TokenType.LEFT_BRACKET,
   ']': TokenType.RIGHT_BRACKET,
   ':': TokenType.COLON,
-  ',': TokenType.COMMA
+  ',': TokenType.COMMA,
 };
 
 final Map<String, TokenType> keywordTokensMap = {
   'true': TokenType.TRUE,
   'false': TokenType.FALSE,
-  'null': TokenType.NULL
+  'null': TokenType.NULL,
 };
 
 enum _StringState { _START_, START_QUOTE_OR_CHAR, ESCAPE }
@@ -45,7 +45,7 @@ final Map<String, int> escapes = {
   'n': 5, // New line
   'r': 6, // Carriage return
   't': 7, // Horizontal tab
-  'u': 8 // 4 hexadecimal digits
+  'u': 8, // 4 hexadecimal digits
 };
 
 enum _NumberState {
@@ -147,9 +147,11 @@ class Token {
 class ObjectNode extends Node {
   final List<PropertyNode> children;
 
-  ObjectNode(
-      [super.type = 'Object', super.loc, List<PropertyNode>? children])
-      : children = children ?? <PropertyNode>[];
+  ObjectNode([
+    super.type = 'Object',
+    super.loc,
+    List<PropertyNode>? children,
+  ]) : children = children ?? <PropertyNode>[];
 
   ObjectNode copyWith({
     String? type,
@@ -171,7 +173,6 @@ class ObjectNode extends Node {
       _compareDynamicList(children, other.children);
 
   @override
-  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
 
@@ -201,7 +202,6 @@ class ArrayNode extends Node {
       _compareDynamicList(children, other.children);
 
   @override
-  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
 
@@ -250,7 +250,6 @@ class PropertyNode extends Node {
   }
 
   @override
-  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
 
@@ -288,7 +287,6 @@ class LiteralNode extends Node {
   }
 
   @override
-  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
 
@@ -304,7 +302,6 @@ class ValueIndex<T> {
       other is ValueIndex<T> && value == other.value && index == other.index;
 
   @override
-  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }
 
@@ -421,8 +418,13 @@ Token? parseString(String input, int index, int line, int column) {
             state = _StringState.ESCAPE;
           } else if (char == '"') {
             index++;
-            return Token(TokenType.STRING, line, column + index - startIndex,
-                index, safeSubstring(input, startIndex, index));
+            return Token(
+              TokenType.STRING,
+              line,
+              column + index - startIndex,
+              index,
+              safeSubstring(input, startIndex, index),
+            );
           } else {
             // buffer.write(char);
             index++;
@@ -574,8 +576,13 @@ Token? parseNumber(String input, int index, int line, int column) {
   }
 
   if (passedValueIndex > 0) {
-    return Token(TokenType.NUMBER, line, column + passedValueIndex - startIndex,
-        passedValueIndex, safeSubstring(input, startIndex, passedValueIndex));
+    return Token(
+      TokenType.NUMBER,
+      line,
+      column + passedValueIndex - startIndex,
+      passedValueIndex,
+      safeSubstring(input, startIndex, passedValueIndex),
+    );
   }
 
   return null;
@@ -585,7 +592,7 @@ List<Token? Function(String, int, int, int)> _parsers = [
   parseChar,
   parseKeyword,
   parseString,
-  parseNumber
+  parseNumber,
 ];
 
 Token? _parseToken(String input, int index, int line, int column) {
@@ -616,15 +623,26 @@ List<Token> tokenize(String input, Settings settings) {
     final token = _parseToken(input, index, line, column);
 
     if (token != null) {
-      token.loc = Location.create(line, column, index, token.line, token.column,
-          token.index, settings.source);
+      token.loc = Location.create(
+        line,
+        column,
+        index,
+        token.line,
+        token.column,
+        token.index,
+        settings.source,
+      );
       tokens.add(token);
       index = token.index;
       line = token.line;
       column = token.column;
     } else {
       final msg = unexpectedSymbol(
-          substring(input, index, index + 1), settings.source, line, column);
+        substring(input, index, index + 1),
+        settings.source,
+        line,
+        column,
+      );
       throw JSONASTException(msg, input, settings.source, line, column);
     }
   }

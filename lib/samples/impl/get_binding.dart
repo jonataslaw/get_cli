@@ -1,7 +1,7 @@
 import 'package:recase/recase.dart';
 
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../interface/sample_interface.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from Module_Binding file creation.
 class BindingSample extends Sample {
@@ -10,9 +10,14 @@ class BindingSample extends Sample {
   final String _bindingName;
   final bool _isServer;
 
-  BindingSample(super.path, this._fileName, this._bindingName,
-      this._controllerDir, this._isServer,
-      {super.overwrite});
+  BindingSample(
+    super.path,
+    this._fileName,
+    this._bindingName,
+    this._controllerDir,
+    this._isServer, {
+    super.overwrite,
+  });
 
   String get _import => _isServer
       ? "import 'package:get_server/get_server.dart';"

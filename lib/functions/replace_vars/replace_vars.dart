@@ -1,6 +1,6 @@
 import 'package:recase/recase.dart';
 
-import '../../common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
 
 String replaceVars(String content, String name) {
   return content

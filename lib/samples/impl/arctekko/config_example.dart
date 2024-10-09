@@ -1,4 +1,4 @@
-import '../../interface/sample_interface.dart';
+import 'package:get_cli/samples/interface/sample_interface.dart';
 
 class ConfigExampleSample extends Sample {
   ConfigExampleSample({String path = 'lib/config.dart'}) : super(path);

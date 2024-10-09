@@ -1,5 +1,5 @@
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../interface/sample_interface.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from Module_View file creation.
 class GetViewSample extends Sample {
@@ -8,9 +8,14 @@ class GetViewSample extends Sample {
   final String _controller;
   final bool _isServer;
 
-  GetViewSample(super.path, this._viewName, this._controller,
-      this._controllerDir, this._isServer,
-      {super.overwrite});
+  GetViewSample(
+    super.path,
+    this._viewName,
+    this._controller,
+    this._controllerDir,
+    this._isServer, {
+    super.overwrite,
+  });
 
   String get import => _controllerDir.isNotEmpty
       ? '''import 'package:${PubspecUtils.projectName}/$_controllerDir';'''

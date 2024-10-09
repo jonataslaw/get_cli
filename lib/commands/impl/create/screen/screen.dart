@@ -2,19 +2,19 @@ import 'dart:io';
 
 import 'package:recase/recase.dart';
 
-import '../../../../common/menu/menu.dart';
-import '../../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../../core/generator.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../core/structure.dart';
-import '../../../../functions/create/create_single_file.dart';
-import '../../../../functions/exports_files/add_export.dart';
-import '../../../../functions/routes/arc_add_route.dart';
-import '../../../../samples/impl/get_binding.dart';
-import '../../../../samples/impl/get_controller.dart';
-import '../../../../samples/impl/get_view.dart';
-import '../../../interface/command.dart';
+import 'package:get_cli/common/menu/menu.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/core/generator.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/functions/exports_files/add_export.dart';
+import 'package:get_cli/functions/routes/arc_add_route.dart';
+import 'package:get_cli/samples/impl/get_binding.dart';
+import 'package:get_cli/samples/impl/get_controller.dart';
+import 'package:get_cli/samples/impl/get_view.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 class CreateScreenCommand extends Command {
   @override
@@ -39,10 +39,13 @@ class CreateScreenCommand extends Command {
     var path = pathSplit.join('/');
     path = Structure.replaceAsExpected(path: path);
     if (Directory(path).existsSync()) {
-      final menu = Menu([
-        LocaleKeys.options_yes.tr,
-        LocaleKeys.options_no.tr,
-      ], title: LocaleKeys.ask_existing_page.trArgs([name]).toString());
+      final menu = Menu(
+        [
+          LocaleKeys.options_yes.tr,
+          LocaleKeys.options_no.tr,
+        ],
+        title: LocaleKeys.ask_existing_page.trArgs([name]).toString(),
+      );
       final result = menu.choose();
       if (result.index == 0) {
         _writeFiles(path, name, overwrite: true);
@@ -64,47 +67,57 @@ class CreateScreenCommand extends Command {
   void _writeFiles(String path, String name, {bool overwrite = false}) {
     var isServer = PubspecUtils.isServerProject;
 
-    var controller = handleFileCreate(name, 'controller', path, true,
-        ControllerSample('', name, isServer), 'controllers', '.');
+    var controller = handleFileCreate(
+      name,
+      'controller',
+      path,
+      true,
+      ControllerSample('', name, isServer),
+      'controllers',
+      '.',
+    );
 
     var controllerImport = Structure.pathToDirImport(controller.path);
 
     var view = handleFileCreate(
-        name,
-        'screen',
-        path,
-        false,
-        GetViewSample(
-          '',
-          '${name.pascalCase}Screen',
-          '${name.pascalCase}Controller',
-          controllerImport,
-          isServer,
-        ),
+      name,
+      'screen',
+      path,
+      false,
+      GetViewSample(
         '',
-        '.');
+        '${name.pascalCase}Screen',
+        '${name.pascalCase}Controller',
+        controllerImport,
+        isServer,
+      ),
+      '',
+      '.',
+    );
     var binding = handleFileCreate(
-        name,
-        'controller.binding',
+      name,
+      'controller.binding',
+      '',
+      true,
+      BindingSample(
         '',
-        true,
-        BindingSample(
-          '',
-          name,
-          '${name.pascalCase}ControllerBinding',
-          controllerImport,
-          isServer,
-        ),
-        'controllers',
-        '.');
+        name,
+        '${name.pascalCase}ControllerBinding',
+        controllerImport,
+        isServer,
+      ),
+      'controllers',
+      '.',
+    );
 
     var exportView = 'package:${PubspecUtils.projectName}/'
         '${Structure.pathToDirImport(view.path)}';
     addExport('lib/presentation/screens.dart', "export '$exportView';");
 
     addExport(
-        'lib/infrastructure/navigation/bindings/controllers/controllers_bindings.dart',
-        "export 'package:${PubspecUtils.projectName}/${Structure.pathToDirImport(binding.path)}'; ");
+      'lib/infrastructure/navigation/bindings/controllers/controllers_bindings.dart',
+      "export 'package:${PubspecUtils.projectName}/${Structure.pathToDirImport(binding.path)}'; ",
+    );
     arcAddRoute(name);
   }
 

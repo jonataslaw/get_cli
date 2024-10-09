@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../../functions/version/check_dev_version.dart';
-import '../logger/log_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/functions/version/check_dev_version.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
 
 class PubspecLock {
   static Future<String?> getVersionCli({bool disableLog = false}) async {
@@ -28,7 +28,8 @@ class PubspecLock {
     } on Exception catch (_) {
       if (!disableLog) {
         LogService.error(
-            Translation(LocaleKeys.error_cli_version_not_found).tr);
+          Translation(LocaleKeys.error_cli_version_not_found).tr,
+        );
       }
       return null;
     }

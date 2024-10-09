@@ -3,10 +3,11 @@ import 'dart:collection';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:dart_style/dart_style.dart';
 
-import '../pubspec/pubspec_utils.dart';
-import 'helpers.dart';
-import 'json_ast/json_ast.dart' show parse, Settings, Node;
-import 'sintaxe.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/common/utils/json_serialize/helpers.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/json_ast.dart'
+    show parse, Settings, Node;
+import 'package:get_cli/common/utils/json_serialize/sintaxe.dart';
 
 class DartCode extends WithWarning<String> {
   DartCode(super.result, super.warnings);
@@ -30,10 +31,12 @@ class ModelGenerator {
   final Map<String, String> sameClassMapping = HashMap<String, String>();
   late List<Hint> hints;
 
-  ModelGenerator(this._rootClassName,
-      [this._privateFields = false,
-      this._withCopyConstructor,
-      List<Hint>? hints]) {
+  ModelGenerator(
+    this._rootClassName, [
+    this._privateFields = false,
+    this._withCopyConstructor,
+    List<Hint>? hints,
+  ]) {
     if (hints != null) {
       this.hints = hints;
     } else {
@@ -45,8 +48,12 @@ class ModelGenerator {
     return hints.firstWhereOrNull((h) => h.path == path);
   }
 
-  List<Warning> _generateClassDefinition(String className,
-      dynamic jsonRawDynamicData, String path, Node? astNode) {
+  List<Warning> _generateClassDefinition(
+    String className,
+    dynamic jsonRawDynamicData,
+    String path,
+    Node? astNode,
+  ) {
     var warnings = <Warning>[];
     if (jsonRawDynamicData is List) {
       // if first element is an array, start in the first element.
@@ -113,21 +120,30 @@ class ModelGenerator {
             dynamic toAnalyze;
             if (!dependency.typeDef.isAmbiguous!) {
               var mergeWithWarning = mergeObjectList(
-                  jsonRawData[dependency.name] as List,
-                  '$path/${dependency.name}');
+                jsonRawData[dependency.name] as List,
+                '$path/${dependency.name}',
+              );
               toAnalyze = mergeWithWarning.result;
               warnings.addAll(mergeWithWarning.warnings);
             } else {
               toAnalyze = jsonRawData[dependency.name][0];
             }
             final node = navigateNode(astNode, dependency.name);
-            warns = _generateClassDefinition(dependency.className, toAnalyze,
-                '$path/${dependency.name}', node);
+            warns = _generateClassDefinition(
+              dependency.className,
+              toAnalyze,
+              '$path/${dependency.name}',
+              node,
+            );
           }
         } else {
           final node = navigateNode(astNode, dependency.name);
-          warns = _generateClassDefinition(dependency.className,
-              jsonRawData[dependency.name], '$path/${dependency.name}', node);
+          warns = _generateClassDefinition(
+            dependency.className,
+            jsonRawData[dependency.name],
+            '$path/${dependency.name}',
+            node,
+          );
         }
         if (warns != null) {
           warnings.addAll(warns);
@@ -181,6 +197,8 @@ class ModelGenerator {
     final unsafeDartCode = generateUnsafeDart(rawJson);
     final formatter = DartFormatter();
     return DartCode(
-        formatter.format(unsafeDartCode.code), unsafeDartCode.warnings);
+      formatter.format(unsafeDartCode.code),
+      unsafeDartCode.warnings,
+    );
   }
 }
