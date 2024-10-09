@@ -253,31 +253,31 @@ abstract class AppTranslation {
 
 }
 abstract class LocaleKeys {
-  static const buttons_login = 'buttons_login';
-  static const buttons_sign_in = 'buttons_sign_in';
-  static const buttons_logout = 'buttons_logout';
-  static const buttons_sign_in_fb = 'buttons_sign_in_fb';
-  static const buttons_sign_in_google = 'buttons_sign_in_google';
-  static const buttons_sign_in_apple = 'buttons_sign_in_apple';
+  static const buttons_login = 'buttons.login';
+  static const buttons_sign_in = 'buttons.sign_in';
+  static const buttons_logout = 'buttons.logout';
+  static const buttons_sign_in_fb = 'buttons.sign_in_fb';
+  static const buttons_sign_in_google = 'buttons.sign_in_google';
+  static const buttons_sign_in_apple = 'buttons.sign_in_apple';
 }
 
 abstract class Locales {
 
   static const en_US = {
-   'buttons_login': 'Login',
-   'buttons_sign_in': 'Sign-in',
-   'buttons_logout': 'Logout',
-   'buttons_sign_in_fb': 'Sign-in with Facebook',
-   'buttons_sign_in_google': 'Sign-in with Google',
-   'buttons_sign_in_apple': 'Sign-in with Apple',
+   'buttons.login': 'Login',
+   'buttons.sign_in': 'Sign-in',
+   'buttons.logout': 'Logout',
+   'buttons.sign_in_fb': 'Sign-in with Facebook',
+   'buttons.sign_in_google': 'Sign-in with Google',
+   'buttons.sign_in_apple': 'Sign-in with Apple',
   };
   static const zh_CN = {
-   'buttons_login': 'Entrar',
-   'buttons_sign_in': 'Cadastrar-se',
-   'buttons_logout': 'Sair',
-   'buttons_sign_in_fb': '用 Facebook 登录',
-   'buttons_sign_in_google': '用 Google 登录',
-   'buttons_sign_in_apple': '用 Apple 登录',
+   'buttons.login': 'Entrar',
+   'buttons.sign_in': 'Cadastrar-se',
+   'buttons.logout': 'Sair',
+   'buttons.sign_in_fb': '用 Facebook 登录',
+   'buttons.sign_in_google': '用 Google 登录',
+   'buttons.sign_in_apple': '用 Apple 登录',
   };
 
 }
