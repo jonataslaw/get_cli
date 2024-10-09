@@ -2,35 +2,49 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 
-import '../../common/utils/logger/log_utils.dart';
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../../core/internationalization.dart';
-import '../../core/locales.g.dart';
-import '../../core/structure.dart';
-import '../../samples/interface/sample_interface.dart';
-import '../sorter_imports/sort.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/samples/interface/sample_interface.dart';
+import 'package:get_cli/functions/sorter_imports/sort.dart';
 
-File handleFileCreate(String name, String command, String on, bool extraFolder,
-    Sample sample, String folderName,
-    [String sep = '_']) {
+File handleFileCreate(
+  String name,
+  String command,
+  String on,
+  bool extraFolder,
+  Sample sample,
+  String folderName, [
+  String sep = '_',
+]) {
   folderName = folderName;
   /* if (folderName.isNotEmpty) {
     extraFolder = PubspecUtils.extraFolder ?? extraFolder;
   } */
-  final fileModel = Structure.model(name, command, extraFolder,
-      on: on, folderName: folderName);
+  final fileModel = Structure.model(
+    name,
+    command,
+    extraFolder,
+    on: on,
+    folderName: folderName,
+  );
   var path = '${fileModel.path}$sep${fileModel.commandName}.dart';
   sample.path = path;
   return sample.create();
 }
 
 /// Create or edit the contents of a file
-File writeFile(String path, String content,
-    {bool overwrite = false,
-    bool skipFormatter = false,
-    bool logger = true,
-    bool skipRename = false,
-    bool useRelativeImport = false}) {
+File writeFile(
+  String path,
+  String content, {
+  bool overwrite = false,
+  bool skipFormatter = false,
+  bool logger = true,
+  bool skipRename = false,
+  bool useRelativeImport = false,
+}) {
   var newFile = File(Structure.replaceAsExpected(path: path));
 
   if (!newFile.existsSync() || overwrite) {
@@ -46,7 +60,8 @@ File writeFile(String path, String content,
         } on Exception catch (_) {
           if (newFile.existsSync()) {
             LogService.info(
-                LocaleKeys.error_invalid_dart.trArgs([newFile.path]));
+              LocaleKeys.error_invalid_dart.trArgs([newFile.path]),
+            );
           }
           rethrow;
         }
@@ -78,8 +93,10 @@ File writeFile(String path, String content,
 /// Replace the file name separator
 String replacePathTypeSeparator(String path, String separator) {
   if (separator.isNotEmpty) {
-    var index = path.indexOf(RegExp(r'controller.dart|model.dart|provider.dart|'
-        'binding.dart|view.dart|screen.dart|widget.dart|repository.dart'));
+    var index = path.indexOf(
+      RegExp(r'controller.dart|model.dart|provider.dart|'
+          'binding.dart|view.dart|screen.dart|widget.dart|repository.dart'),
+    );
     if (index != -1) {
       var chars = path.split('');
       index--;

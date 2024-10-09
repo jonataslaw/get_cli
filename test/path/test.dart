@@ -6,7 +6,9 @@ void main() {
     var import =
         "import 'package:ponto_facil/app/modules/home/views/home.view.dart';";
     var otherFile = 'lib/app/data/file.dart';
-    expect(replaceToRelativeImport(import, otherFile),
-        equals("import '../modules/home/views/home.view.dart';"));
+    expect(
+      replaceToRelativeImport(import, otherFile),
+      equals("import '../modules/home/views/home.view.dart';"),
+    );
   });
 }

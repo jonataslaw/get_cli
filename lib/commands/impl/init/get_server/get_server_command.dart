@@ -1,12 +1,11 @@
 import 'dart:io';
 
+import 'package:get_cli/commands/impl/init/flutter/init_getxpattern.dart';
+import 'package:get_cli/commands/interface/command.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/samples/impl/analysis_options.dart';
+import 'package:get_cli/samples/impl/get_server/pubspec.dart';
 import 'package:path/path.dart';
-
-import '../../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../../samples/impl/analysis_options.dart';
-import '../../../../samples/impl/get_server/pubspec.dart';
-import '../../../interface/command.dart';
-import '../flutter/init_getxpattern.dart';
 
 class InitGetServer extends Command {
   @override
@@ -20,8 +19,11 @@ class InitGetServer extends Command {
       include: 'include: package:pedantic/analysis_options.yaml',
     ).create();
     await PubspecUtils.addDependencies('get_server', runPubGet: false);
-    await PubspecUtils.addDependencies('pedantic',
-        isDev: true, runPubGet: false);
+    await PubspecUtils.addDependencies(
+      'pedantic',
+      isDev: true,
+      runPubGet: false,
+    );
     await PubspecUtils.addDependencies('test', isDev: true, runPubGet: false);
 
     await createInitGetxPattern();

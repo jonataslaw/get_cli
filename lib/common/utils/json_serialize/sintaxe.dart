@@ -2,9 +2,10 @@
 
 import 'package:collection/collection.dart' show IterableExtension;
 
-import '../pubspec/pubspec_utils.dart';
-import 'helpers.dart';
-import 'json_ast/json_ast.dart' show Node;
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/common/utils/json_serialize/helpers.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/json_ast.dart'
+    show Node;
 
 // ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
 
@@ -62,8 +63,12 @@ class TypeDefinition {
         // when array is empty insert Null just to warn the user
         elemType = 'Null';
       }
-      return TypeDefinition(type,
-          astNode: astNode, subtype: elemType, isAmbiguous: isAmbiguous);
+      return TypeDefinition(
+        type,
+        astNode: astNode,
+        subtype: elemType,
+        isAmbiguous: isAmbiguous,
+      );
     }
     return TypeDefinition(type, astNode: astNode, isAmbiguous: isAmbiguous);
   }
@@ -203,8 +208,11 @@ class ClassDefinition {
     return dependenciesList;
   }
 
-  ClassDefinition(this._name,
-      [this._privateFields = false, this._withCopyConstructor = false]);
+  ClassDefinition(
+    this._name, [
+    this._privateFields = false,
+    this._withCopyConstructor = false,
+  ]);
 
   @override
   bool operator ==(Object other) {
@@ -396,6 +404,5 @@ class ClassDefinition {
   }
 
   @override
-  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 }

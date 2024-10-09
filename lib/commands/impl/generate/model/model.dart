@@ -1,21 +1,20 @@
 import 'dart:io';
 
-
 import 'package:dcli/dcli.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart' as p;
 import 'package:recase/recase.dart';
 
-import '../../../../common/utils/json_serialize/model_generator.dart';
-import '../../../../common/utils/logger/log_utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../core/structure.dart';
-import '../../../../exception_handler/exceptions/cli_exception.dart';
-import '../../../../functions/create/create_single_file.dart';
-import '../../../../models/file_model.dart';
-import '../../../../samples/impl/get_provider.dart';
-import '../../../interface/command.dart';
+import 'package:get_cli/common/utils/json_serialize/model_generator.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/models/file_model.dart';
+import 'package:get_cli/samples/impl/get_provider.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 class GenerateModelCommand extends Command {
   @override
@@ -34,7 +33,10 @@ class GenerateModelCommand extends Command {
 
     FileModel newFileModel;
     final classGenerator = ModelGenerator(
-        name, containsArg('--private'), containsArg('--withCopy'));
+      name,
+      containsArg('--private'),
+      containsArg('--withCopy'),
+    );
 
     newFileModel = Structure.model(name, 'model', false, on: onCommand);
 
@@ -74,8 +76,10 @@ class GenerateModelCommand extends Command {
         fromArgument.isEmpty) {
       var codeSample =
           'get generate model on home with assets/models/user.json';
-      throw CliException(LocaleKeys.error_invalid_json.trArgs([withArgument]),
-          codeSample: codeSample);
+      throw CliException(
+        LocaleKeys.error_invalid_json.trArgs([withArgument]),
+        codeSample: codeSample,
+      );
     }
     return true;
   }
@@ -89,15 +93,18 @@ class GenerateModelCommand extends Command {
         return result.body;
       } on Exception catch (_) {
         throw CliException(
-            LocaleKeys.error_failed_to_connect.trArgs([fromArgument]));
+          LocaleKeys.error_failed_to_connect.trArgs([fromArgument]),
+        );
       }
     }
   }
 
   final String? codeSample1 = LogService.code(
-      'get generate model on home with assets/models/user.json');
+    'get generate model on home with assets/models/user.json',
+  );
   final String? codeSample2 = LogService.code(
-      'get generate model on home from "https://api.github.com/users/CpdnCristiano"');
+    'get generate model on home from "https://api.github.com/users/CpdnCristiano"',
+  );
 
   @override
   String get codeSample => '''

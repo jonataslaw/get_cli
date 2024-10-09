@@ -4,12 +4,12 @@ import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 import 'package:yaml/yaml.dart';
 
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../../extensions.dart';
-import '../../menu/menu.dart';
-import '../logger/log_utils.dart';
-import '../shell/shel.utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/extensions.dart';
+import 'package:get_cli/common/menu/menu.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/common/utils/shell/shel.utils.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class PubspecUtils {
@@ -19,7 +19,7 @@ class PubspecUtils {
 
   static String get pubspecString => _pubspecFile.readAsStringSync();
 
-  static get pubspecJson => loadYaml(pubspecString);
+  static dynamic get pubspecJson => loadYaml(pubspecString);
 
   /// separtor
   static final _mapSep = _PubValue<String>(() {
@@ -58,13 +58,18 @@ class PubspecUtils {
 
   static bool? get extraFolder => _extraFolder.value;
 
-  static Future<bool> addDependencies(String package,
-      {String? version, bool isDev = false, bool runPubGet = true}) async {
+  static Future<bool> addDependencies(
+    String package, {
+    String? version,
+    bool isDev = false,
+    bool runPubGet = true,
+  }) async {
     if (containsPackage(package)) {
       LogService.info(
-          LocaleKeys.ask_package_already_installed.trArgs([package]),
-          false,
-          false);
+        LocaleKeys.ask_package_already_installed.trArgs([package]),
+        false,
+        false,
+      );
       final menu = Menu(
         [
           LocaleKeys.options_yes.tr,
@@ -109,8 +114,10 @@ class PubspecUtils {
     return true;
   }
 
-  static Future<void> removeDependencies(String package,
-      {bool logger = true}) async {
+  static Future<void> removeDependencies(
+    String package, {
+    bool logger = true,
+  }) async {
     if (logger) LogService.info('Removing package: "$package"');
 
     await ShellUtils.removePackage(package);

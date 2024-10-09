@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:get_cli/functions/create/create_single_file.dart';
 import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
 
-import '../exception_handler/exceptions/cli_exception.dart';
-import 'string.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:get_cli/extensions/string.dart';
 
 extension DartCodeExt on File {
   /// Append the content of dart class
@@ -35,7 +35,8 @@ extension DartCodeExt on File {
       throw CliException('The class $className is not found in the file $path');
     } else if (matches.length > 1) {
       throw CliException(
-          'The class $className is found more than once in the file $path');
+        'The class $className is found more than once in the file $path',
+      );
     }
     var match = matches.first;
     content = content.insert(match.end - 1, value);

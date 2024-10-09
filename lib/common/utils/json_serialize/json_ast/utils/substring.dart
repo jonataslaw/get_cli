@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'grapheme_splitter.dart' show GraphemeSplitter;
+import 'package:get_cli/common/utils/json_serialize/json_ast/utils/grapheme_splitter.dart'
+    show GraphemeSplitter;
 
 String substring(String str, int start, [int? end]) {
   end ??= start + 1;

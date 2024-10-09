@@ -1,22 +1,21 @@
 import 'dart:io';
 
-
 import 'package:dcli/dcli.dart';
 import 'package:recase/recase.dart';
 
-import '../../../../common/menu/menu.dart';
-import '../../../../common/utils/logger/log_utils.dart';
-import '../../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../../core/generator.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../core/structure.dart';
-import '../../../../functions/create/create_single_file.dart';
-import '../../../../functions/routes/get_add_route.dart';
-import '../../../../samples/impl/get_binding.dart';
-import '../../../../samples/impl/get_controller.dart';
-import '../../../../samples/impl/get_view.dart';
-import '../../../interface/command.dart';
+import 'package:get_cli/common/menu/menu.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/core/generator.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/functions/routes/get_add_route.dart';
+import 'package:get_cli/samples/impl/get_binding.dart';
+import 'package:get_cli/samples/impl/get_controller.dart';
+import 'package:get_cli/samples/impl/get_view.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 /// The command create a Binding and Controller page and view
 class CreatePageCommand extends Command {

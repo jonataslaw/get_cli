@@ -1,7 +1,7 @@
-import '../commands/commands_list.dart';
-import '../commands/impl/help/help.dart';
-import '../commands/interface/command.dart';
-import '../common/utils/logger/log_utils.dart';
+import 'package:get_cli/commands/commands_list.dart';
+import 'package:get_cli/commands/impl/help/help.dart';
+import 'package:get_cli/commands/interface/command.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
 
 class GetCli {
   final List<String> _arguments;
@@ -22,10 +22,11 @@ class GetCli {
       final currentArgument = arguments[currentIndex].split(':').first;
 
       var command = commands.firstWhere(
-          (command) =>
-              command.commandName == currentArgument ||
-              command.alias.contains(currentArgument),
-          orElse: () => ErrorCommand('command not found'));
+        (command) =>
+            command.commandName == currentArgument ||
+            command.alias.contains(currentArgument),
+        orElse: () => ErrorCommand('command not found'),
+      );
       if (command.childrens.isNotEmpty) {
         if (command is CommandParent) {
           command = _findCommand(++currentIndex, command.childrens);

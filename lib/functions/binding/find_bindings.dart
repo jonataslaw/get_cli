@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 
-import '../../core/structure.dart';
+import 'package:get_cli/core/structure.dart';
 
 String findBindingFromName(String path, String name) {
   path = Structure.replaceAsExpected(path: path);

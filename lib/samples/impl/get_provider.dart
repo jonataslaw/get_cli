@@ -1,7 +1,7 @@
 import 'package:recase/recase.dart';
 
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../interface/sample_interface.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from Provider file creation.
 class ProviderSample extends Sample {
@@ -11,13 +11,14 @@ class ProviderSample extends Sample {
   final String modelPath;
   String? _namePascal;
   String? _nameLower;
-  ProviderSample(this._fileName,
-      {bool overwrite = false,
-      this.createEndpoints = false,
-      this.modelPath = '',
-      this.isServer = false,
-      String path = ''})
-      : super(path, overwrite: overwrite) {
+  ProviderSample(
+    this._fileName, {
+    bool overwrite = false,
+    this.createEndpoints = false,
+    this.modelPath = '',
+    this.isServer = false,
+    String path = '',
+  }) : super(path, overwrite: overwrite) {
     _namePascal = _fileName.pascalCase;
     _nameLower = _fileName.toLowerCase();
   }
@@ -41,7 +42,7 @@ $_defaultEndpoint}
 ''';
 
   String get _defaultEndpoint => createEndpoints
-      ? ''' 
+      ? '''
 \tFuture<$_namePascal?> get$_namePascal(int id) async {
 \t\tfinal response = await get('$_nameLower/\$id');
 \t\treturn response.body;

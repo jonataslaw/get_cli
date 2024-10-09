@@ -1,5 +1,5 @@
-import 'impl/commads_export.dart';
-import 'interface/command.dart';
+import 'package:get_cli/commands/impl/commads_export.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 final List<Command> commands = [
   CommandParent(
@@ -10,7 +10,7 @@ final List<Command> commands = [
       CreateProjectCommand(),
       CreateProviderCommand(),
       CreateScreenCommand(),
-      CreateViewCommand()
+      CreateViewCommand(),
     ],
     ['-c'],
   ),

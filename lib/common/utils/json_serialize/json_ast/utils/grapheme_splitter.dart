@@ -1,26 +1,26 @@
-const int CR = 0;
-const int LF = 1;
-const int Control = 2;
-const int Extend = 3;
-const int Regional_Indicator = 4;
-const int SpacingMark = 5;
+const int cr = 0;
+const int lf = 1;
+const int control = 2;
+const int extend = 3;
+const int regionalIndicator = 4;
+const int spacingMark = 5;
 const int L = 6;
 const int V = 7;
-const int T = 8;
-const int LV = 9;
-const int LVT = 10;
-const int Other = 11;
-const int Prepend = 12;
-const int E_Base = 13;
-const int E_Modifier = 14;
-const int ZWJ = 15;
-const int Glue_After_Zwj = 16;
-const int E_Base_GAZ = 17;
-const int NotBreak = 0;
-const int BreakStart = 1;
-const int Break = 2;
-const int BreakLastRegional = 3;
-const int BreakPenultimateRegional = 4;
+const int t = 8;
+const int lv = 9;
+const int lvt = 10;
+const int other = 11;
+const int prepend = 12;
+const int eBase = 13;
+const int eModifier = 14;
+const int zwj = 15;
+const int glueAfterZwj = 16;
+const int eBaseGAZ = 17;
+const int notBreak = 0;
+const int breakStart = 1;
+const int kBreak = 2;
+const int breakLastRegional = 3;
+const int breakPenultimateRegional = 4;
 
 bool _isSurrogate(String str, int pos) {
   return 0xd800 <= str.codeUnitAt(pos) &&
@@ -61,65 +61,65 @@ int shouldBreak(int start, List<int> mid, int end) {
   all.addAll([end]);
   final previous = all[all.length - 2];
   final next = end;
-  final eModifierIndex = all.lastIndexOf(E_Modifier);
+  final eModifierIndex = all.lastIndexOf(eModifier);
   if (eModifierIndex > 1 &&
-      all.sublist(1, eModifierIndex).every((c) => c == Extend) &&
-      ![Extend, E_Base, E_Base_GAZ].contains(start)) {
-    return Break;
+      all.sublist(1, eModifierIndex).every((c) => c == extend) &&
+      ![extend, eBase, eBaseGAZ].contains(start)) {
+    return kBreak;
   }
-  var rIIndex = all.lastIndexOf(Regional_Indicator);
+  var rIIndex = all.lastIndexOf(regionalIndicator);
   if (rIIndex > 0 &&
-      all.sublist(1, rIIndex).every((c) => c == Regional_Indicator) &&
-      ![Prepend, Regional_Indicator].contains(previous)) {
-    if (all.where((c) => c == Regional_Indicator).length % 2 == 1) {
-      return BreakLastRegional;
+      all.sublist(1, rIIndex).every((c) => c == regionalIndicator) &&
+      ![prepend, regionalIndicator].contains(previous)) {
+    if (all.where((c) => c == regionalIndicator).length % 2 == 1) {
+      return breakLastRegional;
     } else {
-      return BreakPenultimateRegional;
+      return breakPenultimateRegional;
     }
   }
-  if (previous == CR && next == LF) {
-    return NotBreak;
-  } else if (previous == Control || previous == CR || previous == LF) {
-    if (next == E_Modifier && mid.every((c) => c == Extend)) {
-      return Break;
+  if (previous == cr && next == lf) {
+    return notBreak;
+  } else if (previous == control || previous == cr || previous == lf) {
+    if (next == eModifier && mid.every((c) => c == extend)) {
+      return kBreak;
     } else {
-      return BreakStart;
+      return breakStart;
     }
-  } else if (next == Control || next == CR || next == LF) {
-    return BreakStart;
+  } else if (next == control || next == cr || next == lf) {
+    return breakStart;
   } else if (previous == L &&
-      (next == L || next == V || next == LV || next == LVT)) {
-    return NotBreak;
-  } else if ((previous == LV || previous == V) && (next == V || next == T)) {
-    return NotBreak;
-  } else if ((previous == LVT || previous == T) && next == T) {
-    return NotBreak;
-  } else if (next == Extend || next == ZWJ) {
-    return NotBreak;
-  } else if (next == SpacingMark) {
-    return NotBreak;
-  } else if (previous == Prepend) {
-    return NotBreak;
+      (next == L || next == V || next == lv || next == lvt)) {
+    return notBreak;
+  } else if ((previous == lv || previous == V) && (next == V || next == t)) {
+    return notBreak;
+  } else if ((previous == lvt || previous == t) && next == t) {
+    return notBreak;
+  } else if (next == extend || next == zwj) {
+    return notBreak;
+  } else if (next == spacingMark) {
+    return notBreak;
+  } else if (previous == prepend) {
+    return notBreak;
   }
   final previousNonExtendIndex =
-      all.contains(Extend) ? all.lastIndexOf(Extend) - 1 : all.length - 2;
+      all.contains(extend) ? all.lastIndexOf(extend) - 1 : all.length - 2;
   if (previousNonExtendIndex != -1 &&
-      [E_Base, E_Base_GAZ].contains(all[previousNonExtendIndex]) &&
+      [eBase, eBaseGAZ].contains(all[previousNonExtendIndex]) &&
       all.length > previousNonExtendIndex + 1 &&
-      sliceFromEnd(all, previousNonExtendIndex + 1).every((c) => c == Extend) &&
-      next == E_Modifier) {
-    return NotBreak;
+      sliceFromEnd(all, previousNonExtendIndex + 1).every((c) => c == extend) &&
+      next == eModifier) {
+    return notBreak;
   }
-  if (previous == ZWJ && [Glue_After_Zwj, E_Base_GAZ].contains(next)) {
-    return NotBreak;
+  if (previous == zwj && [glueAfterZwj, eBaseGAZ].contains(next)) {
+    return notBreak;
   }
-  if (mid.contains(Regional_Indicator)) {
-    return Break;
+  if (mid.contains(regionalIndicator)) {
+    return kBreak;
   }
-  if (previous == Regional_Indicator && next == Regional_Indicator) {
-    return NotBreak;
+  if (previous == regionalIndicator && next == regionalIndicator) {
+    return notBreak;
   }
-  return BreakStart;
+  return breakStart;
 }
 
 int getGraphemeBreakProperty(int code) {
@@ -133,13 +133,13 @@ int getGraphemeBreakProperty(int code) {
       0x11A3A == code ||
       (0x11A86 <= code && code <= 0x11A89) ||
       0x11D46 == code) {
-    return Prepend;
+    return prepend;
   }
   if (0x000D == code) {
-    return CR;
+    return cr;
   }
   if (0x000A == code) {
-    return LF;
+    return lf;
   }
   if ((0x0000 <= code && code <= 0x0009) ||
       (0x000B <= code && code <= 0x000C) ||
@@ -167,7 +167,7 @@ int getGraphemeBreakProperty(int code) {
       (0xE0002 <= code && code <= 0xE001F) ||
       (0xE0080 <= code && code <= 0xE00FF) ||
       (0xE01F0 <= code && code <= 0xE0FFF)) {
-    return Control;
+    return control;
   }
   if ((0x0300 <= code && code <= 0x036F) ||
       (0x0483 <= code && code <= 0x0487) ||
@@ -498,10 +498,10 @@ int getGraphemeBreakProperty(int code) {
       (0x1E944 <= code && code <= 0x1E94A) ||
       (0xE0020 <= code && code <= 0xE007F) ||
       (0xE0100 <= code && code <= 0xE01EF)) {
-    return Extend;
+    return extend;
   }
   if ((0x1F1E6 <= code && code <= 0x1F1FF)) {
-    return Regional_Indicator;
+    return regionalIndicator;
   }
   if (0x0903 == code ||
       0x093B == code ||
@@ -648,7 +648,7 @@ int getGraphemeBreakProperty(int code) {
       (0x16F51 <= code && code <= 0x16F7E) ||
       0x1D166 == code ||
       0x1D16D == code) {
-    return SpacingMark;
+    return spacingMark;
   }
   if ((0x1100 <= code && code <= 0x115F) ||
       (0xA960 <= code && code <= 0xA97C)) {
@@ -660,7 +660,7 @@ int getGraphemeBreakProperty(int code) {
   }
   if ((0x11A8 <= code && code <= 0x11FF) ||
       (0xD7CB <= code && code <= 0xD7FB)) {
-    return T;
+    return t;
   }
   if (0xAC00 == code ||
       0xAC1C == code ||
@@ -1061,7 +1061,7 @@ int getGraphemeBreakProperty(int code) {
       0xD750 == code ||
       0xD76C == code ||
       0xD788 == code) {
-    return LV;
+    return lv;
   }
   if ((0xAC01 <= code && code <= 0xAC1B) ||
       (0xAC1D <= code && code <= 0xAC37) ||
@@ -1462,7 +1462,7 @@ int getGraphemeBreakProperty(int code) {
       (0xD751 <= code && code <= 0xD76B) ||
       (0xD76D <= code && code <= 0xD787) ||
       (0xD789 <= code && code <= 0xD7A3)) {
-    return LVT;
+    return lvt;
   }
   if (0x261D == code ||
       0x26F9 == code ||
@@ -1495,13 +1495,13 @@ int getGraphemeBreakProperty(int code) {
       (0x1F930 <= code && code <= 0x1F939) ||
       (0x1F93D <= code && code <= 0x1F93E) ||
       (0x1F9D1 <= code && code <= 0x1F9DD)) {
-    return E_Base;
+    return eBase;
   }
   if ((0x1F3FB <= code && code <= 0x1F3FF)) {
-    return E_Modifier;
+    return eModifier;
   }
   if (0x200D == code) {
-    return ZWJ;
+    return zwj;
   }
   if (0x2640 == code ||
       0x2642 == code ||
@@ -1523,12 +1523,12 @@ int getGraphemeBreakProperty(int code) {
       0x1F5E8 == code ||
       0x1F680 == code ||
       0x1F692 == code) {
-    return Glue_After_Zwj;
+    return glueAfterZwj;
   }
   if ((0x1F466 <= code && code <= 0x1F469)) {
-    return E_Base_GAZ;
+    return eBaseGAZ;
   }
-  return Other;
+  return other;
 }
 
 class GraphemeSplitter {

@@ -40,9 +40,15 @@ class Location {
       end == other.end &&
       source == other.source;
 
-  static Location create(int? startLine, int? startColumn, int? startOffset,
-      int? endLine, int? endColumn, int? endOffset,
-      [String? source]) {
+  static Location create(
+    int? startLine,
+    int? startColumn,
+    int? startOffset,
+    int? endLine,
+    int? endColumn,
+    int? endOffset, [
+    String? source,
+  ]) {
     final startSegment = Segment(startLine, startColumn, startOffset);
     final endSegment = Segment(endLine, endColumn, endOffset);
     return Location(startSegment, endSegment, source);

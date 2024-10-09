@@ -4,7 +4,6 @@
 // ignore_for_file: constant_identifier_names
 // ignore: avoid_classes_with_only_static_members
 
-
 class AppTranslation {
   static Map<String, Map<String, String>> translations = {
     'tr_TR': Locales.tr_TR,
@@ -352,7 +351,8 @@ class Locales {
     'error_failed_to_connect': 'Failed to connect with %s.',
     'error_no_valid_file_or_url': '%s is not a file or valid url.',
     'error_unnecessary_parameter': 'the %s parameter is not necessary.',
-    'error_unnecessary_parameter_plural': 'the %s parameters are not necessary.',
+    'error_unnecessary_parameter_plural':
+        'the %s parameters are not necessary.',
     'error_nonexistent_directory': '%s directory does not exist.',
     'error_empty_directory': '%s is empty.',
     'error_invalid_json': '%s is not a valid json file.',

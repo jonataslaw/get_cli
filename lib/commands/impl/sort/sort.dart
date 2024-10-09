@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import '../../../common/utils/logger/log_utils.dart';
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../../exception_handler/exceptions/cli_exception.dart';
-import '../../../functions/create/create_single_file.dart';
-import '../../interface/command.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 class SortCommand extends Command {
   @override
@@ -25,7 +25,8 @@ class SortCommand extends Command {
       sortImportsFile(path);
     } else {
       throw CliException(
-          LocaleKeys.error_invalid_file_or_directory.trArgs([path]));
+        LocaleKeys.error_invalid_file_or_directory.trArgs([path]),
+      );
     }
   }
 
@@ -43,8 +44,10 @@ class SortCommand extends Command {
   bool validate() {
     super.validate();
     if (args.isEmpty) {
-      throw CliException(LocaleKeys.error_required_path.tr,
-          codeSample: codeSample);
+      throw CliException(
+        LocaleKeys.error_required_path.tr,
+        codeSample: codeSample,
+      );
     }
     return true;
   }
@@ -54,24 +57,31 @@ class SortCommand extends Command {
         .listSync(recursive: true, followLinks: false)
         .forEach((element) {
       if (element is File && element.path.endsWith('.dart')) {
-        writeFile(element.path, element.readAsStringSync(),
-            overwrite: true,
-            logger: false,
-            skipRename: containsArg('--skipRename'),
-            useRelativeImport: containsArg('--relative'));
+        writeFile(
+          element.path,
+          element.readAsStringSync(),
+          overwrite: true,
+          logger: false,
+          skipRename: containsArg('--skipRename'),
+          useRelativeImport: containsArg('--relative'),
+        );
         LogService.success(
-            LocaleKeys.sucess_file_formatted.trArgs([element.path]));
+          LocaleKeys.sucess_file_formatted.trArgs([element.path]),
+        );
       }
     });
   }
 
   void sortImportsFile(String path) {
     if (path.endsWith('.dart') && File(path).existsSync()) {
-      writeFile(path, File(path).readAsStringSync(),
-          overwrite: true,
-          logger: false,
-          skipRename: containsArg('--skipRename'),
-          useRelativeImport: containsArg('--relative'));
+      writeFile(
+        path,
+        File(path).readAsStringSync(),
+        overwrite: true,
+        logger: false,
+        skipRename: containsArg('--skipRename'),
+        useRelativeImport: containsArg('--relative'),
+      );
       LogService.success(LocaleKeys.sucess_file_formatted.trArgs([path]));
     } else {
       throw CliException(LocaleKeys.error_invalid_dart.trArgs([path]));
