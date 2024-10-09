@@ -9,21 +9,19 @@ import 'json_ast/json_ast.dart';
 import 'sintaxe.dart';
 
 const Map<String, bool> PRIMITIVE_TYPES = {
-  'int': true,
-  'double': true,
+  'num': true,
   'String': true,
   'bool': true,
   'DateTime': false,
   'List<DateTime>': false,
-  'List<int>': true,
-  'List<double>': true,
+  'List<num>': true,
   'List<String>': true,
   'List<bool>': true,
   'Null': true,
   'dynamic': true,
 };
 
-enum ListType { Object, String, Double, Int, Null }
+enum ListType { Object, String, Num, Null }
 
 class MergeableListType {
   final ListType? listType;
@@ -37,10 +35,8 @@ MergeableListType mergeableListType(List<dynamic> list) {
   var isAmbigous = false;
   for (var e in list) {
     ListType? inferredType;
-    if (e.runtimeType.toString() == 'int') {
-      inferredType = ListType.Int;
-    } else if (e.runtimeType.toString() == 'double') {
-      inferredType = ListType.Double;
+    if (e.runtimeType.toString() == 'num') {
+      inferredType = ListType.Num;
     } else if (e.runtimeType.toString() == 'string') {
       inferredType = ListType.String;
     } else if (e is Map) {
@@ -92,14 +88,7 @@ WithWarning<Map> mergeObj(Map obj, Map other, String path) {
       final otherType = getTypeName(v);
       final t = getTypeName(clone[k]);
       if (t != otherType) {
-        if (t == 'int' && otherType == 'double') {
-          // if double was found instead of int, assign the double
-          clone[k] = v;
-        } else if (clone[k].runtimeType.toString() != 'double' &&
-            v.runtimeType.toString() != 'int') {
-          // if types are not equal, then
-          warnings.add(newAmbiguousType('$path/$k'));
-        }
+        warnings.add(newAmbiguousType('$path/$k'));
       } else if (t == 'List') {
         var l = List.from(clone[k] as Iterable);
         l.addAll(other[k] as Iterable);
@@ -140,18 +129,12 @@ WithWarning<Map> mergeObjectList(List<dynamic> list, String path,
         } else {
           final otherType = getTypeName(v);
           if (t != otherType) {
-            if (t == 'int' && otherType == 'double') {
-              // if double was found instead of int, assign the double
-              obj[k] = v;
-            } else if (t != 'double' && otherType != 'int') {
-              // if types are not equal, then
-              var realIndex = i;
-              if (idx != -1) {
-                realIndex = idx - i;
-              }
-              final ambiguosTypePath = '$path[$realIndex]/$k';
-              warnings.add(newAmbiguousType(ambiguosTypePath));
+            var realIndex = i;
+            if (idx != -1) {
+              realIndex = idx - i;
             }
+            final ambiguosTypePath = '$path[$realIndex]/$k';
+            warnings.add(newAmbiguousType(ambiguosTypePath));
           } else if (t == 'List') {
             var l = List.from(obj[k] as Iterable);
             final beginIndex = l.length;
@@ -215,10 +198,8 @@ String fixFieldName(String name,
 String getTypeName(dynamic obj) {
   if (obj is String) {
     return 'String';
-  } else if (obj is int) {
-    return 'int';
-  } else if (obj is double) {
-    return 'double';
+  } else if (obj is num) {
+    return 'num';
   } else if (obj is bool) {
     return 'bool';
   } else if (obj == null) {

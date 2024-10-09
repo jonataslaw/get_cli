@@ -143,7 +143,7 @@ class PubspecUtils {
     return dependencies.containsKey(package.trim());
   }
 
-  static bool get nullSafeSupport => !pubSpec.environment!['sdkConstraint']!
+  static bool get nullSafeSupport => !pubSpec.environment!['sdk']!
       .allowsAny(VersionConstraint.parse('<2.12.0'));
 
   /// make sure it is a get_server project
