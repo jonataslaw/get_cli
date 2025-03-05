@@ -1,0 +1,88 @@
+{
+  "ask": {
+    "existing_page": "페이지 [%s]가 이미 존재합니다. 덮어쓰시겠습니까?",
+    "name_to_project": "프로젝트 이름은 무엇입니까?",
+    "company_domain": "회사의 도메인은 무엇입니까?",
+    "model_name": "모델 이름을 자동으로 설정할 수 없습니다. 어떤 이름을 사용하시겠습니까?",
+    "package_already_installed": "패키지: %s가 이미 설치되어 있습니다. 업데이트하시겠습니까?",
+    "lib_not_empty": "lib 폴더가 비어있지 않습니다. 애플리케이션을 덮어쓰시겠습니까? \n경고: 이 작업은 되돌릴 수 없습니다",
+    "ios_lang": "iOS에서 사용할 언어는 무엇입니까?",
+    "android_lang": "Android에서 사용할 언어는 무엇입니까?",
+    "use_null_safe": "null safety를 사용하시겠습니까?",
+    "use_linter": "린터를 사용하시겠습니까?",
+    "new_page_name": "새 페이지의 이름은 무엇입니까?"
+  },
+  "error": {
+    "failed_to_connect": "%s와(과) 연결하지 못했습니다",
+    "no_valid_file_or_url": "%s는 유효한 파일이나 URL이 아닙니다",
+    "unnecessary_parameter": "%s 매개변수는 불필요합니다",
+    "unnecessary_parameter_plural": "%s 매개변수들은 불필요합니다",
+    "nonexistent_directory": "%s 디렉토리가 존재하지 않습니다.",
+    "empty_directory": "%s가 비어있습니다",
+    "invalid_json": "%s는 유효한 json 파일이 아닙니다",
+    "special_characters_in_key": "키에 특수 문자를 사용할 수 없습니다. \n키: %s",
+    "required_path": "파일 또는 디렉토리 경로가 필요합니다",
+    "invalid_dart": "%s는 유효한 dart 파일이 아닙니다",
+    "invalid_file_or_directory": "%s는 유효한 파일이나 디렉토리가 아닙니다",
+    "package_not_found": "패키지: %s를 pub.dev에서 찾을 수 없습니다",
+    "cli_version_not_found": "설치된 버전을 찾을 수 없습니다.",
+    "update_cli": "get_cli 업그레이드 중 오류가 발생했습니다",
+    "folder_not_found": "폴더 %s를 찾을 수 없습니다",
+    "file_not_found": "%s에서 파일을 찾을 수 없습니다",
+    "access_denied": "%s에 대한 접근이 거부되었습니다",
+    "unexpected": "예기치 않은 오류가 발생했습니다:",
+    "no_package_to_remove": "제거할 패키지 이름을 입력하세요"
+  },
+  "example": "예시:",
+  "warning": "경고:",
+  "hint": {
+    "create": {
+      "controller": "컨트롤러 생성",
+      "page": "페이지 생성에 사용",
+      "project": "새 프로젝트 생성에 사용",
+      "provider": "새 프로바이더 생성",
+      "screen": "새 화면 생성",
+      "view": "뷰 생성"
+    },
+    "generate": {
+      "locales": "json 파일에서 번역 파일 생성",
+      "model": "json에서 클래스 모델 생성"
+    },
+    "help": "이 도움말 표시",
+    "init": "기존 프로젝트에서 선택한 구조 생성:",
+    "install": "프로젝트에 패키지 설치에 사용 (의존성):",
+    "remove": "프로젝트에서 패키지 제거에 사용 (의존성):",
+    "sort": "dart 파일의 import 정렬 및 포맷",
+    "update": "GET_CLI 업데이트",
+    "version": "현재 CLI 버전 표시"
+  },
+  "info": {
+    "unnecessary_flag": "%s는 불필요합니다",
+    "unnecessary_flag_prural": "%s는 불필요합니다",
+    "package_not_installed": "패키지: %s가 이 애플리케이션에 설치되어 있지 않습니다",
+    "cli_last_version_already_installed": "get_cli의 최신 버전이 이미 설치되어 있습니다",
+    "no_file_overwritten": "덮어쓴 파일이 없습니다",
+    "update_available": "업데이트가 있습니다! 현재 설치된 버전: %s",
+    "update_available2": "새 버전 사용 가능: %s 다음을 실행하세요:"
+  },
+  "options": {
+    "yes": "네!",
+    "no": "아니오",
+    "rename": "이름을 변경하고 싶습니다"
+  },
+  "optional_parameters": "선택적 매개변수: %s",
+  "sucess": {
+    "page_create": "%s 페이지가 성공적으로 생성되었습니다.",
+    "locale_generate": "로케일 파일이 성공적으로 생성되었습니다.",
+    "getx_pattern_generated": "GetX 패턴 구조가 성공적으로 생성되었습니다.",
+    "clean_Pattern_generated": "CLEAN 패턴 구조가 성공적으로 생성되었습니다.",
+    "file_formatted": "'%s'가 성공적으로 포맷되었습니다",
+    "package_removed": "패키지: %s가 제거되었습니다!",
+    "package_installed": "패키지: %s가 설치되었습니다!",
+    "update_cli": "업그레이드 완료",
+    "add_controller_in_bindings": "%s가 바인딩에 경로: %s로 추가되었습니다",
+    "navigation_added": "%s 네비게이션이 성공적으로 추가되었습니다.",
+    "file_created": "파일: %s가 경로: %s에 성공적으로 생성되었습니다",
+    "route_created": "%s 라우트가 성공적으로 생성되었습니다."
+  }
+}

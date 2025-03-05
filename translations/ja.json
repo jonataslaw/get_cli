@@ -1,0 +1,88 @@
+{
+  "ask": {
+    "existing_page": "ページ [%s] は既に存在します。上書きしますか？",
+    "name_to_project": "プロジェクト名は何ですか？",
+    "company_domain": "会社のドメインは何ですか？",
+    "model_name": "モデル名を自動設定できませんでした。使用する名前を指定してください。",
+    "package_already_installed": "パッケージ: %s は既にインストールされています。更新しますか？",
+    "lib_not_empty": "libフォルダが空ではありません。アプリケーションを上書きしてもよろしいですか？\n警告：この操作は元に戻せません",
+    "ios_lang": "iOSで使用する言語は何ですか？",
+    "android_lang": "Androidで使用する言語は何ですか？",
+    "use_null_safe": "Null safetyを使用しますか？",
+    "use_linter": "リンターを使用しますか？",
+    "new_page_name": "新しいページの名前は何ですか？"
+  },
+  "error": {
+    "failed_to_connect": "%s への接続に失敗しました",
+    "no_valid_file_or_url": "%s は有効なファイルまたはURLではありません",
+    "unnecessary_parameter": "%s パラメータは不要です",
+    "unnecessary_parameter_plural": "%s パラメータは不要です",
+    "nonexistent_directory": "ディレクトリ %s が存在しません。",
+    "empty_directory": "%s は空です",
+    "invalid_json": "%s は有効なJSONファイルではありません",
+    "special_characters_in_key": "キーに特殊文字は使用できません。\nキー: %s",
+    "required_path": "ファイルまたはディレクトリのパスが必要です",
+    "invalid_dart": "%s は有効なDartファイルではありません",
+    "invalid_file_or_directory": "%s は有効なファイルまたはディレクトリではありません",
+    "package_not_found": "パッケージ: %s が pub.dev で見つかりません",
+    "cli_version_not_found": "インストールされているバージョンを見つけられませんでした。",
+    "update_cli": "get_cliのアップグレード中にエラーが発生しました",
+    "folder_not_found": "フォルダ %s が見つかりません",
+    "file_not_found": "%s にファイルが見つかりません",
+    "access_denied": "%s へのアクセスが拒否されました",
+    "unexpected": "予期せぬエラーが発生しました：",
+    "no_package_to_remove": "削除するパッケージ名を入力してください"
+  },
+  "example": "例：",
+  "warning": "警告：",
+  "hint": {
+    "create": {
+      "controller": "コントローラーを生成",
+      "page": "ページを生成するために使用",
+      "project": "新規プロジェクトを生成するために使用",
+      "provider": "新規プロバイダーを作成",
+      "screen": "新規スクリーンを生成",
+      "view": "ビューを生成"
+    },
+    "generate": {
+      "locales": "JSONファイルから翻訳ファイルを生成",
+      "model": "JSONからクラスモデルを生成"
+    },
+    "help": "このヘルプを表示",
+    "init": "既存のプロジェクトで選択した構造を生成：",
+    "install": "プロジェクトにパッケージをインストールするために使用（依存関係）：",
+    "remove": "プロジェクトからパッケージを削除するために使用（依存関係）：",
+    "sort": "Dartファイルのインポートをソートしフォーマット",
+    "update": "GET_CLIを更新するため",
+    "version": "現在のCLIバージョンを表示"
+  },
+  "info": {
+    "unnecessary_flag": "%s は不要です",
+    "unnecessary_flag_prural": "%s は不要です",
+    "package_not_installed": "パッケージ: %s はこのアプリケーションにインストールされていません",
+    "cli_last_version_already_installed": "get_cliの最新バージョンが既にインストールされています",
+    "no_file_overwritten": "ファイルは上書きされませんでした",
+    "update_available": "アップデートが利用可能です！現在インストールされているバージョン: %s",
+    "update_available2": "新しいバージョンが利用可能です: %s 実行してください："
+  },
+  "options": {
+    "yes": "はい！",
+    "no": "いいえ",
+    "rename": "名前を変更したい"
+  },
+  "optional_parameters": "オプションパラメータ: %s",
+  "sucess": {
+    "page_create": "%s ページが正常に作成されました。",
+    "locale_generate": "ロケールファイルが正常に生成されました。",
+    "getx_pattern_generated": "GetXパターン構造が正常に生成されました。",
+    "clean_Pattern_generated": "CLEANパターン構造が正常に生成されました。",
+    "file_formatted": "'%s' が正常にフォーマットされました",
+    "package_removed": "パッケージ: %s が削除されました！",
+    "package_installed": "パッケージ: %s がインストールされました！",
+    "update_cli": "アップグレードが完了しました",
+    "add_controller_in_bindings": "%s がパス: %s のバインディングに追加されました",
+    "navigation_added": "%s ナビゲーションが正常に追加されました。",
+    "file_created": "ファイル: %s がパス: %s に正常に作成されました",
+    "route_created": "%s ルートが正常に作成されました。"
+  }
+}
