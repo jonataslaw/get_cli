@@ -1,4 +1,4 @@
-import '../../interface/sample_interface.dart';
+import 'package:get_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from pubspec.yaml file creation.
 class GetServerPubspecSample extends Sample {

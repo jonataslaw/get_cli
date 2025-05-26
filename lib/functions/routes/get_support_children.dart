@@ -1,5 +1,5 @@
-import '../../common/utils/pubspec/pubspec_utils.dart';
-import '../find_file/find_file_by_name.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/functions/find_file/find_file_by_name.dart';
 
 /// Checks whether the installed version of get supports child routes
 bool get supportChildrenRoutes {

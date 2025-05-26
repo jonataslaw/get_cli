@@ -3,13 +3,13 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 
-import '../../../../common/utils/logger/log_utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../../core/structure.dart';
-import '../../../../exception_handler/exceptions/cli_exception.dart';
-import '../../../../samples/impl/generate_locales.dart';
-import '../../../interface/command.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:get_cli/samples/impl/generate_locales.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 class GenerateLocalesCommand extends Command {
   @override
@@ -28,7 +28,8 @@ class GenerateLocalesCommand extends Command {
 
     if (!await Directory(inputPath).exists()) {
       LogService.error(
-          LocaleKeys.error_nonexistent_directory.trArgs([inputPath]));
+        LocaleKeys.error_nonexistent_directory.trArgs([inputPath]),
+      );
       return;
     }
 
@@ -80,7 +81,8 @@ class GenerateLocalesCommand extends Command {
         value = _replaceValue(value);
         if (RegExp(r'^[0-9]|[!@#<>?":`~;[\]\\|=+)(*&^%-\s]').hasMatch(key)) {
           throw CliException(
-              LocaleKeys.error_special_characters_in_key.trArgs([key]));
+            LocaleKeys.error_special_characters_in_key.trArgs([key]),
+          );
         }
         parsedLocales.writeln('\t\t\'$key\': \'$value\',');
       });
@@ -91,15 +93,20 @@ class GenerateLocalesCommand extends Command {
         Structure.model('locales', 'generate_locales', false, on: onCommand);
 
     GenerateLocalesSample(
-            parsedKeys, parsedLocales.toString(), translationsKeys.toString(),
-            path: '${newFileModel.path}.g.dart')
-        .create();
+      parsedKeys,
+      parsedLocales.toString(),
+      translationsKeys.toString(),
+      path: '${newFileModel.path}.g.dart',
+    ).create();
 
     LogService.success(LocaleKeys.sucess_locale_generate.tr);
   }
 
-  void _resolve(Map<String, dynamic> localization, Map<String, String?> result,
-      [String? accKey]) {
+  void _resolve(
+    Map<String, dynamic> localization,
+    Map<String, String?> result, [
+    String? accKey,
+  ]) {
     final sortedKeys = localization.keys.toList();
 
     for (var key in sortedKeys) {

@@ -13,7 +13,7 @@ pubspec.lock
 doc/api/
 
 # The .vscode folder contains launch configuration and tasks you configure in
-.vscode/
+# .vscode/
 
 # Avoid committing generated Javascript files:
 *.dart.js

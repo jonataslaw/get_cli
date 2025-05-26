@@ -1,6 +1,6 @@
 import 'package:path/path.dart';
 
-import '../../core/structure.dart';
+import 'package:get_cli/core/structure.dart';
 
 /// Replace the import with a relative path import.
 String replaceToRelativeImport(String import, String otherFile) {

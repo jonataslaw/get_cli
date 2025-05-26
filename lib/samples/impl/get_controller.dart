@@ -1,13 +1,17 @@
 import 'package:recase/recase.dart';
 
-import '../interface/sample_interface.dart';
+import 'package:get_cli/samples/interface/sample_interface.dart';
 
 /// [Sample] file from Module_Controller file creation.
 class ControllerSample extends Sample {
   final String _fileName;
   final bool _isServer;
-  ControllerSample(super.path, this._fileName, this._isServer,
-      {super.overwrite});
+  ControllerSample(
+    super.path,
+    this._fileName,
+    this._isServer, {
+    super.overwrite,
+  });
 
   @override
   String get content => _isServer ? serverController : flutterController;

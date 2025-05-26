@@ -3,18 +3,21 @@ import 'dart:io';
 
 import 'package:recase/recase.dart';
 
-import '../../common/utils/logger/log_utils.dart';
-import '../../core/internationalization.dart';
-import '../../core/locales.g.dart';
-import '../../core/structure.dart';
-import '../../samples/impl/arctekko/arc_routes.dart';
-import '../create/create_navigation.dart';
-import '../create/create_single_file.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/core/structure.dart';
+import 'package:get_cli/samples/impl/arctekko/arc_routes.dart';
+import 'package:get_cli/functions/create/create_navigation.dart';
+import 'package:get_cli/functions/create/create_single_file.dart';
+import 'package:get_cli/functions/formatter_dart_file/frommatter_dart_file.dart';
 
 void arcAddRoute(String nameRoute) {
-  var routesFile = File(Structure.replaceAsExpected(
-      path: 'lib/infrastructure/navigation/routes.dart'));
+  var routesFile = File(
+    Structure.replaceAsExpected(
+      path: 'lib/infrastructure/navigation/routes.dart',
+    ),
+  );
   var lines = <String>[];
   if (!routesFile.existsSync()) {
     ArcRouteSample(nameRoute.snakeCase.toUpperCase()).create();
@@ -39,7 +42,8 @@ void arcAddRoute(String nameRoute) {
 
   writeFile(routesFile.path, lines.join('\n'), overwrite: true);
   LogService.success(
-      Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
+    Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]),
+  );
   addNavigation(nameRoute);
 }
 

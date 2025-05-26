@@ -1,12 +1,12 @@
-import '../../../../common/menu/menu.dart';
-import '../../../../common/utils/logger/log_utils.dart';
-import '../../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../../common/utils/shell/shel.utils.dart';
-import '../../../../core/internationalization.dart';
-import '../../../../core/locales.g.dart';
-import '../../../interface/command.dart';
-import 'init_getxpattern.dart';
-import 'init_katteko.dart';
+import 'package:get_cli/common/menu/menu.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/common/utils/shell/shel.utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/commands/interface/command.dart';
+import 'package:get_cli/commands/impl/init/flutter/init_getxpattern.dart';
+import 'package:get_cli/commands/impl/init/flutter/init_katteko.dart';
 
 class InitCommand extends Command {
   @override
@@ -14,10 +14,13 @@ class InitCommand extends Command {
 
   @override
   Future<void> execute() async {
-    final menu = Menu([
-      'GetX Pattern (by Kauê)',
-      'CLEAN (by Arktekko)',
-    ], title: 'Which architecture do you want to use?');
+    final menu = Menu(
+      [
+        'GetX Pattern (by Kauê)',
+        'CLEAN (by Arktekko)',
+      ],
+      title: 'Which architecture do you want to use?',
+    );
     final result = menu.choose();
 
     result.index == 0

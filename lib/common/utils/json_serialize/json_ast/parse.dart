@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import './error.dart';
-import './location.dart';
-import './parse_error_types.dart';
-import './tokenize.dart';
-import './utils/substring.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/error.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/location.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/parse_error_types.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/tokenize.dart';
+import 'package:get_cli/common/utils/json_serialize/json_ast/utils/substring.dart';
 
 enum _ObjectState { _START_, OPEN_OBJECT, PROPERTY, COMMA }
 
@@ -13,13 +13,21 @@ enum _PropertyState { _START_, KEY, COLON }
 enum _ArrayState { _START_, OPEN_ARRAY, VALUE, COMMA }
 
 JSONASTException errorEof(
-    String input, List<dynamic> tokenList, Settings settings) {
+  String input,
+  List<dynamic> tokenList,
+  Settings settings,
+) {
   final loc = (tokenList.isNotEmpty
       ? tokenList[tokenList.length - 1].loc.end as Loc
       : Loc(line: 1, column: 1));
 
   return JSONASTException(
-      unexpectedEnd(), input, settings.source, loc.line, loc.column);
+    unexpectedEnd(),
+    input,
+    settings.source,
+    loc.line,
+    loc.column,
+  );
 }
 
 /// [hexCode] is the hexCode string without '\u' prefix
@@ -37,7 +45,7 @@ final escapes = {
   'f': '\f', // Form feed
   'n': '\n', // New line
   'r': '\r', // Carriage return
-  't': '\t' // Horizontal tab
+  't': '\t', // Horizontal tab
 };
 
 final passEscapes = ['"', '\\', '/'];
@@ -67,7 +75,11 @@ String parseString(String string) {
 }
 
 ValueIndex<ObjectNode>? parseObject(
-    String input, List<Token> tokenList, int index, Settings settings) {
+  String input,
+  List<Token> tokenList,
+  int index,
+  Settings settings,
+) {
   // object: LEFT_BRACE (property (COMMA property)*)? RIGHT_BRACE
   late Token startToken;
   var object = ObjectNode();
@@ -94,14 +106,16 @@ ValueIndex<ObjectNode>? parseObject(
           if (token.type == TokenType.RIGHT_BRACE) {
             //  if (settings.loc != null) {
             object = object.copyWith(
-                loc: Location.create(
-                    startToken.loc!.start.line,
-                    startToken.loc!.start.column,
-                    startToken.loc!.start.offset,
-                    token.loc!.end.line,
-                    token.loc!.end.column,
-                    token.loc!.end.offset,
-                    settings.source));
+              loc: Location.create(
+                startToken.loc!.start.line,
+                startToken.loc!.start.column,
+                startToken.loc!.start.offset,
+                token.loc!.end.line,
+                token.loc!.end.column,
+                token.loc!.end.offset,
+                settings.source,
+              ),
+            );
             //  }
             return ValueIndex(object, index + 1);
           } else {
@@ -135,13 +149,22 @@ ValueIndex<ObjectNode>? parseObject(
             index++;
           } else {
             final msg = unexpectedToken(
-                substring(
-                    input, token.loc!.start.offset!, token.loc!.end.offset),
-                settings.source,
-                token.loc!.start.line,
-                token.loc!.start.column);
-            throw JSONASTException(msg, input, settings.source,
-                token.loc!.start.line, token.loc!.start.column);
+              substring(
+                input,
+                token.loc!.start.offset!,
+                token.loc!.end.offset,
+              ),
+              settings.source,
+              token.loc!.start.line,
+              token.loc!.start.column,
+            );
+            throw JSONASTException(
+              msg,
+              input,
+              settings.source,
+              token.loc!.start.line,
+              token.loc!.start.column,
+            );
           }
           break;
         }
@@ -155,13 +178,22 @@ ValueIndex<ObjectNode>? parseObject(
             state = _ObjectState.PROPERTY;
           } else {
             final msg = unexpectedToken(
-                substring(
-                    input, token.loc!.start.offset!, token.loc!.end.offset),
-                settings.source,
-                token.loc!.start.line,
-                token.loc!.start.column);
-            throw JSONASTException(msg, input, settings.source,
-                token.loc!.start.line, token.loc!.start.column);
+              substring(
+                input,
+                token.loc!.start.offset!,
+                token.loc!.end.offset,
+              ),
+              settings.source,
+              token.loc!.start.line,
+              token.loc!.start.column,
+            );
+            throw JSONASTException(
+              msg,
+              input,
+              settings.source,
+              token.loc!.start.line,
+              token.loc!.start.column,
+            );
           }
           break;
         }
@@ -171,7 +203,11 @@ ValueIndex<ObjectNode>? parseObject(
 }
 
 ValueIndex<PropertyNode>? parseProperty(
-    String input, List<Token> tokenList, int index, Settings settings) {
+  String input,
+  List<Token> tokenList,
+  int index,
+  Settings settings,
+) {
   // property: STRING COLON value
   late Token startToken;
   var property = PropertyNode();
@@ -184,8 +220,13 @@ ValueIndex<PropertyNode>? parseProperty(
       case _PropertyState._START_:
         {
           if (token.type == TokenType.STRING) {
-            final value = parseString(safeSubstring(input,
-                token.loc!.start.offset! + 1, token.loc!.end.offset! - 1));
+            final value = parseString(
+              safeSubstring(
+                input,
+                token.loc!.start.offset! + 1,
+                token.loc!.end.offset! - 1,
+              ),
+            );
             var key = ValueNode(value, token.value);
             if (settings.loc) {
               key = key.copyWith(loc: token.loc);
@@ -207,13 +248,22 @@ ValueIndex<PropertyNode>? parseProperty(
             index++;
           } else {
             final msg = unexpectedToken(
-                substring(
-                    input, token.loc!.start.offset!, token.loc!.end.offset),
-                settings.source,
-                token.loc!.start.line,
-                token.loc!.start.column);
-            throw JSONASTException(msg, input, settings.source,
-                token.loc!.start.line, token.loc!.start.column);
+              substring(
+                input,
+                token.loc!.start.offset!,
+                token.loc!.end.offset,
+              ),
+              settings.source,
+              token.loc!.start.line,
+              token.loc!.start.column,
+            );
+            throw JSONASTException(
+              msg,
+              input,
+              settings.source,
+              token.loc!.start.line,
+              token.loc!.start.column,
+            );
           }
           break;
         }
@@ -224,14 +274,16 @@ ValueIndex<PropertyNode>? parseProperty(
           property = property.copyWith(value: value.value);
           if (settings.loc) {
             property = property.copyWith(
-                loc: Location.create(
-                    startToken.loc?.start.line,
-                    startToken.loc?.start.column,
-                    startToken.loc?.start.offset,
-                    value.value?.loc?.end.line,
-                    value.value?.loc?.end.column,
-                    value.value?.loc?.end.offset,
-                    settings.source));
+              loc: Location.create(
+                startToken.loc?.start.line,
+                startToken.loc?.start.column,
+                startToken.loc?.start.offset,
+                value.value?.loc?.end.line,
+                value.value?.loc?.end.column,
+                value.value?.loc?.end.offset,
+                settings.source,
+              ),
+            );
           }
           return ValueIndex(property, value.index);
         }
@@ -241,7 +293,11 @@ ValueIndex<PropertyNode>? parseProperty(
 }
 
 ValueIndex<ArrayNode>? parseArray(
-    String input, List<Token> tokenList, int index, Settings settings) {
+  String input,
+  List<Token> tokenList,
+  int index,
+  Settings settings,
+) {
   // array: LEFT_BRACKET (value (COMMA value)*)? RIGHT_BRACKET
   late Token startToken;
   var array = ArrayNode();
@@ -267,14 +323,16 @@ ValueIndex<ArrayNode>? parseArray(
           if (token.type == TokenType.RIGHT_BRACKET) {
             if (settings.loc) {
               array = array.copyWith(
-                  loc: Location.create(
-                      startToken.loc!.start.line,
-                      startToken.loc!.start.column,
-                      startToken.loc!.start.offset,
-                      token.loc!.end.line,
-                      token.loc!.end.column,
-                      token.loc!.end.offset,
-                      settings.source));
+                loc: Location.create(
+                  startToken.loc!.start.line,
+                  startToken.loc!.start.column,
+                  startToken.loc!.start.offset,
+                  token.loc!.end.line,
+                  token.loc!.end.column,
+                  token.loc!.end.offset,
+                  settings.source,
+                ),
+              );
             }
             return ValueIndex(array, index + 1);
           } else {
@@ -291,14 +349,16 @@ ValueIndex<ArrayNode>? parseArray(
           if (token.type == TokenType.RIGHT_BRACKET) {
             if (settings.loc) {
               array = array.copyWith(
-                  loc: Location.create(
-                      startToken.loc!.start.line,
-                      startToken.loc!.start.column,
-                      startToken.loc!.start.offset,
-                      token.loc!.end.line,
-                      token.loc!.end.column,
-                      token.loc!.end.offset,
-                      settings.source));
+                loc: Location.create(
+                  startToken.loc!.start.line,
+                  startToken.loc!.start.column,
+                  startToken.loc!.start.offset,
+                  token.loc!.end.line,
+                  token.loc!.end.column,
+                  token.loc!.end.offset,
+                  settings.source,
+                ),
+              );
             }
             return ValueIndex(array, index + 1);
           } else if (token.type == TokenType.COMMA) {
@@ -306,13 +366,22 @@ ValueIndex<ArrayNode>? parseArray(
             index++;
           } else {
             final msg = unexpectedToken(
-                substring(
-                    input, token.loc!.start.offset!, token.loc!.end.offset),
-                settings.source,
-                token.loc!.start.line,
-                token.loc!.start.column);
-            throw JSONASTException(msg, input, settings.source,
-                token.loc!.start.line, token.loc!.start.column);
+              substring(
+                input,
+                token.loc!.start.offset!,
+                token.loc!.end.offset,
+              ),
+              settings.source,
+              token.loc!.start.line,
+              token.loc!.start.column,
+            );
+            throw JSONASTException(
+              msg,
+              input,
+              settings.source,
+              token.loc!.start.line,
+              token.loc!.start.column,
+            );
           }
           break;
         }
@@ -331,7 +400,11 @@ ValueIndex<ArrayNode>? parseArray(
 }
 
 ValueIndex<LiteralNode>? parseLiteral(
-    String input, List<Token> tokenList, int index, Settings settings) {
+  String input,
+  List<Token> tokenList,
+  int index,
+  Settings settings,
+) {
   // literal: STRING | NUMBER | TRUE | FALSE | NULL
   final token = tokenList[index];
   dynamic value;
@@ -339,8 +412,13 @@ ValueIndex<LiteralNode>? parseLiteral(
   switch (token.type) {
     case TokenType.STRING:
       {
-        value = parseString(safeSubstring(
-            input, token.loc!.start.offset! + 1, token.loc!.end.offset! - 1));
+        value = parseString(
+          safeSubstring(
+            input,
+            token.loc!.start.offset! + 1,
+            token.loc!.end.offset! - 1,
+          ),
+        );
         break;
       }
     case TokenType.NUMBER:
@@ -378,15 +456,27 @@ ValueIndex<LiteralNode>? parseLiteral(
 }
 
 typedef ParserFun<T> = ValueIndex<T>? Function(
-    String input, List<Token> tokenList, int index, Settings settings);
+  String input,
+  List<Token> tokenList,
+  int index,
+  Settings settings,
+);
 
 List<ParserFun> _parsersList = [parseLiteral, parseObject, parseArray];
 
 ValueIndex<T>? _findValueIndex<T>(
-    String input, List<Token> tokenList, int index, Settings settings) {
+  String input,
+  List<Token> tokenList,
+  int index,
+  Settings settings,
+) {
   for (var i = 0; i < _parsersList.length; i++) {
     final parser = _parsersList.elementAt(i) as ValueIndex<T>? Function(
-        String, List<Token>, int, Settings);
+      String,
+      List<Token>,
+      int,
+      Settings,
+    );
     final valueIndex = parser(input, tokenList, index, settings);
     if (valueIndex != null) {
       return valueIndex;
@@ -396,7 +486,11 @@ ValueIndex<T>? _findValueIndex<T>(
 }
 
 ValueIndex<T> _parseValue<T>(
-    String input, List<Token> tokenList, int index, Settings settings) {
+  String input,
+  List<Token> tokenList,
+  int index,
+  Settings settings,
+) {
   // value: literal | object | array
   final token = tokenList[index];
 
@@ -406,12 +500,18 @@ ValueIndex<T> _parseValue<T>(
     return value;
   } else {
     final msg = unexpectedToken(
-        substring(input, token.loc!.start.offset!, token.loc!.end.offset),
-        settings.source,
-        token.loc!.start.line,
-        token.loc!.start.column);
-    throw JSONASTException(msg, input, settings.source, token.loc!.start.line,
-        token.loc!.start.column);
+      substring(input, token.loc!.start.offset!, token.loc!.end.offset),
+      settings.source,
+      token.loc!.start.line,
+      token.loc!.start.column,
+    );
+    throw JSONASTException(
+      msg,
+      input,
+      settings.source,
+      token.loc!.start.line,
+      token.loc!.start.column,
+    );
   }
 }
 
@@ -431,10 +531,16 @@ Node parse(String input, Settings settings) {
   final token = tokenList[value.index];
 
   final msg = unexpectedToken(
-      substring(input, token.loc!.start.offset!, token.loc!.end.offset),
-      settings.source,
-      token.loc!.start.line,
-      token.loc!.start.column);
-  throw JSONASTException(msg, input, settings.source, token.loc!.start.line,
-      token.loc!.start.column);
+    substring(input, token.loc!.start.offset!, token.loc!.end.offset),
+    settings.source,
+    token.loc!.start.line,
+    token.loc!.start.column,
+  );
+  throw JSONASTException(
+    msg,
+    input,
+    settings.source,
+    token.loc!.start.line,
+    token.loc!.start.column,
+  );
 }

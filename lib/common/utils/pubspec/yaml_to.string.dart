@@ -1,5 +1,6 @@
 final _unsuportedCharacters = RegExp(
-    r'''^[\n\t ,[\]{}#&*!|<>'"%@']|^[?-]$|^[?-][ \t]|[\n:][ \t]|[ \t]\n|[\n\t ]#|[\n\t :]$''');
+  r'''^[\n\t ,[\]{}#&*!|<>'"%@']|^[?-]$|^[?-][ \t]|[\n:][ \t]|[ \t]\n|[\n\t ]#|[\n\t :]$''',
+);
 
 class CliYamlToString {
   const CliYamlToString({
@@ -21,11 +22,21 @@ class CliYamlToString {
     _writeYamlString(node, 0, sink, true, false);
   }
 
-  void _writeYamlString(node, int indentCount, StringSink stringSink,
-      bool isTopLevel, bool isList) {
+  void _writeYamlString(
+    node,
+    int indentCount,
+    StringSink stringSink,
+    bool isTopLevel,
+    bool isList,
+  ) {
     if (node is Map) {
-      _mapToYamlString(node.cast<String, dynamic>(), indentCount, stringSink,
-          isTopLevel, isList);
+      _mapToYamlString(
+        node.cast<String, dynamic>(),
+        indentCount,
+        stringSink,
+        isTopLevel,
+        isList,
+      );
     } else if (node is Iterable) {
       _listToYamlString(node, indentCount, stringSink, isTopLevel);
     } else if (node is String) {

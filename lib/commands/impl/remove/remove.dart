@@ -1,10 +1,10 @@
-import '../../../common/utils/logger/log_utils.dart';
-import '../../../common/utils/pubspec/pubspec_utils.dart';
-import '../../../common/utils/shell/shel.utils.dart';
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../../exception_handler/exceptions/cli_exception.dart';
-import '../../interface/command.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/common/utils/pubspec/pubspec_utils.dart';
+import 'package:get_cli/common/utils/shell/shel.utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/exception_handler/exceptions/cli_exception.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 class RemoveCommand extends Command {
   @override
@@ -27,8 +27,10 @@ class RemoveCommand extends Command {
   bool validate() {
     super.validate();
     if (args.isEmpty) {
-      CliException(LocaleKeys.error_no_package_to_remove.tr,
-          codeSample: codeSample);
+      CliException(
+        LocaleKeys.error_no_package_to_remove.tr,
+        codeSample: codeSample,
+      );
     }
     return true;
   }

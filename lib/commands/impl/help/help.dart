@@ -1,8 +1,8 @@
-import '../../../common/utils/logger/log_utils.dart';
-import '../../../core/internationalization.dart';
-import '../../../core/locales.g.dart';
-import '../../commands_list.dart';
-import '../../interface/command.dart';
+import 'package:get_cli/common/utils/logger/log_utils.dart';
+import 'package:get_cli/core/internationalization.dart';
+import 'package:get_cli/core/locales.g.dart';
+import 'package:get_cli/commands/commands_list.dart';
+import 'package:get_cli/commands/interface/command.dart';
 
 class HelpCommand extends Command {
   @override
