@@ -1,0 +1,88 @@
+    {
+    "ask": {
+        "existing_page": "La página [%s] ya existe, ¿desea sobrescribirla?",
+        "name_to_project": "¿Cuál es el nombre del proyecto?",
+        "company_domain": "¿Cuál es el dominio de tu empresa?",
+        "model_name": "No se pudo establecer el nombre del modelo automáticamente, ¿qué nombre desea usar?",
+        "package_already_installed": "paquete: %s ya instalado, ¿desea actualizarlo?",
+        "lib_not_empty": "Tu carpeta lib no está vacía. ¿Estás seguro de que quieres sobrescribir tu aplicación? \n ADVERTENCIA: Esta acción es irreversible",
+        "ios_lang": "¿Qué idioma quieres usar en iOS?",
+        "android_lang": "¿Qué idioma quieres usar en Android?",
+        "use_null_safe": "¿Quieres usar null safety?",
+        "use_linter": "¿quieres usar algún linter?",
+        "new_page_name": "¿qué nuevo nombre para la página?"
+    },
+    "error": {
+        "failed_to_connect": "Error al conectar con %s",
+        "no_valid_file_or_url": "%s no es un archivo o URL válida",
+        "unnecessary_parameter": "el parámetro %s no es necesario",
+        "unnecessary_parameter_plural": "los parámetros %s no son necesarios",
+        "nonexistent_directory": "El directorio %s no existe.",
+        "empty_directory": "%s está vacío",
+        "invalid_json": "%s no es un archivo json válido",
+        "special_characters_in_key": "No se permiten caracteres especiales en la clave. \n clave: %s",
+        "required_path": "Se necesita pasar la ruta del archivo o directorio",
+        "invalid_dart": "El %s no es un archivo dart válido",
+        "invalid_file_or_directory": "El %s no es un archivo o directorio válido",
+        "package_not_found": "Paquete: %s no encontrado en pub.dev",
+        "cli_version_not_found": "no se pudo encontrar la versión que tienes instalada.",
+        "update_cli": "Hubo un error al actualizar get_cli",
+        "folder_not_found": "Carpeta %s no encontrada",
+        "file_not_found": "Archivo no encontrado en %s",
+        "access_denied": "Acceso denegado a %s",
+        "unexpected": "Ocurrió un error inesperado:",
+        "no_package_to_remove": "Ingrese el nombre del paquete que desea eliminar"
+    },
+    "example": "Ejemplo:",
+    "warning": "Advertencia:",
+    "hint": {
+        "create": {
+        "controller": "Generar controlador",
+        "page": "Usar para generar páginas",
+        "project": "Usar para generar nuevo proyecto",
+        "provider": "Crear un nuevo Proveedor",
+        "screen": "Generar nueva pantalla",
+        "view": "Generar vista"
+        },
+        "generate": {
+        "locales": "Generar archivo de traducción desde archivos json",
+        "model": "generar modelo de Clase desde json"
+        },
+        "help": "Mostrar esta ayuda",
+        "init": "generar la estructura elegida en un proyecto existente:",
+        "install": "Usar para instalar un paquete en tu proyecto (dependencias):",
+        "remove": "Usar para eliminar un paquete en tu proyecto (dependencias):",
+        "sort": "Ordenar importaciones y formatear archivos dart",
+        "update": "Para actualizar GET_CLI",
+        "version": "Muestra la versión actual de CLI"
+    },
+    "info": {
+        "unnecessary_flag": "El %s no es necesario",
+        "unnecessary_flag_prural": "Los %s no son necesarios",
+        "package_not_installed": "Paquete: %s no está instalado en esta aplicación",
+        "cli_last_version_already_installed": "Última versión de get_cli ya instalada",
+        "no_file_overwritten": "Ningún archivo fue sobrescrito",
+        "update_available": "¡Hay una actualización disponible! Versión instalada actual: %s",
+        "update_available2": "Nueva versión disponible: %s Por favor, ejecuta:"
+    },
+    "options": {
+        "yes": "¡Sí!",
+        "no": "No",
+        "rename": "Quiero renombrar"
+    },
+    "optional_parameters": "Parámetros opcionales: %s",
+    "sucess": {
+        "page_create": "página %s creada exitosamente.",
+        "locale_generate": "archivos de idioma generados exitosamente.",
+        "getx_pattern_generated": "Estructura GetX Pattern generada exitosamente.",
+        "clean_Pattern_generated": "Estructura CLEAN Pattern generada exitosamente.",
+        "file_formatted": "'%s' fue formateado exitosamente",
+        "package_removed": "¡Paquete: %s eliminado!",
+        "package_installed": "¡Paquete: %s instalado!",
+        "update_cli": "Actualización completada",
+        "add_controller_in_bindings": "El %s ha sido añadido al binding en la ruta: %s",
+        "navigation_added": "navegación %s añadida exitosamente.",
+        "file_created": "Archivo: %s creado exitosamente en la ruta: %s",
+        "route_created": "ruta %s creada exitosamente."
+    }
+    }

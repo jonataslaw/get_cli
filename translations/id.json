@@ -1,0 +1,88 @@
+{
+  "ask": {
+    "existing_page": "Halaman [%s] sudah ada, apakah Anda ingin menimpanya?",
+    "name_to_project": "apa nama projectnya?",
+    "company_domain": "Apa domain perusahaan Anda?",
+    "model_name": "Tidak dapat mengatur nama model secara otomatis, nama apa yang ingin Anda gunakan?",
+    "package_already_installed": "paket: %s sudah terpasang, apakah Anda ingin memperbarui?",
+    "lib_not_empty": "Folder lib Anda tidak kosong. Apakah Anda yakin ingin menimpa aplikasi Anda? \nPERINGATAN: Tindakan ini tidak dapat dibatalkan",
+    "ios_lang": "bahasa apa yang ingin Anda gunakan di iOS?",
+    "android_lang": "bahasa apa yang ingin Anda gunakan di Android?",
+    "use_null_safe": "Apakah Anda ingin menggunakan null safety?",
+    "use_linter": "apakah Anda ingin menggunakan linter?",
+    "new_page_name": "apa nama baru untuk halaman?"
+  },
+  "error": {
+    "failed_to_connect": "Gagal terhubung dengan %s",
+    "no_valid_file_or_url": "%s bukan file atau URL yang valid",
+    "unnecessary_parameter": "parameter %s tidak diperlukan",
+    "unnecessary_parameter_plural": "parameter %s tidak diperlukan",
+    "nonexistent_directory": "Direktori %s tidak ada.",
+    "empty_directory": "%s kosong",
+    "invalid_json": "%s bukan file json yang valid",
+    "special_characters_in_key": "Karakter khusus tidak diizinkan dalam kunci. \nkunci: %s",
+    "required_path": "Diperlukan path file atau direktori",
+    "invalid_dart": "%s bukan file dart yang valid",
+    "invalid_file_or_directory": "%s bukan file atau direktori yang valid",
+    "package_not_found": "Paket: %s tidak ditemukan di pub.dev",
+    "cli_version_not_found": "gagal menemukan versi yang telah Anda pasang.",
+    "update_cli": "Terjadi kesalahan saat meningkatkan get_cli",
+    "folder_not_found": "Folder %s tidak ditemukan",
+    "file_not_found": "File tidak ditemukan di %s",
+    "access_denied": "Akses ditolak ke %s",
+    "unexpected": "Terjadi kesalahan yang tidak terduga:",
+    "no_package_to_remove": "Masukkan nama paket yang ingin Anda hapus"
+  },
+  "example": "Contoh:",
+  "warning": "Peringatan:",
+  "hint": {
+    "create": {
+      "controller": "Buat controller",
+      "page": "Digunakan untuk membuat halaman",
+      "project": "Digunakan untuk membuat project baru",
+      "provider": "Buat Provider baru",
+      "screen": "Buat layar baru",
+      "view": "Buat view"
+    },
+    "generate": {
+      "locales": "Buat file terjemahan dari file json",
+      "model": "buat model Class dari json"
+    },
+    "help": "Tampilkan bantuan ini",
+    "init": "buat struktur yang dipilih pada project yang ada:",
+    "install": "Digunakan untuk memasang paket di project Anda (dependencies):",
+    "remove": "Digunakan untuk menghapus paket di project Anda (dependencies):",
+    "sort": "Urutkan impor dan format file dart",
+    "update": "Untuk memperbarui GET_CLI",
+    "version": "Menampilkan versi CLI saat ini"
+  },
+  "info": {
+    "unnecessary_flag": "%s tidak diperlukan",
+    "unnecessary_flag_prural": "%s tidak diperlukan",
+    "package_not_installed": "Paket: %s tidak terpasang di aplikasi ini",
+    "cli_last_version_already_installed": "Versi terbaru get_cli sudah terpasang",
+    "no_file_overwritten": "Tidak ada file yang ditimpa",
+    "update_available": "Ada pembaruan tersedia! Versi terpasang saat ini: %s",
+    "update_available2": "Versi baru tersedia: %s Silakan jalankan:"
+  },
+  "options": {
+    "yes": "Ya!",
+    "no": "Tidak",
+    "rename": "Saya ingin mengganti nama"
+  },
+  "optional_parameters": "Parameter opsional: %s",
+  "sucess": {
+    "page_create": "halaman %s berhasil dibuat.",
+    "locale_generate": "file locale berhasil dibuat.",
+    "getx_pattern_generated": "Struktur GetX Pattern berhasil dibuat.",
+    "clean_Pattern_generated": "Struktur CLEAN Pattern berhasil dibuat.",
+    "file_formatted": "'%s' berhasil diformat",
+    "package_removed": "Paket: %s dihapus!",
+    "package_installed": "Paket: %s terpasang!",
+    "update_cli": "Peningkatan selesai",
+    "add_controller_in_bindings": "%s telah ditambahkan ke binding di path: %s",
+    "navigation_added": "navigasi %s berhasil ditambahkan.",
+    "file_created": "File: %s berhasil dibuat di path: %s",
+    "route_created": "rute %s berhasil dibuat."
+  }
+}

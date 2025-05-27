@@ -1,0 +1,88 @@
+{
+  "ask": {
+    "existing_page": "Strona [%s] już istnieje, czy chcesz ją nadpisać?",
+    "name_to_project": "jaka jest nazwa projektu?",
+    "company_domain": "Jaka jest domena twojej firmy?",
+    "model_name": "Nie można automatycznie ustawić nazwy modelu, jakiej nazwy chcesz użyć?",
+    "package_already_installed": "pakiet: %s jest już zainstalowany, czy chcesz go zaktualizować?",
+    "lib_not_empty": "Twój folder lib nie jest pusty. Czy na pewno chcesz nadpisać swoją aplikację? \nUWAGA: Ta akcja jest nieodwracalna",
+    "ios_lang": "jakiego języka chcesz użyć na iOS?",
+    "android_lang": "jakiego języka chcesz użyć na Androidzie?",
+    "use_null_safe": "Czy chcesz użyć null safety?",
+    "use_linter": "czy chcesz użyć lintera?",
+    "new_page_name": "jaka jest nowa nazwa dla strony?"
+  },
+  "error": {
+    "failed_to_connect": "Nie udało się połączyć z %s",
+    "no_valid_file_or_url": "%s nie jest plikiem ani prawidłowym URL",
+    "unnecessary_parameter": "parametr %s nie jest potrzebny",
+    "unnecessary_parameter_plural": "parametry %s nie są potrzebne",
+    "nonexistent_directory": "Katalog %s nie istnieje.",
+    "empty_directory": "%s jest pusty",
+    "invalid_json": "%s nie jest prawidłowym plikiem json",
+    "special_characters_in_key": "Znaki specjalne nie są dozwolone w kluczu. \nklucz: %s",
+    "required_path": "Wymagana ścieżka do pliku lub katalogu",
+    "invalid_dart": "%s nie jest prawidłowym plikiem dart",
+    "invalid_file_or_directory": "%s nie jest prawidłowym plikiem ani katalogiem",
+    "package_not_found": "Pakiet: %s nie znaleziono w pub.dev",
+    "cli_version_not_found": "nie udało się znaleźć zainstalowanej wersji.",
+    "update_cli": "Wystąpił błąd podczas aktualizacji get_cli",
+    "folder_not_found": "Folder %s nie znaleziony",
+    "file_not_found": "Nie znaleziono pliku w %s",
+    "access_denied": "Odmowa dostępu do %s",
+    "unexpected": "Wystąpił nieoczekiwany błąd:",
+    "no_package_to_remove": "Wprowadź nazwę pakietu, który chcesz usunąć"
+  },
+  "example": "Przykład:",
+  "warning": "Ostrzeżenie:",
+  "hint": {
+    "create": {
+      "controller": "Generuj kontroler",
+      "page": "Użyj do generowania stron",
+      "project": "Użyj do generowania nowego projektu",
+      "provider": "Utwórz nowy Provider",
+      "screen": "Generuj nowy ekran",
+      "view": "Generuj widok"
+    },
+    "generate": {
+      "locales": "Generuj plik tłumaczenia z plików json",
+      "model": "generuj model klasy z json"
+    },
+    "help": "Pokaż tę pomoc",
+    "init": "generuj wybraną strukturę w istniejącym projekcie:",
+    "install": "Użyj do instalacji pakietu w twoim projekcie (zależności):",
+    "remove": "Użyj do usunięcia pakietu z twojego projektu (zależności):",
+    "sort": "Sortuj importy i formatuj pliki dart",
+    "update": "Aby zaktualizować GET_CLI",
+    "version": "Pokazuje aktualną wersję CLI"
+  },
+  "info": {
+    "unnecessary_flag": "%s nie jest potrzebny",
+    "unnecessary_flag_prural": "%s nie są potrzebne",
+    "package_not_installed": "Pakiet: %s nie jest zainstalowany w tej aplikacji",
+    "cli_last_version_already_installed": "Najnowsza wersja get_cli jest już zainstalowana",
+    "no_file_overwritten": "Żadne pliki nie zostały nadpisane",
+    "update_available": "Dostępna jest aktualizacja! Obecnie zainstalowana wersja: %s",
+    "update_available2": "Dostępna nowa wersja: %s Proszę uruchom:"
+  },
+  "options": {
+    "yes": "Tak!",
+    "no": "Nie",
+    "rename": "Chcę zmienić nazwę"
+  },
+  "optional_parameters": "Parametry opcjonalne: %s",
+  "sucess": {
+    "page_create": "strona %s została utworzona pomyślnie.",
+    "locale_generate": "pliki lokalizacji zostały wygenerowane pomyślnie.",
+    "getx_pattern_generated": "Struktura GetX Pattern została wygenerowana pomyślnie.",
+    "clean_Pattern_generated": "Struktura CLEAN Pattern została wygenerowana pomyślnie.",
+    "file_formatted": "'%s' został sformatowany pomyślnie",
+    "package_removed": "Pakiet: %s został usunięty!",
+    "package_installed": "Pakiet: %s został zainstalowany!",
+    "update_cli": "Aktualizacja zakończona",
+    "add_controller_in_bindings": "%s został dodany do binding w ścieżce: %s",
+    "navigation_added": "nawigacja %s została dodana pomyślnie.",
+    "file_created": "Plik: %s został utworzony pomyślnie w ścieżce: %s",
+    "route_created": "trasa %s została utworzona pomyślnie."
+  }
+}
