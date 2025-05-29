@@ -56,4 +56,7 @@ class $_viewName extends $_controllerName {
 
   @override
   String get content => _isServer ? _serverView : _flutterView;
+
+  @override
+  String? get getX5Content => null;
 }

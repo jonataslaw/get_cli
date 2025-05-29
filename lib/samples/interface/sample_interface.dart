@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:pubspec_parse/pubspec_parse.dart';
 
 import '../../functions/create/create_single_file.dart';
 
@@ -20,14 +21,31 @@ abstract class Sample {
   /// by path.
   String get content;
 
+  /// Store the (GetX 5 content) that will be written to the file in a String or
+  /// Future <String> in that variable. It is used to fill the file created
+  /// by path.
+  String? get getX5Content;
+
+  /// check if project using GetX 5
+  bool isUsingGetX5() {
+    final pubspecFile = File('pubspec.yaml');
+    final pubSpec = Pubspec.parse(pubspecFile.readAsStringSync());
+
+    if(pubSpec.dependencies['get'] == null ) return false;
+
+    return pubSpec.dependencies['get'].toString().contains('^5') ||
+        pubSpec.dependencies['get'].toString().contains(': 5');
+  }
+
   Sample(this.path, {this.overwrite = false});
 
   /// This function will create the file in [path] with the
-  /// content of [content].
+  /// content of [content] or [getX5Content] according to he used get version.
   File create({bool skipFormatter = false}) {
     return writeFile(
       path,
-      customContent.isNotEmpty ? customContent : content,
+      customContent.isNotEmpty ? customContent : isUsingGetX5() && getX5Content
+          != null ? getX5Content! : content,
       overwrite: overwrite,
       skipFormatter: skipFormatter,
       useRelativeImport: true,

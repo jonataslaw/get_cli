@@ -70,4 +70,7 @@ class CounterScreen extends GetView<CounterController> {
   }
 }
 ''';
+
+  @override
+  String? get getX5Content => null;
 }

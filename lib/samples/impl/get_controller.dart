@@ -54,4 +54,7 @@ class ${_fileName.pascalCase}Controller extends GetxController {
   void increment() => count.value++;
 }
 ''';
+
+  @override
+  String? get getX5Content => null;
 }
