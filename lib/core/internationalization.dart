@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'locales.g.dart';
 
-extension Trans on String {
+extension TranslationExt on String {
   /// Translation
   String get tr {
     var translations = AppTranslation.translations;
