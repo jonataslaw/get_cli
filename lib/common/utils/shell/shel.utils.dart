@@ -33,9 +33,10 @@ class ShellUtils {
   ) async {
     LogService.info('Running `flutter create $path` …');
 
-    await run(
-        'flutter create --no-pub -i $iosLang -a $androidLang --org $org'
-        ' "$path"',
+ // Note: -i and -a flags are only supported for --template=plugin
+ // For regular Flutter projects, Flutter uses Swift/Kotlin by default 
+   await run( 
+       'flutter create --no-pub --org $org "$path"', 
         verbose: true);
   }
 
