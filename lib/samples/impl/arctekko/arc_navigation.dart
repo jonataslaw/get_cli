@@ -35,4 +35,7 @@ class Nav {
   static List<GetPage> routes = [
   ];
 }''';
+
+  @override
+  String? get getX5Content => null;
 }

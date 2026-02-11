@@ -32,4 +32,7 @@ void main() {
 
   @override
   String get content => isServer! ? _serverMain : _flutterMain;
+
+  @override
+  String? get getX5Content => null;
 }

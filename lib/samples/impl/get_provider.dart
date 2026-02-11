@@ -60,4 +60,7 @@ if(map is Map<String, dynamic>) return $_namePascal.fromJson(map);
 if(map is List) return map.map((item)=> $_namePascal.fromJson(item)).toList();
 };\n'''
       : '\n';
+
+  @override
+  String? get getX5Content => null;
 }

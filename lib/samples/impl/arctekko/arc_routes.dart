@@ -14,4 +14,7 @@ class Routes {
   }
 }
 ''';
+
+  @override
+  String? get getX5Content => null;
 }

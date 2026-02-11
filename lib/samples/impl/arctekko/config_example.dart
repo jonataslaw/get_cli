@@ -39,4 +39,7 @@ class ConfigEnvironments {
     );
   }
 }''';
+
+  @override
+  String? get getX5Content => null;
 }

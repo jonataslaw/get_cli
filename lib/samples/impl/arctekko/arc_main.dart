@@ -28,4 +28,7 @@ class Main extends StatelessWidget {
     
   }
 }''';
+
+  @override
+  String? get getX5Content => null;
 }
