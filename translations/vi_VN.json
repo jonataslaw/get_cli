@@ -1,0 +1,88 @@
+{
+  "ask": {
+    "existing_page": "Trang [%s] đã tồn tại, bạn có muốn ghi đè lên không?",
+    "name_to_project": "Tên của project là gì?",
+    "company_domain": "Tên miền của công ty bạn là gì?",
+    "model_name": "Không thể tự động đặt tên model, bạn muốn sử dụng tên nào?",
+    "package_already_installed": "Package: %s đã được cài đặt, bạn có muốn cập nhật không?",
+    "lib_not_empty": "lib folder của bạn không trống. Bạn có chắc chắn muốn ghi đè lên ứng dụng của mình không? \\n CẢNH BÁO: Hành động này không thể đảo ngược",
+    "ios_lang": "Bạn muốn sử dụng ngôn ngữ nào trên iOS?",
+    "android_lang": "Bạn muốn sử dụng ngôn ngữ nào trên Android?",
+    "use_null_safe": "Bạn có muốn sử dụng chế độ null safe không?",
+    "use_linter": "Bạn có muốn sử dụng một số linter không?",
+    "new_page_name": "Tên mới cho trang này là gì?"
+  },
+  "error": {
+    "failed_to_connect": "Không thể kết nối với %s",
+    "no_valid_file_or_url": "%s không phải là một file hoặc url hợp lệ",
+    "unnecessary_parameter": "Tham số %s không cần thiết",
+    "unnecessary_parameter_plural": "Các tham số %s không cần thiết",
+    "nonexistent_directory": "Directory %s không tồn tại.",
+    "empty_directory": "Directory %s trống rỗng",
+    "invalid_json": "%s không phải là file json hợp lệ",
+    "special_characters_in_key": "Không được phép sử dụng các ký tự đặc biệt trong khóa. \\n khóa: %s",
+    "required_path": "Cần phải truyền đường dẫn file hoặc directory",
+    "invalid_dart": "%s không phải là file dart hợp lệ",
+    "invalid_file_or_directory": "%s không phải là một file hoặc directory hợp lệ",
+    "package_not_found": "Package: %s không tìm thấy trong pub.dev",
+    "cli_version_not_found": "Không tìm thấy phiên bản bạn đã cài đặt.",
+    "update_cli": "Đã xảy ra lỗi khi nâng cấp get_cli",
+    "folder_not_found": "Không tìm thấy folder %s",
+    "file_not_found": "Không tìm thấy file trong %s",
+    "access_denied": "Truy cập bị từ chối vào %s",
+    "unexpected": "Đã xảy ra lỗi không mong muốn:",
+    "no_package_to_remove": "Nhập tên package bạn muốn xóa"
+  },
+  "example": "Ví dụ:",
+  "warning": "Cảnh báo:",
+  "hint": {
+    "create": {
+      "controller": "Khởi tạo controller",
+      "page": "Sử dụng để khởi tạo các trang",
+      "project": "Sử dụng để khởi tạo project mới",
+      "provider": "Khởi tạo một Provider mới",
+      "screen": "Khởi tạo screen mới",
+      "view": "Khởi tạo view"
+    },
+    "generate": {
+      "locales": "Khởi tạo file được dịch từ file json",
+      "model": "Khởi tạo Class model từ file json"
+    },
+    "help": "Hiển thị trợ giúp này",
+    "init": "Khởi tạo cấu trúc đã chọn trên một project hiện có:",
+    "install": "Sử dụng để cài đặt package trong project của bạn (dependencies):",
+    "remove": "Sử dụng để xóa một package trong project của bạn (dependencies):",
+    "sort": "Sắp xếp các import và các format dart file",
+    "update": "Dùng để cập nhật GET_CLI",
+    "version": "Hiển thị phiên bản CLI hiện tại'"
+  },
+  "info": {
+    "unnecessary_flag": "%s không cần thiết",
+    "unnecessary_flag_prural": "%s không cần thiết",
+    "package_not_installed": "Package: %s không được cài đặt trong ứng dụng này",
+    "cli_last_version_already_installed": "Phiên bản mới nhất của get_cli đã được cài đặt",
+    "no_file_overwritten": "Không có file nào đã được ghi đè",
+    "update_available": "Có bản cập nhật khả dụng! Phiên bản hiện tại đã cài đặt: %s",
+    "update_available2": "Phiên bản mới có sẵn: %s Vui lòng chạy:"
+  },
+  "options": {
+    "yes": "Có!",
+    "no": "Không",
+    "rename": "Tôi muốn đổi tên"
+  },
+  "optional_parameters": "Các tham số tùy chọn: %s",
+  "sucess": {
+    "page_create": "%s trang đã được tạo thành công.",
+    "locale_generate": "Các locale file đã được tạo thành công.",
+    "getx_pattern_generated": "GetX Pattern structure đã được tạo thành công.",
+    "clean_Pattern_generated": "CLEAN Pattern structure đã được tạo thành công.",
+    "file_formatted": " '%s' đã được định dạng thành công",
+    "package_removed": "Package: %s đã được gỡ bỏ!",
+    "package_installed": "'Package: %s đã được cài đặt!",
+    "update_cli": "Cập nhật thành công",
+    "add_controller_in_bindings": "%s đã được thêm vào liên kết tại đường dẫn: %s'",
+    "navigation_added": "Điều hướng %s đã được thêm vào thành công.",
+    "file_created": "File: %s đã được tạo thành công tại đường dẫn: %s",
+    "route_created": "Route %s đã được tạo thành công."
+  }
+}
