@@ -8,7 +8,7 @@ GetX™ 框架的官方 CLI。
 ```dart
 // 安装:
 pub global activate get_cli 
-// 使用本命令需要设置系统环境变量: [FlutterSDK安装目录]\bin\cache\dart-sdk\bin
+// 使用本命令需要设置系统环境变量: [FlutterSDK安装目录]\bin\cache\dart-sdk\bin 和 [FlutterSDK安装目录]\.pub-cache\bin
 
 flutter pub global activate get_cli
 
@@ -21,10 +21,17 @@ get create project
 // 在现有项目中生成所选结构:
 get init
 
-// 创建页面:
+// 创建page:
 // (页面包括 controller, view, 和 binding)
 // 注: 你可以随便命名, 例如: `get create page:login`
+// 注: 选择了 Getx_pattern 结构才用这个选项
 get create page:home
+
+// 创建 Screen:
+// (Screens 有 controller, view, 和 binding)
+// 注: 你可以随便命名，例如: `get screen page:login`
+// 注: 选择了 CLEAN 结构才用这个选项 (by Arktekko)
+get create screen:home 
 
 // 在指定文件夹创建新 controller:
 // 注: 你无需引用文件夹, Getx 会自动搜索 home 目录,
@@ -114,10 +121,9 @@ get help
 ```shell
   get create page:name
 ```
+该命令允许您创建模块，建议选择使用 getx_pattern 的用户使用，
 
-这条命令允许你创建模块，建议选择getx_pattern的人使用。
-
-创建 view, controller 和 binding 文件, 除了自动添加路由。
+创建 view, controller 和 binding 文件, 此外还可以自动添加路由。
 
 你可以在一个模块内创建另一个模块。
 
@@ -193,7 +199,7 @@ class AuthController extends GetxController {
 
 在指定目录创建 view
 
-### 生成国家化文件
+### 生成国际化文件
 
 在 assets/locales 目录创建 json 格式的语言文件
 
@@ -345,6 +351,17 @@ class User {
 ```yaml
 get_cli:
   separator: "."
+```
+
+### 配置 Getx 路径样式
+
+当你创建一个 Page 或 Screen 时，每个模块都会有 binding , controller, view 子目录。
+
+如果你更想要一个平级文件结构，添加以下内容到你的`pubspec.yaml`:
+
+```yml
+get_cli:
+    sub_folder: false
 ```
 
 ### 你的 import 乱不乱?

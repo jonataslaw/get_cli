@@ -8,25 +8,19 @@ import '../../core/internationalization.dart';
 import '../../core/locales.g.dart';
 import '../../extensions.dart';
 import '../../samples/impl/get_route.dart';
-import '../create/create_single_file.dart';
 import '../find_file/find_file_by_name.dart';
-import '../formatter_dart_file/frommatter_dart_file.dart';
 import 'get_app_pages.dart';
 import 'get_support_children.dart';
 
 /// This command will create the route to the new page
 void addRoute(String nameRoute, String bindingDir, String viewDir) {
   var routesFile = findFileByName('app_routes.dart');
-  //var lines = <String>[];
-  var content = '';
+  // var content = '';
 
   if (routesFile.path.isEmpty) {
     RouteSample().create();
     routesFile = File(RouteSample().path);
-    content = routesFile.readAsStringSync();
-  } else {
-    content = formatterDartFile(routesFile.readAsStringSync());
-    //lines = LineSplitter.split(content).toList();
+    // content = routesFile.readAsStringSync();
   }
   var pathSplit = viewDir.split('/');
 
@@ -51,22 +45,14 @@ void addRoute(String nameRoute, String bindingDir, String viewDir) {
   if (supportChildrenRoutes) {
     line = '$declareRoute ${_pathsToRoute(pathSplit)};';
     var linePath = "$declareRoute '/${pathSplit.last}';";
-    content = content.appendClassContent('_Paths', linePath);
+    routesFile.appendClassContent('_Paths', linePath);
   }
-  content = content.appendClassContent('Routes', line);
+  routesFile.appendClassContent('Routes', line);
 
   addAppPage(nameRoute, bindingDir, viewDir);
 
   LogService.success(
       Translation(LocaleKeys.sucess_route_created).trArgs([nameRoute]));
-
-  writeFile(
-    routesFile.path,
-    content,
-    overwrite: true,
-    logger: false,
-    useRelativeImport: true,
-  );
 }
 
 /// Create routes from the path

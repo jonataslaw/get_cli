@@ -71,9 +71,6 @@ class TypeDefinition {
   TypeDefinition(this.name, {this.subtype, this.isAmbiguous, Node? astNode}) {
     if (subtype == null) {
       _isPrimitive = isPrimitiveType(name);
-      if (name == 'int' && isASTLiteralDouble(astNode)) {
-        name = 'double';
-      }
     } else {
       _isPrimitive = isPrimitiveType('$name<$subtype>');
     }
@@ -88,7 +85,7 @@ class TypeDefinition {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (other is TypeDefinition) {
       return name == other.name &&
           subtype == other.subtype &&
@@ -127,7 +124,10 @@ class TypeDefinition {
         fixFieldName(key, typeDef: this, privateField: privateField);
     if (isPrimitive) {
       if (name == 'List') {
-        return "$fieldKey = json['$key'].cast<$subtype>();";
+        return "$fieldKey = json['$key']?.cast<$subtype>();";
+      }
+      if (name == 'num?') {
+        return "$fieldKey = json['$key'] as num?;";
       }
       return "$fieldKey = json['$key'];";
     } else if (name == 'List' && subtype == 'DateTime') {
@@ -204,7 +204,7 @@ class ClassDefinition {
       [this._privateFields = false, this._withCopyConstructor = false]);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (other is ClassDefinition) {
       var otherClassDef = other;
       return isSubsetOf(otherClassDef) && otherClassDef.isSubsetOf(this);
@@ -315,22 +315,25 @@ class ClassDefinition {
 
   String get _defaultConstructor {
     final sb = StringBuffer();
-    sb.write('\t$name({');
-    var i = 0;
-    var len = fields.keys.length - 1;
-    for (var key in fields.keys) {
-      final f = fields[key];
-      final fieldName =
-          fixFieldName(key, typeDef: f, privateField: privateFields);
-      sb.write('this.$fieldName');
-      //sb.write('$fieldName');
-      if (i != len) {
-        sb.write(', ');
+    sb.write('\t$name(');
+
+    if (fields.keys.isNotEmpty) {
+      sb.write('{');
+
+      for (var key in fields.keys) {
+        final f = fields[key];
+        final fieldName = fixFieldName(
+          key,
+          typeDef: f,
+          privateField: privateFields,
+        );
+        sb.write('this.$fieldName,');
       }
-      i++;
+
+      sb.write('}');
     }
 
-    sb.write('});');
+    sb.write(');');
     return sb.toString();
   }
 
