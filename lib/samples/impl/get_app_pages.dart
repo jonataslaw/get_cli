@@ -5,11 +5,11 @@ import '../interface/sample_interface.dart';
 class AppPagesSample extends Sample {
   String initial;
   AppPagesSample(
-      {String path = 'lib/app/routes/app_pages.dart', this.initial = 'HOME'})
+      {String path = 'lib/app/routes/app_pages.dart', this.initial = 'home'})
       : super(path);
   final import = PubspecUtils.getPackageImport;
   String get _initialRoute =>
-      initial.isNotEmpty ? '\nstatic const INITIAL = Routes.$initial;' : '';
+      initial.isNotEmpty ? '\nstatic const initial = Routes.$initial;' : '';
 
   @override
   String get content => '''$import
