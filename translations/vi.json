@@ -1,0 +1,88 @@
+{
+  "ask": {
+    "existing_page": "Trang [%s] đã tồn tại, bạn có muốn ghi đè không?",
+    "name_to_project": "tên dự án là gì?",
+    "company_domain": "Tên miền công ty của bạn là gì?",
+    "model_name": "Không thể tự động đặt tên model, bạn muốn sử dụng tên nào?",
+    "package_already_installed": "gói: %s đã được cài đặt, bạn có muốn cập nhật không?",
+    "lib_not_empty": "Thư mục lib của bạn không trống. Bạn có chắc chắn muốn ghi đè ứng dụng của bạn không? \nCẢNH BÁO: Hành động này không thể hoàn tác",
+    "ios_lang": "bạn muốn sử dụng ngôn ngữ nào trên iOS?",
+    "android_lang": "bạn muốn sử dụng ngôn ngữ nào trên Android?",
+    "use_null_safe": "Bạn có muốn sử dụng null safety không?",
+    "use_linter": "bạn có muốn sử dụng linter không?",
+    "new_page_name": "tên mới cho trang là gì?"
+  },
+  "error": {
+    "failed_to_connect": "Không thể kết nối với %s",
+    "no_valid_file_or_url": "%s không phải là tệp hoặc URL hợp lệ",
+    "unnecessary_parameter": "tham số %s không cần thiết",
+    "unnecessary_parameter_plural": "các tham số %s không cần thiết",
+    "nonexistent_directory": "Thư mục %s không tồn tại.",
+    "empty_directory": "%s trống",
+    "invalid_json": "%s không phải là tệp json hợp lệ",
+    "special_characters_in_key": "Không được phép sử dụng ký tự đặc biệt trong khóa. \nkhóa: %s",
+    "required_path": "Cần đường dẫn tệp hoặc thư mục",
+    "invalid_dart": "%s không phải là tệp dart hợp lệ",
+    "invalid_file_or_directory": "%s không phải là tệp hoặc thư mục hợp lệ",
+    "package_not_found": "Gói: %s không tìm thấy trên pub.dev",
+    "cli_version_not_found": "không tìm thấy phiên bản bạn đã cài đặt.",
+    "update_cli": "Đã xảy ra lỗi khi nâng cấp get_cli",
+    "folder_not_found": "Không tìm thấy thư mục %s",
+    "file_not_found": "Không tìm thấy tệp trong %s",
+    "access_denied": "Từ chối truy cập vào %s",
+    "unexpected": "Đã xảy ra lỗi không mong muốn:",
+    "no_package_to_remove": "Nhập tên gói bạn muốn xóa"
+  },
+  "example": "Ví dụ:",
+  "warning": "Cảnh báo:",
+  "hint": {
+    "create": {
+      "controller": "Tạo controller",
+      "page": "Dùng để tạo trang",
+      "project": "Dùng để tạo dự án mới",
+      "provider": "Tạo Provider mới",
+      "screen": "Tạo màn hình mới",
+      "view": "Tạo view"
+    },
+    "generate": {
+      "locales": "Tạo tệp dịch từ tệp json",
+      "model": "tạo model Class từ json"
+    },
+    "help": "Hiển thị trợ giúp này",
+    "init": "tạo cấu trúc đã chọn trên dự án hiện có:",
+    "install": "Dùng để cài đặt gói trong dự án của bạn (dependencies):",
+    "remove": "Dùng để xóa gói trong dự án của bạn (dependencies):",
+    "sort": "Sắp xếp import và định dạng tệp dart",
+    "update": "Để cập nhật GET_CLI",
+    "version": "Hiển thị phiên bản CLI hiện tại"
+  },
+  "info": {
+    "unnecessary_flag": "%s không cần thiết",
+    "unnecessary_flag_prural": "%s không cần thiết",
+    "package_not_installed": "Gói: %s chưa được cài đặt trong ứng dụng này",
+    "cli_last_version_already_installed": "Phiên bản mới nhất của get_cli đã được cài đặt",
+    "no_file_overwritten": "Không có tệp nào bị ghi đè",
+    "update_available": "Có bản cập nhật! Phiên bản hiện tại đã cài đặt: %s",
+    "update_available2": "Phiên bản mới khả dụng: %s Vui lòng chạy:"
+  },
+  "options": {
+    "yes": "Có!",
+    "no": "Không",
+    "rename": "Tôi muốn đổi tên"
+  },
+  "optional_parameters": "Tham số tùy chọn: %s",
+  "sucess": {
+    "page_create": "trang %s đã được tạo thành công.",
+    "locale_generate": "các tệp locale đã được tạo thành công.",
+    "getx_pattern_generated": "Cấu trúc GetX Pattern đã được tạo thành công.",
+    "clean_Pattern_generated": "Cấu trúc CLEAN Pattern đã được tạo thành công.",
+    "file_formatted": "'%s' đã được định dạng thành công",
+    "package_removed": "Gói: %s đã được xóa!",
+    "package_installed": "Gói: %s đã được cài đặt!",
+    "update_cli": "Nâng cấp hoàn tất",
+    "add_controller_in_bindings": "%s đã được thêm vào binding tại đường dẫn: %s",
+    "navigation_added": "điều hướng %s đã được thêm thành công.",
+    "file_created": "Tệp: %s đã được tạo thành công tại đường dẫn: %s",
+    "route_created": "route %s đã được tạo thành công."
+  }
+}
